@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw Setup Service | Professional Installation & Configuration</title>
-    <meta name="description" content="Professional OpenClaw installation service. Expert setup for Telegram, Discord, Slack, WhatsApp. 100% success rate. 14-day money-back guarantee.">
-    <meta name="keywords" content="OpenClaw setup, OpenClaw installation, Telegram bot setup, Discord bot setup, business automation">
-    <meta property="og:title" content="OpenClaw Setup Service | Professional Installation">
+    <title>Automatyn | OpenClaw Setup Service - Professional Installation</title>
+    <meta name="description" content="Professional OpenClaw installation by Automatyn. Expert setup for Telegram, Discord, Slack, WhatsApp. $1,000-$3,000. 14-day guarantee.">
+    <meta name="keywords" content="OpenClaw setup, OpenClaw installation, Telegram bot setup, Discord bot setup, business automation, Automatyn">
+    <meta property="og:title" content="Automatyn | OpenClaw Setup Service">
     <meta property="og:description" content="Get OpenClaw professionally installed and configured. Expert setup for all channels. Starting at $1,000.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -514,47 +514,191 @@
     <section id="contact" class="py-20 px-4 bg-gray-50">
         <div class="max-w-2xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get Started Today</h2>
-                <p class="text-xl text-gray-600">Tell us about your project and we'll get back to you within 24 hours.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let's Get You Started</h2>
+                <p class="text-xl text-gray-600">Answer a few quick questions and we'll send you a personalized quote.</p>
             </div>
 
-            <form id="contact-form" class="bg-white rounded-2xl p-8 card-shadow-lg">
-                <div class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your name">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                            <input type="email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="you@example.com">
-                        </div>
+            <!-- Chat-style form -->
+            <div class="bg-white rounded-2xl card-shadow-lg overflow-hidden">
+                <!-- Chat header -->
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">What's your use case?</label>
-                        <textarea rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your project and what you need..."></textarea>
+                        <div class="font-semibold text-white">Automatyn Assistant</div>
+                        <div class="text-sm text-blue-100 flex items-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            Online now
+                        </div>
                     </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Which plan interests you?</label>
-                        <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option>Foundation ($1,000)</option>
-                            <option selected>Professional ($2,000)</option>
-                            <option>Enterprise ($3,000)</option>
-                            <option>Not sure yet</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition">
-                        Send Message
-                    </button>
-
-                    <p class="text-center text-sm text-gray-500">
-                        We'll respond within 24 hours. No commitment required.
-                    </p>
                 </div>
-            </form>
+
+                <!-- Chat messages container -->
+                <div id="chat-container" class="h-96 overflow-y-auto p-6 space-y-4 bg-gray-50">
+                    <!-- Initial bot message -->
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <div class="bg-white rounded-2xl rounded-tl-none px-4 py-3 max-w-sm shadow-sm">
+                            <p class="text-gray-800">Hi! 👋 I'm here to help you get set up with OpenClaw. What's your name?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input area -->
+                <div id="input-area" class="p-4 border-t border-gray-100 bg-white">
+                    <form id="chat-form" action="https://formsubmit.co/patricksson@gmail.com" method="POST">
+                        <!-- Hidden fields for form submission -->
+                        <input type="hidden" name="_subject" value="New Automatyn Lead">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="">
+                        <input type="hidden" id="form-name" name="name" value="">
+                        <input type="hidden" id="form-email" name="email" value="">
+                        <input type="hidden" id="form-usecase" name="use_case" value="">
+                        <input type="hidden" id="form-channels" name="channels" value="">
+                        <input type="hidden" id="form-plan" name="plan_interest" value="">
+                        <input type="hidden" id="form-budget" name="timeline_budget" value="">
+
+                        <div id="step-name" class="chat-step">
+                            <div class="flex gap-3">
+                                <input type="text" id="user-name" required class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Type your name...">
+                                <button type="button" onclick="submitName()" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition">
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-email" class="chat-step hidden">
+                            <div class="flex gap-3">
+                                <input type="email" id="user-email" required class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com">
+                                <button type="button" onclick="submitEmail()" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition">
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-usecase" class="chat-step hidden">
+                            <div class="flex flex-col gap-2">
+                                <button type="button" onclick="submitUsecase('Business automation')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    🏢 Business automation
+                                </button>
+                                <button type="button" onclick="submitUsecase('Customer support')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    💬 Customer support bot
+                                </button>
+                                <button type="button" onclick="submitUsecase('Community management')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    👥 Community management
+                                </button>
+                                <button type="button" onclick="submitUsecase('Personal project')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    🔧 Personal project
+                                </button>
+                                <button type="button" onclick="submitUsecase('Other')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    ✨ Something else
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-channels" class="chat-step hidden">
+                            <p class="text-sm text-gray-500 mb-2">Select all that apply:</p>
+                            <div class="flex flex-col gap-2">
+                                <label class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600" value="Telegram">
+                                    <span>Telegram</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600" value="Discord">
+                                    <span>Discord</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600" value="WhatsApp">
+                                    <span>WhatsApp</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600" value="Slack">
+                                    <span>Slack</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600" value="Signal">
+                                    <span>Signal</span>
+                                </label>
+                            </div>
+                            <button type="button" onclick="submitChannels()" class="w-full mt-3 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition">
+                                Continue
+                            </button>
+                        </div>
+
+                        <div id="step-plan" class="chat-step hidden">
+                            <div class="flex flex-col gap-2">
+                                <button type="button" onclick="submitPlan('Foundation - $1,000')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    <div class="font-medium">Foundation</div>
+                                    <div class="text-sm text-gray-500">$1,000 - 1 channel, basic setup</div>
+                                </button>
+                                <button type="button" onclick="submitPlan('Professional - $2,000')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition border-2 border-blue-500">
+                                    <div class="font-medium flex items-center gap-2">
+                                        Professional
+                                        <span class="text-xs bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full">Popular</span>
+                                    </div>
+                                    <div class="text-sm text-gray-500">$2,000 - 3 channels, custom agents</div>
+                                </button>
+                                <button type="button" onclick="submitPlan('Enterprise - $3,000')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    <div class="font-medium">Enterprise</div>
+                                    <div class="text-sm text-gray-500">$3,000 - Unlimited channels, priority support</div>
+                                </button>
+                                <button type="button" onclick="submitPlan('Not sure - need advice')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    <div class="font-medium">Not sure yet</div>
+                                    <div class="text-sm text-gray-500">Help me choose the right plan</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-timeline" class="chat-step hidden">
+                            <div class="flex flex-col gap-2">
+                                <button type="button" onclick="submitTimeline('ASAP - This week')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    🚀 ASAP - This week
+                                </button>
+                                <button type="button" onclick="submitTimeline('Within 2 weeks')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    📅 Within 2 weeks
+                                </button>
+                                <button type="button" onclick="submitTimeline('Within a month')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    🗓️ Within a month
+                                </button>
+                                <button type="button" onclick="submitTimeline('Just exploring options')" class="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition">
+                                    💡 Just exploring options
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-submit" class="chat-step hidden">
+                            <div class="text-center py-4">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Ready to submit!</h3>
+                                <p class="text-gray-600 mb-4">We'll send your request and get back to you within 24 hours.</p>
+                                <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition">
+                                    Send My Request
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step-thanks" class="chat-step hidden">
+                            <div class="text-center py-4">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Request Sent!</h3>
+                                <p class="text-gray-600">We'll be in touch within 24 hours. Check your email for confirmation.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="text-center text-sm text-gray-500 mt-4">
+                🔒 Your information is secure and will never be shared.
+            </p>
         </div>
     </section>
 
@@ -590,7 +734,8 @@
                 <div>
                     <h4 class="font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li>Email: support@openclaw-setup.com</li>
+                        <li>Use the chat form above</li>
+                        <li>Response within 24h</li>
                     </ul>
                 </div>
             </div>
@@ -613,11 +758,150 @@
             });
         });
 
-        // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest! We will contact you within 24 hours.');
-            this.reset();
+        // Chat form state
+        let formData = {
+            name: '',
+            email: '',
+            usecase: '',
+            channels: [],
+            plan: '',
+            timeline: ''
+        };
+
+        function addBotMessage(text) {
+            const container = document.getElementById('chat-container');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex gap-3';
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-none px-4 py-3 max-w-sm shadow-sm">
+                    <p class="text-gray-800">${text}</p>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addUserMessage(text) {
+            const container = document.getElementById('chat-container');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex gap-3 justify-end';
+            msgDiv.innerHTML = `
+                <div class="bg-blue-600 rounded-2xl rounded-tr-none px-4 py-3 max-w-sm">
+                    <p class="text-white">${text}</p>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showStep(stepId) {
+            document.querySelectorAll('.chat-step').forEach(step => step.classList.add('hidden'));
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function submitName() {
+            const input = document.getElementById('user-name');
+            const name = input.value.trim();
+            if (!name) return;
+
+            formData.name = name;
+            document.getElementById('form-name').value = name;
+            addUserMessage(name);
+            setTimeout(() => {
+                addBotMessage(`Nice to meet you, ${name}! What's your email address so we can send you a quote?`);
+                showStep('step-email');
+            }, 500);
+        }
+
+        function submitEmail() {
+            const input = document.getElementById('user-email');
+            const email = input.value.trim();
+            if (!email || !email.includes('@')) return;
+
+            formData.email = email;
+            document.getElementById('form-email').value = email;
+            addUserMessage(email);
+            setTimeout(() => {
+                addBotMessage("Great! What are you looking to automate with OpenClaw?");
+                showStep('step-usecase');
+            }, 500);
+        }
+
+        function submitUsecase(usecase) {
+            formData.usecase = usecase;
+            document.getElementById('form-usecase').value = usecase;
+            addUserMessage(usecase);
+            setTimeout(() => {
+                addBotMessage("Which messaging channels do you need configured?");
+                showStep('step-channels');
+            }, 500);
+        }
+
+        function submitChannels() {
+            const checkboxes = document.querySelectorAll('#step-channels input[type="checkbox"]:checked');
+            const channels = Array.from(checkboxes).map(cb => cb.value);
+            if (channels.length === 0) {
+                channels.push('Not specified');
+            }
+
+            formData.channels = channels;
+            document.getElementById('form-channels').value = channels.join(', ');
+            addUserMessage(channels.join(', '));
+            setTimeout(() => {
+                addBotMessage("Which plan interests you?");
+                showStep('step-plan');
+            }, 500);
+        }
+
+        function submitPlan(plan) {
+            formData.plan = plan;
+            document.getElementById('form-plan').value = plan;
+            addUserMessage(plan);
+            setTimeout(() => {
+                addBotMessage("When do you need this completed?");
+                showStep('step-timeline');
+            }, 500);
+        }
+
+        function submitTimeline(timeline) {
+            formData.timeline = timeline;
+            document.getElementById('form-budget').value = timeline;
+            addUserMessage(timeline);
+            setTimeout(() => {
+                addBotMessage("Perfect! I've got all the info I need. Submit your request and we'll get back to you within 24 hours with a personalized quote.");
+                showStep('step-submit');
+            }, 500);
+        }
+
+        // Handle form submission
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            // Let the form submit naturally to Formsubmit
+            // Show thanks after submission
+            const form = this;
+            form.querySelector('[name="_next"]').value = window.location.href + '?submitted=true';
+        });
+
+        // Check for successful submission
+        if (window.location.search.includes('submitted=true')) {
+            showStep('step-thanks');
+            addBotMessage("Thanks! Your request has been submitted. We'll be in touch within 24 hours.");
+        }
+
+        // Enter key support for name and email inputs
+        document.getElementById('user-name').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submitName();
+            }
+        });
+        document.getElementById('user-email').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submitEmail();
+            }
         });
     </script>
 </body>
