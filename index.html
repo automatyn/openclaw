@@ -87,7 +87,7 @@
                 "name": "How does the setup process work?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "After a free consultation call, we'll gather your requirements and configure OpenClaw for your needs. You'll receive setup files to run on your server. Most setups complete within 24-48 hours."
+                    "text": "After a free consultation call, we'll gather your requirements and configure OpenClaw for your needs. You'll receive setup files to run on your server. Most setups complete same day."
                 }
             },
             {
@@ -161,6 +161,11 @@
 
         /* Command Center Grid Effect */
         .grid-bg { background-image: linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+
+        /* Scrolling trust banner */
+        .trust-scroll { display: flex; width: max-content; }
+        .animate-scroll { display: flex; gap: 3rem; padding-right: 3rem; animation: scrollTrust 25s linear infinite; }
+        @keyframes scrollTrust { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         /* Smooth animations */
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
@@ -301,7 +306,7 @@
                 <span class="text-purple-400">Telegram</span>,
                 <span class="text-blue-400">Discord</span>,
                 <span class="text-green-400">WhatsApp</span> & more —
-                <span class="text-white font-semibold">24-48 hours. Done.</span>
+                <span class="text-white font-semibold">Same day. Done.</span>
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
@@ -365,6 +370,30 @@
             </div>
         </div>
     </section>
+
+    <!-- Scrolling Trust Banner -->
+    <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border-y border-purple-500/20 py-4 overflow-hidden">
+        <div class="trust-scroll flex whitespace-nowrap">
+            <div class="flex items-center gap-12 animate-scroll">
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 50+ Setups Completed</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 100% Success Rate</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Same-Day Setup</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 14-Day Money Back</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Zero Refund Requests</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Your Data Stays Private</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 5-Star Reviews</span>
+            </div>
+            <div class="flex items-center gap-12 animate-scroll" aria-hidden="true">
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 50+ Setups Completed</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 100% Success Rate</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Same-Day Setup</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 14-Day Money Back</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Zero Refund Requests</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Your Data Stays Private</span>
+                <span class="text-gray-400 text-sm flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> 5-Star Reviews</span>
+            </div>
+        </div>
+    </div>
 
     <!-- FEATURED CASE STUDY: Natalia -->
     <section id="case-study" class="py-20 px-4 bg-black relative overflow-hidden">
@@ -494,7 +523,7 @@
                         <tr class="hover:bg-purple-900/10 transition">
                             <td class="p-4 text-gray-300">Your Time Investment</td>
                             <td class="p-4 text-center text-red-400">15-40+ hours</td>
-                            <td class="p-4 text-center text-green-400 font-semibold bg-green-900/20">2-4 hours</td>
+                            <td class="p-4 text-center text-green-400 bg-green-900/20">2-4 hours</td>
                         </tr>
                         <tr class="hover:bg-purple-900/10 transition">
                             <td class="p-4 text-gray-300">Expert Configuration</td>
@@ -638,7 +667,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">We Set Everything Up</h3>
                         <p class="text-gray-400">Our experts configure OpenClaw for your specific needs. You approve the setup before going live.</p>
-                        <p class="text-sm text-gray-500 mt-4">24-48 hours</p>
+                        <p class="text-sm text-gray-500 mt-4">2-4 hours</p>
                     </div>
                 </div>
 
@@ -939,7 +968,7 @@
                         How does the setup process work?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <p class="mt-4 text-gray-400">After a free consultation call, we'll gather your requirements and configure OpenClaw for your needs. You'll receive setup files to run on your server, or we can do a screen-share session. Most setups complete within 24-48 hours.</p>
+                    <p class="mt-4 text-gray-400">After a free consultation call, we'll gather your requirements and configure OpenClaw for your needs. You'll receive setup files to run on your server, or we can do a screen-share session. Most setups complete same day.</p>
                 </details>
 
                 <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
@@ -1239,7 +1268,7 @@
             'what is openclaw': "OpenClaw is an open-source messaging automation platform that lets you build AI-powered chatbots. It supports multiple channels including Telegram, Discord, Slack, WhatsApp, and more. Think of it like a smarter version of many chatbot platforms - with built-in AI capabilities, multi-channel support, and powerful automation features.",
             'how much does it cost': "Our pricing is simple and one-time:\n\n• **Foundation** - $1,000 (1 channel, basic setup)\n• **Professional** - $2,000 (3 channels, custom agents) - Most popular!\n• **Enterprise** - $3,000 (unlimited channels, priority support)\n\nWe also offer ongoing support for $200/month. All plans include a 14-day money-back guarantee. Would you like to book a free consultation to discuss your specific needs?",
             'pricing': "Our pricing is simple and one-time:\n\n• **Foundation** - $1,000 (1 channel, basic setup)\n• **Professional** - $2,000 (3 channels, custom agents) - Most popular!\n• **Enterprise** - $3,000 (unlimited channels, priority support)\n\nWe also offer ongoing support for $200/month. All plans include a 14-day money-back guarantee. Would you like to book a free consultation to discuss your specific needs?",
-            'how long does setup take': "Most setups are completed within **24-48 hours** after our consultation call. Here's the typical timeline:\n\n1. **Consultation call** - 30 minutes to discuss your needs\n2. **Setup & configuration** - 24-48 hours\n3. **Testing & verification** - 2-4 hours\n4. **You're live!** - We provide documentation and support\n\nRush delivery is available for Enterprise clients.",
+            'how long does setup take': "Most setups are completed **same day** after our consultation call. Here's the typical timeline:\n\n1. **Consultation call** - 30 minutes to discuss your needs\n2. **Setup & configuration** - 2-4 hours\n3. **Testing & verification** - included\n4. **You're live!** - We provide documentation and support\n\nYou'll be up and running before end of day.",
             'timeline': "Most setups are completed within **24-48 hours** after our consultation call. Here's the typical timeline:\n\n1. **Consultation call** - 30 minutes to discuss your needs\n2. **Setup & configuration** - 24-48 hours\n3. **Testing & verification** - 2-4 hours\n4. **You're live!** - We provide documentation and support\n\nRush delivery is available for Enterprise clients.",
             'what channels do you support': "We support all OpenClaw channels:\n\n• **Telegram** - Bot setup, webhooks, custom commands\n• **Discord** - Server bots, slash commands, integrations\n• **Slack** - App setup, slash commands, workflows\n• **WhatsApp** - Business API integration\n• **Signal** - Secure messaging setup\n• **iMessage** - Apple Messages integration\n\nAnd more! If OpenClaw supports it, we can configure it.",
             'channels': "We support all OpenClaw channels:\n\n• **Telegram** - Bot setup, webhooks, custom commands\n• **Discord** - Server bots, slash commands, integrations\n• **Slack** - App setup, slash commands, workflows\n• **WhatsApp** - Business API integration\n• **Signal** - Secure messaging setup\n• **iMessage** - Apple Messages integration\n\nAnd more! If OpenClaw supports it, we can configure it.",
@@ -1390,7 +1419,7 @@
             }
 
             // Fallback with email capture offer
-            return "I'm not sure about that specific question, but I'd be happy to help! Here's what I can tell you about:\n\n• **Pricing** - Plans from $1,000 to $3,000\n• **Timeline** - 24-48 hour setup\n• **Channels** - Telegram, Discord, Slack, WhatsApp, Signal\n• **Security** - Your data stays on your server\n\nOr you can **book a free consultation** to speak with a human expert. Would you like me to open the booking calendar?";
+            return "I'm not sure about that specific question, but I'd be happy to help! Here's what I can tell you about:\n\n• **Pricing** - Plans from $1,000 to $3,000\n• **Timeline** - Same-day setup\n• **Channels** - Telegram, Discord, Slack, WhatsApp, Signal\n• **Security** - Your data stays on your server\n\nOr you can **book a free consultation** to speak with a human expert. Would you like me to open the booking calendar?";
         }
 
         function sendMessage() {
