@@ -130,8 +130,8 @@
     </script>
 
     <style>
-        * { font-family: 'Satoshi', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; }
+        *, body, p, span, li, td, th, input, button, a, label, summary, details { font-family: 'Satoshi', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6, .font-bold, .font-semibold, .font-extrabold, nav a { font-family: 'Inter', sans-serif !important; }
         /* DARK MODE - SHADOW AGENCY THEME */
         :root {
             --neon-purple: #a855f7;
@@ -253,7 +253,14 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-2">
                     <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center neon-glow">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M7 4C7 4 5 8 5 10C5 12 7 13 7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 3C12 3 10 8 10 10C10 12 12 14 12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M17 4C17 4 15 8 15 10C15 12 17 13 17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 13L9.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M17 13L14.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
                     </div>
                     <span class="font-bold text-xl text-white">Automatyn</span>
                 </div>
@@ -1146,7 +1153,14 @@
                 <div>
                     <div class="flex items-center gap-2 mb-4">
                         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center neon-glow">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M7 4C7 4 5 8 5 10C5 12 7 13 7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M12 3C12 3 10 8 10 10C10 12 12 14 12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M17 4C17 4 15 8 15 10C15 12 17 13 17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 13L9.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M17 13L14.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
                         </div>
                         <span class="font-bold">Automatyn</span>
                     </div>
