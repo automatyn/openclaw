@@ -1188,11 +1188,13 @@
             e.preventDefault();
             const email = document.getElementById('guide-email').value;
             if (email && email.includes('@')) {
-                // Send to formsubmit.co (no API key needed, emails you directly)
-                fetch('https://formsubmit.co/ajax/patricksson@outlook.com', {
+                // Submit to Brevo form (hidden, no API key exposed)
+                const brevoForm = new FormData();
+                brevoForm.append('EMAIL', email);
+                fetch('https://e9b2bb57.sibforms.com/serve/MUIFALDsXgfDHOTeA8JiA_g-QJ1jfIUjYuMe7YrKSfvdtBIrlSCW50LHlMrijNr0c8KjVPsfByI0MCvu4CPuCDptgLQP1kThFWMWVkziKV1NVj3aakOCytMANNUzoSo0cXpQfY9axzNjUv5stXp9idge-nkrZEFkffV9695AcEv8dnRgIJSoWD_bwUhn_U6FUa8epyskx9C2lAdMAg==', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ email: email, _subject: 'New Hardware Guide Download', source: 'hardware-guide' })
+                    body: brevoForm,
+                    mode: 'no-cors'
                 }).catch(() => {});
 
                 // Show success with download link
@@ -1353,10 +1355,13 @@
                 addBotMessage("Got it! We'll send you a summary at " + email + ". Is there anything else I can help you with?");
                 // In production, you would send this to your backend
                 console.log('Email captured:', email);
-                fetch('https://formsubmit.co/ajax/patricksson@outlook.com', {
+                // Submit to Brevo form (hidden, no API key exposed)
+                const chatBrevoForm = new FormData();
+                chatBrevoForm.append('EMAIL', email);
+                fetch('https://e9b2bb57.sibforms.com/serve/MUIFALDsXgfDHOTeA8JiA_g-QJ1jfIUjYuMe7YrKSfvdtBIrlSCW50LHlMrijNr0c8KjVPsfByI0MCvu4CPuCDptgLQP1kThFWMWVkziKV1NVj3aakOCytMANNUzoSo0cXpQfY9axzNjUv5stXp9idge-nkrZEFkffV9695AcEv8dnRgIJSoWD_bwUhn_U6FUa8epyskx9C2lAdMAg==', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ email: email, _subject: 'New Chat Email Capture', source: 'chat-widget' })
+                    body: chatBrevoForm,
+                    mode: 'no-cors'
                 }).catch(() => {});
             } else {
                 addBotMessage("Please enter a valid email address.");
