@@ -28,4 +28,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://automatyn.github.io/sitemap.xml
+Sitemap: https://automatyn.co/sitemap.xml

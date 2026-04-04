@@ -18,11 +18,11 @@ Automatyn is a done-for-you AI automation setup service. We handle the full Open
 - Business Package: $1,500 — All platforms, custom integrations, 30-day support
 
 ## Key Pages
-- [Home](https://automatyn.github.io/)
-- [Blog: What is OpenClaw and Why Every Business Needs It](https://automatyn.github.io/blog/what-is-openclaw-why-every-business-needs-it-2026.html)
-- [Blog: 5 Ways to Make Passive Income with AI Agents](https://automatyn.github.io/blog/passive-income-ai-agents-2026.html)
+- [Home](https://automatyn.co/)
+- [Blog: What is OpenClaw and Why Every Business Needs It](https://automatyn.co/blog/what-is-openclaw-why-every-business-needs-it-2026.html)
+- [Blog: 5 Ways to Make Passive Income with AI Agents](https://automatyn.co/blog/passive-income-ai-agents-2026.html)
 
 ## Contact
 - Free 15-minute consultation available
 - Email: support@automatyn.com
-- Book a call: https://automatyn.github.io/#contact
+- Book a call: https://automatyn.co/#contact
