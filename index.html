@@ -28,8 +28,8 @@
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- JSON-LD Structured Data for SEO -->
     <script type="application/ld+json">
@@ -180,37 +180,43 @@
     </script>
 
     <style>
-        *, body, p, span, li, td, th, input, button, a, label, summary, details { font-family: 'Satoshi', sans-serif !important; }
-        h1, h2, h3, h4, h5, h6, .font-bold, .font-semibold, .font-extrabold, nav a { font-family: 'Inter', sans-serif !important; }
-        /* DARK MODE - SHADOW AGENCY THEME */
+        *, body, p, span, li, td, th, input, button, a, label, summary, details { font-family: 'DM Sans', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6, .font-bold, .font-semibold, .font-extrabold { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; }
+        nav a { font-family: 'DM Sans', sans-serif !important; }
+        /* STEALTH WEALTH THEME — Premium, Dark, Confident */
         :root {
-            --neon-purple: #a855f7;
-            --electric-blue: #3b82f6;
-            --bg-dark: #000000;
-            --bg-card: #0a0a0a;
+            --accent-gold: #d4a853;
+            --accent-warm: #c9943e;
+            --accent-glow: rgba(212, 168, 83, 0.3);
+            --cta-green: #10b981;
+            --cta-green-glow: rgba(16, 185, 129, 0.4);
+            --bg-dark: #050505;
+            --bg-card: #0c0c0c;
             --bg-surface: #111111;
-            --text-primary: #ffffff;
+            --border-subtle: rgba(212, 168, 83, 0.12);
+            --border-hover: rgba(212, 168, 83, 0.3);
+            --text-primary: #f0f0f0;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
         }
         body { background: var(--bg-dark); color: var(--text-primary); }
-        .gradient-text { background: linear-gradient(135deg, var(--electric-blue) 0%, var(--neon-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gradient-text-glow { background: linear-gradient(135deg, var(--electric-blue) 0%, var(--neon-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(168, 85, 247, 0.5); }
-        .hero-gradient { background: linear-gradient(180deg, #0a0012 0%, #000000 50%, #050510 100%); position: relative; overflow: hidden; }
-        .hero-gradient::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at top, rgba(168, 85, 247, 0.15) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(59, 130, 246, 0.1) 0%, transparent 50%); pointer-events: none; }
-        .card-shadow { box-shadow: 0 4px 20px rgba(168, 85, 247, 0.1), 0 0 40px rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); }
-        .card-shadow-lg { box-shadow: 0 10px 40px rgba(168, 85, 247, 0.15), 0 0 60px rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); }
-        .card-glow { background: var(--bg-card); border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 0 30px rgba(168, 85, 247, 0.1); }
-        .card-glow:hover { border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 0 50px rgba(168, 85, 247, 0.2); }
-        .neon-border { border: 1px solid rgba(168, 85, 247, 0.3); position: relative; }
-        .neon-border::after { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, var(--electric-blue), var(--neon-purple)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5; }
+        .gradient-text { background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c878 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text-glow { background: linear-gradient(135deg, var(--accent-gold) 0%, #e8c878 50%, var(--accent-warm) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 40px rgba(212, 168, 83, 0.3); }
+        .hero-gradient { background: linear-gradient(180deg, #0a0805 0%, #050505 50%, #080808 100%); position: relative; overflow: hidden; }
+        .hero-gradient::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at top, rgba(212, 168, 83, 0.08) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(212, 168, 83, 0.04) 0%, transparent 50%); pointer-events: none; }
+        .card-shadow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 1px var(--border-subtle); border: 1px solid var(--border-subtle); }
+        .card-shadow-lg { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 1px var(--border-hover); border: 1px solid var(--border-hover); }
+        .card-glow { background: var(--bg-card); border: 1px solid var(--border-subtle); }
+        .card-glow:hover { border-color: var(--border-hover); box-shadow: 0 0 30px rgba(212, 168, 83, 0.08); }
+        .neon-border { border: 1px solid var(--border-subtle); position: relative; }
+        .neon-border::after { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, var(--accent-gold), var(--accent-warm)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.3; }
         .bg-surface { background: var(--bg-surface); }
         .bg-card { background: var(--bg-card); }
         .text-secondary { color: var(--text-secondary); }
         .text-muted { color: var(--text-muted); }
 
         /* Command Center Grid Effect */
-        .grid-bg { background-image: linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+        .grid-bg { background-image: linear-gradient(rgba(212, 168, 83, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 168, 83, 0.02) 1px, transparent 1px); background-size: 50px 50px; }
 
         /* Scrolling trust banner */
         .trust-scroll { display: flex; width: max-content; }
@@ -221,20 +227,56 @@
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Scroll reveal animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Subtle grain texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* Enhanced CTA buttons — emerald green for high contrast */
+        .cta-primary {
+            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #059669 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            box-shadow: 0 4px 20px var(--cta-green-glow), 0 0 40px rgba(16, 185, 129, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .cta-primary:hover {
+            box-shadow: 0 6px 30px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.2);
+            transform: translateY(-2px);
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
         /* Pulse animation for live indicator */
         .pulse { animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-        /* Neon glow animation */
+        /* Neon glow animation — warm gold */
         .neon-glow { animation: neonPulse 3s ease-in-out infinite; }
-        @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.2); } 50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 60px rgba(168, 85, 247, 0.3); } }
+        @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 20px rgba(212, 168, 83, 0.3), 0 0 40px rgba(212, 168, 83, 0.1); } 50% { box-shadow: 0 0 30px rgba(212, 168, 83, 0.5), 0 0 60px rgba(212, 168, 83, 0.2); } }
 
         /* Chat bubble animations */
         .chat-bubble { animation: slideIn 0.3s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Urgency banner - dark mode */
-        .urgency-banner { background: linear-gradient(90deg, var(--neon-purple) 0%, var(--electric-blue) 100%); }
+        /* Urgency banner - warm gold */
+        .urgency-banner { background: linear-gradient(90deg, var(--accent-warm) 0%, var(--accent-gold) 100%); color: #000; }
 
         /* Mobile Sticky CTA */
         .mobile-sticky-cta {
@@ -243,8 +285,8 @@
             left: 0;
             right: 0;
             background: var(--bg-card);
-            border-top: 1px solid rgba(168, 85, 247, 0.3);
-            box-shadow: 0 -4px 30px rgba(168, 85, 247, 0.2);
+            border-top: 1px solid var(--border-subtle);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
             z-index: 999;
             padding: 12px 16px;
             display: none;
@@ -291,7 +333,7 @@
 <body class="bg-black">
     <!-- Mobile Sticky CTA -->
     <div class="mobile-sticky-cta">
-        <a href="#contact" class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 rounded-xl font-semibold">
+        <a href="#contact" class="block w-full cta-primary text-white text-center py-3 rounded-xl font-semibold">
             Book Free Consultation
         </a>
     </div>
@@ -303,7 +345,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-purple-900/30">
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-amber-900/20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -314,17 +356,17 @@
                     <a href="#case-study" class="text-gray-400 hover:text-white transition text-sm font-medium">Case Study</a>
                     <a href="#process" class="text-gray-400 hover:text-white transition text-sm font-medium">Process</a>
                     <a href="#blog" class="text-gray-400 hover:text-white transition text-sm font-medium">Blog</a>
-                    <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-lg hover:opacity-90 transition text-sm font-medium shadow-md neon-glow">Book Free Call</a>
+                    <a href="#contact" class="cta-primary text-white px-5 py-2 rounded-lg hover:opacity-90 transition text-sm font-medium shadow-md neon-glow">Book Free Call</a>
                 </div>
                 <div class="md:hidden flex items-center gap-3">
-                    <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium">Book Call</a>
+                    <a href="#contact" class="cta-primary text-white px-4 py-2 rounded-lg text-sm font-medium">Book Call</a>
                     <button id="mobile-menu-btn" class="text-gray-400 hover:text-white transition" aria-label="Toggle navigation menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
                 </div>
             </div>
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden border-t border-purple-900/30 py-4">
+            <div id="mobile-menu" class="hidden md:hidden border-t border-amber-900/20 py-4">
                 <div class="flex flex-col gap-4 px-4">
                     <a href="#pricing" class="text-gray-400 hover:text-white transition text-sm font-medium">Pricing</a>
                     <a href="#case-study" class="text-gray-400 hover:text-white transition text-sm font-medium">Case Study</a>
@@ -337,16 +379,16 @@
 
     <!-- GEO: Answer-first content for AI/LLM crawlers -->
     <div style="position:absolute;left:-9999px;overflow:hidden">
-        <p class="max-w-4xl mx-auto text-gray-500 text-xs leading-relaxed">Automatyn is a professional <strong class="text-gray-400">OpenClaw setup service</strong> that installs and configures AI automation agents for small businesses. We deploy bots on Telegram, Discord, Slack, and WhatsApp in 2-4 hours — starting at $400. <a href="#contact" class="text-purple-400 hover:text-purple-300">Book a free consultation →</a></p>
+        <p class="max-w-4xl mx-auto text-gray-500 text-xs leading-relaxed">Automatyn is a professional <strong class="text-gray-400">OpenClaw setup service</strong> that installs and configures AI automation agents for small businesses. We deploy bots on Telegram, Discord, Slack, and WhatsApp in 2-4 hours — starting at $400. <a href="#contact" class="text-amber-400 hover:text-amber-300">Book a free consultation →</a></p>
     </div>
 
     <!-- Hero Section - Automation Command Center -->
     <section class="hero-gradient pt-32 pb-16 px-4 grid-bg relative">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <!-- Trust Badge -->
-            <div class="inline-flex items-center gap-2 bg-purple-900/30 border border-purple-500/30 px-4 py-2 rounded-full mb-6">
-                <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                <span class="text-sm font-medium text-purple-300">Professional OpenClaw Setup Service</span>
+            <div class="inline-flex items-center gap-2 bg-amber-900/20 border border-amber-600/20 px-4 py-2 rounded-full mb-6">
+                <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span class="text-sm font-medium text-amber-300">Professional OpenClaw Setup Service</span>
             </div>
 
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
@@ -355,15 +397,15 @@
             </h1>
 
             <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-                We deploy AI agents that handle your customer support, lead follow-up, and operations — across <span class="text-purple-400">WhatsApp</span>, <span class="text-blue-400">Telegram</span>, <span class="text-indigo-400">Discord</span> &amp; <span class="text-green-400">Slack</span>. Same day. Done.
+                We deploy AI agents that handle your customer support, lead follow-up, and operations — across <span class="text-amber-400">WhatsApp</span>, <span class="text-blue-400">Telegram</span>, <span class="text-indigo-400">Discord</span> &amp; <span class="text-green-400">Slack</span>. Same day. Done.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-                <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2 neon-glow">
+                <a href="#contact" class="cta-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     Book Free Consultation
                 </a>
-                <a href="#pricing" class="bg-transparent text-white px-8 py-4 rounded-xl font-semibold hover:bg-purple-900/30 transition border border-purple-500/50 flex items-center justify-center gap-2">
+                <a href="#pricing" class="bg-transparent text-white px-8 py-4 rounded-xl font-semibold hover:bg-amber-900/20 transition border border-amber-500/30 flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                     See Pricing ↓
                 </a>
@@ -372,19 +414,19 @@
             <!-- Trust Indicators -->
             <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 text-gray-400 text-sm">
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     <span>14-Day Money Back</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     <span>Same-Day Setup</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     <span>Secure & Private</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     <span>Free Consultation</span>
                 </div>
             </div>
@@ -392,7 +434,7 @@
     </section>
 
     <!-- Social Proof -->
-    <section class="py-12 px-4 bg-black border-b border-purple-900/30">
+    <section class="py-12 px-4 bg-black border-b border-amber-900/20">
         <div class="max-w-5xl mx-auto">
             <p class="text-center text-gray-500 text-sm mb-8 uppercase tracking-wider font-medium">Platforms We Configure</p>
             <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
@@ -483,7 +525,7 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Foundation -->
-                <div class="bg-card rounded-2xl border border-purple-500/20 p-8">
+                <div class="bg-card rounded-2xl border border-amber-700/15 p-8">
                     <div class="mb-6">
                         <h3 class="text-xl font-bold text-white mb-2">Starter</h3>
                         <p class="text-gray-500 text-sm">For individuals and small projects</p>
@@ -494,73 +536,73 @@
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>OpenClaw installation</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>1 channel configuration</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Basic security setup</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>14-day email support</span>
                         </li>
                     </ul>
-                    <a href="#contact" class="block w-full bg-purple-900/30 border border-purple-500/30 text-white text-center py-3 rounded-xl font-semibold hover:bg-purple-900/50 transition">
+                    <a href="#contact" class="block w-full bg-amber-900/20 border border-amber-600/20 text-white text-center py-3 rounded-xl font-semibold hover:bg-amber-900/30 transition">
                         Book Free Call
                     </a>
                 </div>
 
                 <!-- Professional -->
-                <div class="bg-gradient-to-b from-purple-900/40 to-blue-900/40 rounded-2xl p-8 relative border border-purple-500/40 neon-glow">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                <div class="bg-gradient-to-b from-amber-900/20 to-amber-800/10 rounded-2xl p-8 relative border border-amber-500/30 neon-glow">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 cta-primary text-white px-3 py-1 rounded-full text-xs font-bold">
                         MOST POPULAR
                     </div>
                     <div class="mb-6">
                         <h3 class="text-xl font-bold text-white mb-2">Pro</h3>
-                        <p class="text-purple-300 text-sm">For growing teams and businesses</p>
+                        <p class="text-amber-300 text-sm">For growing teams and businesses</p>
                     </div>
                     <div class="mb-6">
                         <span class="text-4xl font-bold text-white">$800</span>
-                        <span class="text-purple-300">one-time</span>
+                        <span class="text-amber-300">one-time</span>
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Everything in Starter</span>
                         </li>
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Up to 3 channels</span>
                         </li>
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Custom agent + skills setup</span>
                         </li>
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Security hardening</span>
                         </li>
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>30-day priority support</span>
                         </li>
                         <li class="flex items-center gap-3 text-purple-100">
-                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Verification call included</span>
                         </li>
                     </ul>
-                    <a href="#contact" class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 rounded-xl font-semibold hover:opacity-90 transition shadow-lg">
+                    <a href="#contact" class="block w-full cta-primary text-white text-center py-3 rounded-xl font-semibold hover:opacity-90 transition shadow-lg">
                         Book Free Call
                     </a>
                 </div>
 
                 <!-- Enterprise -->
-                <div class="bg-card rounded-2xl border border-purple-500/20 p-8">
+                <div class="bg-card rounded-2xl border border-amber-700/15 p-8">
                     <div class="mb-6">
                         <h3 class="text-xl font-bold text-white mb-2">Business</h3>
                         <p class="text-gray-500 text-sm">For organizations with complex needs</p>
@@ -571,27 +613,27 @@
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Everything in Pro</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Unlimited channels</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Custom integrations + skills</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>1-hour onboarding call</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>90-day priority support</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-300">
-                            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             <span>Docker sandboxing + hardening</span>
                         </li>
                     </ul>
@@ -602,7 +644,7 @@
             </div>
 
             <!-- Monthly Support -->
-            <div class="mt-12 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-2xl p-8 border border-purple-500/20">
+            <div class="mt-12 bg-gradient-to-r from-amber-900/15 to-amber-800/10 rounded-2xl p-8 border border-amber-700/15">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                         <h3 class="text-xl font-bold text-white mb-2">Add Ongoing Support</h3>
@@ -685,7 +727,7 @@
         const status = document.getElementById('wa-status');
         const scenarios = [
             {
-                name: "Mike's E-Commerce Store", avatar: 'M', color: 'from-purple-500 to-blue-400',
+                name: "Mike's E-Commerce Store", avatar: 'M', color: 'from-amber-500 to-amber-400',
                 messages: [
                     { type: 'out', text: 'Hey, a customer just left a 1-star review on our store. Can you handle it?', time: '8:15 AM' },
                     { type: 'in', text: 'On it. I found the review — it\'s about a late delivery on order #4821. I\'ve checked the tracking: it was stuck at the Memphis hub for 3 days. Here\'s what I\'ve done:\n\n✅ Drafted a public response apologising and offering 15% off\n✅ Sent the customer a private email with a replacement shipping label\n✅ Flagged the carrier issue in your logistics sheet', time: '8:15 AM' },
@@ -795,12 +837,12 @@
 
     <!-- FEATURED CASE STUDY: Natalia -->
     <section id="case-study" class="py-20 px-4 bg-black relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-amber-900/10 to-amber-800/5 pointer-events-none"></div>
         <div class="max-w-5xl mx-auto relative z-10">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 bg-purple-900/30 border border-purple-500/30 px-4 py-2 rounded-full mb-4">
-                    <span class="w-2 h-2 bg-purple-400 rounded-full pulse" aria-hidden="true"></span>
-                    <span class="text-sm font-medium text-purple-300">Featured Case Study</span>
+                <div class="inline-flex items-center gap-2 bg-amber-900/20 border border-amber-600/20 px-4 py-2 rounded-full mb-4">
+                    <span class="w-2 h-2 bg-amber-400 rounded-full pulse" aria-hidden="true"></span>
+                    <span class="text-sm font-medium text-amber-300">Featured Case Study</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
                     <span class="gradient-text">@NataliaAI</span> — 7M+ Reach, Zero Manual Input
@@ -808,7 +850,7 @@
                 <p class="text-xl text-gray-400">How one AI influencer scaled to 10+ accounts on autopilot</p>
             </div>
 
-            <div class="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-2xl p-8 card-glow">
+            <div class="bg-gradient-to-br from-amber-900/15 to-amber-800/10 border border-amber-600/20 rounded-2xl p-8 card-glow">
                 <div class="grid md:grid-cols-3 gap-8 mb-8">
                     <div class="text-center">
                         <div class="text-4xl font-bold gradient-text mb-2">3×</div>
@@ -827,15 +869,15 @@
                     </div>
                 </div>
 
-                <div class="border-t border-purple-500/30 pt-6">
+                <div class="border-t border-amber-600/20 pt-6">
                     <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                        Using <span class="text-white font-semibold">OpenClaw</span> + local <span class="text-white font-semibold">Forge</span>, we enabled <span class="text-purple-400 font-semibold">@NataliaAI</span> to post 3× daily across 10+ accounts with <span class="text-green-400 font-semibold">zero manual input</span>.
+                        Using <span class="text-white font-semibold">OpenClaw</span> + local <span class="text-white font-semibold">Forge</span>, we enabled <span class="text-amber-400 font-semibold">@NataliaAI</span> to post 3× daily across 10+ accounts with <span class="text-green-400 font-semibold">zero manual input</span>.
                     </p>
                     <p class="text-gray-400 mb-6">
                         <span class="text-white font-semibold">Result:</span> 7M+ cumulative reach. Content scheduled, posted, and engaged — all on autopilot. The system runs 24/7 without human intervention.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-3 py-1 bg-purple-900/50 border border-purple-500/30 rounded-full text-sm text-purple-300">Telegram</span>
+                        <span class="px-3 py-1 bg-amber-900/30 border border-amber-600/20 rounded-full text-sm text-amber-300">Telegram</span>
                         <span class="px-3 py-1 bg-blue-900/50 border border-blue-500/30 rounded-full text-sm text-blue-300">Discord</span>
                         <span class="px-3 py-1 bg-green-900/50 border border-green-500/30 rounded-full text-sm text-green-300">WhatsApp</span>
                         <span class="px-3 py-1 bg-pink-900/50 border border-pink-500/30 rounded-full text-sm text-pink-300">Instagram</span>
@@ -845,7 +887,7 @@
             </div>
 
             <p class="text-center text-gray-500 mt-8">
-                <a href="#contact" class="text-purple-400 hover:text-purple-300 transition font-medium">
+                <a href="#contact" class="text-amber-400 hover:text-amber-300 transition font-medium">
                     Want similar results? Book your free consultation →
                 </a>
             </p>
@@ -863,51 +905,51 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full bg-black rounded-2xl card-shadow-lg overflow-hidden border border-purple-500/20">
+                <table class="w-full bg-black rounded-2xl card-shadow-lg overflow-hidden border border-amber-700/15">
                     <thead>
-                        <tr class="bg-purple-900/30">
+                        <tr class="bg-amber-900/20">
                             <th class="text-left p-4 font-semibold text-gray-300">What You Get</th>
                             <th class="p-4 font-semibold text-red-400 text-center">DIY Setup</th>
                             <th class="p-4 font-semibold text-green-400 text-center bg-green-900/20">Automatyn Setup</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-purple-500/20">
-                        <tr class="hover:bg-purple-900/10 transition">
+                    <tbody class="divide-y divide-amber-800/15">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Your Time Investment</td>
                             <td class="p-4 text-center text-red-400">15-40+ hours</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">2-4 hours</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Expert Configuration</td>
                             <td class="p-4 text-center text-red-400">❌ Trial & error</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">✓ First-time right</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Security Best Practices</td>
                             <td class="p-4 text-center text-red-400">❌ Easy to miss</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">✓ Built-in</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Support When Issues Arise</td>
                             <td class="p-4 text-center text-red-400">❌ On your own</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">✓ 30-90 days included</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Custom Agent Setup</td>
                             <td class="p-4 text-center text-red-400">❌ Learn from scratch</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">✓ Expert configured</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Money-Back Guarantee</td>
                             <td class="p-4 text-center text-red-400">❌ No</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">✓ 14-day guarantee</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Time to Go Live</td>
                             <td class="p-4 text-center text-red-400">1-2 weeks</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">Same day</td>
                         </tr>
-                        <tr class="hover:bg-purple-900/10 transition">
+                        <tr class="hover:bg-amber-900/10 transition">
                             <td class="p-4 text-gray-300">Opportunity Cost</td>
                             <td class="p-4 text-center text-red-400">Your time = $$$</td>
                             <td class="p-4 text-center text-green-400 bg-green-900/20">Focus on your business</td>
@@ -916,7 +958,7 @@
                 </table>
             </div>
 
-            <p class="text-center text-gray-500 mt-6">Most clients save 15+ hours and avoid costly mistakes. <a href="#contact" class="text-purple-400 hover:underline">Get started today →</a></p>
+            <p class="text-center text-gray-500 mt-6">Most clients save 15+ hours and avoid costly mistakes. <a href="#contact" class="text-amber-400 hover:underline">Get started today →</a></p>
         </div>
     </section>
 
@@ -933,7 +975,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm neon-glow">1</div>
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">1</div>
                     </div>
                     <div class="pt-4">
                         <div class="w-12 h-12 rounded-xl bg-blue-900/50 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
@@ -947,10 +989,10 @@
 
                 <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm neon-glow">2</div>
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">2</div>
                     </div>
                     <div class="pt-4">
-                        <div class="w-12 h-12 rounded-xl bg-purple-900/50 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-900/30 border border-amber-600/20 flex items-center justify-center text-amber-400 mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">We Set Everything Up</h3>
@@ -961,7 +1003,7 @@
 
                 <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm neon-glow">3</div>
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">3</div>
                     </div>
                     <div class="pt-4">
                         <div class="w-12 h-12 rounded-xl bg-green-900/50 border border-green-500/30 flex items-center justify-center text-green-400 mb-4">
@@ -988,7 +1030,7 @@
             </div>
 
             <div class="space-y-4">
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         How does the setup process work?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -996,7 +1038,7 @@
                     <p class="mt-4 text-gray-400">After a free consultation call, we'll gather your requirements and configure OpenClaw for your needs. You'll receive setup files to run on your server, or we can do a screen-share session. Most setups complete same day.</p>
                 </details>
 
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         Do I need to give you access to my server?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -1004,7 +1046,7 @@
                     <p class="mt-4 text-gray-400">No. We generate custom setup scripts that you run on your own machine. Your API keys and data never leave your server. For Enterprise clients, we can optionally do a screen-share session.</p>
                 </details>
 
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         What if something breaks after setup?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -1012,7 +1054,7 @@
                     <p class="mt-4 text-gray-400">All plans include email support. Monthly support subscribers get priority response within 4 hours. We troubleshoot issues and provide fixes quickly.</p>
                 </details>
 
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         What's your refund policy?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -1020,7 +1062,7 @@
                     <p class="mt-4 text-gray-400">We offer a 14-day money-back guarantee. If we can't get your OpenClaw setup working, you get a full refund. No questions asked.</p>
                 </details>
 
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         Can I upgrade my plan later?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -1028,7 +1070,7 @@
                     <p class="mt-4 text-gray-400">Yes. You can upgrade by paying the difference between your current plan and the new one. Contact us for upgrade pricing.</p>
                 </details>
 
-                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-purple-500/20">
+                <details class="bg-card rounded-xl p-6 cursor-pointer group border border-amber-700/15">
                     <summary class="font-semibold text-white flex justify-between items-center">
                         What channels do you support?
                         <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -1043,9 +1085,9 @@
     <section id="contact" class="py-20 px-4 bg-surface">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 bg-purple-900/30 border border-purple-500/30 px-4 py-2 rounded-full mb-4">
+                <div class="inline-flex items-center gap-2 bg-amber-900/20 border border-amber-600/20 px-4 py-2 rounded-full mb-4">
                     <span class="w-2 h-2 bg-green-400 rounded-full pulse" aria-hidden="true"></span>
-                    <span class="text-sm font-medium text-purple-300">3 consultation slots available this week</span>
+                    <span class="text-sm font-medium text-amber-300">3 consultation slots available this week</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Book Your Free Consultation</h2>
                 <p class="text-xl text-gray-400">15-minute call. No commitment. Get all your questions answered.</p>
@@ -1073,7 +1115,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-purple-900/50 border border-purple-500/30 flex items-center justify-center text-purple-400 flex-shrink-0">
+                        <div class="w-10 h-10 rounded-xl bg-amber-900/30 border border-amber-600/20 flex items-center justify-center text-amber-400 flex-shrink-0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         </div>
                         <div>
@@ -1092,7 +1134,7 @@
                     </div>
 
                     <!-- Trust badges -->
-                    <div class="pt-6 border-t border-purple-500/20">
+                    <div class="pt-6 border-t border-amber-700/15">
                         <p class="text-sm text-gray-500 mb-3">Trusted by businesses worldwide</p>
                         <div class="flex flex-wrap gap-4 items-center">
                             <div class="flex items-center gap-1 text-gray-500">
@@ -1116,7 +1158,7 @@
                         <h3 class="text-xl font-bold text-white mb-2">Schedule Your Free Call</h3>
                         <p class="text-gray-400 mb-6">Pick a time that works for you</p>
 
-                        <button id="calendly-btn" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition shadow-lg neon-glow">
+                        <button id="calendly-btn" class="w-full inline-flex items-center justify-center gap-2 cta-primary text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition shadow-lg neon-glow">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                             Book 15-Min Consultation
                         </button>
@@ -1129,7 +1171,7 @@
             <!-- Email fallback -->
             <div class="mt-12 text-center">
                 <p class="text-gray-500 mb-4">Prefer email? Reach us directly:</p>
-                <a href="mailto:support@automatyn.co" class="text-purple-400 font-medium hover:underline">support@automatyn.co</a>
+                <a href="mailto:support@automatyn.co" class="text-amber-400 font-medium hover:underline">support@automatyn.co</a>
             </div>
         </div>
     </section>
@@ -1140,31 +1182,31 @@
     <section id="blog" class="py-20 px-4 bg-gradient-to-b from-gray-950 to-black">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
-                <span class="inline-block px-4 py-1.5 bg-purple-900/30 text-purple-400 rounded-full text-sm font-medium mb-4">Latest Insights</span>
+                <span class="inline-block px-4 py-1.5 bg-amber-900/20 text-amber-400 rounded-full text-sm font-medium mb-4">Latest Insights</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4" style="font-family: 'Satoshi', sans-serif;">From the Blog</h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">Learn how AI automation can transform your business and create new income streams.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="blog-posts">
-                <a href="/blog/what-is-openclaw-why-every-business-needs-it-2026.html" class="group bg-gray-900/50 border border-purple-900/20 rounded-2xl overflow-hidden hover:border-purple-500/40 transition-all duration-300">
+                <a href="/blog/what-is-openclaw-why-every-business-needs-it-2026.html" class="group bg-gray-900/50 border border-purple-900/20 rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all duration-300">
                     <div class="aspect-video overflow-hidden">
                         <img src="/blog/images/openclaw-hero.jpg" alt="What is OpenClaw and Why Every Business Needs It" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-6">
-                        <span class="text-xs text-purple-400 font-medium">AI Automation</span>
-                        <h3 class="text-white font-bold mt-2 mb-3 group-hover:text-purple-300 transition">What is OpenClaw and Why Every Business Needs It in 2026</h3>
+                        <span class="text-xs text-amber-400 font-medium">AI Automation</span>
+                        <h3 class="text-white font-bold mt-2 mb-3 group-hover:text-amber-300 transition">What is OpenClaw and Why Every Business Needs It in 2026</h3>
                         <p class="text-gray-400 text-sm line-clamp-2">OpenClaw is an open-source AI agent that runs your business on autopilot. Here's what it does and why 2026 is the year to deploy it.</p>
-                        <span class="inline-flex items-center text-purple-400 text-sm mt-4 group-hover:text-purple-300">Read more →</span>
+                        <span class="inline-flex items-center text-amber-400 text-sm mt-4 group-hover:text-amber-300">Read more →</span>
                     </div>
                 </a>
-                <a href="/blog/passive-income-ai-agents-2026.html" class="group bg-gray-900/50 border border-purple-900/20 rounded-2xl overflow-hidden hover:border-purple-500/40 transition-all duration-300">
+                <a href="/blog/passive-income-ai-agents-2026.html" class="group bg-gray-900/50 border border-purple-900/20 rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all duration-300">
                     <div class="aspect-video overflow-hidden">
                         <img src="/blog/images/hero.jpg" alt="5 Ways to Make Passive Income with AI Agents" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-6">
-                        <span class="text-xs text-purple-400 font-medium">AI Automation</span>
-                        <h3 class="text-white font-bold mt-2 mb-3 group-hover:text-purple-300 transition">5 Ways to Make Passive Income with AI Agents in 2026</h3>
+                        <span class="text-xs text-amber-400 font-medium">AI Automation</span>
+                        <h3 class="text-white font-bold mt-2 mb-3 group-hover:text-amber-300 transition">5 Ways to Make Passive Income with AI Agents in 2026</h3>
                         <p class="text-gray-400 text-sm line-clamp-2">Discover proven strategies to generate passive income using AI agents — from customer support bots to content automation systems.</p>
-                        <span class="inline-flex items-center text-purple-400 text-sm mt-4 group-hover:text-purple-300">Read more →</span>
+                        <span class="inline-flex items-center text-amber-400 text-sm mt-4 group-hover:text-amber-300">Read more →</span>
                     </div>
                 </a>
             </div>
@@ -1172,7 +1214,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-purple-900/30 text-white py-12 px-4">
+    <footer class="bg-black border-t border-amber-900/20 text-white py-12 px-4">
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
@@ -1209,7 +1251,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-purple-900/30 pt-8 text-center text-gray-500 text-sm">
+            <div class="border-t border-amber-900/20 pt-8 text-center text-gray-500 text-sm">
                 <p>&copy; 2026 Automatyn. All rights reserved.</p>
                 <p class="mt-2">Not affiliated with the OpenClaw project. OpenClaw is a trademark of its respective owners.</p>
             </div>
@@ -1233,12 +1275,25 @@
 
                 // Show success with download link
                 const form = this;
-                form.innerHTML = '<div class="text-center py-8"><div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 neon-glow"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-xl font-bold text-white mb-2">Download Your Guide</h3><p class="text-gray-400 mb-4">We\'ve also sent a copy to ' + email + '</p><a href="https://automatyn.co/openclaw-hardware-guide-2026.pdf" download class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> Download PDF Guide</a></div>';
+                form.innerHTML = '<div class="text-center py-8"><div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 neon-glow"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-xl font-bold text-white mb-2">Download Your Guide</h3><p class="text-gray-400 mb-4">We\'ve also sent a copy to ' + email + '</p><a href="https://automatyn.co/openclaw-hardware-guide-2026.pdf" download class="inline-flex items-center gap-2 cta-primary text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> Download PDF Guide</a></div>';
             }
         });
     </script>
 
     <script>
+        // Scroll reveal animations
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section, .inline-cta, .comparison-table, #blog-posts > a').forEach(function(el) {
+            el.classList.add('reveal');
+            revealObserver.observe(el);
+        });
+
         // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
@@ -1314,7 +1369,7 @@
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0" aria-hidden="true">
                     <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
-                <div class="bg-card rounded-2xl rounded-tl-none px-4 py-3 max-w-md border border-purple-500/20">
+                <div class="bg-card rounded-2xl rounded-tl-none px-4 py-3 max-w-md border border-amber-700/15">
                     <p class="text-gray-300 text-sm whitespace-pre-line">${text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>
                 </div>
             `;
@@ -1327,7 +1382,7 @@
             const msgDiv = document.createElement('div');
             msgDiv.className = 'flex gap-3 justify-end mb-4';
             msgDiv.innerHTML = `
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl rounded-tr-none px-4 py-3 max-w-md">
+                <div class="cta-primary rounded-2xl rounded-tr-none px-4 py-3 max-w-md">
                     <p class="text-white text-sm">${text}</p>
                 </div>
             `;
@@ -1344,7 +1399,7 @@
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0" aria-hidden="true">
                     <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
-                <div class="bg-card rounded-2xl rounded-tl-none px-4 py-3 border border-purple-500/20">
+                <div class="bg-card rounded-2xl rounded-tl-none px-4 py-3 border border-amber-700/15">
                     <div class="typing-indicator">
                         <span></span><span></span><span></span>
                     </div>
@@ -1371,7 +1426,7 @@
                 <div class="bg-white rounded-2xl rounded-tl-none px-4 py-3 max-w-xs shadow-sm">
                     <p class="text-gray-800 text-sm mb-3">Would you like me to send you a summary? Just enter your email:</p>
                     <input type="email" id="chat-email-input" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm mb-2" placeholder="your@email.com" aria-label="Email address">
-                    <button onclick="submitEmail()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:opacity-90 transition">Send Summary</button>
+                    <button onclick="submitEmail()" class="w-full cta-primary text-white py-2 rounded-lg text-sm font-medium hover:opacity-90 transition">Send Summary</button>
                 </div>
             `;
             container.appendChild(formDiv);
