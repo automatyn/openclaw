@@ -78,9 +78,20 @@ yt-dlp --flat-playlist --dump-json "https://www.tiktok.com/@realnataliana"
 ```
 Report: total videos, total views, total likes, followers, and per-video performance for any new videos since last check.
 
-## Step 6: Reply to 7 Tweets from Feed
+## Step 6: Scan Trending Topics + Reply to 7 Tweets
 
-Connect to Chrome browser via Playwright CDP on port 18800. Navigate to https://x.com/home. Scroll through the feed and extract tweets.
+**TRENDING SCAN (do this BEFORE writing any replies or tweets):**
+Connect to Chrome browser via Playwright CDP on port 18800. Visit these 3 URLs and extract trending topics/keywords:
+1. https://x.com/explore/tabs/trending
+2. https://x.com/explore/tabs/news
+3. https://x.com/explore/tabs/for_you
+
+For each page, extract the visible trending topic names/headlines. Save the top 20 trending topics to a variable. Then when writing replies and the standalone tweet, actively try to piggyback on relevant trending words/topics that can bridge to AI agents, automation, small business, or side hustles. Example: if "OpenAI" or "Stargate" or "remote work" is trending, weave it into a reply naturally.
+
+Not every trend will be relevant. Only use trends that have a natural bridge to the Automatyn mission. Skip politics, wars, sports, celebrity drama unless there's a clean business/AI angle.
+
+**REPLY SCAN:**
+Navigate to https://x.com/home. Scroll through the feed and extract tweets.
 
 **DEDUP SYSTEM (CRITICAL):**
 Before writing ANY reply, read the reply log at `/home/marketingpatpat/openclaw/social-posts/reply-log.md`. This file tracks every reply you've ever posted. Format per entry:

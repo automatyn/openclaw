@@ -8,9 +8,18 @@ user_invocable: true
 
 End-of-day wrap-up. Final engagement, stats, and prep for tomorrow. Do NOT ask for permission. Execute everything and report.
 
-## Step 1: Reply to 7 Tweets from Feed
+## Step 1: Scan Trending Topics + Reply to 7 Tweets
 
-Connect to Chrome browser via Playwright CDP on port 18800. Navigate to https://x.com/home. Scroll through the feed and extract tweets.
+**TRENDING SCAN (do this BEFORE writing any replies):**
+Connect to Chrome browser via Playwright CDP on port 18800. Visit these 3 URLs and extract trending topics:
+1. https://x.com/explore/tabs/trending
+2. https://x.com/explore/tabs/news
+3. https://x.com/explore/tabs/for_you
+
+Extract top 20 trending topics. Use relevant ones as piggyback hooks in replies where there's a natural bridge to AI agents / automation / small business.
+
+**REPLY SCAN:**
+Navigate to https://x.com/home. Scroll through the feed and extract tweets.
 
 **DEDUP SYSTEM (CRITICAL):**
 Before writing ANY reply, read the reply log at `/home/marketingpatpat/openclaw/social-posts/reply-log.md`.
