@@ -27,3 +27,5 @@ Format: `- [DATE] | @handle | status_url | first 60 chars of reply`
 - 2026-04-09 | @cb_doge | https://x.com/cb_doge/status/2042283512246780387 | [B-PUNCHLINE] The scariest part of AI isn't what the companies are do
 - 2026-04-09 | @yacineMTB | https://x.com/yacineMTB/status/2042248741315305509 | [B-PUNCHLINE] They don't want AI regulated because it's dangerous. Th
 - 2026-04-09 | @Cointelegraph | https://x.com/Cointelegraph/status/2042357062550569021 | [A-CONVERSATION] The tool matters less than what you told it
+- 2026-04-10 | @PromptSlinger | https://x.com/PromptSlinger/status/2042447545029251426 | [150x REPLY-BACK] Exactly. The model is the cheapest part
+- 2026-04-10 | @MahlumAI | https://x.com/MahlumAI/status/2042395435646796070 | [150x REPLY-BACK] Manufacturing is a great example. Every fac
