@@ -29,3 +29,10 @@ Format: `- [DATE] | @handle | status_url | first 60 chars of reply`
 - 2026-04-09 | @Cointelegraph | https://x.com/Cointelegraph/status/2042357062550569021 | [A-CONVERSATION] The tool matters less than what you told it
 - 2026-04-10 | @PromptSlinger | https://x.com/PromptSlinger/status/2042447545029251426 | [150x REPLY-BACK] Exactly. The model is the cheapest part
 - 2026-04-10 | @MahlumAI | https://x.com/MahlumAI/status/2042395435646796070 | [150x REPLY-BACK] Manufacturing is a great example. Every fac
+- 2026-04-10 | @Austen | https://x.com/Austen/status/2042444789891654076 | [A-CONV] Which version were you running? The memory leak was
+- 2026-04-10 | @rxhit05 | https://x.com/rxhit05/status/2042386576420798531 | [A-CONV] Real question though. If someone uses Claude to buil
+- 2026-04-10 | @zuess05 | https://x.com/zuess05/status/2042473755071701434 | [A-CONV] Genuine question. How many of those clones actually
+- 2026-04-10 | @Polymarket | https://x.com/Polymarket/status/2042428490700439781 | [A-CONV] Does this worry anyone building on Claude right now?
+- 2026-04-10 | @aryanlabde | https://x.com/aryanlabde/status/2042483773389095300 | [A-CONV] What happens to your workflow when either of them ch
+- 2026-04-10 | @Mayhem4Markets | https://x.com/Mayhem4Markets/status/2042455530816618578 | [A-CONV] Are you seeing this in the API or the consumer produ
+- 2026-04-10 | @felixgrows | https://x.com/felixgrows/status/2042508439834828908 | [A-CONV] Serious question. When that one person leaves, how l
