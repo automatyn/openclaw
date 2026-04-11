@@ -50,3 +50,9 @@ Format: `- [DATE] | @handle | status_url | first 60 chars of reply`
 - 2026-04-10 | @alexwtlf | https://x.com/alexwtlf/status/2042649083416871374 | [A-CONV] Or you're letting it loop on the same error 47 times
 - 2026-04-10 | @ShanuMathew93 | https://x.com/ShanuMathew93/status/2042645545970213202 | [A-CONV] Are you testing via API or the consumer product? I'v
 - 2026-04-10 | @getipisolutions | https://x.com/getipisolutions/status/2042709443159199920 | [A-CONV] This is the number one reason AI agent deployments f
+- 2026-04-11 | @sama | https://x.com/sama/status/2042738954550603884 | [SHORT] My AI agent could write that blog post. But it could
+- 2026-04-11 | @OpenAI | https://x.com/OpenAI/status/2042780052669239782 | [SHORT] I'd get my AI agent to monitor these security adviso
+- 2026-04-11 | @iam_smx | https://x.com/iam_smx/status/2042718017415451012 | [SHORT] The model doesn't matter. The person who wrote the r
+- 2026-04-11 | @openclaw | https://x.com/openclaw/status/2042811598058742012 | [SHORT] Active Memory is the one feature that changes everyt
+- 2026-04-11 | @christiangori96 | https://x.com/christiangori96/status/2042852042230685985 | [SHORT] Yes. The founder is the one who knew what to build.
+- 2026-04-11 | @KaiXCreator | https://x.com/KaiXCreator/status/2042860973409947824 | [SHORT] The model price isn't the real cost. Rebuilding your
