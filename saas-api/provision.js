@@ -4,6 +4,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const OPENCLAW_HOME = path.join(require('os').homedir(), '.openclaw');
+const OPENCLAW_CONFIG = path.join(OPENCLAW_HOME, 'openclaw.json');
 const AGENTS_DIR = path.join(OPENCLAW_HOME, 'agents');
 const DATA_DIR = path.join(__dirname, 'data');
 const TEMPLATE_PATH = path.join(__dirname, 'soul-template.md');
@@ -82,29 +83,28 @@ function provisionAgent(agentData) {
     JSON.stringify(authProfile, null, 2)
   );
 
-  // Add agent via OpenClaw CLI
-  try {
-    execSync(
-      `openclaw agents add "${agentId}" --workspace "${workspaceDir}" --model google/gemini-2.5-flash --non-interactive --json`,
-      { timeout: 15000, stdio: 'pipe' }
-    );
-  } catch (err) {
-    // Agent might already exist if retrying
-    const stderr = err.stderr ? err.stderr.toString() : '';
-    if (!stderr.includes('already exists')) {
-      throw new Error(`Failed to add agent: ${stderr}`);
-    }
-  }
+  // Add agent directly to openclaw.json (bypasses CLI SHA race condition with gateway)
+  const config = JSON.parse(fs.readFileSync(OPENCLAW_CONFIG, 'utf-8'));
+  const alreadyExists = config.agents.list.some(a => a.id === agentId);
+  if (!alreadyExists) {
+    const emoji = getIndustryEmoji(agentData.industry);
+    config.agents.list.push({
+      id: agentId,
+      name: agentData.businessName,
+      workspace: workspaceDir,
+      agentDir: agentDir,
+      model: 'google/gemini-2.5-flash',
+      identity: { name: agentData.businessName, emoji },
+    });
+    config.meta.lastTouchedAt = new Date().toISOString();
+    fs.writeFileSync(OPENCLAW_CONFIG, JSON.stringify(config, null, 2));
 
-  // Set identity
-  const emoji = getIndustryEmoji(agentData.industry);
-  try {
-    execSync(
-      `openclaw agents set-identity --agent "${agentId}" --name "${agentData.businessName.replace(/"/g, '\\"')}" --emoji "${emoji}"`,
-      { timeout: 10000, stdio: 'pipe' }
-    );
-  } catch (err) {
-    console.error('Warning: set-identity failed:', err.message);
+    // Signal gateway to reload config
+    try {
+      execSync('openclaw gateway reload', { timeout: 10000, stdio: 'pipe' });
+    } catch (err) {
+      console.error('Warning: gateway reload failed (will pick up on next restart):', err.message);
+    }
   }
 
   // Save agent metadata
