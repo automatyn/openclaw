@@ -9,7 +9,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.SAAS_API_PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
-const LS_WEBHOOK_SECRET = process.env.LEMONSQUEEZY_WEBHOOK_SECRET || '';
+const PADDLE_WEBHOOK_SECRET = process.env.PADDLE_WEBHOOK_SECRET || '';
 
 // Save JWT_SECRET to a file so it persists across restarts
 const secretPath = path.join(__dirname, '.jwt-secret');
@@ -118,27 +118,34 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ============================================================
-// POST /api/webhook/lemonsqueezy — Payment webhook
+// POST /api/webhook/paddle — Payment webhook
 // ============================================================
-app.post('/api/webhook/lemonsqueezy', (req, res) => {
-  // Verify signature
-  if (LS_WEBHOOK_SECRET) {
-    const signature = req.headers['x-signature'];
-    const hmac = crypto.createHmac('sha256', LS_WEBHOOK_SECRET);
-    hmac.update(req.body);
-    const digest = hmac.digest('hex');
-    if (signature !== digest) {
+app.post('/api/webhook/paddle', (req, res) => {
+  // Verify Paddle signature (H1 scheme)
+  if (PADDLE_WEBHOOK_SECRET) {
+    const signature = req.headers['paddle-signature'] || '';
+    const parts = Object.fromEntries(signature.split(';').map(p => p.split('=')));
+    const ts = parts['ts'];
+    const h1 = parts['h1'];
+    if (!ts || !h1) {
+      return res.status(401).json({ error: 'Invalid signature format' });
+    }
+    const payload = `${ts}:${req.body.toString()}`;
+    const expected = crypto.createHmac('sha256', PADDLE_WEBHOOK_SECRET).update(payload).digest('hex');
+    if (h1 !== expected) {
       return res.status(401).json({ error: 'Invalid signature' });
     }
   }
 
   try {
-    const payload = JSON.parse(req.body.toString());
-    const event = payload.meta?.event_name;
-    const agentId = payload.meta?.custom_data?.agent_id;
+    const event = JSON.parse(req.body.toString());
+    const eventType = event.event_type;
+    const data = event.data;
+    const agentId = data?.custom_data?.agent_id;
+
+    console.log('Paddle webhook:', eventType, agentId || '(no agent_id)');
 
     if (!agentId) {
-      console.log('Webhook received without agent_id:', event);
       return res.json({ received: true });
     }
 
@@ -149,18 +156,19 @@ app.post('/api/webhook/lemonsqueezy', (req, res) => {
     }
 
     const metaPath = path.join(DATA_DIR, `${agentId}.json`);
+    const starterPriceId = 'pri_01kp9nmg87gyapxj153wv8t4y9';
+    const proPriceId = 'pri_01kp9nmhq88fnny2ha7b37yxy2';
 
-    if (event === 'subscription_created' || event === 'subscription_updated') {
-      const variantName = payload.data?.attributes?.variant_name || '';
-      const plan = variantName.toLowerCase().includes('pro') ? 'pro' : 'starter';
-      agent.plan = plan;
+    if (eventType === 'subscription.created' || eventType === 'subscription.updated') {
+      const priceId = data.items?.[0]?.price?.id || '';
+      agent.plan = priceId === proPriceId ? 'pro' : 'starter';
       agent.status = 'active';
-      agent.lsSubscriptionId = payload.data?.id;
+      agent.paddleSubscriptionId = data.id;
       agent.updatedAt = new Date().toISOString();
       fs.writeFileSync(metaPath, JSON.stringify(agent, null, 2));
     }
 
-    if (event === 'subscription_cancelled' || event === 'subscription_expired') {
+    if (eventType === 'subscription.canceled') {
       agent.plan = 'free';
       agent.updatedAt = new Date().toISOString();
       fs.writeFileSync(metaPath, JSON.stringify(agent, null, 2));

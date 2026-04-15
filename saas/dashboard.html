@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
@@ -201,7 +202,10 @@
                             <p class="text-lg font-bold" id="plan-name">Free</p>
                             <p class="text-zinc-400 text-sm" id="plan-detail">50 conversations/month</p>
                         </div>
-                        <a href="/saas/#pricing" class="tab-btn" style="text-decoration: none;" id="upgrade-btn">Upgrade</a>
+                        <div id="upgrade-btn" class="flex gap-2">
+                            <button onclick="openCheckout('starter')" class="tab-btn" style="background:#10b981;color:#fff;border:none;">Starter $39/mo</button>
+                            <button onclick="openCheckout('pro')" class="tab-btn" style="background:#22d3ee;color:#030303;border:none;">Pro $99/mo</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -214,9 +218,22 @@
         const API_URL = 'https://api.automatyn.co';
         // const API_URL = 'http://localhost:3001';
 
+        const PADDLE_PRICES = {
+            starter: 'pri_01kp9nmg87gyapxj153wv8t4y9',
+            pro: 'pri_01kp9nmhq88fnny2ha7b37yxy2',
+        };
+
         let token = null;
         let agentId = null;
         let agentData = null;
+
+        function openCheckout(plan) {
+            if (!agentData) return;
+            const priceId = PADDLE_PRICES[plan];
+            // Paddle checkout link format
+            const url = `https://checkout.paddle.com/checkout/custom-checkout?items[0][price_id]=${priceId}&items[0][quantity]=1&customer[email]=${encodeURIComponent(agentData.email)}&custom_data[agent_id]=${encodeURIComponent(agentId)}`;
+            window.open(url, '_blank');
+        }
 
         // Get auth from URL params or localStorage
         function init() {
