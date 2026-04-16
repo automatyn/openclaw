@@ -1,8 +1,62 @@
-.mcp.json
+# ==========================================
+# SECRETS — never commit
+# ==========================================
 .env
-.env.local
+.env.*
+!.env.example
+.mcp.json
+.mcp.*.json
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+credentials*.json
+secrets.json
+service-account*.json
+*_rsa
+*_dsa
+*_ecdsa
+*_ed25519
+.jwt-secret
+
+# ==========================================
+# User data (contains emails, tokens)
+# ==========================================
 saas-api/data/
-saas-api/node_modules/
+saas-api/*.jwt-secret
+saas-api/logs/
+
+# ==========================================
+# Dependencies & build output
+# ==========================================
 node_modules/
+saas-api/node_modules/
+dist/
+build/
+.next/
+out/
+.vercel/
+.cache/
+
+# ==========================================
+# Logs & temp
+# ==========================================
 *.log
+npm-debug.log*
+yarn-error.log*
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# ==========================================
+# Python (for any scripts)
+# ==========================================
+__pycache__/
+*.pyc
+.venv/
+venv/
