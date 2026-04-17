@@ -18,8 +18,8 @@ const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('he
 const DODO_API_KEY = process.env.DODO_API_KEY;
 const DODO_WEBHOOK_SECRET = process.env.DODO_WEBHOOK_SECRET;
 const DODO_API_BASE = 'https://live.dodopayments.com';
-const DODO_PRODUCT_STARTER = 'pdt_0NcooRMOGyOxO7roCiSmn';
-const DODO_PRODUCT_PRO = 'pdt_0NcooSqClvpfz5UfxgLcS';
+const DODO_PRODUCT_PRO = 'pdt_0NcooRMOGyOxO7roCiSmn';
+const DODO_PRODUCT_MAX = 'pdt_0NcooSqClvpfz5UfxgLcS';
 
 // Save JWT_SECRET to a file so it persists across restarts
 const secretPath = path.join(__dirname, '.jwt-secret');
@@ -103,7 +103,7 @@ app.post('/api/auth/register', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const email = (req.body.email || '').trim().toLowerCase();
   const password = req.body.password || '';
-  const plan = ['free', 'starter', 'pro'].includes(req.body.plan) ? req.body.plan : 'free';
+  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
 
   // Rate limit
   if (!authLib.rateLimit(`register:ip:${ip}`, 5, 3600000)) {
@@ -251,7 +251,7 @@ app.post('/api/auth/login', async (req, res) => {
     agentId: user.agentId,
     email: user.email,
     verified: !!user.verified,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
   });
 });
 
@@ -260,7 +260,7 @@ app.post('/api/auth/login', async (req, res) => {
 app.post('/api/auth/magic-link', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const email = (req.body.email || '').trim().toLowerCase();
-  const plan = ['free', 'starter', 'pro'].includes(req.body.plan) ? req.body.plan : 'free';
+  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
 
   if (!authLib.rateLimit(`magiclink:ip:${ip}`, 10, 3600000)) {
     return res.status(429).json({ error: 'Too many requests from this IP. Try again later.' });
@@ -371,7 +371,7 @@ app.post('/api/auth/magic-link/consume', (req, res) => {
     agentId: user.agentId,
     email: user.email,
     verified: true,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
     isNewUser: !!entry.isNewUser,
   });
 });
@@ -380,7 +380,7 @@ app.post('/api/auth/magic-link/consume', (req, res) => {
 app.post('/api/auth/google', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const credential = (req.body.credential || '').trim();
-  const plan = ['free', 'starter', 'pro'].includes(req.body.plan) ? req.body.plan : 'free';
+  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
 
   if (!credential) return res.status(400).json({ error: 'Missing Google credential.' });
   if (!authLib.rateLimit(`google:ip:${ip}`, 20, 3600000)) {
@@ -461,7 +461,7 @@ app.post('/api/auth/google', async (req, res) => {
     agentId: user.agentId,
     email: user.email,
     verified: true,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
     isNewUser,
   });
 });
@@ -498,7 +498,7 @@ app.post('/api/auth/verify', (req, res) => {
     agentId: user.agentId,
     email: user.email,
     verified: true,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
   });
 });
 
@@ -611,7 +611,7 @@ app.post('/api/auth/reset-password', async (req, res) => {
     agentId: user.agentId,
     email: user.email,
     verified: !!user.verified,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
   });
 });
 
@@ -623,7 +623,7 @@ app.get('/api/auth/me', auth, (req, res) => {
     email: user.email,
     agentId: user.agentId,
     verified: !!user.verified,
-    plan: user.plan || 'free',
+    plan: user.plan || 'starter',
   });
 });
 
@@ -642,7 +642,7 @@ app.post('/api/register', (req, res) => {
   }
 
   try {
-    const plan = req.body.plan || 'free';
+    const plan = req.body.plan || 'starter';
     const metadata = provisionAgent({
       email,
       businessName: '',
@@ -688,7 +688,7 @@ app.post('/api/signup', (req, res) => {
   }
 
   try {
-    const plan = req.body.plan || 'free';
+    const plan = req.body.plan || 'starter';
     const metadata = provisionAgent({
       email: req.body.email.trim(),
       businessName: req.body.businessName.trim(),
@@ -763,7 +763,7 @@ app.post('/api/webhook/dodo', (req, res) => {
 
     if (eventType === 'subscription.active' || eventType === 'subscription.renewed' || eventType === 'payment.succeeded') {
       const productId = data.product_id || data.product?.product_id || '';
-      agent.plan = productId === DODO_PRODUCT_PRO ? 'pro' : 'starter';
+      agent.plan = productId === DODO_PRODUCT_MAX ? 'max' : 'pro';
       agent.status = 'active';
       agent.dodoSubscriptionId = data.subscription_id || data.id;
       agent.updatedAt = new Date().toISOString();
@@ -772,11 +772,11 @@ app.post('/api/webhook/dodo', (req, res) => {
     }
 
     if (eventType === 'subscription.cancelled' || eventType === 'subscription.expired' || eventType === 'subscription.failed') {
-      agent.plan = 'free';
+      agent.plan = 'starter';
       agent.status = 'canceled';
       agent.updatedAt = new Date().toISOString();
       fs.writeFileSync(metaPath, JSON.stringify(agent, null, 2));
-      console.log(`Agent ${agentId} downgraded to free`);
+      console.log(`Agent ${agentId} downgraded to starter`);
     }
 
     res.json({ received: true });
@@ -792,13 +792,13 @@ app.post('/api/webhook/dodo', (req, res) => {
 app.post('/api/checkout', auth, async (req, res) => {
   const { plan } = req.body;
   const productIds = {
-    starter: DODO_PRODUCT_STARTER,
     pro: DODO_PRODUCT_PRO,
+    max: DODO_PRODUCT_MAX,
   };
 
   const productId = productIds[plan];
   if (!productId) {
-    return res.status(400).json({ error: 'Invalid plan. Use "starter" or "pro".' });
+    return res.status(400).json({ error: 'Invalid plan. Use "pro" or "max".' });
   }
 
   const agent = getAgent(req.agentId);
@@ -898,7 +898,7 @@ app.get('/api/agent/:id/status', auth, (req, res) => {
     return res.status(404).json({ error: 'Agent not found' });
   }
 
-  const limits = { free: 25, starter: 150, pro: -1 };
+  const limits = { starter: 25, pro: 150, max: -1 };
   res.json({
     connected: agent.whatsappConnected || false,
     plan: agent.plan,

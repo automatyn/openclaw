@@ -209,9 +209,9 @@
 
   // Read plan from URL
   const params = new URLSearchParams(window.location.search);
-  const plan = (params.get('plan') || 'free').toLowerCase();
-  const validPlans = { free: 'Free plan', starter: 'Starter — $39/mo', pro: 'Pro — $99/mo' };
-  if (plan !== 'free' && validPlans[plan]) {
+  const plan = (params.get('plan') || 'starter').toLowerCase();
+  const validPlans = { starter: 'Starter — Free', pro: 'Pro — $29/mo', max: 'Max — $79/mo' };
+  if (plan !== 'starter' && validPlans[plan]) {
     document.getElementById('plan-badge').classList.remove('hidden');
     document.getElementById('plan-badge').classList.add('flex');
     document.getElementById('plan-label').textContent = validPlans[plan];
