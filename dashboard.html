@@ -676,7 +676,7 @@
                     <span class="icon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                     </span>
-                    Bot Settings
+                    Settings
                 </button>
                 <button class="nav-item" data-section="deploy" onclick="showSection('deploy', event)">
                     <span class="icon">
@@ -725,7 +725,7 @@
                 <div class="text-5xl mb-4">🔒</div>
                 <h2 class="text-2xl font-bold mb-3">Access denied</h2>
                 <p class="text-zinc-400 mb-7">Your session has expired or the link is invalid.</p>
-                <a href="/signup.html" class="cta-button" style="display: inline-block; text-decoration: none;">Create a New Bot</a>
+                <a href="/signup.html" class="cta-button" style="display: inline-block; text-decoration: none;">Create a New Agent</a>
             </div>
 
             <!-- Verify email banner (hidden until we know the user is unverified) -->
@@ -750,11 +750,11 @@
                         <div class="flex items-end justify-between flex-wrap gap-3">
                             <div>
                                 <h1 class="page-title" id="dashboard-title">Dashboard</h1>
-                                <p class="page-subtitle">Connect WhatsApp and your bot goes live.</p>
+                                <p class="page-subtitle">Connect WhatsApp and your AI receptionist goes live.</p>
                             </div>
                             <div class="deploy-live" id="header-status" style="display: none;">
                                 <span class="status-dot connected"></span>
-                                <span>Bot live</span>
+                                <span>Agent live</span>
                             </div>
                         </div>
                     </div>
@@ -792,7 +792,7 @@
                         <div class="flex items-start justify-between gap-4 mb-6 flex-wrap">
                             <div>
                                 <h2 class="card-title">Connect WhatsApp</h2>
-                                <p class="card-subtitle mb-0">Scan the QR with your WhatsApp Business app to bring the bot online.</p>
+                                <p class="card-subtitle mb-0">Scan the QR with your WhatsApp Business app to bring your AI agent online.</p>
                             </div>
                         </div>
 
@@ -824,7 +824,7 @@
                                     <li>Tap <strong class="text-zinc-200">Link a Device</strong></li>
                                     <li>Point your phone at the QR code</li>
                                 </ol>
-                                <p class="text-xs text-zinc-500 mt-4">Your bot stays connected even after editing settings. You only need to scan again if you switch phone numbers.</p>
+                                <p class="text-xs text-zinc-500 mt-4">Your agent stays connected even after editing settings. You only need to scan again if you switch phone numbers.</p>
                             </div>
                         </div>
 
@@ -833,7 +833,7 @@
                                 <span class="status-dot connected"></span>
                                 <div>
                                     <div class="text-green-400 font-bold">WhatsApp Connected</div>
-                                    <div class="text-zinc-400 text-sm">Your bot is live and responding to messages.</div>
+                                    <div class="text-zinc-400 text-sm">Your AI receptionist is live and responding to messages.</div>
                                 </div>
                             </div>
                         </div>
@@ -847,7 +847,7 @@
                         <div class="flex items-end justify-between flex-wrap gap-3">
                             <div>
                                 <h1 class="page-title">Leads</h1>
-                                <p class="page-subtitle">Every customer your bot talked to, in one place.</p>
+                                <p class="page-subtitle">Every customer your AI receptionist talked to, in one place.</p>
                             </div>
                             <div class="flex gap-2">
                                 <button class="ghost-button" onclick="exportLeads()" id="export-btn" style="display:none;">
@@ -934,7 +934,7 @@
                         <div class="empty-state">
                             <div class="empty-icon">📋</div>
                             <h3 class="text-xl font-bold mb-2">No leads yet</h3>
-                            <p class="text-zinc-400 max-w-md mx-auto mb-6">When customers message your bot, their contact details appear here automatically. You can also add leads manually.</p>
+                            <p class="text-zinc-400 max-w-md mx-auto mb-6">When customers message your AI receptionist, their contact details appear here automatically. You can also add leads manually.</p>
                             <button class="cta-button" onclick="openAddLeadModal()" style="font-size:0.85rem;padding:0.65rem 1.5rem;">+ Add your first lead</button>
                         </div>
                     </div>
@@ -991,8 +991,8 @@
                 <section class="section" id="section-settings">
                     <div class="page-header">
                         <div class="page-eyebrow">Configuration</div>
-                        <h1 class="page-title">Bot Settings</h1>
-                        <p class="page-subtitle">Change how your bot answers. Saves apply to every new conversation instantly.</p>
+                        <h1 class="page-title">Settings</h1>
+                        <p class="page-subtitle">Change how your AI receptionist answers. Saves apply instantly.</p>
                     </div>
 
                     <div class="card">
@@ -1046,14 +1046,14 @@
                     <div class="page-header">
                         <div class="page-eyebrow">Status</div>
                         <h1 class="page-title">Deploy</h1>
-                        <p class="page-subtitle">Your bot updates automatically when you save settings. No redeploy needed.</p>
+                        <p class="page-subtitle">Your AI receptionist updates automatically when you save settings. No redeploy needed.</p>
                     </div>
 
                     <div class="card mb-5">
                         <div class="flex items-center justify-between flex-wrap gap-4">
                             <div>
                                 <div class="card-title mb-1">Current status</div>
-                                <p class="text-zinc-400 text-sm mb-0">Your bot is using the latest version of your settings.</p>
+                                <p class="text-zinc-400 text-sm mb-0">Your AI receptionist is using the latest version of your settings.</p>
                             </div>
                             <div class="deploy-live">
                                 <span class="status-dot connected"></span>
@@ -1322,7 +1322,7 @@
                 return;
             }
             document.getElementById('dashboard-content').style.display = 'block';
-            const name = agentData.businessName || 'Your bot';
+            const name = agentData.businessName || 'Your AI receptionist';
             document.getElementById('dashboard-title').textContent = name;
             document.getElementById('nav-business-name').textContent = name;
             document.getElementById('biz-avatar').textContent = (name.charAt(0) || 'A').toUpperCase();
@@ -1549,7 +1549,7 @@
                     setTimeout(() => toast.classList.remove('visible'), 2000);
                     const data = await res.json();
                     if (data.agent) agentData = data.agent;
-                    const name = agentData.businessName || 'Your bot';
+                    const name = agentData.businessName || 'Your AI receptionist';
                     document.getElementById('dashboard-title').textContent = name;
                     document.getElementById('nav-business-name').textContent = name;
                     document.getElementById('biz-avatar').textContent = (name.charAt(0) || 'A').toUpperCase();
