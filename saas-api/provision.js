@@ -155,14 +155,12 @@ function registerAgentInConfig(agentId, businessName, industry, workspaceDir, ag
         minMs: 1500,
         maxMs: 4000,
       },
-      typingMode: 'message',
-      typingIntervalSeconds: 3,
     });
     config.meta.lastTouchedAt = new Date().toISOString();
     fs.writeFileSync(OPENCLAW_CONFIG, JSON.stringify(config, null, 2));
 
     try {
-      execSync('openclaw gateway reload', { timeout: 10000, stdio: 'pipe' });
+      execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway reload', { timeout: 10000, stdio: 'pipe' });
     } catch (err) {
       console.error('Warning: gateway reload failed:', err.message);
     }

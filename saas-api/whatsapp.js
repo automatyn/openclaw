@@ -251,8 +251,7 @@ function registerWhatsAppWithGateway(agentId) {
     // Add this agent's WhatsApp account
     config.channels.whatsapp.accounts[agentId] = {
       authDir: authDir,
-      dmPolicy: 'open',
-      allowFrom: ['*'],
+      dmPolicy: 'pairing',
       agent: agentId,
     };
 
@@ -261,7 +260,7 @@ function registerWhatsAppWithGateway(agentId) {
 
     // Reload gateway to pick up new channel
     try {
-      execSync('openclaw gateway reload', { timeout: 10000, stdio: 'pipe' });
+      execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway reload', { timeout: 10000, stdio: 'pipe' });
       console.log(`WhatsApp channel registered for agent ${agentId}`);
     } catch (err) {
       console.error('Gateway reload failed:', err.message);
