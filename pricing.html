@@ -123,10 +123,14 @@
 
       /* CTA gradient */
       .cta-primary { background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%); color: #0a0a0a !important; border: none;
-        box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 20px rgba(117,224,167,0.25), 0 0 60px rgba(117,224,167,0.08), 0 4px 16px rgba(117,224,167,0.2);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 16px rgba(117,224,167,0.2);
         transition: all .25s ease; border-radius: 10px; }
-      .cta-primary:hover { transform: translateY(-2px); background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
-        box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 0 30px rgba(117,224,167,0.4), 0 0 80px rgba(117,224,167,0.12), 0 8px 24px rgba(117,224,167,0.3); }
+      .cta-primary:hover { transform: translateY(-2px) scale(1.02); background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px rgba(117,224,167,0.3); }
+      .cta-nav { box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 8px rgba(117,224,167,0.15); }
+      .cta-nav:hover { transform: translateY(-1px) scale(1.01); box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 12px rgba(117,224,167,0.25); }
+      .cta-glow-full { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 20px rgba(117,224,167,0.25), 0 0 60px rgba(117,224,167,0.08), 0 4px 16px rgba(117,224,167,0.2); }
+      .cta-glow-full:hover { box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 0 30px rgba(117,224,167,0.4), 0 0 80px rgba(117,224,167,0.12), 0 8px 24px rgba(117,224,167,0.3); }
       .cta-cyan { background: linear-gradient(180deg, #22d3ee 0%, #0891b2 100%); color:#030303;
         box-shadow: 0 10px 30px rgba(34,211,238,0.2); transition: transform .15s, box-shadow .2s; }
       .cta-cyan:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(34,211,238,0.32); }
@@ -166,11 +170,11 @@
         <a href="/#case-study" class="text-gray-400 hover:text-white transition text-sm font-medium">Case Study</a>
         <a href="/blog/" class="text-gray-400 hover:text-white transition text-sm font-medium">Blog</a>
         <a href="/login.html" class="text-gray-400 hover:text-white transition text-sm font-medium">Sign in</a>
-        <a href="/signup.html" class="cta-primary px-5 py-2 rounded-lg text-sm font-semibold">Start Free</a>
+        <a href="/signup.html" class="cta-primary cta-nav px-5 py-2 rounded-lg text-sm font-semibold">Start Free</a>
       </div>
       <div class="md:hidden flex items-center gap-2">
         <a href="/login.html" class="text-gray-400 hover:text-white text-sm font-medium px-2 py-1">Sign in</a>
-        <a href="/signup.html" class="cta-primary px-4 py-2 rounded-lg text-sm font-semibold">Start Free</a>
+        <a href="/signup.html" class="cta-primary cta-nav px-4 py-2 rounded-lg text-sm font-semibold">Start Free</a>
       </div>
     </div>
   </div>
@@ -202,7 +206,7 @@
     <div class="glass p-7 sm:p-8 fade-up d-3 flex flex-col">
       <div class="plan-tag text-gray-400 mb-3">Free</div>
       <div class="price-big heading mb-1">Free</div>
-      <p class="text-xs text-gray-500 mb-6">Perfect for testing with your first few customers</p>
+      <p class="text-xs text-gray-400 mb-6">Perfect for testing with your first few customers</p>
       <a href="/signup.html?plan=free" class="cta-primary block w-full text-center py-3 rounded-xl font-semibold mb-7">Start free</a>
       <div class="border-t border-white/8 pt-6">
         <ul class="space-y-3 text-sm text-gray-200">
@@ -222,7 +226,7 @@
         <span class="price-big heading" id="price-starter">$39</span>
         <span class="text-sm text-gray-400" id="price-starter-suffix">/ month</span>
       </div>
-      <p class="text-xs text-gray-500 mb-6">Built for solopreneurs and small businesses</p>
+      <p class="text-xs text-gray-400 mb-6">Built for solopreneurs and small businesses</p>
       <a href="/signup.html?plan=starter" class="cta-primary block w-full text-center py-3 rounded-xl font-semibold mb-7">Start free trial</a>
       <div class="border-t border-white/10 pt-6">
         <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Everything in Free, plus</div>
@@ -243,7 +247,7 @@
         <span class="price-big heading" id="price-pro">$99</span>
         <span class="text-sm text-gray-400" id="price-pro-suffix">/ month</span>
       </div>
-      <p class="text-xs text-gray-500 mb-6">For busy teams handling high message volume</p>
+      <p class="text-xs text-gray-400 mb-6">For busy teams handling high message volume</p>
       <a href="/signup.html?plan=pro" class="cta-primary block w-full text-center py-3 rounded-xl font-semibold transition mb-7">Start free trial</a>
       <div class="border-t border-white/8 pt-6">
         <div class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-3">Everything in Starter, plus</div>
@@ -319,7 +323,7 @@
   <div class="max-w-3xl mx-auto glass p-8 sm:p-12 text-center">
     <h2 class="heading text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight">Ready to stop missing leads?</h2>
     <p class="text-gray-400 mb-6 max-w-lg mx-auto text-sm">Set up your AI receptionist in under 10 minutes. No credit card.</p>
-    <a href="/signup.html" class="cta-primary inline-block px-8 py-3.5 rounded-xl font-semibold text-sm sm:text-base">Start free — no card needed</a>
+    <a href="/signup.html" class="cta-primary cta-glow-full inline-block px-8 py-3.5 rounded-xl font-semibold text-sm sm:text-base">Start free — no card needed</a>
   </div>
 </section>
 

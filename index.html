@@ -426,7 +426,7 @@
             opacity: 0.4;
         }
 
-        /* CTA buttons — Dodo-style yellow-green, dark text, rounded rect */
+        /* CTA buttons — gradient green, dark text */
         .cta-primary {
             background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
             color: #0a0a0a !important;
@@ -436,18 +436,37 @@
             font-weight: 600;
             box-shadow:
                 0 1px 0 rgba(255,255,255,0.2) inset,
-                0 0 20px rgba(117,224,167,0.25),
-                0 0 60px rgba(117,224,167,0.08),
                 0 4px 16px rgba(117,224,167,0.2);
         }
         .cta-primary:hover {
             background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.25) inset,
+                0 8px 24px rgba(117,224,167,0.3);
+        }
+        /* Full glow — hero CTA + bottom CTA only */
+        .cta-glow-full {
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.2) inset,
+                0 0 20px rgba(117,224,167,0.25),
+                0 0 60px rgba(117,224,167,0.08),
+                0 4px 16px rgba(117,224,167,0.2);
+        }
+        .cta-glow-full:hover {
             box-shadow:
                 0 1px 0 rgba(255,255,255,0.25) inset,
                 0 0 30px rgba(117,224,167,0.4),
                 0 0 80px rgba(117,224,167,0.12),
                 0 8px 24px rgba(117,224,167,0.3);
+        }
+        /* Nav CTA — compact, no ambient glow */
+        .cta-nav {
+            box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 8px rgba(117,224,167,0.15);
+        }
+        .cta-nav:hover {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 12px rgba(117,224,167,0.25);
         }
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
@@ -568,10 +587,10 @@
                     <a href="#process" class="text-gray-400 hover:text-white transition text-sm font-medium">Process</a>
                     <a href="#blog" class="text-gray-400 hover:text-white transition text-sm font-medium">Blog</a>
                     <a href="#try-demo" class="text-purple-400 hover:text-purple-300 transition text-sm font-medium">Try Demo</a>
-                    <a href="/signup.html" class="cta-primary px-5 py-2 transition text-sm font-medium">Start Free</a>
+                    <a href="/signup.html" class="cta-primary cta-nav px-5 py-2 transition text-sm font-medium">Start Free</a>
                 </div>
                 <div class="md:hidden flex items-center gap-3">
-                    <a href="/signup.html" class="cta-primary px-4 py-2 text-sm font-medium">Start Free</a>
+                    <a href="/signup.html" class="cta-primary cta-nav px-4 py-2 text-sm font-medium">Start Free</a>
                     <button id="mobile-menu-btn" class="text-gray-400 hover:text-white transition" aria-label="Toggle navigation menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -614,7 +633,7 @@
                 </p>
 
                 <div class="hero-enter hero-enter-4 max-w-xl mx-auto mb-4 text-center">
-                    <a href="/signup.html" class="cta-primary cta-glow px-6 py-2.5 text-sm sm:text-base inline-flex items-center gap-1.5">
+                    <a href="/signup.html" class="cta-primary cta-glow-full cta-glow px-6 py-2.5 text-sm sm:text-base inline-flex items-center gap-1.5">
                         Start Free →
                     </a>
                     <div class="mt-5 flex items-center justify-center gap-4 text-sm">
@@ -1068,7 +1087,7 @@
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-white mb-2 tracking-tight">Free</h3>
                         <div class="text-4xl font-bold text-white heading">Free</div>
-                        <p class="text-xs text-gray-500 mt-2">Perfect for testing with your first few customers</p>
+                        <p class="text-xs text-gray-400 mt-2">Perfect for testing with your first few customers</p>
                     </div>
                     <a href="/signup.html?plan=free" class="block w-full cta-primary text-center py-3 rounded-lg font-semibold text-sm transition mb-8">
                         Start free
@@ -1094,7 +1113,7 @@
                             <span class="text-4xl font-bold text-white heading" id="price-starter">$39</span>
                             <span class="text-sm text-gray-400">/ month</span>
                         </div>
-                        <p class="text-xs text-gray-500 mt-2">Built for solopreneurs and small businesses</p>
+                        <p class="text-xs text-gray-400 mt-2">Built for solopreneurs and small businesses</p>
                     </div>
                     <a href="/signup.html?plan=starter" class="block w-full cta-primary text-center py-3 font-semibold text-sm transition mb-8">
                         Get started
@@ -1118,7 +1137,7 @@
                             <span class="text-4xl font-bold text-white heading" id="price-pro">$99</span>
                             <span class="text-sm text-gray-400">/ month</span>
                         </div>
-                        <p class="text-xs text-gray-500 mt-2">For busy teams handling high message volume</p>
+                        <p class="text-xs text-gray-400 mt-2">For busy teams handling high message volume</p>
                     </div>
                     <a href="/signup.html?plan=pro" class="block w-full cta-primary text-center py-3 rounded-lg font-semibold text-sm transition mb-8">
                         Get started
@@ -1506,7 +1525,7 @@
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Ready to Stop Missing Messages?</h2>
             <p class="text-base sm:text-xl text-gray-400 mb-8">Set up your AI receptionist in 10 minutes. Free plan included.</p>
-            <a href="/signup.html" class="inline-flex items-center justify-center gap-2 cta-primary px-8 py-4 font-semibold text-lg transition">
+            <a href="/signup.html" class="inline-flex items-center justify-center gap-2 cta-primary cta-glow-full px-8 py-4 font-semibold text-lg transition">
                 Start Free
             </a>
             <p class="text-sm text-gray-500 mt-4">No credit card required. Cancel anytime.</p>
