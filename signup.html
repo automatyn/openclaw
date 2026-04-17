@@ -69,7 +69,7 @@
 <body class="bg-ambient">
 
 <!-- Urgency banner -->
-<div class="urgency-banner text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium fixed top-0 w-full z-[60]">
+<div id="urgency-banner" class="urgency-banner text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium fixed top-0 w-full z-[60]">
   <strong class="text-white">Free forever plan.</strong> <span class="text-gray-400">No credit card.</span>
 </div>
 
@@ -97,7 +97,7 @@
         <span id="plan-label"></span>
       </div>
       <h1 class="heading text-xl sm:text-2xl font-bold mb-1.5">Get your AI receptionist</h1>
-      <p class="text-xs sm:text-sm text-gray-500 mb-6">Free plan. No credit card. Sign in with Google or use your email.</p>
+      <p id="plan-subtitle" class="text-xs sm:text-sm text-gray-500 mb-6">Free plan. No credit card. Sign in with Google or use your email.</p>
 
       <!-- Google Sign-In -->
       <div id="g_id_onload"
@@ -234,6 +234,14 @@
       document.getElementById('plan-badge').classList.add('flex');
       document.getElementById('plan-label').textContent = validPlans[plan];
     }
+  }
+
+  // Update subtitle and banner based on plan
+  var subtitle = document.getElementById('plan-subtitle');
+  var banner = document.getElementById('urgency-banner');
+  if (plan === 'pro' || plan === 'max') {
+    subtitle.textContent = 'Create your account to get started. Sign in with Google or use your email.';
+    banner.innerHTML = '<strong class="text-white">Create your account</strong> <span class="text-gray-400">to start your ' + (plan === 'pro' ? 'Pro' : 'Max') + ' plan.</span>';
   }
 
   // Default to USD, then override with geo
