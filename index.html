@@ -375,7 +375,20 @@
         .gradient-text { background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gradient-text-glow { background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-gradient { background: var(--bg-dark); position: relative; overflow: hidden; }
-        .hero-gradient::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 70% 20%, rgba(34, 211, 238, 0.06) 0%, transparent 50%); pointer-events: none; }
+        .hero-gradient::before {
+            content: ''; position: absolute; top: -20%; left: -20%; right: -20%; bottom: -20%;
+            background:
+                radial-gradient(ellipse at 25% 20%, rgba(117,224,167,0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 30%, rgba(34,211,238,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(117,224,167,0.04) 0%, transparent 40%);
+            pointer-events: none;
+            animation: meshDrift 12s ease-in-out infinite;
+        }
+        @keyframes meshDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, -1%) scale(1.02); }
+            66% { transform: translate(-1%, 1.5%) scale(0.98); }
+        }
         .card-shadow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 1px var(--border-subtle); border: 1px solid var(--border-subtle); }
         .card-shadow-lg { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 1px var(--border-hover); border: 1px solid var(--border-hover); }
         .card-glow { background: var(--bg-card); border: 1px solid var(--border-subtle); }
@@ -1073,7 +1086,7 @@
     </script>
 
     <!-- Pricing -->
-    <section id="pricing" class="py-20 px-4 bg-surface">
+    <section id="pricing" class="py-20 px-4 bg-surface section-glow-cyan">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
@@ -1155,14 +1168,52 @@
             </div>
 
             <style>
-                .pricing-card { transition: transform .2s ease, border-color .2s ease; }
-                .pricing-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.16); }
-                .pricing-card-featured {
-                    background: linear-gradient(180deg, rgba(34,211,238,0.08) 0%, rgba(34,211,238,0.02) 100%);
-                    border: 1px solid rgba(34,211,238,0.3);
-                    box-shadow: 0 0 0 1px rgba(34,211,238,0.1), 0 20px 60px -10px rgba(34,211,238,0.15);
+                .pricing-card {
+                    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    background: rgba(255,255,255,0.025);
                 }
-                .pricing-card-featured:hover { border-color: rgba(34,211,238,0.45); }
+                .pricing-card:hover {
+                    transform: translateY(-4px);
+                    border-color: rgba(255,255,255,0.16);
+                    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+                }
+                .pricing-card-featured {
+                    background: linear-gradient(180deg, rgba(117,224,167,0.06) 0%, rgba(34,211,238,0.03) 100%);
+                    border: 1px solid rgba(117,224,167,0.3);
+                    box-shadow: 0 0 0 1px rgba(117,224,167,0.08), 0 0 40px -10px rgba(117,224,167,0.12), 0 20px 60px -10px rgba(0,0,0,0.3);
+                }
+                .pricing-card-featured:hover {
+                    border-color: rgba(117,224,167,0.45);
+                    box-shadow: 0 0 0 1px rgba(117,224,167,0.12), 0 0 60px -10px rgba(117,224,167,0.18), 0 24px 60px -10px rgba(0,0,0,0.4);
+                }
+
+                /* Section atmospheric glows */
+                .section-glow-cyan { position: relative; }
+                .section-glow-cyan::before {
+                    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+                    width: 60%; height: 1px;
+                    background: linear-gradient(90deg, transparent, rgba(34,211,238,0.2), transparent);
+                }
+                .section-glow-cyan::after {
+                    content: ''; position: absolute; top: -5%; left: 50%; transform: translateX(-40%);
+                    width: 50%; height: 40%;
+                    background: radial-gradient(ellipse, rgba(34,211,238,0.04) 0%, transparent 70%);
+                    pointer-events: none;
+                }
+                .section-glow-green { position: relative; }
+                .section-glow-green::before {
+                    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+                    width: 50%; height: 1px;
+                    background: linear-gradient(90deg, transparent, rgba(117,224,167,0.25), transparent);
+                }
+                .section-glow-green::after {
+                    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+                    width: 40%; height: 50%;
+                    background: radial-gradient(ellipse, rgba(117,224,167,0.05) 0%, transparent 70%);
+                    pointer-events: none;
+                }
             </style>
 
             <!-- Full pricing link -->
@@ -1521,7 +1572,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="contact" class="py-20 px-4 bg-surface">
+    <section id="contact" class="py-20 px-4 bg-surface section-glow-green">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Ready to Stop Missing Messages?</h2>
             <p class="text-base sm:text-xl text-gray-400 mb-8">Set up your AI receptionist in 10 minutes. Free plan included.</p>
