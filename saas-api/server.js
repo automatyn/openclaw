@@ -1201,6 +1201,384 @@ app.get('/api/agent/:id/leads/export', auth, (req, res) => {
   res.send([header, ...rows].join('\n'));
 });
 
+// ============================================================
+// BOOKINGS ENDPOINTS
+// ============================================================
+
+const BOOKINGS_DIR = path.join(__dirname, 'data', 'bookings');
+if (!fs.existsSync(BOOKINGS_DIR)) fs.mkdirSync(BOOKINGS_DIR, { recursive: true });
+
+function getAvailabilityPath(agentId) {
+  return path.join(BOOKINGS_DIR, `${agentId}-availability.json`);
+}
+function getBookingsPath(agentId) {
+  return path.join(BOOKINGS_DIR, `${agentId}-bookings.json`);
+}
+
+function loadAvailability(agentId) {
+  const p = getAvailabilityPath(agentId);
+  if (!fs.existsSync(p)) return null;
+  try { return JSON.parse(fs.readFileSync(p, 'utf-8')); } catch { return null; }
+}
+function saveAvailability(agentId, data) {
+  fs.writeFileSync(getAvailabilityPath(agentId), JSON.stringify(data, null, 2));
+}
+function loadBookings(agentId) {
+  const p = getBookingsPath(agentId);
+  if (!fs.existsSync(p)) return [];
+  try { return JSON.parse(fs.readFileSync(p, 'utf-8')); } catch { return []; }
+}
+function saveBookings(agentId, bookings) {
+  fs.writeFileSync(getBookingsPath(agentId), JSON.stringify(bookings, null, 2));
+}
+
+// GET /api/agent/:id/availability — Get availability settings
+app.get('/api/agent/:id/availability', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const avail = loadAvailability(req.params.id);
+  if (!avail) {
+    // Return default (empty) availability
+    return res.json({
+      schedule: {
+        monday:    { enabled: false, start: '09:00', end: '17:00' },
+        tuesday:   { enabled: false, start: '09:00', end: '17:00' },
+        wednesday: { enabled: false, start: '09:00', end: '17:00' },
+        thursday:  { enabled: false, start: '09:00', end: '17:00' },
+        friday:    { enabled: false, start: '09:00', end: '17:00' },
+        saturday:  { enabled: false, start: '09:00', end: '17:00' },
+        sunday:    { enabled: false, start: '09:00', end: '17:00' },
+      },
+      appointmentTypes: [],
+      bufferMinutes: 15,
+      blockedDates: [],
+      googleCalendar: { connected: false },
+      updatedAt: null,
+    });
+  }
+  res.json(avail);
+});
+
+// PUT /api/agent/:id/availability — Update availability settings
+app.put('/api/agent/:id/availability', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const { schedule, appointmentTypes, bufferMinutes, blockedDates } = req.body;
+
+  // Validate schedule
+  const validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  if (schedule) {
+    for (const day of validDays) {
+      if (schedule[day]) {
+        const d = schedule[day];
+        if (typeof d.enabled !== 'boolean') {
+          return res.status(400).json({ error: `Invalid schedule for ${day}` });
+        }
+      }
+    }
+  }
+
+  // Validate appointment types
+  if (appointmentTypes && Array.isArray(appointmentTypes)) {
+    for (const t of appointmentTypes) {
+      if (!t.name || !t.durationMinutes || t.durationMinutes < 5 || t.durationMinutes > 480) {
+        return res.status(400).json({ error: 'Each appointment type needs a name and duration (5-480 minutes)' });
+      }
+    }
+  }
+
+  const existing = loadAvailability(req.params.id) || {};
+  const updated = {
+    schedule: schedule || existing.schedule || {},
+    appointmentTypes: appointmentTypes || existing.appointmentTypes || [],
+    bufferMinutes: typeof bufferMinutes === 'number' ? bufferMinutes : (existing.bufferMinutes || 15),
+    blockedDates: blockedDates || existing.blockedDates || [],
+    googleCalendar: existing.googleCalendar || { connected: false },
+    updatedAt: new Date().toISOString(),
+  };
+
+  saveAvailability(req.params.id, updated);
+  res.json({ success: true, availability: updated });
+});
+
+// GET /api/agent/:id/bookings — List bookings
+app.get('/api/agent/:id/bookings', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  let bookings = loadBookings(req.params.id);
+
+  // Filter by status
+  if (req.query.status) {
+    bookings = bookings.filter(b => b.status === req.query.status);
+  }
+  // Filter by date range
+  if (req.query.from) {
+    bookings = bookings.filter(b => b.startTime >= req.query.from);
+  }
+  if (req.query.to) {
+    bookings = bookings.filter(b => b.startTime <= req.query.to);
+  }
+
+  // Sort by start time (upcoming first)
+  bookings.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
+  // Stats
+  const all = loadBookings(req.params.id);
+  const now = new Date().toISOString();
+  const today = now.slice(0, 10);
+  const stats = {
+    total: all.length,
+    upcoming: all.filter(b => b.startTime >= now && b.status === 'confirmed').length,
+    today: all.filter(b => (b.startTime || '').slice(0, 10) === today && b.status === 'confirmed').length,
+    cancelled: all.filter(b => b.status === 'cancelled').length,
+  };
+
+  res.json({ bookings, stats });
+});
+
+// POST /api/agent/:id/bookings — Create a booking (from dashboard or AI)
+app.post('/api/agent/:id/bookings', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const { customerName, customerPhone, customerEmail, appointmentType, startTime, notes } = req.body;
+
+  if (!customerName && !customerPhone) {
+    return res.status(400).json({ error: 'Customer name or phone is required.' });
+  }
+  if (!startTime) {
+    return res.status(400).json({ error: 'Start time is required.' });
+  }
+
+  // Look up appointment type duration
+  const avail = loadAvailability(req.params.id);
+  let durationMinutes = 60; // default
+  if (avail && appointmentType) {
+    const type = avail.appointmentTypes.find(t => t.name === appointmentType);
+    if (type) durationMinutes = type.durationMinutes;
+  }
+
+  const start = new Date(startTime);
+  const end = new Date(start.getTime() + durationMinutes * 60000);
+
+  // Check for conflicts
+  const existing = loadBookings(req.params.id);
+  const conflict = existing.find(b => {
+    if (b.status === 'cancelled') return false;
+    const bStart = new Date(b.startTime);
+    const bEnd = new Date(b.endTime);
+    return start < bEnd && end > bStart;
+  });
+
+  if (conflict) {
+    return res.status(409).json({ error: 'This time slot conflicts with an existing booking.' });
+  }
+
+  const booking = {
+    id: crypto.randomBytes(8).toString('hex'),
+    customerName: (customerName || '').trim(),
+    customerPhone: (customerPhone || '').trim(),
+    customerEmail: (customerEmail || '').trim(),
+    appointmentType: (appointmentType || '').trim(),
+    startTime: start.toISOString(),
+    endTime: end.toISOString(),
+    durationMinutes,
+    status: 'confirmed',
+    notes: (notes || '').trim(),
+    source: 'dashboard',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  existing.push(booking);
+  saveBookings(req.params.id, existing);
+  res.json({ success: true, booking });
+});
+
+// POST /api/agent/:id/bookings/ingest — Unauthenticated booking creation (called by OpenClaw bot)
+app.post('/api/agent/:id/bookings/ingest', (req, res) => {
+  const agentId = req.params.id;
+  const agent = getAgent(agentId);
+  if (!agent) return res.status(404).json({ error: 'Agent not found' });
+
+  const ingestToken = req.headers['x-ingest-token'] || '';
+  if (!agent.ingestToken || ingestToken !== agent.ingestToken) {
+    return res.status(401).json({ error: 'Invalid ingest token' });
+  }
+
+  const { customerName, customerPhone, appointmentType, startTime, notes } = req.body;
+  if (!startTime) return res.status(400).json({ error: 'Start time is required.' });
+
+  const avail = loadAvailability(agentId);
+  let durationMinutes = 60;
+  if (avail && appointmentType) {
+    const type = avail.appointmentTypes.find(t => t.name === appointmentType);
+    if (type) durationMinutes = type.durationMinutes;
+  }
+
+  const start = new Date(startTime);
+  const end = new Date(start.getTime() + durationMinutes * 60000);
+
+  const existing = loadBookings(agentId);
+  const conflict = existing.find(b => {
+    if (b.status === 'cancelled') return false;
+    const bStart = new Date(b.startTime);
+    const bEnd = new Date(b.endTime);
+    return start < bEnd && end > bStart;
+  });
+
+  if (conflict) {
+    return res.status(409).json({ error: 'This time slot is no longer available.' });
+  }
+
+  const booking = {
+    id: crypto.randomBytes(8).toString('hex'),
+    customerName: (customerName || '').trim(),
+    customerPhone: (customerPhone || '').trim(),
+    customerEmail: '',
+    appointmentType: (appointmentType || '').trim(),
+    startTime: start.toISOString(),
+    endTime: end.toISOString(),
+    durationMinutes,
+    status: 'confirmed',
+    notes: (notes || '').trim(),
+    source: 'whatsapp-ai',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  existing.push(booking);
+  saveBookings(agentId, existing);
+  res.json({ success: true, booking });
+});
+
+// PATCH /api/agent/:id/bookings/:bookingId — Update a booking (reschedule/cancel)
+app.patch('/api/agent/:id/bookings/:bookingId', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const bookings = loadBookings(req.params.id);
+  const idx = bookings.findIndex(b => b.id === req.params.bookingId);
+  if (idx === -1) return res.status(404).json({ error: 'Booking not found' });
+
+  const allowed = ['customerName', 'customerPhone', 'customerEmail', 'appointmentType', 'startTime', 'status', 'notes'];
+  const validStatuses = ['confirmed', 'cancelled', 'completed', 'no-show'];
+
+  for (const key of allowed) {
+    if (req.body[key] !== undefined) {
+      if (key === 'status' && !validStatuses.includes(req.body[key])) {
+        return res.status(400).json({ error: `Invalid status. Use: ${validStatuses.join(', ')}` });
+      }
+      bookings[idx][key] = typeof req.body[key] === 'string' ? req.body[key].trim() : req.body[key];
+    }
+  }
+
+  // If startTime changed, recalculate endTime
+  if (req.body.startTime) {
+    const start = new Date(req.body.startTime);
+    const dur = bookings[idx].durationMinutes || 60;
+    bookings[idx].startTime = start.toISOString();
+    bookings[idx].endTime = new Date(start.getTime() + dur * 60000).toISOString();
+
+    // Check conflicts (excluding self)
+    const conflict = bookings.find((b, i) => {
+      if (i === idx || b.status === 'cancelled') return false;
+      const bStart = new Date(b.startTime);
+      const bEnd = new Date(b.endTime);
+      return start < bEnd && new Date(bookings[idx].endTime) > bStart;
+    });
+    if (conflict) {
+      return res.status(409).json({ error: 'This time slot conflicts with another booking.' });
+    }
+  }
+
+  bookings[idx].updatedAt = new Date().toISOString();
+  saveBookings(req.params.id, bookings);
+  res.json({ success: true, booking: bookings[idx] });
+});
+
+// DELETE /api/agent/:id/bookings/:bookingId — Delete a booking
+app.delete('/api/agent/:id/bookings/:bookingId', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const bookings = loadBookings(req.params.id);
+  const idx = bookings.findIndex(b => b.id === req.params.bookingId);
+  if (idx === -1) return res.status(404).json({ error: 'Booking not found' });
+
+  bookings.splice(idx, 1);
+  saveBookings(req.params.id, bookings);
+  res.json({ success: true });
+});
+
+// GET /api/agent/:id/bookings/slots — Get available slots for a date
+app.get('/api/agent/:id/bookings/slots', auth, (req, res) => {
+  if (req.params.id !== req.agentId) return res.status(403).json({ error: 'Access denied' });
+
+  const { date, type } = req.query;
+  if (!date) return res.status(400).json({ error: 'Date parameter required (YYYY-MM-DD)' });
+
+  const avail = loadAvailability(req.params.id);
+  if (!avail) return res.json({ slots: [], message: 'No availability configured' });
+
+  // Check if date is blocked
+  if (avail.blockedDates && avail.blockedDates.includes(date)) {
+    return res.json({ slots: [], message: 'This date is blocked' });
+  }
+
+  // Get day of week
+  const dayOfWeek = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+  const daySchedule = avail.schedule[dayOfWeek];
+  if (!daySchedule || !daySchedule.enabled) {
+    return res.json({ slots: [], message: 'Not available on this day' });
+  }
+
+  // Get duration
+  let durationMinutes = 60;
+  if (type && avail.appointmentTypes.length > 0) {
+    const apptType = avail.appointmentTypes.find(t => t.name === type);
+    if (apptType) durationMinutes = apptType.durationMinutes;
+  } else if (avail.appointmentTypes.length > 0) {
+    durationMinutes = avail.appointmentTypes[0].durationMinutes;
+  }
+
+  const buffer = avail.bufferMinutes || 0;
+  const [startH, startM] = daySchedule.start.split(':').map(Number);
+  const [endH, endM] = daySchedule.end.split(':').map(Number);
+  const dayStartMin = startH * 60 + startM;
+  const dayEndMin = endH * 60 + endM;
+
+  // Get existing bookings for this date
+  const bookings = loadBookings(req.params.id).filter(b => {
+    if (b.status === 'cancelled') return false;
+    return (b.startTime || '').slice(0, 10) === date;
+  });
+
+  // Generate slots
+  const slots = [];
+  let cursor = dayStartMin;
+  while (cursor + durationMinutes <= dayEndMin) {
+    const slotStart = new Date(`${date}T${String(Math.floor(cursor / 60)).padStart(2, '0')}:${String(cursor % 60).padStart(2, '0')}:00`);
+    const slotEnd = new Date(slotStart.getTime() + durationMinutes * 60000);
+
+    // Check if slot conflicts with any existing booking
+    const hasConflict = bookings.some(b => {
+      const bStart = new Date(b.startTime);
+      const bEnd = new Date(b.endTime);
+      return slotStart < bEnd && slotEnd > bStart;
+    });
+
+    if (!hasConflict) {
+      slots.push({
+        start: slotStart.toISOString(),
+        end: slotEnd.toISOString(),
+        label: `${String(Math.floor(cursor / 60)).padStart(2, '0')}:${String(cursor % 60).padStart(2, '0')}`,
+      });
+    }
+
+    cursor += durationMinutes + buffer;
+  }
+
+  res.json({ slots, date, durationMinutes });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });

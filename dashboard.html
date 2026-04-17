@@ -672,17 +672,18 @@
                     Leads
                     <span class="nav-badge" id="leads-count-badge" style="display:none;">0</span>
                 </button>
+                <button class="nav-item" data-section="bookings" onclick="showSection('bookings', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+                    </span>
+                    Bookings
+                    <span class="nav-badge" id="bookings-count-badge" style="display:none;">0</span>
+                </button>
                 <button class="nav-item" data-section="settings" onclick="showSection('settings', event)">
                     <span class="icon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                     </span>
-                    Settings
-                </button>
-                <button class="nav-item" data-section="deploy" onclick="showSection('deploy', event)">
-                    <span class="icon">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-                    </span>
-                    Deploy
+                    Agent Settings
                 </button>
 
                 <div class="nav-section">Account</div>
@@ -697,6 +698,14 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                     </span>
                     Billing
+                </button>
+
+                <div class="nav-section">Help</div>
+                <button class="nav-item" data-section="guide" onclick="showSection('guide', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </span>
+                    How to Use
                 </button>
             </nav>
 
@@ -835,6 +844,42 @@
                                     <div class="text-green-400 font-bold">WhatsApp Connected</div>
                                     <div class="text-zinc-400 text-sm">Your AI receptionist is live and responding to messages.</div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Status -->
+                    <div class="card mt-5">
+                        <h2 class="card-title">Service Status</h2>
+                        <p class="card-subtitle">Current health of your AI receptionist services.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="stat-tile">
+                                <div class="stat-tile-label">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>
+                                    WhatsApp
+                                </div>
+                                <div class="flex items-center gap-2 mt-1" id="svc-whatsapp">
+                                    <span class="status-dot pending"></span>
+                                    <span class="text-sm font-semibold text-zinc-400">Checking...</span>
+                                </div>
+                            </div>
+                            <div class="stat-tile">
+                                <div class="stat-tile-label">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                    API Server
+                                </div>
+                                <div class="flex items-center gap-2 mt-1" id="svc-api">
+                                    <span class="status-dot pending"></span>
+                                    <span class="text-sm font-semibold text-zinc-400">Checking...</span>
+                                </div>
+                            </div>
+                            <div class="stat-tile">
+                                <div class="stat-tile-label">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    Last Updated
+                                </div>
+                                <div class="text-sm font-semibold text-zinc-300 mt-1" id="svc-last-updated">—</div>
                             </div>
                         </div>
                     </div>
@@ -991,7 +1036,7 @@
                 <section class="section" id="section-settings">
                     <div class="page-header">
                         <div class="page-eyebrow">Configuration</div>
-                        <h1 class="page-title">Settings</h1>
+                        <h1 class="page-title">Agent Settings</h1>
                         <p class="page-subtitle">Change how your AI receptionist answers. Saves apply instantly.</p>
                     </div>
 
@@ -1001,36 +1046,43 @@
                                 <div>
                                     <label class="form-label" for="s-businessName">Business name</label>
                                     <input type="text" id="s-businessName" class="form-input">
+                                    <p class="text-zinc-500 text-xs mt-1.5">The name your AI receptionist will introduce itself as.</p>
                                 </div>
                                 <div>
                                     <label class="form-label" for="s-industry">Industry</label>
                                     <input type="text" id="s-industry" class="form-input" disabled style="opacity: 0.5;">
+                                    <p class="text-zinc-500 text-xs mt-1.5">Set during onboarding. Determines how your AI handles conversations.</p>
                                 </div>
                             </div>
 
                             <div class="mt-5">
                                 <label class="form-label" for="s-services">Services</label>
                                 <textarea id="s-services" class="form-input"></textarea>
+                                <p class="text-zinc-500 text-xs mt-1.5">List each service you offer. The AI uses this to answer "What do you offer?" and recommend the right service.</p>
                             </div>
                             <div class="mt-5">
                                 <label class="form-label" for="s-prices">Pricing</label>
                                 <textarea id="s-prices" class="form-input"></textarea>
+                                <p class="text-zinc-500 text-xs mt-1.5">Include prices, packages, or price ranges. Write "Prices vary" or "Contact for quote" if you prefer not to show exact figures.</p>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
                                 <div>
                                     <label class="form-label" for="s-hours">Business hours</label>
                                     <textarea id="s-hours" class="form-input" style="min-height: 90px;"></textarea>
+                                    <p class="text-zinc-500 text-xs mt-1.5">e.g. Mon-Fri 9am-5pm, Sat 10am-2pm. The AI tells customers when you're open and when to expect a response.</p>
                                 </div>
                                 <div>
                                     <label class="form-label" for="s-location">Location</label>
                                     <textarea id="s-location" class="form-input" style="min-height: 90px;"></textarea>
+                                    <p class="text-zinc-500 text-xs mt-1.5">Your address, service area, or "We come to you." The AI shares this when customers ask where you're based.</p>
                                 </div>
                             </div>
 
                             <div class="mt-5 mb-7">
                                 <label class="form-label" for="s-policies">Policies</label>
                                 <textarea id="s-policies" class="form-input"></textarea>
+                                <p class="text-zinc-500 text-xs mt-1.5">Cancellation policy, deposit requirements, warranty info, or anything the AI should mention before confirming a booking.</p>
                             </div>
 
                             <div class="flex items-center gap-3">
@@ -1041,41 +1093,205 @@
                     </div>
                 </section>
 
-                <!-- ============ DEPLOY SECTION ============ -->
-                <section class="section" id="section-deploy">
+                <!-- ============ BOOKINGS SECTION ============ -->
+                <section class="section" id="section-bookings">
                     <div class="page-header">
-                        <div class="page-eyebrow">Status</div>
-                        <h1 class="page-title">Deploy</h1>
-                        <p class="page-subtitle">Your AI receptionist updates automatically when you save settings. No redeploy needed.</p>
-                    </div>
-
-                    <div class="card mb-5">
-                        <div class="flex items-center justify-between flex-wrap gap-4">
+                        <div class="page-eyebrow">Schedule</div>
+                        <div class="flex items-end justify-between flex-wrap gap-3">
                             <div>
-                                <div class="card-title mb-1">Current status</div>
-                                <p class="text-zinc-400 text-sm mb-0">Your AI receptionist is using the latest version of your settings.</p>
+                                <h1 class="page-title">Bookings</h1>
+                                <p class="page-subtitle">Manage your availability and view customer appointments.</p>
                             </div>
-                            <div class="deploy-live">
-                                <span class="status-dot connected"></span>
-                                <span>Changes are live</span>
+                            <button class="cta-button" onclick="openBookingModal()" style="padding:0.6rem 1.25rem;font-size:0.8rem;">+ Add Booking</button>
+                        </div>
+                    </div>
+
+                    <!-- Google Calendar connect -->
+                    <div class="card mb-5" id="gcal-card">
+                        <div class="flex items-start gap-4 flex-wrap">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.08); border:1px solid rgba(34,211,238,0.2);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="card-title mb-1">Connect Google Calendar</div>
+                                <p class="text-zinc-400 text-sm mb-3" style="line-height:1.6;">This is <strong class="text-zinc-300">optional but recommended</strong>. When connected, the AI checks your real calendar before offering times to customers, preventing double bookings if you also take appointments by phone or in person.</p>
+                                <p class="text-zinc-500 text-xs mb-4">If you manage your own bookings and only want the AI to handle online appointments, you can skip this and use the built-in availability below.</p>
+                                <button class="ghost-button" disabled style="opacity:0.5;cursor:not-allowed;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-2px;margin-right:4px;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                                    Google Calendar — coming soon
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Availability settings -->
+                    <div class="card mb-5">
+                        <h2 class="card-title">Your availability</h2>
+                        <p class="card-subtitle">Set the days and hours you're available. The AI will only offer these times to customers.</p>
+
+                        <div id="availability-form">
+                            <div class="space-y-2 mb-5" id="schedule-rows">
+                                <!-- Generated by JS -->
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                                <div>
+                                    <label class="form-label">Buffer between appointments</label>
+                                    <select id="avail-buffer" class="form-input" style="appearance:auto;">
+                                        <option value="0">No buffer</option>
+                                        <option value="5">5 minutes</option>
+                                        <option value="10">10 minutes</option>
+                                        <option value="15" selected>15 minutes</option>
+                                        <option value="30">30 minutes</option>
+                                        <option value="60">1 hour</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">Blocked dates</label>
+                                    <input type="date" id="avail-block-date" class="form-input" style="color-scheme:dark;">
+                                    <button onclick="addBlockedDate()" class="ghost-button mt-2" style="font-size:0.75rem;padding:0.4rem 0.8rem;">+ Block this date</button>
+                                    <div id="blocked-dates-list" class="mt-2 flex flex-wrap gap-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Appointment types -->
+                            <div class="mb-5">
+                                <label class="form-label">Appointment types</label>
+                                <p class="text-zinc-500 text-xs mb-3">Define the types of appointments you offer and how long each one takes.</p>
+                                <div id="appt-types-list" class="space-y-2 mb-3">
+                                    <!-- Generated by JS -->
+                                </div>
+                                <div class="flex gap-2 items-end flex-wrap">
+                                    <div>
+                                        <input type="text" id="new-appt-name" class="form-input" placeholder="e.g. Consultation" style="width:180px;font-size:0.85rem;padding:0.55rem 0.8rem;">
+                                    </div>
+                                    <div>
+                                        <input type="number" id="new-appt-duration" class="form-input" placeholder="60" min="5" max="480" style="width:100px;font-size:0.85rem;padding:0.55rem 0.8rem;">
+                                    </div>
+                                    <span class="text-zinc-500 text-xs" style="padding-bottom:0.65rem;">minutes</span>
+                                    <button onclick="addAppointmentType()" class="ghost-button" style="font-size:0.75rem;padding:0.5rem 0.8rem;">+ Add</button>
+                                </div>
+                            </div>
+
+                            <button onclick="saveAvailability()" class="cta-button" id="save-avail-btn">Save Availability</button>
+                            <span class="text-xs text-zinc-500 ml-3" id="avail-last-saved"></span>
+                        </div>
+                    </div>
+
+                    <!-- Bookings stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="bookings-stats">
                         <div class="stat-tile">
-                            <div class="stat-tile-label">Last updated</div>
-                            <div class="stat-tile-value" id="last-updated">Just now</div>
+                            <div class="stat-tile-label">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Total
+                            </div>
+                            <div class="stat-tile-value" id="bookings-total">0</div>
                         </div>
                         <div class="stat-tile">
-                            <div class="stat-tile-label">WhatsApp status</div>
-                            <div class="stat-tile-value flex items-center gap-2" id="deploy-wa-status">
-                                <span class="status-dot pending"></span>
-                                <span>Pending</span>
+                            <div class="stat-tile-label">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                Today
                             </div>
+                            <div class="stat-tile-value" style="color:#22d3ee;" id="bookings-today">0</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                Upcoming
+                            </div>
+                            <div class="stat-tile-value" style="color:#10b981;" id="bookings-upcoming">0</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                                Cancelled
+                            </div>
+                            <div class="stat-tile-value" style="color:#f87171;" id="bookings-cancelled">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Bookings list -->
+                    <div class="card" style="padding:0;overflow:hidden;" id="bookings-table-card">
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.875rem;" id="bookings-table">
+                                <thead>
+                                    <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2);">
+                                        <th style="text-align:left;padding:0.75rem 1rem;font-weight:600;color:#a1a1aa;font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;">Customer</th>
+                                        <th style="text-align:left;padding:0.75rem 0.75rem;font-weight:600;color:#a1a1aa;font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;">Type</th>
+                                        <th style="text-align:left;padding:0.75rem 0.75rem;font-weight:600;color:#a1a1aa;font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;">Date & Time</th>
+                                        <th style="text-align:left;padding:0.75rem 0.75rem;font-weight:600;color:#a1a1aa;font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;">Status</th>
+                                        <th style="text-align:left;padding:0.75rem 0.75rem;font-weight:600;color:#a1a1aa;font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;">Source</th>
+                                        <th style="padding:0.75rem 0.75rem;width:60px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookings-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Empty state -->
+                    <div class="card" id="bookings-empty" style="display:none;">
+                        <div class="empty-state">
+                            <div class="empty-icon">📅</div>
+                            <h3 class="text-xl font-bold mb-2">No bookings yet</h3>
+                            <p class="text-zinc-400 max-w-md mx-auto mb-6">Set your availability above and the AI will start taking bookings from customers who message on WhatsApp. You can also add bookings manually.</p>
+                            <button class="cta-button" onclick="openBookingModal()" style="font-size:0.85rem;padding:0.65rem 1.5rem;">+ Add your first booking</button>
                         </div>
                     </div>
                 </section>
+
+                <!-- Add/Edit Booking Modal -->
+                <div id="booking-modal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:480px;background:linear-gradient(180deg,#121214,#0a0a0c);border:1px solid var(--border);border-radius:1.25rem;padding:2rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);max-height:90vh;overflow-y:auto;">
+                        <div class="flex justify-between items-center mb-5">
+                            <h3 class="text-lg font-bold" id="booking-modal-title">Add Booking</h3>
+                            <button onclick="closeBookingModal()" style="background:none;border:none;color:#71717a;cursor:pointer;font-size:1.25rem;padding:4px;">&times;</button>
+                        </div>
+                        <form id="booking-form" onsubmit="saveBooking(event)">
+                            <input type="hidden" id="bf-id" value="">
+                            <div class="grid grid-cols-1 gap-4">
+                                <div>
+                                    <label class="form-label" for="bf-name">Customer name</label>
+                                    <input type="text" id="bf-name" class="form-input" placeholder="John Smith">
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="form-label" for="bf-phone">Phone</label>
+                                        <input type="tel" id="bf-phone" class="form-input" placeholder="+44 7700 900000">
+                                    </div>
+                                    <div>
+                                        <label class="form-label" for="bf-email">Email</label>
+                                        <input type="email" id="bf-email" class="form-input" placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="bf-type">Appointment type</label>
+                                    <select id="bf-type" class="form-input" style="appearance:auto;">
+                                        <option value="">General appointment</option>
+                                    </select>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="form-label" for="bf-date">Date</label>
+                                        <input type="date" id="bf-date" class="form-input" style="color-scheme:dark;">
+                                    </div>
+                                    <div>
+                                        <label class="form-label" for="bf-time">Time</label>
+                                        <input type="time" id="bf-time" class="form-input" style="color-scheme:dark;">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="bf-notes">Notes</label>
+                                    <textarea id="bf-notes" class="form-input" placeholder="e.g. First-time customer, wants quote for kitchen refit" style="min-height:70px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 mt-6">
+                                <button type="submit" class="cta-button" id="bf-submit-btn" style="flex:1;">Save Booking</button>
+                                <button type="button" onclick="closeBookingModal()" class="ghost-button" style="flex:0;">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- ============ USAGE SECTION ============ -->
                 <section class="section" id="section-usage">
@@ -1109,6 +1325,90 @@
                             <div class="usage-bar" id="usage-bar" style="width: 0%"></div>
                         </div>
                         <p class="text-zinc-500 text-xs" id="plan-detail">25 conversations/month</p>
+                    </div>
+                </section>
+
+                <!-- ============ GUIDE SECTION ============ -->
+                <section class="section" id="section-guide">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Help</div>
+                        <h1 class="page-title">How to Use This Dashboard</h1>
+                        <p class="page-subtitle">A quick guide to getting the most out of your AI receptionist.</p>
+                    </div>
+
+                    <div class="space-y-5">
+                        <!-- Step 1 -->
+                        <div class="card">
+                            <div class="flex items-start gap-4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">1</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white mb-1">Setup — Connect WhatsApp</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Open WhatsApp Business on your phone, go to Settings > Linked Devices > Link a Device, then scan the QR code shown on the Setup tab. Your AI receptionist goes live immediately. You only need to scan once — it stays connected even if you close this dashboard.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="card">
+                            <div class="flex items-start gap-4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">2</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white mb-1">Agent Settings — Tell the AI about your business</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Fill in your services, pricing, business hours, and policies. The more detail you provide, the better the AI answers customer questions. Changes apply instantly — no need to restart anything. Think of it as writing a cheat sheet for your best employee.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="card">
+                            <div class="flex items-start gap-4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">3</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white mb-1">Bookings — Set your availability</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Enable the days you work, set your hours, and add your appointment types (e.g. "Consultation — 30 min"). The AI will only offer times that are genuinely free. If you also take bookings by phone, connect Google Calendar so everything stays in sync.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="card">
+                            <div class="flex items-start gap-4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">4</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white mb-1">Leads — See who's contacted you</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Every customer who messages your WhatsApp gets saved as a lead automatically. You can update their status (New, Contacted, Qualified, Won, Lost), add notes, and export the list as a CSV. Use the search and filters to find specific customers quickly.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="card">
+                            <div class="flex items-start gap-4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">5</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white mb-1">Usage & Billing — Track conversations and upgrade</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">The Usage tab shows how many conversations your AI has handled this month and how close you are to your plan limit. When you need more capacity, head to Billing to upgrade to Pro (150 conversations) or Max (unlimited).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips -->
+                        <div class="card" style="border-color:rgba(34,211,238,0.15);">
+                            <h3 class="text-sm font-bold text-white mb-3">Tips for getting the best results</h3>
+                            <ul class="text-zinc-400 text-sm space-y-2" style="line-height:1.6;">
+                                <li>• <strong class="text-zinc-200">Be specific in your settings.</strong> Instead of "We do plumbing," write "Emergency callouts, boiler repairs, bathroom installations, tap replacements." The AI matches customer requests to your exact services.</li>
+                                <li>• <strong class="text-zinc-200">Include pricing where possible.</strong> Customers ask about cost more than anything else. Even a range ("Boiler service: £80-120") is better than nothing.</li>
+                                <li>• <strong class="text-zinc-200">Update your hours if they change.</strong> The AI tells customers when you're available based on what you've entered here. If your hours change seasonally, update them so customers get accurate info.</li>
+                                <li>• <strong class="text-zinc-200">Check your leads regularly.</strong> The AI captures contact details, but following up is on you. Customers who get a quick callback convert at a much higher rate.</li>
+                                <li>• <strong class="text-zinc-200">Don't use the WhatsApp number for cold outreach.</strong> The AI is designed as a receptionist. Sending unsolicited marketing messages can get your WhatsApp number banned.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Support -->
+                        <div class="card">
+                            <h3 class="text-sm font-bold text-white mb-2">Need help?</h3>
+                            <p class="text-zinc-400 text-sm">Email <a href="mailto:support@automatyn.co" class="text-cyan-400 hover:text-cyan-300">support@automatyn.co</a> and we'll get back to you within 24 hours.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -1310,6 +1610,8 @@
                 renderDashboard();
                 loadStatus();
                 loadLeads();
+                loadAvailabilityData();
+                loadBookingsData();
             } catch (err) {
                 showAuthError();
             }
@@ -1396,22 +1698,29 @@
                 const navDot = document.getElementById('nav-status-dot');
                 const navText = document.getElementById('nav-status-text');
                 const headerStatus = document.getElementById('header-status');
-                const deployWa = document.getElementById('deploy-wa-status');
+
+                // Service Status card
+                const svcWa = document.getElementById('svc-whatsapp');
+                const svcApi = document.getElementById('svc-api');
+                const svcUpdated = document.getElementById('svc-last-updated');
 
                 if (status.connected) {
                     navDot.className = 'status-dot connected';
                     navText.textContent = 'Live';
                     if (headerStatus) headerStatus.style.display = 'inline-flex';
-                    if (deployWa) deployWa.innerHTML = '<span class="status-dot connected"></span><span>Connected</span>';
                     document.getElementById('qr-placeholder').style.display = 'none';
                     document.getElementById('qr-instructions').style.display = 'none';
                     document.getElementById('connected-status').style.display = 'block';
+                    if (svcWa) svcWa.innerHTML = '<span class="status-dot connected"></span><span class="text-sm font-semibold text-emerald-400">Connected</span>';
                 } else {
                     navDot.className = 'status-dot pending';
                     navText.textContent = 'Pending';
-                    if (deployWa) deployWa.innerHTML = '<span class="status-dot pending"></span><span>Pending</span>';
                     loadQR();
+                    if (svcWa) svcWa.innerHTML = '<span class="status-dot pending"></span><span class="text-sm font-semibold text-amber-400">Not connected</span>';
                 }
+
+                if (svcApi) svcApi.innerHTML = '<span class="status-dot connected"></span><span class="text-sm font-semibold text-emerald-400">Operational</span>';
+                if (svcUpdated && agentData && agentData.updatedAt) svcUpdated.textContent = formatRelativeTime(agentData.updatedAt);
 
                 // Usage
                 const count = status.conversationCount || 0;
@@ -1859,13 +2168,411 @@
 
         // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLeadModal();
+            if (e.key === 'Escape') { closeLeadModal(); closeBookingModal(); }
         });
 
         // Close modal on backdrop click
         document.getElementById('lead-modal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) closeLeadModal();
         });
+        document.getElementById('booking-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeBookingModal();
+        });
+
+        // ============================================================
+        // BOOKINGS
+        // ============================================================
+        let availabilityData = null;
+        let appointmentTypes = [];
+        let blockedDates = [];
+
+        const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        const DAY_LABELS = { monday: 'Mon', tuesday: 'Tue', wednesday: 'Wed', thursday: 'Thu', friday: 'Fri', saturday: 'Sat', sunday: 'Sun' };
+
+        function renderScheduleRows(schedule) {
+            const container = document.getElementById('schedule-rows');
+            container.innerHTML = DAYS.map(day => {
+                const d = schedule[day] || { enabled: false, start: '09:00', end: '17:00' };
+                return `<div class="flex items-center gap-3 py-2" style="border-bottom:1px solid var(--border);">
+                    <label class="flex items-center gap-2 cursor-pointer" style="width:90px;flex-shrink:0;">
+                        <input type="checkbox" id="sched-${day}-on" ${d.enabled ? 'checked' : ''} style="accent-color:#22d3ee;width:16px;height:16px;">
+                        <span class="text-sm font-semibold ${d.enabled ? 'text-white' : 'text-zinc-500'}">${DAY_LABELS[day]}</span>
+                    </label>
+                    <input type="time" id="sched-${day}-start" value="${d.start}" class="form-input" style="width:110px;font-size:0.8rem;padding:0.4rem 0.6rem;color-scheme:dark;" ${d.enabled ? '' : 'disabled'}>
+                    <span class="text-zinc-500 text-xs">to</span>
+                    <input type="time" id="sched-${day}-end" value="${d.end}" class="form-input" style="width:110px;font-size:0.8rem;padding:0.4rem 0.6rem;color-scheme:dark;" ${d.enabled ? '' : 'disabled'}>
+                </div>`;
+            }).join('');
+
+            // Toggle enable/disable of time inputs
+            DAYS.forEach(day => {
+                const cb = document.getElementById('sched-' + day + '-on');
+                cb.addEventListener('change', function() {
+                    const s = document.getElementById('sched-' + day + '-start');
+                    const e = document.getElementById('sched-' + day + '-end');
+                    const label = this.parentElement.querySelector('span');
+                    s.disabled = !this.checked;
+                    e.disabled = !this.checked;
+                    label.className = 'text-sm font-semibold ' + (this.checked ? 'text-white' : 'text-zinc-500');
+                });
+            });
+        }
+
+        function renderAppointmentTypes(types) {
+            appointmentTypes = types || [];
+            const list = document.getElementById('appt-types-list');
+            if (appointmentTypes.length === 0) {
+                list.innerHTML = '<div class="text-zinc-500 text-xs">No appointment types defined. Add one below.</div>';
+                return;
+            }
+            list.innerHTML = appointmentTypes.map((t, i) => `
+                <div class="flex items-center gap-3 py-1.5" style="border-bottom:1px solid var(--border);">
+                    <span class="text-sm font-semibold text-white flex-1">${esc(t.name)}</span>
+                    <span class="text-zinc-400 text-xs">${t.durationMinutes} min</span>
+                    <button onclick="removeAppointmentType(${i})" class="lead-actions-btn" title="Remove" style="color:#f87171;">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function renderBlockedDates(dates) {
+            blockedDates = dates || [];
+            const list = document.getElementById('blocked-dates-list');
+            list.innerHTML = blockedDates.map((d, i) => `
+                <span style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#f87171;font-size:0.75rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:9999px;display:inline-flex;align-items:center;gap:0.3rem;">
+                    ${d}
+                    <button onclick="removeBlockedDate(${i})" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:0.9rem;padding:0 2px;">&times;</button>
+                </span>
+            `).join('');
+        }
+
+        function addAppointmentType() {
+            const name = document.getElementById('new-appt-name').value.trim();
+            const dur = parseInt(document.getElementById('new-appt-duration').value) || 60;
+            if (!name) return;
+            appointmentTypes.push({ name, durationMinutes: dur });
+            renderAppointmentTypes(appointmentTypes);
+            updateBookingTypeDropdown();
+            document.getElementById('new-appt-name').value = '';
+            document.getElementById('new-appt-duration').value = '';
+        }
+
+        function removeAppointmentType(idx) {
+            appointmentTypes.splice(idx, 1);
+            renderAppointmentTypes(appointmentTypes);
+            updateBookingTypeDropdown();
+        }
+
+        function addBlockedDate() {
+            const d = document.getElementById('avail-block-date').value;
+            if (!d || blockedDates.includes(d)) return;
+            blockedDates.push(d);
+            blockedDates.sort();
+            renderBlockedDates(blockedDates);
+            document.getElementById('avail-block-date').value = '';
+        }
+
+        function removeBlockedDate(idx) {
+            blockedDates.splice(idx, 1);
+            renderBlockedDates(blockedDates);
+        }
+
+        function updateBookingTypeDropdown() {
+            const sel = document.getElementById('bf-type');
+            sel.innerHTML = '<option value="">General appointment</option>' +
+                appointmentTypes.map(t => `<option value="${esc(t.name)}">${esc(t.name)} (${t.durationMinutes} min)</option>`).join('');
+        }
+
+        async function loadAvailabilityData() {
+            if (!agentId || !token) return;
+            try {
+                const res = await fetch(`${API_URL}/api/agent/${agentId}/availability`, {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                });
+                if (!res.ok) return;
+                availabilityData = await res.json();
+                renderScheduleRows(availabilityData.schedule || {});
+                renderAppointmentTypes(availabilityData.appointmentTypes);
+                renderBlockedDates(availabilityData.blockedDates);
+                updateBookingTypeDropdown();
+                document.getElementById('avail-buffer').value = availabilityData.bufferMinutes || 15;
+                if (availabilityData.updatedAt) {
+                    document.getElementById('avail-last-saved').textContent = 'Last saved ' + formatRelativeTime(availabilityData.updatedAt).toLowerCase();
+                }
+            } catch (err) {
+                console.error('Load availability failed:', err);
+            }
+        }
+
+        async function saveAvailability() {
+            const btn = document.getElementById('save-avail-btn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            const schedule = {};
+            DAYS.forEach(day => {
+                schedule[day] = {
+                    enabled: document.getElementById('sched-' + day + '-on').checked,
+                    start: document.getElementById('sched-' + day + '-start').value,
+                    end: document.getElementById('sched-' + day + '-end').value,
+                };
+            });
+
+            try {
+                const res = await fetch(`${API_URL}/api/agent/${agentId}/availability`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: JSON.stringify({
+                        schedule,
+                        appointmentTypes,
+                        bufferMinutes: parseInt(document.getElementById('avail-buffer').value) || 15,
+                        blockedDates,
+                    }),
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    availabilityData = data.availability;
+                    const toast = document.getElementById('save-toast');
+                    toast.textContent = '✓ Availability saved';
+                    toast.classList.add('visible');
+                    setTimeout(() => toast.classList.remove('visible'), 2000);
+                    document.getElementById('avail-last-saved').textContent = 'Last saved just now';
+                }
+            } catch (err) {
+                alert('Failed to save availability. Please try again.');
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Save Availability';
+        }
+
+        async function loadBookingsData() {
+            if (!agentId || !token) return;
+            try {
+                const res = await fetch(`${API_URL}/api/agent/${agentId}/bookings`, {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                renderBookingsStats(data.stats);
+                renderBookingsTable(data.bookings);
+            } catch (err) {
+                console.error('Load bookings failed:', err);
+            }
+        }
+
+        function renderBookingsStats(stats) {
+            document.getElementById('bookings-total').textContent = stats.total;
+            document.getElementById('bookings-today').textContent = stats.today;
+            document.getElementById('bookings-upcoming').textContent = stats.upcoming;
+            document.getElementById('bookings-cancelled').textContent = stats.cancelled;
+
+            const badge = document.getElementById('bookings-count-badge');
+            if (stats.upcoming > 0) {
+                badge.textContent = stats.upcoming;
+                badge.style.display = 'inline';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function renderBookingsTable(bookings) {
+            const tbody = document.getElementById('bookings-tbody');
+            const empty = document.getElementById('bookings-empty');
+            const tableCard = document.getElementById('bookings-table-card');
+
+            if (bookings.length === 0) {
+                tableCard.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            tableCard.style.display = 'block';
+            empty.style.display = 'none';
+
+            const statusColors = {
+                confirmed: 'background:rgba(16,185,129,0.15);color:#10b981;',
+                cancelled: 'background:rgba(239,68,68,0.1);color:#f87171;',
+                completed: 'background:rgba(34,211,238,0.15);color:#22d3ee;',
+                'no-show': 'background:rgba(245,158,11,0.15);color:#fbbf24;',
+            };
+            const sourceLabels = { dashboard: 'Manual', 'whatsapp-ai': 'AI' };
+
+            tbody.innerHTML = bookings.map(b => {
+                const start = new Date(b.startTime);
+                const dateStr = start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                const timeStr = start.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+                const endTime = new Date(b.endTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+                const isPast = start < new Date();
+
+                return `<tr style="border-bottom:1px solid var(--border);${isPast && b.status === 'confirmed' ? 'opacity:0.5;' : ''}">
+                    <td style="padding:0.7rem 1rem;font-weight:600;color:#e4e4e7;">
+                        ${esc(b.customerName || '—')}
+                        ${b.customerPhone ? '<br><span style="font-size:0.75rem;color:#71717a;font-weight:400;">' + esc(b.customerPhone) + '</span>' : ''}
+                    </td>
+                    <td style="padding:0.7rem 0.75rem;color:#a1a1aa;font-size:0.85rem;">${esc(b.appointmentType || 'General')}</td>
+                    <td style="padding:0.7rem 0.75rem;color:#e4e4e7;font-size:0.85rem;">
+                        ${dateStr}<br>
+                        <span style="color:#71717a;font-size:0.75rem;">${timeStr} — ${endTime}</span>
+                    </td>
+                    <td style="padding:0.7rem 0.75rem;">
+                        <span style="display:inline-block;padding:0.2rem 0.6rem;border-radius:9999px;font-size:0.7rem;font-weight:700;${statusColors[b.status] || ''}">${b.status}</span>
+                    </td>
+                    <td style="padding:0.7rem 0.75rem;color:#71717a;font-size:0.8rem;">${sourceLabels[b.source] || b.source || '—'}</td>
+                    <td style="padding:0.7rem 0.75rem;position:relative;">
+                        <button class="lead-actions-btn" onclick="toggleBookingMenu('${b.id}', event)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                        </button>
+                        <div class="lead-actions-menu" id="bmenu-${b.id}" style="display:none;">
+                            ${b.status === 'confirmed' ? '<button onclick="changeBookingStatus(\'' + b.id + '\', \'completed\')">Mark Completed</button>' : ''}
+                            ${b.status === 'confirmed' ? '<button onclick="changeBookingStatus(\'' + b.id + '\', \'no-show\')">Mark No-Show</button>' : ''}
+                            ${b.status === 'confirmed' ? '<button class="danger" onclick="changeBookingStatus(\'' + b.id + '\', \'cancelled\')">Cancel</button>' : ''}
+                            ${b.status === 'cancelled' ? '<button onclick="changeBookingStatus(\'' + b.id + '\', \'confirmed\')">Reinstate</button>' : ''}
+                            <button class="danger" onclick="deleteBooking('${b.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        let openBookingMenuId = null;
+        function toggleBookingMenu(id, e) {
+            e.stopPropagation();
+            if (openBookingMenuId && openBookingMenuId !== id) {
+                const prev = document.getElementById('bmenu-' + openBookingMenuId);
+                if (prev) prev.style.display = 'none';
+            }
+            const menu = document.getElementById('bmenu-' + id);
+            if (menu) {
+                const isOpen = menu.style.display !== 'none';
+                menu.style.display = isOpen ? 'none' : 'block';
+                openBookingMenuId = isOpen ? null : id;
+            }
+        }
+        document.addEventListener('click', () => {
+            if (openBookingMenuId) {
+                const menu = document.getElementById('bmenu-' + openBookingMenuId);
+                if (menu) menu.style.display = 'none';
+                openBookingMenuId = null;
+            }
+        });
+
+        function openBookingModal() {
+            document.getElementById('booking-modal-title').textContent = 'Add Booking';
+            document.getElementById('bf-id').value = '';
+            document.getElementById('bf-name').value = '';
+            document.getElementById('bf-phone').value = '';
+            document.getElementById('bf-email').value = '';
+            document.getElementById('bf-type').value = '';
+            document.getElementById('bf-date').value = new Date().toISOString().slice(0, 10);
+            document.getElementById('bf-time').value = '09:00';
+            document.getElementById('bf-notes').value = '';
+            document.getElementById('bf-submit-btn').textContent = 'Save Booking';
+            document.getElementById('booking-modal').style.display = 'block';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').style.display = 'none';
+        }
+
+        async function saveBooking(e) {
+            e.preventDefault();
+            const id = document.getElementById('bf-id').value;
+            const date = document.getElementById('bf-date').value;
+            const time = document.getElementById('bf-time').value;
+            if (!date || !time) { alert('Please select a date and time.'); return; }
+
+            const startTime = new Date(date + 'T' + time + ':00').toISOString();
+            const body = {
+                customerName: document.getElementById('bf-name').value.trim(),
+                customerPhone: document.getElementById('bf-phone').value.trim(),
+                customerEmail: document.getElementById('bf-email').value.trim(),
+                appointmentType: document.getElementById('bf-type').value,
+                startTime,
+                notes: document.getElementById('bf-notes').value.trim(),
+            };
+
+            if (!body.customerName && !body.customerPhone) {
+                alert('Please enter a customer name or phone number.');
+                return;
+            }
+
+            const btn = document.getElementById('bf-submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            try {
+                const isEdit = !!id;
+                const url = isEdit
+                    ? `${API_URL}/api/agent/${agentId}/bookings/${id}`
+                    : `${API_URL}/api/agent/${agentId}/bookings`;
+                const method = isEdit ? 'PATCH' : 'POST';
+
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                if (res.ok) {
+                    closeBookingModal();
+                    loadBookingsData();
+                    const toast = document.getElementById('save-toast');
+                    toast.textContent = isEdit ? '✓ Booking updated' : '✓ Booking added';
+                    toast.classList.add('visible');
+                    setTimeout(() => toast.classList.remove('visible'), 2000);
+                } else {
+                    const err = await res.json();
+                    alert(err.error || 'Failed to save booking');
+                }
+            } catch (err) {
+                alert('Failed to save booking. Please try again.');
+            }
+
+            btn.disabled = false;
+            btn.textContent = id ? 'Update Booking' : 'Save Booking';
+        }
+
+        async function changeBookingStatus(id, status) {
+            const menu = document.getElementById('bmenu-' + id);
+            if (menu) menu.style.display = 'none';
+            openBookingMenuId = null;
+            try {
+                await fetch(`${API_URL}/api/agent/${agentId}/bookings/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: JSON.stringify({ status }),
+                });
+                loadBookingsData();
+            } catch (err) {
+                console.error('Booking status update failed:', err);
+            }
+        }
+
+        async function deleteBooking(id) {
+            const menu = document.getElementById('bmenu-' + id);
+            if (menu) menu.style.display = 'none';
+            openBookingMenuId = null;
+            if (!confirm('Delete this booking? This cannot be undone.')) return;
+            try {
+                await fetch(`${API_URL}/api/agent/${agentId}/bookings/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                });
+                loadBookingsData();
+            } catch (err) {
+                console.error('Delete booking failed:', err);
+            }
+        }
 
         init();
     </script>
