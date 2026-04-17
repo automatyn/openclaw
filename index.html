@@ -596,48 +596,18 @@
                     You're spending 15+ hours a week on messages, follow-ups, and scheduling. Your AI receptionist handles all of it on WhatsApp. 24/7. Set up in minutes, not hours.
                 </p>
 
-                <!-- Inline email capture -->
                 <div class="hero-enter hero-enter-4 max-w-xl mx-auto mb-4">
-                    <form id="hero-magic-form" class="flex flex-col sm:flex-row gap-3 items-stretch" novalidate>
-                        <input
-                            id="hero-email"
-                            name="email"
-                            type="email"
-                            autocomplete="email"
-                            required
-                            inputmode="email"
-                            placeholder="you@business.com"
-                            class="flex-1 px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 text-base focus:outline-none focus:border-cyan-400 focus:bg-white/[0.07] transition"
-                        />
-                        <button
-                            id="hero-magic-btn"
-                            type="submit"
-                            class="cta-primary text-white px-7 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 text-base sm:text-lg whitespace-nowrap"
-                        >
-                            <span id="hero-magic-btn-text">Start Free →</span>
-                        </button>
-                    </form>
-                    <div id="hero-magic-error" class="hidden mt-3 text-sm text-red-400 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2 text-left"></div>
-
-                    <div id="hero-magic-success" class="hidden mt-4 bg-emerald-950/30 border border-emerald-800/40 rounded-xl p-4 text-left">
-                        <div class="flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            </div>
-                            <div class="flex-1">
-                                <div class="text-emerald-300 font-semibold text-sm">Check your email</div>
-                                <div class="text-gray-400 text-xs mt-1">Sign-in link sent to <span id="hero-magic-sent-to" class="text-white font-medium"></span>. Link expires in 15 minutes.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 flex items-center justify-center gap-4 text-sm">
-                        <a href="#try-demo" class="text-gray-400 hover:text-white transition inline-flex items-center gap-1.5">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="/signup.html" class="cta-primary text-white px-8 py-4 rounded-xl font-semibold text-base sm:text-lg inline-flex items-center gap-2 neon-glow">
+                            Start Free →
+                        </a>
+                        <a href="#try-demo" class="text-gray-400 hover:text-white transition inline-flex items-center gap-1.5 text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             Try the AI demo
                         </a>
-                        <span class="text-gray-700">•</span>
-                        <a href="/pricing.html" class="text-gray-400 hover:text-white transition">See pricing</a>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="/pricing.html" class="text-gray-500 hover:text-white transition text-sm">See pricing</a>
                     </div>
                 </div>
 
@@ -1940,60 +1910,5 @@
     })();
     </script>
 
-    <!-- Hero inline magic-link capture -->
-    <script>
-    (function() {
-        var form = document.getElementById('hero-magic-form');
-        if (!form) return;
-
-        var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-            ? 'http://localhost:3001'
-            : 'https://api.automatyn.co';
-
-        var emailEl = document.getElementById('hero-email');
-        var btn = document.getElementById('hero-magic-btn');
-        var btnText = document.getElementById('hero-magic-btn-text');
-        var errBox = document.getElementById('hero-magic-error');
-        var successBox = document.getElementById('hero-magic-success');
-        var sentToEl = document.getElementById('hero-magic-sent-to');
-
-        function showErr(msg) { errBox.textContent = msg; errBox.classList.remove('hidden'); }
-        function hideErr() { errBox.classList.add('hidden'); }
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            hideErr();
-            var email = (emailEl.value || '').trim().toLowerCase();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showErr('Please enter a valid email.'); return;
-            }
-
-            btn.disabled = true;
-            btnText.textContent = 'Sending…';
-
-            fetch(API + '/api/auth/magic-link', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email, plan: 'free' })
-            }).then(function(res) {
-                return res.json().then(function(data) { return { ok: res.ok, data: data }; });
-            }).then(function(r) {
-                if (!r.ok) {
-                    showErr((r.data && r.data.error) || 'Something went wrong. Please try again.');
-                    btn.disabled = false;
-                    btnText.textContent = 'Start Free →';
-                    return;
-                }
-                form.classList.add('hidden');
-                successBox.classList.remove('hidden');
-                sentToEl.textContent = email;
-            }).catch(function() {
-                showErr('Network error. Please try again.');
-                btn.disabled = false;
-                btnText.textContent = 'Start Free →';
-            });
-        });
-    })();
-    </script>
 </body>
 </html>
