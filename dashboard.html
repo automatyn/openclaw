@@ -1269,7 +1269,24 @@
                                 <h1 class="page-title">Bookings</h1>
                                 <p class="page-subtitle">Manage your availability and view customer appointments.</p>
                             </div>
-                            <button class="cta-button" onclick="openBookingModal()" style="padding:0.6rem 1.25rem;font-size:0.8rem;">+ Add Booking</button>
+                            <button class="cta-button" onclick="gateBookingsAction()" style="padding:0.6rem 1.25rem;font-size:0.8rem;">+ Add Booking</button>
+                        </div>
+                    </div>
+
+                    <!-- Pro upgrade gate (shown for starter/free tier) -->
+                    <div class="card mb-5" id="bookings-upgrade-gate" style="display:none;border:1px solid rgba(34,211,238,0.25);background:linear-gradient(135deg,rgba(34,211,238,0.06),rgba(34,211,238,0.02));">
+                        <div class="flex items-start gap-4 flex-wrap">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.25);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                    <div class="card-title" style="margin-bottom:0;">Bookings are a Pro feature</div>
+                                    <span class="plan-badge" style="background:rgba(34,211,238,0.15);color:#22d3ee;border:1px solid rgba(34,211,238,0.3);">Available on Pro</span>
+                                </div>
+                                <p class="text-zinc-400 text-sm mb-3" style="line-height:1.6;">Let your AI take appointments, sync with Google Calendar, and send confirmations automatically. Upgrade to Pro to unlock bookings and calendar integration.</p>
+                                <button class="cta-button" onclick="showSection('billing')" style="padding:0.55rem 1.1rem;font-size:0.8rem;">Upgrade to Pro →</button>
+                            </div>
                         </div>
                     </div>
 
@@ -1283,9 +1300,9 @@
                                 <div class="card-title mb-1">Connect Google Calendar</div>
                                 <p class="text-zinc-400 text-sm mb-3" style="line-height:1.6;">This is <strong class="text-zinc-300">optional but recommended</strong>. When connected, the AI checks your real calendar before offering times to customers, preventing double bookings if you also take appointments by phone or in person.</p>
                                 <p class="text-zinc-500 text-xs mb-4">If you manage your own bookings and only want the AI to handle online appointments, you can skip this and use the built-in availability below.</p>
-                                <button class="ghost-button" disabled style="opacity:0.5;cursor:not-allowed;">
+                                <button class="ghost-button" onclick="gateBookingsAction()" id="gcal-connect-btn">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-2px;margin-right:4px;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                                    Google Calendar — coming soon
+                                    Connect Google Calendar
                                 </button>
                             </div>
                         </div>
@@ -2075,6 +2092,10 @@
                     if (upgradeBtn) upgradeBtn.style.display = 'none';
                 }
 
+                // Bookings gating: free/starter tier sees upgrade card + locked actions
+                window._userPlan = status.plan || 'starter';
+                applyBookingsGate(window._userPlan);
+
                 // Store range data for filter buttons
                 window._statusData = {
                     countByRange: status.countByRange || { today: 0, week: 0, month: count, year: count },
@@ -2334,6 +2355,33 @@
                 const btn = document.querySelector('.nav-item[data-section="' + name + '"]');
                 if (btn) btn.classList.add('active');
             }
+        }
+
+        function isPaidPlan(plan) {
+            return plan === 'pro' || plan === 'max';
+        }
+
+        function applyBookingsGate(plan) {
+            const gate = document.getElementById('bookings-upgrade-gate');
+            if (!gate) return;
+            const bookingsSection = document.getElementById('section-bookings');
+            if (!bookingsSection) return;
+            const gatedChildren = bookingsSection.querySelectorAll('.card:not(#bookings-upgrade-gate), #bookings-stats, #bookings-table-card, #bookings-empty');
+            if (isPaidPlan(plan)) {
+                gate.style.display = 'none';
+                gatedChildren.forEach(el => { el.style.opacity = ''; el.style.pointerEvents = ''; });
+            } else {
+                gate.style.display = '';
+                gatedChildren.forEach(el => { el.style.opacity = '0.4'; el.style.pointerEvents = 'none'; });
+            }
+        }
+
+        function gateBookingsAction() {
+            if (isPaidPlan(window._userPlan)) {
+                if (typeof openBookingModal === 'function') openBookingModal();
+                return;
+            }
+            showSection('billing');
         }
 
         document.getElementById('settings-form').addEventListener('submit', async function(e) {
