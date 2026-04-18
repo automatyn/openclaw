@@ -981,7 +981,7 @@
                                         <span id="bot-toggle-knob" style="position:absolute; content:''; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s;"></span>
                                     </label>
                                     <div>
-                                        <div class="text-sm font-semibold text-white" id="bot-toggle-label">Bot is active</div>
+                                        <div class="text-sm font-semibold text-white" id="bot-toggle-label">Agent is active</div>
                                         <div class="text-xs text-zinc-500" id="bot-toggle-hint">Toggle off to pause AI responses</div>
                                     </div>
                                 </div>
@@ -1508,8 +1508,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);font-size:0.85rem;font-weight:800;color:#22d3ee;">2</div>
                                 <div>
-                                    <h3 class="text-sm font-bold text-white mb-1">Pause & Disconnect — Control your bot</h3>
-                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Once connected, you can toggle the bot on or off using the switch on the Setup tab. Toggling off pauses AI responses without disconnecting WhatsApp, so you can take over manually. To fully disconnect, use the "Disconnect WhatsApp" button. This unlinks the device entirely and you will need to scan or pair again to reconnect.</p>
+                                    <h3 class="text-sm font-bold text-white mb-1">Pause & Disconnect — Control your agent</h3>
+                                    <p class="text-zinc-400 text-sm" style="line-height:1.6;">Once connected, you can toggle the agent on or off using the switch on the Setup tab. Toggling off pauses AI responses without disconnecting WhatsApp, so you can take over manually. To fully disconnect, use the "Disconnect WhatsApp" button. This unlinks the device entirely and you will need to scan or pair again to reconnect.</p>
                                 </div>
                             </div>
                         </div>
@@ -1983,7 +1983,7 @@
                     var isBotActive = status.botActive !== false;
                     if (botToggle) botToggle.checked = isBotActive;
                     if (!isBotActive) {
-                        if (botLabel) botLabel.textContent = 'Bot is paused';
+                        if (botLabel) botLabel.textContent = 'Agent is paused';
                         if (botHint) botHint.textContent = 'Toggle on to resume AI responses';
                         if (connLabel) { connLabel.textContent = 'WhatsApp Connected (Paused)'; connLabel.className = 'text-amber-400 font-bold'; }
                         if (connDesc) connDesc.textContent = 'Your WhatsApp is connected but the AI is not responding to messages.';
@@ -2160,7 +2160,7 @@
                 if (!res.ok) throw new Error(data.error || 'Failed');
 
                 if (active) {
-                    label.textContent = 'Bot is active';
+                    label.textContent = 'Agent is active';
                     hint.textContent = 'Toggle off to pause AI responses';
                     connLabel.textContent = 'WhatsApp Connected';
                     connLabel.className = 'text-green-400 font-bold';
@@ -2169,7 +2169,7 @@
                     connDot.parentElement.style.borderColor = 'rgba(16,185,129,0.25)';
                     connDot.parentElement.style.background = 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04))';
                 } else {
-                    label.textContent = 'Bot is paused';
+                    label.textContent = 'Agent is paused';
                     hint.textContent = 'Toggle on to resume AI responses';
                     connLabel.textContent = 'WhatsApp Connected (Paused)';
                     connLabel.className = 'text-amber-400 font-bold';
@@ -2181,7 +2181,7 @@
             } catch (err) {
                 // Revert toggle on failure
                 toggle.checked = !active;
-                alert(err.message || 'Failed to toggle bot. Try again.');
+                alert(err.message || 'Failed to toggle agent. Try again.');
             }
         }
 
