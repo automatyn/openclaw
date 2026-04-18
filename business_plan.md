@@ -1,17 +1,30 @@
 # Automatyn Business Plan
 
 ## What We Do
-Professional OpenClaw setup and configuration service. We install, configure, secure, and deploy OpenClaw for businesses across Telegram, Discord, Slack, WhatsApp, and 20+ messaging platforms.
+Self-serve AI receptionist SaaS. Businesses sign up, connect WhatsApp, and get an AI agent that answers calls, books appointments, handles inquiries, and captures leads 24/7.
+
+Also offer professional OpenClaw setup service ($400/$800/$1500 one-time) for custom deployments.
 
 ## Website
-- **Live:** https://automatyn.co (custom domain, purchased 2026-04-04)
-- **Old URL:** automatyn.github.io (redirects to automatyn.co)
-- **Google Search Console:** Verified + sitemap submitted for automatyn.co
+- **Live:** https://automatyn.co (GitHub Pages, custom domain)
+- **Google Search Console:** Verified, 97+ pages indexed
 - **Bing Webmaster:** Indexed, IndexNow submitted
-- **Design:** Midnight Operator theme (Cabinet Grotesk + DM Sans, cyan/emerald on black)
-- **Key feature:** Interactive multi-platform WhatsApp/Telegram/Discord demo in hero
+- **Design:** Midnight Operator theme (Cabinet Grotesk + DM Sans, cyan/emerald on #030303)
+- **SaaS pages:** pricing.html, signup.html, dashboard.html, onboard.html, verify.html, login.html
+- **Free tools:** WhatsApp auto-reply generator, AI receptionist ROI calculator
+- **LLM SEO:** llms.txt, llms-full.txt, ai.txt, ai-plugin.json, 30+ crawlers in robots.txt
 
-## Pricing (competitive positioning)
+## SaaS Pricing
+
+| Tier | Price | Conversations/mo |
+|---|---|---|
+| Free | $0 | 25 |
+| Pro | $29/mo | 150 |
+| Max | $79/mo | Unlimited |
+
+Geo-pricing: US $29/$79, GB £29/£69, EU €29/€79, AU A$49/A$129, NZ NZ$49/NZ$129, CA C$39/C$99
+
+## Setup Service Pricing (legacy)
 
 | Tier | Price | What's included |
 |---|---|---|
@@ -44,56 +57,46 @@ Professional OpenClaw setup and configuration service. We install, configure, se
 
 ## TikTok Content Pipeline (NataliaAI)
 
-### Architecture (Updated)
+### Architecture (Updated 2026-04-18)
 ```
-Telegram Bot (Gemini Flash) ──► Research trending hooks
-                               ──► Write 6 hook texts + CTA
-                               ──► Save to hooks-queue/ folder
-                                         │
-Claude Code ◄─────────────────────────────┘
-  ├─ Read hook texts from hooks-queue/
-  ├─ Generate Natalia images via Forge (trained LoRA)
-  ├─ Animate images via ComfyUI Wan2.2 (image-to-video)
-  ├─ Add text overlays (PIL/ffmpeg)
-  ├─ Stitch 6 clips into one TikTok video (ffmpeg)
-  ├─ Write TikTok caption + hashtags
-  ├─ Self-review quality, regenerate if needed
-  ├─ Upload to Postiz API → TikTok
-  │
-Telegram Bot ◄─── gets notified
-  ├─ Track metrics (views, likes, shares)
-  ├─ Analyze what's working
-  └─ Suggest new hooks ──► repeat
+Claude Code (full pipeline):
+  ├─ Research trending hooks + write 6-slide script
+  ├─ Generate faceless images via Forge (JuggernautXL)
+  ├─ Burn text overlays (Inter font, matching TikTok native style)
+  ├─ Write caption + 5 hashtags max
+  ├─ Audit every image before posting
+  ├─ Upload to Postiz API
+  └─ Post to TikTok (@realnataliana) via UPLOAD mode
 ```
 
-### Image Generation Setup
-- **Forge:** Running on laptop via Tailscale (100.107.24.7:7860)
-- **Model:** JuggernautXL Ragnarok (SDXL, photorealistic)
-- **Resolution:** 896x1152 (TikTok portrait, ~2s per image)
-- **Style:** Natalia character (trained LoRA), lifestyle aesthetic
-- **Natalia LoRA:** Consistent character across all content — builds audience recognition
+### Image Style Rules
+- **FACELESS** — back of head, silhouette, hands only, walking away. Never front-facing.
+- **Dark/moody/cinematic** — low-key lighting, warm amber, deep shadows
+- **iPhone photo quality** — grain, noise, raw unedited look. Not AI-looking.
+- **Props** — phones with trading apps, laptops with dashboards, coffee, flat-lay objects
+- **Resolution:** 768x1376 (9:16)
 
-### Video Generation Setup
-- **ComfyUI:** Running on laptop via Tailscale (100.107.24.7:8188)
-- **GPU:** RTX 4070 Laptop, 8GB VRAM
-- **Model:** Wan2.2 Image-to-Video 14B (FP8 quantized, fits 8GB VRAM)
-- **Speed LoRA:** LightX2V 4-step (generates in 4 steps instead of 20+)
-- **Flow:** Forge generates still → Wan2.2 animates 3-4s clip → repeat x6 → stitch
-- **Status:** Models downloading (2026-03-25), ~19GB total
+### Forge Setup
+- **URL:** 100.107.24.7:7860 via Tailscale
+- **Model:** JuggernautXL Ragnarok (SDXL)
+- **Steps:** 25-28, CFG: 6.5, Sampler: DPM++ 2M Karras
+- **Generation time:** ~3 min per slide at 768x1376
 
-### Quality Control
-- Option 1 + locked prompt templates
-- Self-review each image/video before marking as ready
-- Generate multiple variations for key slides, pick best
-- Avoid: hand gestures (deformation risk), text on screens (gibberish)
+### Carousel Formula (Tier 1)
+6 slides: Hook → Problem → Discovery → Transformation 1 → Transformation 2 → CTA
+Pattern: Person + Conflict → AI → Changed Mind
+End with: "Shadow Agency. [tagline]. Follow for more."
 
-### Postiz Integration
-- **API Key:** Configured
-- **TikTok Account:** realnataliana
-- **Status:** Photo carousel posting broken (known Postiz bug #1338, #1220)
-- **Workaround:** Convert slides to video → post as video (more reliable)
-- **Fallback:** DIRECT_POST mode for video, skip UPLOAD/draft mode
-- **Issue:** TikTok 5 pending shares limit may block posts — clear inbox first
+### Posting
+- Posts via Postiz API using UPLOAD mode (arrives as draft in TikTok inbox)
+- User adds trending audio before publishing (silent carousels get buried)
+- Max 5 hashtags per post
+
+### Content Archive
+- ad_037 (Apr 13): sister/job theme
+- ad_038 (Apr 14): shopping/salary theme
+- ad_039 (Apr 15): therapist theme
+- ad_040 (Apr 18): boss/quiet theme
 
 ## Progress Log
 
@@ -180,15 +183,50 @@ Telegram Bot ◄─── gets notified
 | Google Search | ⚠️ Minimal — domain is new |
 | Bing Search | ✅ Indexed (22 mentions) |
 
+### 2026-04-17 (Major Session)
+- **Paddle payments fully integrated** (primary MoR, verified, live)
+  - Products: Pro $29/mo (pri_01kp9nmg87gyapxj153wv8t4y9), Max $79/mo (pri_01kp9nmhq88fnny2ha7b37yxy2)
+  - Paddle.js checkout overlay directly in dashboard (VM-independent)
+  - Webhook endpoint with HMAC-SHA256 signature verification
+  - DodoPayments as fallback (still in review)
+- **Email marketing infrastructure built**
+  - 3 Brevo contact lists: SaaS Signups, Guide Downloads, Demo Requests
+  - Homepage email forms POST to /api/capture
+  - 4-email onboarding drip: welcome → WhatsApp nudge (day 2) → social proof (day 4) → upgrade (day 7)
+  - Industry-specific social proof emails (plumbing, salon, cleaning, restaurant)
+  - All transactional emails redesigned with branded dark theme
+- **Dashboard sign out** added (dropdown on biz-pill + mobile button)
+- **Onboard dropdown** fixed (was dropping up on mobile)
+- **Security hardened**: webhook fail-closed, XSS fix, legacy endpoints removed, body size limits
+
+### 2026-04-18 (TikTok Session)
+- **TikTok pipeline rebuilt** — Claude Code now handles full carousel pipeline
+  - Bot no longer posts to TikTok (conserves Gemini API keys)
+  - ad_040 generated and posted: "boss/quiet" theme, faceless dark moody style
+  - Learned: images must be faceless, dark/moody, iPhone-quality (NOT AI-looking)
+  - Learned: UPLOAD mode works for carousels (DIRECT_POST silently fails)
+  - Learned: text overlay needs improvement (switch to Inter font, smaller size)
+  - All pipeline knowledge documented in memory for future sessions
+
+## Infrastructure Status (2026-04-18)
+
+| Component | Status |
+|---|---|
+| Website (GitHub Pages) | ✅ Live, 97+ pages |
+| SaaS API (Express.js) | ✅ Running on port 3001 via systemd |
+| Payments (Paddle) | ✅ Live, verified, Paddle.js checkout |
+| Email (Cloudflare + Brevo) | ✅ Inbound routing + outbound transactional + drip |
+| Auth (magic link + Google OAuth) | ✅ Working |
+| WhatsApp (Baileys multi-tenant) | ✅ Per-agent QR/pairing |
+| TikTok (Forge + Postiz) | ✅ Carousel pipeline working |
+| Google Search Console | ✅ 97+ pages indexed |
+| Bing/IndexNow | ✅ Indexed |
+
 ## Next Steps
-- [ ] Product Hunt launch (2026-04-05) — monitor + reply to all comments
-- [ ] Publish 3 Medium articles (copy ready)
-- [ ] Post 10 Quora answers (copy ready)
-- [ ] Submit to G2 when account unblocks
-- [ ] Create Google Business Profile
-- [ ] Get first paying customer → get testimonial → add to site
-- [ ] Add testimonial section to homepage (PLFS +12 gap)
-- [ ] Dev.to RSS import for blog syndication
-- [ ] LinkedIn company page + articles
-- [ ] Test Wan2.2 video pipeline for TikTok content
-- [ ] Consider configuring Claude Haiku as bot fallback ($100 credit)
+- [ ] Get first paying customer
+- [ ] Improve TikTok text overlay (Inter font)
+- [ ] 3 blog hero images need Gemini regen
+- [ ] Product Hunt launch assets
+- [ ] SaaS directory submissions
+- [ ] Daily TikTok carousel posting cadence
+- [ ] Add real testimonials when customers arrive
