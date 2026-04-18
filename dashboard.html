@@ -979,12 +979,8 @@
                                 <span class="status-dot connected" id="connected-dot"></span>
                                 <div style="flex:1;">
                                     <div class="text-green-400 font-bold" id="connected-label">WhatsApp Connected</div>
-                                    <div class="text-zinc-400 text-sm" id="connected-desc">Your AI agent is live. Anyone who messages this number on WhatsApp will get an instant reply.</div>
+                                    <div class="text-zinc-400 text-sm" id="connected-desc">Your AI agent is live and responding to messages.</div>
                                 </div>
-                            </div>
-
-                            <div style="background:rgba(34,211,238,0.04); border:1px solid rgba(34,211,238,0.12); border-radius:0.75rem; padding:0.875rem 1rem; margin-top:0.75rem;">
-                                <p class="text-sm text-zinc-300" style="line-height:1.5;">Share this number on your website, social media, business cards, signage, and vehicles so customers can reach you 24/7.</p>
                             </div>
 
                             <!-- Bot toggle + unpair controls -->
@@ -1461,6 +1457,18 @@
                                 <button type="button" onclick="closeBookingModal()" class="ghost-button" style="flex:0;">Cancel</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+
+                <!-- Success popup after WhatsApp pairing -->
+                <div id="pairing-success-modal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:400px;background:linear-gradient(180deg,#121214,#0a0a0c);border:1px solid rgba(16,185,129,0.3);border-radius:1.25rem;padding:2rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);text-align:center;">
+                        <div style="width:56px;height:56px;border-radius:50%;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h3 style="font-family:'Cabinet Grotesk',sans-serif;font-size:1.35rem;font-weight:800;color:white;margin-bottom:0.5rem;">You're live!</h3>
+                        <p class="text-zinc-400 text-sm" style="line-height:1.6;margin-bottom:1.25rem;">Your AI agent is now responding to WhatsApp messages on this number. Share it on your website, social media, business cards, signage, and vehicles.</p>
+                        <button onclick="document.getElementById('pairing-success-modal').style.display='none'" class="cta-button" style="min-height:44px;width:100%;">Got it</button>
                     </div>
                 </div>
 
@@ -1952,6 +1960,7 @@
             area.setAttribute('d', areaPath);
         }
 
+        var _wasConnected = null; // tracks previous connection state for success popup
         async function loadStatus() {
             try {
                 const res = await fetch(API_URL + '/api/agent/' + agentId + '/status', {
@@ -1989,6 +1998,12 @@
                     if (pairingPhone) pairingPhone.style.display = 'none';
                     document.getElementById('connected-status').style.display = 'block';
 
+                    // Show success popup only on first connection (not page reloads)
+                    if (_wasConnected === false) {
+                        document.getElementById('pairing-success-modal').style.display = 'block';
+                    }
+                    _wasConnected = true;
+
                     // Set bot toggle state
                     var botToggle = document.getElementById('bot-toggle');
                     var botLabel = document.getElementById('bot-toggle-label');
@@ -2008,6 +2023,7 @@
 
                     if (svcWa) svcWa.innerHTML = '<span class="status-dot connected"></span><span class="text-sm font-semibold text-emerald-400">Connected</span>';
                 } else {
+                    if (_wasConnected === null) _wasConnected = false;
                     navDot.className = 'status-dot pending';
                     navText.textContent = 'Pending';
                     if (mobDot) mobDot.className = 'status-dot pending';
