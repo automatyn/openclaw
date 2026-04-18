@@ -3,7 +3,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { provisionAgent, updateAgent, getAgent, DATA_DIR } = require('./provision');
-const { startPairingCode, startQrPairing, checkPairingStatus, isWhatsAppConnected } = require('./whatsapp');
+const { startPairingCode, startQrPairing, checkPairingStatus, isWhatsAppConnected, unpairWhatsApp, setBotActive } = require('./whatsapp');
 const authLib = require('./auth');
 const fs = require('fs');
 const path = require('path');
@@ -1150,6 +1150,7 @@ app.get('/api/agent/:id/status', auth, (req, res) => {
 
   res.json({
     connected: agent.whatsappConnected || false,
+    botActive: agent.botActive !== undefined ? agent.botActive : (agent.whatsappConnected || false),
     plan: agent.plan,
     conversationCount: agent.conversationCount || 0,
     conversationLimit: limits[agent.plan] || 25,
@@ -1236,6 +1237,76 @@ app.get('/api/agent/:id/whatsapp/status', auth, async (req, res) => {
   } catch (err) {
     console.error('WhatsApp status error:', err.message);
     res.status(500).json({ error: err.message || 'Failed to check status' });
+  }
+});
+
+// ============================================================
+// POST /api/agent/:id/whatsapp/unpair — Fully unpair WhatsApp
+// ============================================================
+app.post('/api/agent/:id/whatsapp/unpair', auth, async (req, res) => {
+  if (req.params.id !== req.agentId) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+
+  const agent = getAgent(req.params.id);
+  if (!agent) {
+    return res.status(404).json({ error: 'Agent not found' });
+  }
+
+  try {
+    await unpairWhatsApp(req.params.id);
+
+    // Update agent metadata
+    const metaPath = path.join(DATA_DIR, `${req.params.id}.json`);
+    if (fs.existsSync(metaPath)) {
+      const meta = JSON.parse(fs.readFileSync(metaPath, 'utf-8'));
+      meta.whatsappConnected = false;
+      meta.botActive = false;
+      meta.updatedAt = new Date().toISOString();
+      fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+    }
+
+    res.json({ success: true, message: 'WhatsApp unpaired. You can pair again at any time.' });
+  } catch (err) {
+    console.error('WhatsApp unpair error:', err.message);
+    res.status(500).json({ error: err.message || 'Failed to unpair WhatsApp' });
+  }
+});
+
+// ============================================================
+// POST /api/agent/:id/toggle — Toggle bot on/off
+// ============================================================
+app.post('/api/agent/:id/toggle', auth, async (req, res) => {
+  if (req.params.id !== req.agentId) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+
+  const agent = getAgent(req.params.id);
+  if (!agent) {
+    return res.status(404).json({ error: 'Agent not found' });
+  }
+
+  const { active } = req.body;
+  if (typeof active !== 'boolean') {
+    return res.status(400).json({ error: 'active must be true or false' });
+  }
+
+  try {
+    setBotActive(req.params.id, active);
+
+    // Update agent metadata
+    const metaPath = path.join(DATA_DIR, `${req.params.id}.json`);
+    if (fs.existsSync(metaPath)) {
+      const meta = JSON.parse(fs.readFileSync(metaPath, 'utf-8'));
+      meta.botActive = active;
+      meta.updatedAt = new Date().toISOString();
+      fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+    }
+
+    res.json({ success: true, active, message: active ? 'Bot activated. AI is responding to messages.' : 'Bot paused. Messages will not be answered until you turn it back on.' });
+  } catch (err) {
+    console.error('Bot toggle error:', err.message);
+    res.status(500).json({ error: err.message || 'Failed to toggle bot' });
   }
 });
 

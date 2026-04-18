@@ -468,6 +468,10 @@
         }
         .status-dot.connected { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
         .status-dot.disconnected { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.2); }
+
+        /* Bot toggle switch */
+        #bot-toggle:checked + span { background: #10b981; }
+        #bot-toggle:checked ~ #bot-toggle-knob { transform: translateX(20px); }
         .status-dot.pending { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); animation: dotPulse 2s ease-in-out infinite; }
         @keyframes dotPulse {
             0%,100% { opacity: 1; }
@@ -943,10 +947,40 @@
 
                         <div id="connected-status" style="display: none;" class="mt-6 p-5 rounded-xl" >
                             <div class="flex items-center gap-3" style="background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04)); border: 1px solid rgba(16,185,129,0.25); border-radius: 0.875rem; padding: 1rem 1.25rem;">
-                                <span class="status-dot connected"></span>
-                                <div>
-                                    <div class="text-green-400 font-bold">WhatsApp Connected</div>
-                                    <div class="text-zinc-400 text-sm">Your AI receptionist is live and responding to messages.</div>
+                                <span class="status-dot connected" id="connected-dot"></span>
+                                <div style="flex:1;">
+                                    <div class="text-green-400 font-bold" id="connected-label">WhatsApp Connected</div>
+                                    <div class="text-zinc-400 text-sm" id="connected-desc">Your AI receptionist is live and responding to messages.</div>
+                                </div>
+                            </div>
+
+                            <!-- Bot toggle + unpair controls -->
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-4">
+                                <!-- Bot on/off toggle -->
+                                <div class="flex items-center gap-3 flex-1" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem; padding: 0.75rem 1rem;">
+                                    <label style="position:relative; display:inline-block; width:44px; height:24px; flex-shrink:0; cursor:pointer;">
+                                        <input type="checkbox" id="bot-toggle" checked onchange="toggleBot(this.checked)" style="opacity:0; width:0; height:0;">
+                                        <span style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#3f3f46; border-radius:24px; transition:0.3s;"></span>
+                                        <span id="bot-toggle-knob" style="position:absolute; content:''; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s;"></span>
+                                    </label>
+                                    <div>
+                                        <div class="text-sm font-semibold text-white" id="bot-toggle-label">Bot is active</div>
+                                        <div class="text-xs text-zinc-500" id="bot-toggle-hint">Toggle off to pause AI responses</div>
+                                    </div>
+                                </div>
+
+                                <!-- Unpair button -->
+                                <button onclick="confirmUnpair()" style="background:transparent; border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:0.625rem 1rem; border-radius:0.75rem; font-size:0.8125rem; font-weight:500; cursor:pointer; transition:all 0.2s; white-space:nowrap;" onmouseover="this.style.background='rgba(239,68,68,0.1)'; this.style.borderColor='rgba(239,68,68,0.5)';" onmouseout="this.style.background='transparent'; this.style.borderColor='rgba(239,68,68,0.3)';">
+                                    Disconnect WhatsApp
+                                </button>
+                            </div>
+
+                            <!-- Unpair confirmation modal (hidden by default) -->
+                            <div id="unpair-confirm" style="display:none; margin-top:0.75rem; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); border-radius:0.75rem; padding:1rem;">
+                                <p class="text-sm text-zinc-300 mb-3">This will fully disconnect your WhatsApp number. The AI will stop responding and you'll need to pair again to resume.</p>
+                                <div class="flex gap-2">
+                                    <button onclick="doUnpair()" style="background:#dc2626; color:white; padding:0.5rem 1rem; border-radius:0.5rem; font-size:0.8125rem; font-weight:600; border:none; cursor:pointer;">Yes, disconnect</button>
+                                    <button onclick="document.getElementById('unpair-confirm').style.display='none'" style="background:rgba(255,255,255,0.06); color:#a1a1aa; padding:0.5rem 1rem; border-radius:0.5rem; font-size:0.8125rem; border:none; cursor:pointer;">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -1910,6 +1944,24 @@
                     if (pairingQr) pairingQr.style.display = 'none';
                     if (pairingPhone) pairingPhone.style.display = 'none';
                     document.getElementById('connected-status').style.display = 'block';
+
+                    // Set bot toggle state
+                    var botToggle = document.getElementById('bot-toggle');
+                    var botLabel = document.getElementById('bot-toggle-label');
+                    var botHint = document.getElementById('bot-toggle-hint');
+                    var connLabel = document.getElementById('connected-label');
+                    var connDesc = document.getElementById('connected-desc');
+                    var connDot = document.getElementById('connected-dot');
+                    var isBotActive = status.botActive !== false;
+                    if (botToggle) botToggle.checked = isBotActive;
+                    if (!isBotActive) {
+                        if (botLabel) botLabel.textContent = 'Bot is paused';
+                        if (botHint) botHint.textContent = 'Toggle on to resume AI responses';
+                        if (connLabel) { connLabel.textContent = 'WhatsApp Connected (Paused)'; connLabel.className = 'text-amber-400 font-bold'; }
+                        if (connDesc) connDesc.textContent = 'Your WhatsApp is connected but the AI is not responding to messages.';
+                        if (connDot) { connDot.className = 'status-dot pending'; connDot.parentElement.style.borderColor = 'rgba(245,158,11,0.25)'; connDot.parentElement.style.background = 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04))'; }
+                    }
+
                     if (svcWa) svcWa.innerHTML = '<span class="status-dot connected"></span><span class="text-sm font-semibold text-emerald-400">Connected</span>';
                 } else {
                     navDot.className = 'status-dot pending';
@@ -2061,6 +2113,88 @@
                 showPairingMethod('phone');
             }
         })();
+
+        async function toggleBot(active) {
+            const toggle = document.getElementById('bot-toggle');
+            const label = document.getElementById('bot-toggle-label');
+            const hint = document.getElementById('bot-toggle-hint');
+            const connLabel = document.getElementById('connected-label');
+            const connDesc = document.getElementById('connected-desc');
+            const connDot = document.getElementById('connected-dot');
+
+            try {
+                const res = await fetch(API_URL + '/api/agent/' + agentId + '/toggle', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ active })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed');
+
+                if (active) {
+                    label.textContent = 'Bot is active';
+                    hint.textContent = 'Toggle off to pause AI responses';
+                    connLabel.textContent = 'WhatsApp Connected';
+                    connLabel.className = 'text-green-400 font-bold';
+                    connDesc.textContent = 'Your AI receptionist is live and responding to messages.';
+                    connDot.className = 'status-dot connected';
+                    connDot.parentElement.style.borderColor = 'rgba(16,185,129,0.25)';
+                    connDot.parentElement.style.background = 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04))';
+                } else {
+                    label.textContent = 'Bot is paused';
+                    hint.textContent = 'Toggle on to resume AI responses';
+                    connLabel.textContent = 'WhatsApp Connected (Paused)';
+                    connLabel.className = 'text-amber-400 font-bold';
+                    connDesc.textContent = 'Your WhatsApp is connected but the AI is not responding to messages.';
+                    connDot.className = 'status-dot pending';
+                    connDot.parentElement.style.borderColor = 'rgba(245,158,11,0.25)';
+                    connDot.parentElement.style.background = 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04))';
+                }
+            } catch (err) {
+                // Revert toggle on failure
+                toggle.checked = !active;
+                alert(err.message || 'Failed to toggle bot. Try again.');
+            }
+        }
+
+        function confirmUnpair() {
+            document.getElementById('unpair-confirm').style.display = 'block';
+        }
+
+        async function doUnpair() {
+            const btn = document.querySelector('#unpair-confirm button');
+            btn.disabled = true;
+            btn.textContent = 'Disconnecting...';
+            try {
+                const res = await fetch(API_URL + '/api/agent/' + agentId + '/whatsapp/unpair', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed');
+
+                // Reset UI to show pairing options again
+                document.getElementById('connected-status').style.display = 'none';
+                document.getElementById('pairing-method-toggle').style.display = 'flex';
+                document.getElementById('pairing-qr').style.display = 'flex';
+                document.getElementById('unpair-confirm').style.display = 'none';
+
+                // Update status indicators
+                var navDot = document.getElementById('nav-status-dot');
+                var navText = document.getElementById('nav-status-text');
+                if (navDot) navDot.className = 'status-dot pending';
+                if (navText) navText.textContent = 'Pending';
+
+                var svcWa = document.getElementById('svc-whatsapp');
+                if (svcWa) svcWa.innerHTML = '<span class="status-dot pending"></span><span class="text-sm font-semibold text-amber-400">Not connected</span>';
+
+                loadQR();
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Yes, disconnect';
+                alert(err.message || 'Failed to disconnect. Try again.');
+            }
+        }
 
         function showPairingMethod(method) {
             const qrSection = document.getElementById('pairing-qr');

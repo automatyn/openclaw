@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Host Your AI Agent | Automatyn</title>
+    <meta name="description" content="Run your own AI agent on your own server with OpenClaw. Full control, no platform fees. Or let us set it up for you starting at $400.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23030303'/><text x='50' y='68' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='65' fill='%2322d3ee'>A</text></svg>">
+    <link rel="canonical" href="https://automatyn.co/self-host.html">
+    <meta property="og:title" content="Self-Host Your AI Agent | Automatyn">
+    <meta property="og:description" content="Run your own AI agent on your own server. Full control, no platform fees. Done-for-you setup from $400.">
+    <meta property="og:image" content="https://automatyn.co/og-image-v2.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .heading { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; letter-spacing: -0.025em; }
+        body { background: #030303; color: #ffffff; }
+        .gradient-text { background: linear-gradient(135deg, #22d3ee, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 2rem; }
+        .card-featured { background: linear-gradient(135deg, rgba(34,211,238,0.06), rgba(16,185,129,0.03)); border-color: rgba(34,211,238,0.2); }
+        .cta-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.9375rem; color: #030303; background: linear-gradient(135deg, #22d3ee, #10b981); transition: all 0.2s; text-decoration: none; }
+        .cta-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .cta-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.9375rem; color: #22d3ee; border: 1px solid rgba(34,211,238,0.3); background: transparent; transition: all 0.2s; text-decoration: none; }
+        .cta-secondary:hover { background: rgba(34,211,238,0.08); border-color: rgba(34,211,238,0.5); }
+        .check { color: #10b981; flex-shrink: 0; }
+        .sticky-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(3,3,3,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky nav -->
+    <div class="sticky-banner">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="text-lg font-extrabold text-white heading" style="letter-spacing:-0.04em;">Automatyn.</a>
+            <div class="flex items-center gap-4">
+                <a href="/pricing.html" class="text-sm text-gray-400 hover:text-white transition hidden sm:inline">SaaS Pricing</a>
+                <a href="/blog" class="text-sm text-gray-400 hover:text-white transition hidden sm:inline">Blog</a>
+                <a href="/signup.html" class="text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition">Start Free</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-4 py-2 rounded-full mb-6">
+                <span class="text-sm font-medium text-cyan-300">Self-hosted option</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight heading">
+                Your server. Your AI agent.<br>
+                <span class="gradient-text">No platform fees.</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+                Run a fully private AI receptionist on your own infrastructure with OpenClaw. Or skip the technical work and let us set it up for you.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#setup-service" class="cta-primary">Done-for-you setup →</a>
+                <a href="https://github.com/nichochar/openclaw" target="_blank" rel="noopener" class="cta-secondary">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SaaS vs Self-Host comparison -->
+    <section class="py-16 px-4 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-4 heading">SaaS vs. Self-Hosted</h2>
+            <p class="text-gray-400 text-center mb-10 max-w-xl mx-auto">Choose the option that fits your needs. Most small businesses start with SaaS. Technical teams and agencies prefer self-hosted.</p>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm sm:text-base">
+                    <thead>
+                        <tr class="border-b border-white/10">
+                            <th class="text-left py-4 px-4 text-gray-500 font-medium"></th>
+                            <th class="text-center py-4 px-4 text-gray-400 font-semibold">Automatyn SaaS</th>
+                            <th class="text-center py-4 px-4 text-cyan-400 font-semibold">Self-Hosted (OpenClaw)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Monthly cost</td>
+                            <td class="py-3 px-4 text-center text-white">Free / $29 / $79</td>
+                            <td class="py-3 px-4 text-center text-white">$0 (your hosting costs only)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Setup time</td>
+                            <td class="py-3 px-4 text-center text-white">10 minutes</td>
+                            <td class="py-3 px-4 text-center text-white">2-6 hours (DIY) or same-day (us)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Channels</td>
+                            <td class="py-3 px-4 text-center text-white">WhatsApp</td>
+                            <td class="py-3 px-4 text-center text-white">WhatsApp, Telegram, Discord, Slack, Signal</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Conversations</td>
+                            <td class="py-3 px-4 text-center text-white">25 / 150 / Unlimited</td>
+                            <td class="py-3 px-4 text-center text-white">Truly unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Data ownership</td>
+                            <td class="py-3 px-4 text-center text-white">Hosted by us</td>
+                            <td class="py-3 px-4 text-center text-emerald-400 font-semibold">100% yours</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Technical skill needed</td>
+                            <td class="py-3 px-4 text-center text-emerald-400 font-semibold">None</td>
+                            <td class="py-3 px-4 text-center text-white">Server admin / Node.js</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Maintenance</td>
+                            <td class="py-3 px-4 text-center text-emerald-400 font-semibold">We handle it</td>
+                            <td class="py-3 px-4 text-center text-white">You manage (or we do for $150/mo)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-400">Custom integrations</td>
+                            <td class="py-3 px-4 text-center text-gray-500">Coming soon</td>
+                            <td class="py-3 px-4 text-center text-emerald-400 font-semibold">Full access</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-gray-500 text-sm">Not technical? <a href="/signup.html" class="text-cyan-400 hover:text-cyan-300 font-medium">Start with the SaaS plan (free)</a> and switch later if you need to.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Done-for-you setup service -->
+    <section id="setup-service" class="py-20 px-4 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4 heading">Done-for-You Setup</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">We install, configure, and secure OpenClaw on your server. You get a working AI agent without touching the terminal.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Starter -->
+                <div class="card flex flex-col">
+                    <h3 class="text-lg font-bold text-white mb-1 heading">Starter</h3>
+                    <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-3xl font-bold text-white heading">$400</span>
+                        <span class="text-sm text-gray-500">one-time</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Get up and running fast with the essentials.</p>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 flex-1">
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Full installation on your server</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 1 messaging channel connected</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Basic security hardening</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 14 days of post-setup support</li>
+                    </ul>
+                    <a href="mailto:support@automatyn.co?subject=Starter%20Setup%20Inquiry" class="cta-secondary justify-center w-full">Get started</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="card card-featured flex flex-col relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] tracking-widest font-bold uppercase bg-cyan-400 text-black">
+                        Recommended
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1 heading">Pro</h3>
+                    <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-3xl font-bold text-white heading">$800</span>
+                        <span class="text-sm text-gray-500">one-time</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Custom agent with multiple channels and advanced config.</p>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 flex-1">
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Everything in Starter</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 3 messaging channels</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Custom agent personality and skills</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Security hardening and firewall setup</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 30 days of post-setup support</li>
+                    </ul>
+                    <a href="mailto:support@automatyn.co?subject=Pro%20Setup%20Inquiry" class="cta-primary justify-center w-full">Get started</a>
+                </div>
+
+                <!-- Business -->
+                <div class="card flex flex-col">
+                    <h3 class="text-lg font-bold text-white mb-1 heading">Business</h3>
+                    <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-3xl font-bold text-white heading">$1,500</span>
+                        <span class="text-sm text-gray-500">one-time</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Enterprise-grade deployment with full customization.</p>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 flex-1">
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Everything in Pro</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Unlimited channels</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Custom integrations (CRM, calendar, etc.)</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> Docker sandboxing for code execution</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 90 days of post-setup support</li>
+                        <li class="flex gap-2"><span class="check">&#10003;</span> 30-min onboarding call</li>
+                    </ul>
+                    <a href="mailto:support@automatyn.co?subject=Business%20Setup%20Inquiry" class="cta-secondary justify-center w-full">Get started</a>
+                </div>
+            </div>
+
+            <!-- Monthly support add-on -->
+            <div class="mt-8 card text-center">
+                <h3 class="text-lg font-bold text-white mb-2 heading">Ongoing Support</h3>
+                <div class="flex items-baseline gap-1 justify-center mb-3">
+                    <span class="text-2xl font-bold text-white heading">$150</span>
+                    <span class="text-sm text-gray-500">/ month</span>
+                </div>
+                <p class="text-gray-400 text-sm max-w-lg mx-auto">Updates, troubleshooting, priority response, and a monthly 30-min remote session. Available as an add-on to any setup tier.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What you get -->
+    <section class="py-16 px-4 border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-10 heading">What's Included in Every Setup</h2>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-base font-bold text-white mb-2">Same-Day Delivery</h3>
+                    <p class="text-sm text-gray-400">Most setups are completed within 1-3 hours. You get a working AI agent by the end of the session.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-base font-bold text-white mb-2">Your Server, Your Data</h3>
+                    <p class="text-sm text-gray-400">Everything runs on your infrastructure. Conversations, contacts, and configurations stay on your machine.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-base font-bold text-white mb-2">No Recurring Platform Fees</h3>
+                    <p class="text-sm text-gray-400">Pay once for setup. The only ongoing cost is your server hosting and AI API usage (typically $5-20/month).</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-base font-bold text-white mb-2">Full Source Access</h3>
+                    <p class="text-sm text-gray-400">OpenClaw is open source. You can modify, extend, or fork it. No vendor lock-in, no proprietary code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="py-16 px-4 border-t border-white/5">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-10 heading">How the Setup Works</h2>
+            <div class="space-y-8">
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-800/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">1</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-1">You share access</h3>
+                        <p class="text-sm text-gray-400">Screen share or SSH access to your server. We work directly on your machine.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-800/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">2</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-1">We install and configure</h3>
+                        <p class="text-sm text-gray-400">OpenClaw installation, channel connections, security hardening, agent personality setup, and testing.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-800/30 flex items-center justify-center text-cyan-400 font-bold text-sm flex-shrink-0">3</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-1">You're live</h3>
+                        <p class="text-sm text-gray-400">Your AI agent is responding to messages. We stick around for testing and answer questions during the support period.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-4 border-t border-white/5">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4 heading">Ready to self-host?</h2>
+            <p class="text-gray-400 mb-8">Email us with your setup requirements and we'll get back to you within 24 hours.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:support@automatyn.co?subject=Self-Host%20Setup%20Inquiry" class="cta-primary">Email us →</a>
+                <a href="/signup.html" class="cta-secondary">Or start with the free SaaS plan</a>
+            </div>
+            <p class="text-gray-600 text-xs mt-6">Questions? Reach us at support@automatyn.co</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="/" class="text-lg font-extrabold text-white heading" style="letter-spacing:-0.04em;">Automatyn.</a>
+                    <p class="text-xs text-gray-500 mt-2">AI receptionist for small businesses</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Services</h4>
+                    <div class="space-y-2">
+                        <a href="/pricing.html" class="block text-sm text-gray-500 hover:text-white transition">SaaS Pricing</a>
+                        <a href="/self-host.html" class="block text-sm text-gray-500 hover:text-white transition">Self-Host</a>
+                        <a href="/tools" class="block text-sm text-gray-500 hover:text-white transition">Free Tools</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Company</h4>
+                    <div class="space-y-2">
+                        <a href="/blog" class="block text-sm text-gray-500 hover:text-white transition">Blog</a>
+                        <a href="/terms.html" class="block text-sm text-gray-500 hover:text-white transition">Terms of Service</a>
+                        <a href="/privacy.html" class="block text-sm text-gray-500 hover:text-white transition">Privacy Policy</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Contact</h4>
+                    <div class="space-y-2">
+                        <a href="mailto:support@automatyn.co" class="block text-sm text-gray-500 hover:text-white transition">support@automatyn.co</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-gray-700 mt-10">&copy; 2026 Automatyn. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

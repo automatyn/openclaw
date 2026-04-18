@@ -270,10 +270,92 @@ function registerWhatsAppWithGateway(agentId) {
   }
 }
 
+/**
+ * Fully unpair WhatsApp: disconnect session, delete auth files, remove from gateway config.
+ */
+async function unpairWhatsApp(agentId) {
+  // 1. Kill active session
+  await disconnectSession(agentId);
+
+  // 2. Delete auth directory
+  const authDir = getAuthDir(agentId);
+  if (fs.existsSync(authDir)) {
+    fs.rmSync(authDir, { recursive: true, force: true });
+  }
+
+  // 3. Remove from gateway config
+  try {
+    const config = JSON.parse(fs.readFileSync(OPENCLAW_CONFIG, 'utf-8'));
+    if (config.channels?.whatsapp?.accounts?.[agentId]) {
+      delete config.channels.whatsapp.accounts[agentId];
+      config.meta.lastTouchedAt = new Date().toISOString();
+      fs.writeFileSync(OPENCLAW_CONFIG, JSON.stringify(config, null, 2));
+
+      // Reload gateway
+      try {
+        execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway reload', { timeout: 10000, stdio: 'pipe' });
+        console.log(`WhatsApp unpaired for agent ${agentId}`);
+      } catch (err) {
+        console.error('Gateway reload failed:', err.message);
+      }
+    }
+  } catch (err) {
+    console.error('Failed to unregister WhatsApp from gateway:', err.message);
+  }
+}
+
+/**
+ * Set bot active/paused in gateway config.
+ * When paused, the WhatsApp account is removed from gateway so the bot stops responding.
+ * When activated, it's re-added.
+ */
+function setBotActive(agentId, active) {
+  const authDir = getAuthDir(agentId);
+  const credsFile = path.join(authDir, 'creds.json');
+
+  // Can only activate if WhatsApp auth exists
+  if (active && !fs.existsSync(credsFile)) {
+    throw new Error('WhatsApp not connected. Pair first.');
+  }
+
+  try {
+    const config = JSON.parse(fs.readFileSync(OPENCLAW_CONFIG, 'utf-8'));
+    if (!config.channels) config.channels = {};
+    if (!config.channels.whatsapp) config.channels.whatsapp = { enabled: true, accounts: {} };
+    if (!config.channels.whatsapp.accounts) config.channels.whatsapp.accounts = {};
+
+    if (active) {
+      // Re-add to gateway
+      config.channels.whatsapp.accounts[agentId] = {
+        authDir: authDir,
+        dmPolicy: 'pairing',
+        agent: agentId,
+      };
+    } else {
+      // Remove from gateway (but keep auth files so re-enabling is instant)
+      delete config.channels.whatsapp.accounts[agentId];
+    }
+
+    config.meta.lastTouchedAt = new Date().toISOString();
+    fs.writeFileSync(OPENCLAW_CONFIG, JSON.stringify(config, null, 2));
+
+    // Reload gateway
+    try {
+      execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway reload', { timeout: 10000, stdio: 'pipe' });
+    } catch (err) {
+      console.error('Gateway reload failed:', err.message);
+    }
+  } catch (err) {
+    throw new Error('Failed to update bot state: ' + err.message);
+  }
+}
+
 module.exports = {
   startPairingCode,
   startQrPairing,
   checkPairingStatus,
   disconnectSession,
   isWhatsAppConnected,
+  unpairWhatsApp,
+  setBotActive,
 };
