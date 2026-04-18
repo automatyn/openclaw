@@ -562,13 +562,25 @@
         .hardware-cta:hover { border-color: rgba(34, 211, 238, 0.6); box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
     </style>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5X730YSNCP"></script>
+    <!-- Google Analytics (deferred to idle to avoid blocking main thread) -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-5X730YSNCP');
+        (function(){
+            var load = function(){
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X730YSNCP';
+                document.head.appendChild(s);
+            };
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(load, { timeout: 4000 });
+            } else {
+                window.addEventListener('load', function(){ setTimeout(load, 1500); });
+            }
+        })();
     </script>
 </head>
 <body class="bg-black">
