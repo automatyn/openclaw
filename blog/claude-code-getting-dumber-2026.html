@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/dist/tailwind.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700;800&display=swap" rel="stylesheet">
 
     <!-- JSON-LD: Article Schema -->
@@ -120,7 +120,7 @@
 
     <style>
         *, body, p, span, li, td, th, input, textarea, select, button, a, label, div { font-family: 'DM Sans', sans-serif !important; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; color: #ffffff; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cabinet Grotesk', sans-serif !important; color: #ffffff; }
         :root {
             --neon-purple: #22d3ee;
             --bg-dark: #030303;
@@ -138,7 +138,7 @@
             pointer-events: none;
         }
         .prose h2 {
-            font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important;
+            font-family: 'Cabinet Grotesk', sans-serif !important;
             font-weight: 700;
             font-size: 1.85rem;
             line-height: 1.3;
@@ -251,9 +251,9 @@
     <!-- Hero -->
     <header class="px-6 py-16 max-w-4xl mx-auto">
         <div class="text-zinc-500 text-sm mb-4">April 12, 2026 &middot; AI Engineering &middot; 9 min read</div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4" style="font-family: 'Cabinet Grotesk', 'Sora', sans-serif;">Claude Code Got 67% Dumber. AMD's AI Director Had the Data to Prove It.</h1>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4" style="font-family: 'Cabinet Grotesk', sans-serif;">Claude Code Got 67% Dumber. AMD's AI Director Had the Data to Prove It.</h1>
         <p class="text-lg text-zinc-400 leading-relaxed max-w-2xl">6,852 sessions. 234,760 tool calls. 17,871 thinking blocks. The numbers don't lie. Here's what happened to Claude Code, why Anthropic let it happen, and what it means for anyone relying on AI agents for real work.</p>
-        <img src="images/claude-code-dumber-hero.jpg" alt="Dark glitching terminal screen with declining performance charts" class="rounded-2xl mt-12 w-full">
+        <picture><source srcset="images/claude-code-dumber-hero.webp" type="image/webp"><img src="images/claude-code-dumber-hero.jpg" alt="Dark glitching terminal screen with declining performance charts" class="rounded-2xl mt-12 w-full"></picture>
     </header>
 
     <!-- Article body -->
@@ -267,7 +267,7 @@
 
         <h2>The Dataset That Ended the Debate</h2>
 
-        <img src="images/claude-code-dumber-data.jpg" alt="Dark data visualization showing declining metrics on monitors" class="rounded-2xl my-8 w-full">
+        <picture><source srcset="images/claude-code-dumber-data.webp" type="image/webp"><img src="images/claude-code-dumber-data.jpg" alt="Dark data visualization showing declining metrics on monitors" class="rounded-2xl my-8 w-full"></picture>
 
         <p>Most complaints about AI tools getting worse are vibes. Someone notices their outputs feel lazier and posts about it on Twitter. Anthropic says they haven't changed anything. The cycle repeats.</p>
 
@@ -357,7 +357,7 @@
 
         <h2>CLAUDE.md Files Might Be Making It Worse</h2>
 
-        <img src="images/claude-code-dumber-config.jpg" alt="Dark code editor showing configuration files with glitch effects" class="rounded-2xl my-8 w-full">
+        <picture><source srcset="images/claude-code-dumber-config.webp" type="image/webp"><img src="images/claude-code-dumber-config.jpg" alt="Dark code editor showing configuration files with glitch effects" class="rounded-2xl my-8 w-full"></picture>
 
         <p>Here's an angle most people are missing. A widely circulated Medium article raised a question that lines up with Laurenzo's data: are CLAUDE.md files making AI agents dumber?</p>
 
