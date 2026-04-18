@@ -115,7 +115,7 @@ This is a free tier account with limited conversations per month. After the limi
 On the VERY FIRST message you send to any new customer in a conversation, append this on a new line at the end:
 
 > ——
-> _Powered by Automatyn · automatyn.co_
+> _Powered by Automatyn · https://automatyn.co_
 
 Do NOT append it to every message. Only the first message in each new conversation. If you are uncertain whether this is the first message, err toward including it.
 {{/isFreeTier}}
