@@ -1461,15 +1461,41 @@
 
                 <!-- Booking Details Modal -->
                 <div id="booking-details-modal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
-                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:520px;background:linear-gradient(180deg,#121214,#0a0a0c);border:1px solid var(--border);border-radius:1.25rem;padding:2rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);max-height:90vh;overflow-y:auto;">
-                        <div class="flex justify-between items-center mb-5">
+                    <div class="booking-details-dialog">
+                        <div class="flex justify-between items-center" style="margin-bottom:1.25rem;">
                             <h3 class="text-lg font-bold">Booking details</h3>
-                            <button onclick="closeBookingDetails()" style="background:none;border:none;color:#71717a;cursor:pointer;font-size:1.25rem;padding:4px;">&times;</button>
+                            <button onclick="closeBookingDetails()" aria-label="Close" style="background:none;border:none;color:#71717a;cursor:pointer;font-size:1.5rem;line-height:1;padding:4px 8px;">&times;</button>
                         </div>
-                        <div id="booking-details-body" style="display:grid;gap:0.85rem;font-size:0.875rem;"></div>
-                        <div id="booking-details-actions" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);"></div>
+                        <div id="booking-details-body" style="display:grid;gap:1rem;font-size:0.875rem;"></div>
+                        <div id="booking-details-actions" style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);"></div>
                     </div>
                 </div>
+                <style>
+                    .booking-details-dialog {
+                        position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                        width:calc(100% - 2rem); max-width:520px;
+                        background:linear-gradient(180deg,#121214,#0a0a0c);
+                        border:1px solid var(--border); border-radius:1.25rem;
+                        padding:1.5rem; box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);
+                        max-height:calc(100vh - 2rem); overflow-y:auto;
+                    }
+                    @media (min-width:640px) { .booking-details-dialog { padding:2rem; } }
+                    .bd-row { display:grid; gap:0.25rem; }
+                    @media (min-width:640px) { .bd-row { grid-template-columns:120px 1fr; gap:1rem; align-items:start; } }
+                    .bd-label { color:#71717a; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; font-weight:600; }
+                    .bd-value { color:#e4e4e7; font-size:0.9rem; word-break:break-word; }
+                    .bd-actions-grid { display:grid; grid-template-columns:1fr; gap:0.5rem; }
+                    @media (min-width:520px) { .bd-actions-grid { grid-template-columns:1fr 1fr; } }
+                    .bd-btn { padding:0.65rem 1rem; font-size:0.82rem; font-weight:600; border-radius:0.65rem; border:1px solid var(--border); background:rgba(255,255,255,0.02); color:#e4e4e7; cursor:pointer; transition:all 0.15s; width:100%; text-align:center; }
+                    .bd-btn:hover { background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.15); }
+                    .bd-btn.primary { background:linear-gradient(135deg,#22d3ee,#06b6d4); border-color:transparent; color:#0a0a0c; }
+                    .bd-btn.primary:hover { filter:brightness(1.1); }
+                    .bd-btn.danger { color:#f87171; border-color:rgba(239,68,68,0.25); }
+                    .bd-btn.danger:hover { background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.4); }
+                    .bd-actions-section { margin-bottom:0.5rem; }
+                    .bd-actions-section:last-child { margin-bottom:0; }
+                    .bd-section-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; color:#52525b; font-weight:600; margin-bottom:0.5rem; }
+                </style>
 
                 <!-- Bookings Upgrade Prompt Modal -->
                 <div id="bookings-upgrade-modal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
@@ -3259,7 +3285,7 @@
                 'no-show': 'background:rgba(245,158,11,0.15);color:#fbbf24;',
             };
             const sourceLabels = { dashboard: 'Added manually', 'whatsapp-ai': 'Booked via WhatsApp AI' };
-            const row = (label, val) => val ? `<div style="display:grid;grid-template-columns:110px 1fr;gap:0.75rem;"><div style="color:#71717a;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em;padding-top:2px;">${label}</div><div style="color:#e4e4e7;">${val}</div></div>` : '';
+            const row = (label, val) => val ? `<div class="bd-row"><div class="bd-label">${label}</div><div class="bd-value">${val}</div></div>` : '';
             document.getElementById('booking-details-body').innerHTML =
                 row('Customer', esc(b.customerName || '—')) +
                 row('Phone', b.customerPhone ? esc(b.customerPhone) : '') +
@@ -3269,21 +3295,34 @@
                 row('Time', timeStr) +
                 row('Status', `<span style="display:inline-block;padding:0.2rem 0.6rem;border-radius:9999px;font-size:0.7rem;font-weight:700;${statusColors[b.status] || ''}">${b.status}</span>`) +
                 row('Source', sourceLabels[b.source] || b.source || '—') +
-                row('Notes', b.notes ? `<div style="white-space:pre-wrap;line-height:1.5;">${esc(b.notes)}</div>` : '<span style="color:#52525b;font-style:italic;">No notes</span>');
+                row('Notes', b.notes ? `<div style="white-space:pre-wrap;line-height:1.5;">${esc(b.notes)}</div>` : '<span style="color:#52525b;font-style:italic;">No notes added</span>');
 
-            const actions = document.getElementById('booking-details-actions');
-            const btn = (label, fn, danger) => `<button onclick="closeBookingDetails(); ${fn}" class="${danger ? 'ghost-button' : 'ghost-button'}" style="${danger ? 'color:#f87171;border-color:rgba(239,68,68,0.3);' : ''}padding:0.55rem 1rem;font-size:0.8rem;">${label}</button>`;
-            let html = btn('Edit', `editBooking('${b.id}')`);
+            const btn = (label, fn, variant) => `<button onclick="closeBookingDetails(); ${fn}" class="bd-btn ${variant || ''}">${label}</button>`;
+
+            const primary = btn('Edit booking', `editBooking('${b.id}')`, 'primary');
+
+            let statusBtns = '';
             if (b.status === 'confirmed') {
-                html += btn('Mark completed', `changeBookingStatus('${b.id}','completed')`);
-                html += btn('Mark no-show', `changeBookingStatus('${b.id}','no-show')`);
-                html += btn('Cancel', `changeBookingStatus('${b.id}','cancelled')`, true);
+                statusBtns += btn('Mark completed', `changeBookingStatus('${b.id}','completed')`);
+                statusBtns += btn('Mark no-show', `changeBookingStatus('${b.id}','no-show')`);
             }
             if (b.status === 'cancelled') {
-                html += btn('Reinstate', `changeBookingStatus('${b.id}','confirmed')`);
+                statusBtns += btn('Reinstate', `changeBookingStatus('${b.id}','confirmed')`);
             }
-            html += btn('Delete', `deleteBooking('${b.id}')`, true);
-            actions.innerHTML = html;
+
+            let dangerBtns = '';
+            if (b.status === 'confirmed') {
+                dangerBtns += btn('Cancel booking', `changeBookingStatus('${b.id}','cancelled')`, 'danger');
+            }
+            dangerBtns += btn('Delete', `deleteBooking('${b.id}')`, 'danger');
+
+            let actionsHtml = `<div class="bd-actions-section">${primary}</div>`;
+            if (statusBtns) {
+                actionsHtml += `<div class="bd-actions-section"><div class="bd-section-label">Update status</div><div class="bd-actions-grid">${statusBtns}</div></div>`;
+            }
+            actionsHtml += `<div class="bd-actions-section"><div class="bd-section-label">Danger zone</div><div class="bd-actions-grid">${dangerBtns}</div></div>`;
+
+            document.getElementById('booking-details-actions').innerHTML = actionsHtml;
 
             document.getElementById('booking-details-modal').style.display = 'block';
         }
