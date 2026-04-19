@@ -165,6 +165,12 @@
 
         @media (max-width: 768px) {
             #wa-chat { height: 420px !important; }
+            .hero-gradient { padding-top: 3rem !important; padding-bottom: 2.5rem !important; }
+            h1.hero-h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+            .section-pad { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+            .pricing-card { padding: 1.25rem !important; }
+            details summary { font-size: 0.95rem !important; }
+            .roi-slider-label { font-size: 0.85rem !important; }
         }
     </style>
 </head>
@@ -189,7 +195,7 @@
                 <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full" aria-hidden="true"></span>
                 FOR UK PLUMBERS · FREE TIER AVAILABLE
             </div>
-            <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
+            <h1 class="hero-h1 text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
                 You're losing jobs because you can't <span class="gradient-text">answer WhatsApp fast enough.</span>
             </h1>
             <p class="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -202,37 +208,69 @@
         </div>
     </section>
 
-    <!-- Phone demo — homepage-style -->
-    <section class="py-10 px-4 bg-black relative">
-        <div class="max-w-sm mx-auto relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-emerald-500/5 rounded-3xl blur-3xl scale-110"></div>
-            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-900/20" style="background: #0b141a;">
-                <!-- WhatsApp header -->
-                <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
-                    <div class="flex items-center gap-3 flex-1">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-400 flex items-center justify-center text-white font-bold text-sm">D</div>
-                        <div>
-                            <div class="text-white text-sm font-semibold">Dave Harris Plumbing</div>
-                            <div class="text-green-400 text-xs" id="wa-status">online</div>
+    <!-- Pain points -->
+    <section class="py-14 px-4 bg-surface border-y border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-10">Sound familiar?</h2>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="bg-card border border-white/8 rounded-xl p-6">
+                    <div class="text-red-400 text-xl font-bold mb-2">Under the sink at 2pm</div>
+                    <p class="text-gray-400 text-sm">Phone is buzzing with enquiries. You can't stop mid-job to type back. By the time you dry your hands, the customer has already booked the next plumber.</p>
+                </div>
+                <div class="bg-card border border-white/8 rounded-xl p-6">
+                    <div class="text-red-400 text-xl font-bold mb-2">Friday night WhatsApp</div>
+                    <p class="text-gray-400 text-sm">"Hi, got a leak under the boiler, can you come tomorrow?" You see it Monday morning. Already sorted. You've just missed £180.</p>
+                </div>
+                <div class="bg-card border border-white/8 rounded-xl p-6">
+                    <div class="text-red-400 text-xl font-bold mb-2">Same five questions</div>
+                    <p class="text-gray-400 text-sm">"Do you do boilers?" "How much for a callout?" "Are you Gas Safe?" You answer it ten times a day. Most never book.</p>
+                </div>
+                <div class="bg-card border border-white/8 rounded-xl p-6">
+                    <div class="text-red-400 text-xl font-bold mb-2">No idea who's who</div>
+                    <p class="text-gray-400 text-sm">End of the week your inbox is 40 threads deep. Which ones were booked, quoted, or ghosted? You've lost track.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live WhatsApp demo -->
+    <section class="py-14 sm:py-16 px-4 bg-black relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-8 sm:mb-10">
+                <div class="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-800/30 px-3 py-1 rounded-full mb-4 text-xs font-semibold text-emerald-300">
+                    <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full" aria-hidden="true"></span>
+                    LIVE DEMO · BOILER EMERGENCY
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">Watch it handle a real enquiry.</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">7:14 AM, low pressure, Worcester Bosch. While Dave's still asleep.</p>
+            </div>
+
+            <div class="max-w-sm mx-auto relative">
+                <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-emerald-500/5 rounded-3xl blur-3xl scale-110"></div>
+                <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-900/20" style="background: #0b141a;">
+                    <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
+                        <div class="flex items-center gap-3 flex-1">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-400 flex items-center justify-center text-white font-bold text-sm">D</div>
+                            <div>
+                                <div class="text-white text-sm font-semibold">Dave Harris Plumbing</div>
+                                <div class="text-green-400 text-xs" id="wa-status">online</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-gray-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         </div>
                     </div>
-                    <div class="flex gap-4 text-gray-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    <div class="px-3 py-4 space-y-3" id="wa-chat" style="height: 480px; overflow-y: auto; scroll-behavior: smooth; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22%23060d11%22/><path d=%22M30 10 L35 15 L30 20 L25 15Z%22 fill=%22%230a1519%22 opacity=%220.5%22/></svg>') repeat;">
                     </div>
-                </div>
-                <!-- Chat Area -->
-                <div class="px-3 py-4 space-y-3" id="wa-chat" style="height: 480px; overflow-y: auto; scroll-behavior: smooth; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22%23060d11%22/><path d=%22M30 10 L35 15 L30 20 L25 15Z%22 fill=%22%230a1519%22 opacity=%220.5%22/></svg>') repeat;">
-                </div>
-                <!-- Input Bar -->
-                <div class="flex items-center gap-2 px-3 py-2" style="background: #1f2c34;">
-                    <div class="flex-1 rounded-full px-4 py-2 text-sm text-gray-400" style="background: #2a3942;">Type a message...</div>
-                    <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    <div class="flex items-center gap-2 px-3 py-2" style="background: #1f2c34;">
+                        <div class="flex-1 rounded-full px-4 py-2 text-sm text-gray-400" style="background: #2a3942;">Type a message...</div>
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="text-center text-gray-500 text-sm mt-4">Live demo · 7:14 AM · Boiler emergency</p>
         </div>
     </section>
 
@@ -252,7 +290,6 @@
         ];
 
         let i = 0;
-
         function addMessage(msg) {
             const div = document.createElement('div');
             div.className = 'wa-msg ' + (msg.type === 'in' ? 'wa-msg-in' : 'wa-msg-out');
@@ -287,7 +324,6 @@
                 addMessage(msg); i++; setTimeout(play, 1800);
             }
         }
-
         const observer = new IntersectionObserver(function(entries) {
             if (entries[0].isIntersecting && i === 0) { observer.disconnect(); play(); }
         }, { threshold: 0.3 });
@@ -295,26 +331,55 @@
     })();
     </script>
 
-    <!-- Pain points -->
-    <section class="py-14 px-4 bg-surface border-y border-white/5">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-10">Sound familiar?</h2>
-            <div class="grid md:grid-cols-2 gap-5">
-                <div class="bg-card border border-white/8 rounded-xl p-6">
-                    <div class="text-red-400 text-xl font-bold mb-2">Under the sink at 2pm</div>
-                    <p class="text-gray-400 text-sm">Phone is buzzing with enquiries. You can't stop mid-job to type back. By the time you dry your hands, the customer has already booked the next plumber.</p>
+    <!-- How It Works -->
+    <section id="process" class="py-16 sm:py-20 px-4 bg-surface border-y border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">How it works</h2>
+                <p class="text-base sm:text-xl text-gray-400">Live in 10 minutes. Three simple steps.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-card rounded-2xl p-5 sm:p-8 border border-white/6 relative">
+                    <div class="absolute -top-4 left-8">
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center font-bold text-sm">1</div>
+                    </div>
+                    <div class="pt-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-900/50 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sign up &amp; answer a few questions</h3>
+                        <p class="text-gray-400">Name, service area, what you do (boilers, bathrooms, emergency call-outs), callout fee, Gas Safe number.</p>
+                        <p class="text-sm text-gray-500 mt-4">2 minutes</p>
+                    </div>
                 </div>
-                <div class="bg-card border border-white/8 rounded-xl p-6">
-                    <div class="text-red-400 text-xl font-bold mb-2">Friday night WhatsApp</div>
-                    <p class="text-gray-400 text-sm">"Hi, got a leak under the boiler, can you come tomorrow?" You see it Monday morning. Already sorted. You've just missed £180.</p>
+
+                <div class="bg-card rounded-2xl p-5 sm:p-8 border border-white/6 relative">
+                    <div class="absolute -top-4 left-8">
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center font-bold text-sm">2</div>
+                    </div>
+                    <div class="pt-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-950/30 border border-white/8 flex items-center justify-center text-cyan-400 mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Connect your WhatsApp number</h3>
+                        <p class="text-gray-400">Scan a QR from your dashboard with WhatsApp Business (or enter a pairing code). Keeps your existing number. No new SIM.</p>
+                        <p class="text-sm text-gray-500 mt-4">5 minutes</p>
+                    </div>
                 </div>
-                <div class="bg-card border border-white/8 rounded-xl p-6">
-                    <div class="text-red-400 text-xl font-bold mb-2">Same five questions</div>
-                    <p class="text-gray-400 text-sm">"Do you do boilers?" "How much for a callout?" "Are you Gas Safe?" You answer it ten times a day. Most never book.</p>
-                </div>
-                <div class="bg-card border border-white/8 rounded-xl p-6">
-                    <div class="text-red-400 text-xl font-bold mb-2">No idea who's who</div>
-                    <p class="text-gray-400 text-sm">End of the week your inbox is 40 threads deep. Which ones were booked, quoted, or ghosted? You've lost track.</p>
+
+                <div class="bg-card rounded-2xl p-5 sm:p-8 border border-white/6 relative">
+                    <div class="absolute -top-4 left-8">
+                        <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center font-bold text-sm">3</div>
+                    </div>
+                    <div class="pt-4">
+                        <div class="w-12 h-12 rounded-xl bg-green-900/50 border border-green-500/30 flex items-center justify-center text-green-400 mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">You're live</h3>
+                        <p class="text-gray-400">AI replies to every enquiry in ~2 seconds. Qualifies the job, quotes your callout, books the slot. You jump in anytime by typing in the chat — AI steps aside.</p>
+                        <p class="text-sm text-gray-500 mt-4">24/7 from day one</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -504,6 +569,58 @@
                 </div>
             </div>
             <p class="text-center text-gray-500 text-xs mt-8">All plans: 7-day money-back on paid tiers. Cancel in one click. GDPR-compliant, UK-based.</p>
+        </div>
+    </section>
+
+    <!-- FAQ — plumber-specific -->
+    <section id="faq" class="py-16 sm:py-20 px-4 bg-surface border-y border-white/5">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Questions plumbers ask</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Straight answers, no sales spin.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>Will it know I'm Gas Safe registered and quote the right price?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">Yes. During setup you enter your Gas Safe number, callout fee, hourly rate, and what jobs you cover. The AI only quotes what you tell it to quote. It'll never invent a price.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>What happens if the AI gets something wrong?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">You can jump into any chat. The moment you type a reply, the AI steps aside and stays out of that thread until you hand it back. No customer ever sees "AI on, AI off" — it just looks like you're replying.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>Do I need a new phone number?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">No. You connect your existing WhatsApp number (Business or personal). Setup is the same QR-scan as linking WhatsApp Web — your phone stays logged in.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>Will customers know it's a bot?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">On the free Starter tier, there's a small "AI agent by Automatyn" footer on replies. Pro and Max remove it entirely. Either way the tone is set to plumber-natural: "right, sounds like the filling loop", not corporate speak.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>What if I can't do a job the AI booked?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">Connect Google Calendar (Pro plan). The AI only offers slots that are genuinely free. If you want it to never auto-book, set it to "qualify and hand over" mode — it gathers the job details and tells the customer you'll confirm timing.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>Is it safe? Where does the data go?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">UK-based, GDPR-compliant. Your business info is stored on ISO 27001-certified infrastructure. Customer messages are processed by Anthropic's Claude API under their enterprise data policy — no training on your data. You can export or delete everything anytime.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>What counts as a "conversation"?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">One customer chatting with you within a 24-hour window, no matter how many back-and-forth messages. Same definition Meta uses for WhatsApp Business billing. If a customer messages you 10 times in a day, that's one conversation.</p>
+                </details>
+
+                <details class="bg-card rounded-xl p-5 sm:p-6 cursor-pointer group border border-white/6">
+                    <summary class="font-semibold text-white flex justify-between items-center gap-4"><span>Can I cancel?</span><svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">One click from your dashboard. 7-day money-back on paid plans. Free tier has no commitment.</p>
+                </details>
+            </div>
         </div>
     </section>
 
