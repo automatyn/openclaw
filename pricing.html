@@ -316,16 +316,42 @@
         CA: { pro: 'C$39', max: 'C$99' },
     };
     var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
-    fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-            var cc = d.country_code;
-            var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
-            var el;
-            el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
-            el = document.getElementById('price-max'); if (el) el.textContent = p.max;
-        })
-        .catch(function() {});
+    function apply(cc) {
+        var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
+        var el;
+        el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
+        el = document.getElementById('price-max'); if (el) el.textContent = p.max;
+    }
+    function langGuess() {
+        try {
+            var langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+            var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
+            for (var i = 0; i < langs.length; i++) {
+                var m = (langs[i] || '').match(/-([A-Z]{2})/i);
+                if (m) return m[1].toUpperCase();
+            }
+            if (tz.indexOf('london') !== -1) return 'GB';
+            if (tz.indexOf('dublin') !== -1) return 'IE';
+            if (tz.indexOf('europe/') === 0) return 'EU';
+            if (tz.indexOf('australia/') === 0) return 'AU';
+            if (tz.indexOf('pacific/auckland') !== -1) return 'NZ';
+            if (tz.indexOf('america/toronto') !== -1 || tz.indexOf('america/vancouver') !== -1) return 'CA';
+        } catch (e) {}
+        return null;
+    }
+    var guess = langGuess();
+    if (guess) apply(guess);
+    function tryIpapi() {
+        return fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(2500) })
+            .then(function(r) { if (!r.ok) throw new Error('ipapi'); return r.json(); })
+            .then(function(d) { if (!d.country_code) throw new Error('no cc'); apply(d.country_code); });
+    }
+    function tryIpwho() {
+        return fetch('https://ipwho.is/', { signal: AbortSignal.timeout(2500) })
+            .then(function(r) { if (!r.ok) throw new Error('ipwho'); return r.json(); })
+            .then(function(d) { if (!d.country_code) throw new Error('no cc'); apply(d.country_code); });
+    }
+    tryIpapi().catch(tryIpwho).catch(function() {});
 })();
 </script>
 

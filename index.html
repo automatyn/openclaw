@@ -625,7 +625,7 @@
 
     <!-- GEO: Answer-first content for AI/LLM crawlers -->
     <div style="position:absolute;left:-9999px;overflow:hidden">
-        <p class="max-w-4xl mx-auto text-gray-500 text-xs leading-relaxed">Automatyn is an <strong class="text-gray-400">AI WhatsApp receptionist</strong> for small businesses. It answers customer questions, handles bookings, and works 24/7. Free plan available with 25 conversations per month. Paid plans from $29/month. Set up in 10 minutes with no coding required.</p>
+        <p class="max-w-4xl mx-auto text-gray-500 text-xs leading-relaxed">Automatyn is an <strong class="text-gray-400">AI WhatsApp receptionist</strong> for small businesses. It answers customer questions, handles bookings, and works 24/7. Free plan available with 25 conversations per month. Paid plans from <span id="seo-from-price">$29</span>/month. Set up in 10 minutes with no coding required.</p>
     </div>
 
     <!-- Hero Section — Demo as Centrepiece -->
@@ -965,9 +965,9 @@
                         <div class="text-xs text-gray-500 mt-1">per month, recovered revenue</div>
                     </div>
                     <div class="bg-cyan-950/30 border border-cyan-500/30 rounded-xl p-5 text-center">
-                        <div class="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold mb-2">ROI vs $29 Pro</div>
+                        <div class="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold mb-2">ROI vs <span id="roi-label-1">$29</span> Pro</div>
                         <div class="text-3xl font-bold text-cyan-400"><span id="roi-multiple">0</span>x</div>
-                        <div class="text-xs text-gray-500 mt-1">return on $29/mo plan</div>
+                        <div class="text-xs text-gray-500 mt-1">return on <span id="roi-label-2">$29</span>/mo plan</div>
                     </div>
                 </div>
 
@@ -1018,7 +1018,7 @@
             if (multiple >= 10) {
                 paybackEl.textContent = `At ${Math.round(multiple)}x ROI, Automatyn pays for itself ${Math.round(multiple)} times over — first recovered booking covers the month.`;
             } else if (multiple >= 2) {
-                paybackEl.textContent = `Pro plan ($29/mo) pays for itself in the first ${Math.ceil(29 / jobValue)} booking${Math.ceil(29 / jobValue) > 1 ? 's' : ''} of the month.`;
+                paybackEl.textContent = `Pro plan (${window.AUTOMATYN_PRO_LABEL || '$29'}/mo) pays for itself in the first ${Math.ceil(29 / jobValue)} booking${Math.ceil(29 / jobValue) > 1 ? 's' : ''} of the month.`;
             } else {
                 paybackEl.textContent = `Even the free tier (25 conversations/mo) saves you most of this. No credit card needed.`;
             }
@@ -1176,7 +1176,7 @@
                 <div class="flex flex-col md:flex-row md:items-center gap-6">
                     <div class="flex-1">
                         <h3 class="text-xl font-bold text-white mb-2">Build Your Own AI Agent on Your Own Machine</h3>
-                        <p class="text-gray-400 mb-3">Prefer full control? Self-host on your own server with OpenClaw. Your data, your agent, no platform fees. We also offer done-for-you setup starting at $400.</p>
+                        <p class="text-gray-400 mb-3">Prefer full control? Self-host on your own server with OpenClaw. Your data, your agent, no platform fees. We also offer done-for-you setup from <span id="selfhost-setup-price">$400</span>.</p>
                     </div>
                     <div class="flex flex-col gap-2 w-full md:w-auto shrink-0">
                         <a href="/self-host.html" class="px-6 py-3 rounded-xl font-semibold text-sm text-white whitespace-nowrap hover:opacity-90 transition text-center" style="background: linear-gradient(135deg, #22d3ee, #0ea5e9); box-shadow: 0 4px 20px rgba(34, 211, 238, 0.2);">
@@ -1931,21 +1931,26 @@
     <script>
     (function() {
         var prices = {
-            US: { pro: '$29', max: '$79', hire: '$2,000+/month', ai: '$0 to start' },
-            GB: { pro: '£29', max: '£69', hire: '£2,000+/month', ai: '£0 to start' },
-            EU: { pro: '€29', max: '€79', hire: '€2,000+/month', ai: '€0 to start' },
-            AU: { pro: 'A$49', max: 'A$129', hire: 'A$3,500+/month', ai: 'A$0 to start' },
-            NZ: { pro: 'NZ$49', max: 'NZ$129', hire: 'NZ$3,500+/month', ai: 'NZ$0 to start' },
-            CA: { pro: 'C$39', max: 'C$99', hire: 'C$3,000+/month', ai: 'C$0 to start' },
+            US: { pro: '$29', max: '$79', hire: '$2,000+/month', ai: '$0 to start', setup: '$400' },
+            GB: { pro: '£29', max: '£69', hire: '£2,000+/month', ai: '£0 to start', setup: '£320' },
+            EU: { pro: '€29', max: '€79', hire: '€2,000+/month', ai: '€0 to start', setup: '€380' },
+            AU: { pro: 'A$49', max: 'A$129', hire: 'A$3,500+/month', ai: 'A$0 to start', setup: 'A$600' },
+            NZ: { pro: 'NZ$49', max: 'NZ$129', hire: 'NZ$3,500+/month', ai: 'NZ$0 to start', setup: 'NZ$650' },
+            CA: { pro: 'C$39', max: 'C$99', hire: 'C$3,000+/month', ai: 'C$0 to start', setup: 'C$540' },
         };
         var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
         function apply(cc) {
             var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
+            window.AUTOMATYN_PRO_LABEL = p.pro;
             var el;
             el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
             el = document.getElementById('price-max'); if (el) el.textContent = p.max;
             el = document.getElementById('hire-cost'); if (el) el.textContent = p.hire;
             el = document.getElementById('ai-cost'); if (el) el.textContent = p.ai;
+            el = document.getElementById('roi-label-1'); if (el) el.textContent = p.pro;
+            el = document.getElementById('roi-label-2'); if (el) el.textContent = p.pro;
+            el = document.getElementById('seo-from-price'); if (el) el.textContent = p.pro;
+            el = document.getElementById('selfhost-setup-price'); if (el) el.textContent = p.setup;
         }
         function langGuess() {
             try {
