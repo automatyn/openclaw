@@ -1,0 +1,26 @@
+{
+  "_comment": "Accounts to scan for reply opportunities. Edit freely. Add/remove handles. The scanner pulls each profile timeline and picks fresh substantive tweets.",
+  "targets": [
+    "OpenClaw",
+    "steipete",
+    "sama",
+    "Scobleizer",
+    "paulg",
+    "levelsio",
+    "shl",
+    "amasad",
+    "garrytan",
+    "rauchg",
+    "patio11",
+    "swyx",
+    "alexalbert__",
+    "mckaywrigley",
+    "danielgross"
+  ],
+  "filters": {
+    "max_age_minutes": 1440,
+    "min_engagement": 5,
+    "skip_replies": true,
+    "skip_retweets": true
+  }
+}

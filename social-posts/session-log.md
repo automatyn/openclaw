@@ -101,3 +101,19 @@ Each command writes its results here after completing. The next command reads th
 - LinkedIn: skipped per Pat
 - Medium: skipped (browser proxy error loading medium.com)
 - Reddit AI Image Pipeline: not fired this session
+
+### /afternoon — 2026-04-20 12:30 UTC
+- X status: 113 followers, 474 tweets (+5 from morning — 4 morning drafts all posted: m1 original + m2 @ShanuMathew93 + m3 @MahlumAI + m4 @PromptSlinger)
+- Triggers: Blog Writer was auto-disabled AGAIN (ended_reason: auto_disabled_repo_access), re-enabled. Content Machine trigger MISSING from list — needs investigation/recreation.
+- Reddit AI Image Pipeline fired, errored (Gemini 503 Service Unavailable on "Generate Prompts" node — same as morning). Retry-on-fail not configured on that n8n node.
+- X afternoon drafts: 2 reply drafts pushed to Telegram via intent-URL scheme (no API cost, Pat taps link → X app opens with reply pre-filled). Targets: @codyschneider (Facebook Ads AI agent), @barronsonline (Adobe AI platform). Scanner against target list returned 0 candidates (accounts too sporadic); pivoted to live search for fresh AI-agent content.
+- TikTok: 22 videos / 6070 views (+7 from morning). Carousels skipped this slot.
+- LinkedIn: skipped (Pat directed)
+- Outreach: skipped (GMAIL_APP_PASSWORD + GOOGLE_PLACES_API_KEY not set)
+- X API budget: 6/500 writes for April (4 morning posts + 2 prior). $0.06 used.
+
+Open items for next slot:
+- Reddit pipeline still failing: need to enable retry-on-fail on n8n Gemini node, or wire fallback key
+- Content Machine trigger missing — decide whether to recreate
+- Blog Writer auto-disabling on repo_access — likely token expired or revoked, needs investigation
+- Outreach setup-blocked on env vars
