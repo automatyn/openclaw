@@ -126,3 +126,15 @@ Open items for next slot:
 - Triggers: Blog Writer enabled, next run 2026-04-22 10:08 UTC. Content Machine trigger still absent. Only 2 triggers listed total.
 - Transcription task: 1h35m SharePoint meeting recording (PatrickDaria/OIa intro call) downloaded, chunked, transcribed end-to-end with whisper base model. Full transcript (913 lines / 12,558 words) saved to gdrive/MyDrive.
 - Open items carried forward: Reddit pipeline Gemini retry logic, Content Machine trigger recreate decision, Blog Writer repo_access root cause, outreach env vars.
+
+### /morning — 2026-04-21 ~08:00 UTC
+- Blog published (ad-hoc overnight): "Why UK Plumbers Lose £500+ a Week to Missed WhatsApp Messages" → /blog/uk-plumbers-missed-whatsapp-messages-2026.html. Hero image Forge/JuggernautXL generated (1344x768, phone glowing green beside pipe wrench + tool belt, no text artefacts). Added as first card on /blog/ index and homepage. Sitemap updated. Commits 2da4d14, c5e1adf, a9ca47b.
+- Blog index grid sorted by date desc (plumbers first). Homepage "From the Blog" cards reordered: plumbers → no-show rescue → after-hours.
+- SEO: llms.txt updated (+Featured blog posts section, +UK plumbers industry entry, Last updated 2026-04-21). IndexNow ping submitted HTTP 200 for 4 URLs (new post, /blog/, /, /llms.txt).
+- X status: 113 followers / 479 tweets. +5 tweets since yesterday evening. No new drafts this slot — no fresh high-signal targets scanned, deferring to /afternoon to avoid wasting the 15/day cap on filler. Budget 6/500 writes.
+- Triggers: only Blog Writer (enabled, next 2026-04-22 10:08 UTC) + one-shot from April 14. Medium Writer and Content Machine still absent from list. Not auto-recreating.
+- Reddit AI Image Pipeline fired via webhook, returned "Workflow was started". Retry-on-fail still not wired.
+- TikTok: 22 videos / 6093 views (+4 overnight) / 72 likes. Top hooks: dad-at-dinner 979, mum-calling 806, boss-caught 652.
+- Outreach: reply-detector self-skipped (Gmail OAuth env not set).
+- Dev.to: last post 2026-04-20 ("Why Most Small Business AI Tools Fail in the First Week"). Within 3-day window, skipped.
+- Open items carried forward: Medium Writer + Content Machine triggers absent (decide whether to recreate), Blog Writer prompt has stale content calendar + hardcoded Gemini key, Reddit pipeline retry logic, outreach env vars.
