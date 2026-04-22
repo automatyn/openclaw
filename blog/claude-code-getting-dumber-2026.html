@@ -203,6 +203,11 @@
             color: #ffffff;
             font-weight: 600;
         }
+        .toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
+        .toc a:hover, .prose .toc a:hover { color: #22d3ee !important; }
+        .toc h3 { font-size: 0.875rem !important; letter-spacing: 0.05em !important; margin: 0 0 0.75rem !important; font-weight: 600 !important; }
+        .card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; }
+        .card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
     </style>
 </head>
 <body class="hero-gradient">
@@ -255,6 +260,19 @@
 
     <!-- Article body -->
     <article class="prose max-w-3xl mx-auto px-6 pb-16">
+        <div class="card-glow rounded-xl p-5 mb-10 toc">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+            <a href="#the-dataset-that-ended-the-debate">The Dataset That Ended the Debate</a>
+            <a href="#what-anthropic-actually-changed-and-admitted-to">What Anthropic Actually Changed (And Admitted To)</a>
+            <a href="#the-file-reading-problem-is-worse-than-it-sounds">The File-Reading Problem Is Worse Than It Sounds</a>
+            <a href="#claudemd-files-might-be-making-it-worse">CLAUDE.md Files Might Be Making It Worse</a>
+            <a href="#what-this-means-for-anyone-using-ai-agents-in-production">What This Means for Anyone Using AI Agents in Production</a>
+            <a href="#the-bigger-picture-trust-and-transparency-in-ai-tooling">The Bigger Picture: Trust and Transparency in AI Tooling</a>
+            <a href="#how-to-protect-your-ai-agent-setup">How to Protect Your AI Agent Setup</a>
+            <a href="#the-bottom-line">The Bottom Line</a>
+            <a href="#faq">Frequently Asked Questions</a>
+        </div>
+
 
         <p>You're running Claude Code on a production codebase. It used to read six or seven files before making an edit. It used to think through problems step by step, catching edge cases before they became bugs. It used to be careful.</p>
 
@@ -262,7 +280,7 @@
 
         <p>You weren't imagining it. And you're not alone. Stella Laurenzo, director of AMD's AI group, had the telemetry data to prove exactly what happened, when it happened, and how bad it got. She filed GitHub issue #5365 with the receipts. The title said it plainly: "Claude-Code is getting dumber."</p>
 
-        <h2>The Dataset That Ended the Debate</h2>
+        <h2 id="the-dataset-that-ended-the-debate">The Dataset That Ended the Debate</h2>
 
         <picture><source srcset="images/claude-code-dumber-data.webp" type="image/webp"><img src="images/claude-code-dumber-data.jpg" alt="Dark data visualization showing declining metrics on monitors" class="rounded-2xl my-8 w-full"></picture>
 
@@ -313,7 +331,7 @@
 
         <p>Let those numbers sit for a second. The model went from reading 6.6 files on average before making an edit to reading just 2. That's not a minor regression. That's the difference between a senior developer who checks the codebase before changing something and a junior developer who edits the first file they find and hopes for the best.</p>
 
-        <h2>What Anthropic Actually Changed (And Admitted To)</h2>
+        <h2 id="what-anthropic-actually-changed-and-admitted-to">What Anthropic Actually Changed (And Admitted To)</h2>
 
         <p>After the issue gained traction, Anthropic confirmed two specific changes that lined up with the performance cliff.</p>
 
@@ -331,7 +349,7 @@
             <p style="margin:0;">If your AI agents are underperforming and you're not sure whether it's the model or the configuration, <a href="https://automatyn.co/#contact">talk to our team</a>. We audit and fix agent setups so you don't have to guess.</p>
         </div>
 
-        <h2>The File-Reading Problem Is Worse Than It Sounds</h2>
+        <h2 id="the-file-reading-problem-is-worse-than-it-sounds">The File-Reading Problem Is Worse Than It Sounds</h2>
 
         <p>The headline number, 67% drop in thinking depth, gets the attention. But the file-reading collapse is the one that actually breaks codebases.</p>
 
@@ -352,7 +370,7 @@
 
         <p>We compared Claude Code's approach to other AI coding tools in our <a href="claude-code-vs-codex-2026.html" style="color:#22d3ee;">Claude Code vs Codex breakdown</a>. The file-reading behavior is one of the key differentiators, and when it breaks, the advantage disappears.</p>
 
-        <h2>CLAUDE.md Files Might Be Making It Worse</h2>
+        <h2 id="claudemd-files-might-be-making-it-worse">CLAUDE.md Files Might Be Making It Worse</h2>
 
         <picture><source srcset="images/claude-code-dumber-config.webp" type="image/webp"><img src="images/claude-code-dumber-config.jpg" alt="Dark code editor showing configuration files with glitch effects" class="rounded-2xl my-8 w-full"></picture>
 
@@ -373,7 +391,7 @@
 
         <p>The fix isn't to remove your CLAUDE.md file. It's to make it lean. Keep only the instructions that directly affect code quality. Remove anything the model doesn't need for every single task. Treat your CLAUDE.md like a system prompt, not a wiki page.</p>
 
-        <h2>What This Means for Anyone Using AI Agents in Production</h2>
+        <h2 id="what-this-means-for-anyone-using-ai-agents-in-production">What This Means for Anyone Using AI Agents in Production</h2>
 
         <p>This isn't just a Claude Code story. It's a warning about every AI agent deployment.</p>
 
@@ -395,7 +413,7 @@
             <p style="margin:0;">Not sure if your AI agents are configured correctly? We review agent setups, identify configuration problems, and fix them. <a href="https://automatyn.co/#contact">Get a free audit of your current setup.</a></p>
         </div>
 
-        <h2>The Bigger Picture: Trust and Transparency in AI Tooling</h2>
+        <h2 id="the-bigger-picture-trust-and-transparency-in-ai-tooling">The Bigger Picture: Trust and Transparency in AI Tooling</h2>
 
         <p>The most important part of this story isn't the 67% number. It's the fact that it took an AMD engineering director filing a public GitHub issue with telemetry data before Anthropic acknowledged the changes.</p>
 
@@ -407,7 +425,7 @@
 
         <p>And for AI-powered business operations specifically, we covered the risks and opportunities in our piece on <a href="how-to-automate-business-ai-bots-2026.html" style="color:#22d3ee;">how to automate your business with AI bots</a>. The configuration layer is where most setups succeed or fail.</p>
 
-        <h2>How to Protect Your AI Agent Setup</h2>
+        <h2 id="how-to-protect-your-ai-agent-setup">How to Protect Your AI Agent Setup</h2>
 
         <p>Whether you're using Claude Code for engineering work or running AI agents for customer-facing business operations, here's the practical playbook based on what Laurenzo's data teaches us.</p>
 
@@ -427,7 +445,7 @@
             <p style="margin:0;">We build AI agent setups with explicit configurations, monitoring, and fallback plans baked in. If you want an agent that doesn't break when the provider changes a dial, <a href="https://automatyn.co/#contact">let's talk about your setup</a>.</p>
         </div>
 
-        <h2>The Bottom Line</h2>
+        <h2 id="the-bottom-line">The Bottom Line</h2>
 
         <p>Claude Code got measurably worse in March 2026. Not because the model lost capability, but because Anthropic reduced the default amount of thinking it does per task. An AMD engineering director proved it with 6,852 sessions of telemetry data that showed a 67% drop in thinking depth and a 70%+ drop in file-reading before edits.</p>
 

@@ -211,6 +211,11 @@
             color: #ffffff;
             font-weight: 600;
         }
+        .toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
+        .toc a:hover, .prose .toc a:hover { color: #22d3ee !important; }
+        .toc h3 { font-size: 0.875rem !important; letter-spacing: 0.05em !important; margin: 0 0 0.75rem !important; font-weight: 600 !important; }
+        .card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; }
+        .card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
     </style>
 </head>
 <body class="hero-gradient">
@@ -263,6 +268,19 @@
 
     <!-- Article body -->
     <article class="prose max-w-3xl mx-auto px-6 pb-16">
+        <div class="card-glow rounded-xl p-5 mb-10 toc">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+            <a href="#what-is-an-ai-agent-and-how-is-it-different-from-a-chatbot">What Is an AI Agent and How Is It Different from a Chatbot?</a>
+            <a href="#the-full-comparison-ai-agent-vs-virtual-assistant">The Full Comparison: AI Agent vs Virtual Assistant</a>
+            <a href="#where-ai-agents-beat-virtual-assistants-and-its-not-close">Where AI Agents Beat Virtual Assistants (and It's Not Close)</a>
+            <a href="#where-virtual-assistants-still-win-in-2026">Where Virtual Assistants Still Win in 2026</a>
+            <a href="#the-hybrid-approach-why-the-best-businesses-use-both">The Hybrid Approach: Why the Best Businesses Use Both</a>
+            <a href="#how-much-does-this-actually-cost-real-numbers-no-fluff">How Much Does This Actually Cost? Real Numbers, No Fluff</a>
+            <a href="#how-to-decide-which-one-your-business-needs-right-now">How to Decide Which One Your Business Needs Right Now</a>
+            <a href="#the-bottom-line">The Bottom Line</a>
+            <a href="#faq">Frequently Asked Questions</a>
+        </div>
+
 
         <p>You're drowning in customer messages. Your inbox has 47 unread DMs. Two leads went cold because you didn't reply fast enough. You know you need help, so you start looking at your options.</p>
 
@@ -272,7 +290,7 @@
 
         <p>Both are real options. Both have trade-offs. And picking the wrong one will cost you thousands of dollars over the next year. This post breaks down the actual differences so you can make the right call for your business. Not the trendy call. Not the cheap call. The right one.</p>
 
-        <h2>What Is an AI Agent and How Is It Different from a Chatbot?</h2>
+        <h2 id="what-is-an-ai-agent-and-how-is-it-different-from-a-chatbot">What Is an AI Agent and How Is It Different from a Chatbot?</h2>
 
         <p>Before we compare AI agents to virtual assistants, we need to clear up a confusion that wastes a lot of people's time. An AI agent is not a chatbot. A chatbot follows a script. It has a decision tree. If the user says X, the chatbot says Y. If the user goes off-script, the chatbot breaks.</p>
 
@@ -284,7 +302,7 @@
 
         <p>If you want a deeper look at how these agents work under the hood, we broke that down in our post on <a href="how-to-automate-business-ai-bots-2026.html" style="color:#22d3ee;">how to automate your business with AI bots</a>.</p>
 
-        <h2>The Full Comparison: AI Agent vs Virtual Assistant</h2>
+        <h2 id="the-full-comparison-ai-agent-vs-virtual-assistant">The Full Comparison: AI Agent vs Virtual Assistant</h2>
 
         <picture><source srcset="images/ai-agent-vs-va-comparison.webp" type="image/webp"><img src="images/ai-agent-vs-va-comparison.jpg" alt="Side by side comparison of AI brain and human assistant" class="rounded-2xl my-8 w-full"></picture>
 
@@ -365,7 +383,7 @@
             <p style="margin:0;">Not sure which tasks in your business should go to an AI agent vs staying with a human? <a href="https://automatyn.co/#contact">Book a free 15-minute audit</a> and we'll map it out for you. No sales pitch.</p>
         </div>
 
-        <h2>Where AI Agents Beat Virtual Assistants (and It's Not Close)</h2>
+        <h2 id="where-ai-agents-beat-virtual-assistants-and-its-not-close">Where AI Agents Beat Virtual Assistants (and It's Not Close)</h2>
 
         <p>There are five areas where an AI agent is so much better than a VA that it's not even a fair fight.</p>
 
@@ -381,7 +399,7 @@
 
         <p>We covered some of these revenue models in more detail in our post about <a href="passive-income-ai-agents-2026.html" style="color:#22d3ee;">building passive income with AI agents</a>.</p>
 
-        <h2>Where Virtual Assistants Still Win in 2026</h2>
+        <h2 id="where-virtual-assistants-still-win-in-2026">Where Virtual Assistants Still Win in 2026</h2>
 
         <p>This wouldn't be an honest comparison if we pretended AI agents can do everything. They can't. Here's where a human VA is still the better choice.</p>
 
@@ -395,7 +413,7 @@
 
         <p><strong>Relationship building.</strong> Some businesses run on personal relationships. Real estate agents, executive coaches, luxury services. In these cases, the human touch isn't optional. It is the product.</p>
 
-        <h2>The Hybrid Approach: Why the Best Businesses Use Both</h2>
+        <h2 id="the-hybrid-approach-why-the-best-businesses-use-both">The Hybrid Approach: Why the Best Businesses Use Both</h2>
 
         <picture><source srcset="images/ai-agent-revenue-growth.webp" type="image/webp"><img src="images/ai-agent-revenue-growth.jpg" alt="Business owner reviewing automated dashboards showing growth" class="rounded-2xl my-8 w-full"></picture>
 
@@ -415,7 +433,7 @@
             <p style="margin:0;">Want to see how the hybrid model would work for your specific business? <a href="https://automatyn.co/#contact">Tell us what you're working on</a> and we'll map out which tasks your AI agent should handle vs what stays with a human.</p>
         </div>
 
-        <h2>How Much Does This Actually Cost? Real Numbers, No Fluff</h2>
+        <h2 id="how-much-does-this-actually-cost-real-numbers-no-fluff">How Much Does This Actually Cost? Real Numbers, No Fluff</h2>
 
         <p>Let's put real numbers on the table. Here's what it costs to go each route for a typical small business handling 40 to 60 customer conversations per day.</p>
 
@@ -444,7 +462,7 @@
 
         <p>For a broader look at how AI is changing income streams for small business owners, check out our piece on <a href="can-you-really-make-money-with-ai-2026.html" style="color:#22d3ee;">whether you can really make money with AI in 2026</a>.</p>
 
-        <h2>How to Decide Which One Your Business Needs Right Now</h2>
+        <h2 id="how-to-decide-which-one-your-business-needs-right-now">How to Decide Which One Your Business Needs Right Now</h2>
 
         <p>Here's a simple decision framework. Answer these three questions honestly.</p>
 
@@ -460,7 +478,7 @@
             <p style="margin:0;">Ready to get started? <a href="https://automatyn.co/#contact">Tell us about your business</a> and we'll recommend the right setup for your situation. Free, no commitment.</p>
         </div>
 
-        <h2>The Bottom Line</h2>
+        <h2 id="the-bottom-line">The Bottom Line</h2>
 
         <p>The question isn't "AI agent or virtual assistant?" The question is "which tasks should each one handle?"</p>
 

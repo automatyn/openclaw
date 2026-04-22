@@ -95,6 +95,11 @@
         .comparison-table tr:hover td { background: #0a0a0a; }
         .comparison-table td:first-child { color: #ffffff; font-weight: 600; white-space: nowrap; }
         .winner { color: #10b981; font-weight: 700; }
+        .toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
+        .toc a:hover, .prose .toc a:hover { color: #22d3ee !important; }
+        .toc h3 { font-size: 0.875rem !important; letter-spacing: 0.05em !important; margin: 0 0 0.75rem !important; font-weight: 600 !important; }
+        .card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; }
+        .card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
     </style>
 </head>
 <body class="hero-gradient">
@@ -144,6 +149,18 @@
     </header>
 
     <article class="prose max-w-3xl mx-auto px-6 pb-16">
+        <div class="card-glow rounded-xl p-5 mb-10 toc">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+            <a href="#the-head-to-head-comparison">The Head-to-Head Comparison</a>
+            <a href="#why-managed-agents-exists-and-who-its-actually-for">Why Managed Agents Exists (And Who It's Actually For)</a>
+            <a href="#why-openclaw-wins-for-small-businesses">Why OpenClaw Wins for Small Businesses</a>
+            <a href="#where-managed-agents-actually-wins">Where Managed Agents Actually Wins</a>
+            <a href="#the-real-question-what-do-you-actually-need">The Real Question: What Do You Actually Need?</a>
+            <a href="#the-configuration-problem-neither-platform-solves-for-you">The Configuration Problem Neither Platform Solves for You</a>
+            <a href="#the-bottom-line">The Bottom Line</a>
+            <a href="#faq">Frequently Asked Questions</a>
+        </div>
+
 
         <p>You run a small business. You've heard that AI agents can handle customer messages, qualify leads, and save you 10+ hours a week. You started looking into options and now you're staring at two completely different products that both claim to solve the same problem.</p>
 
@@ -153,7 +170,7 @@
 
         <p>Both can power an AI agent for your business. But they're built for very different buyers, with very different trade-offs. This post will walk you through the real differences so you can pick the one that fits your situation, not the one with the bigger marketing budget.</p>
 
-        <h2>The Head-to-Head Comparison</h2>
+        <h2 id="the-head-to-head-comparison">The Head-to-Head Comparison</h2>
 
         <p>Before we get into the details, here's the full comparison table. Every row is a real dimension that matters when you're choosing an AI agent platform for a small business.</p>
 
@@ -243,7 +260,7 @@
 
         <p>The pattern is clear. Managed Agents wins on speed-to-deploy and built-in tooling. OpenClaw wins on everything else that matters to a small business: cost, ownership, flexibility, transparency, and long-term control.</p>
 
-        <h2>Why Managed Agents Exists (And Who It's Actually For)</h2>
+        <h2 id="why-managed-agents-exists-and-who-its-actually-for">Why Managed Agents Exists (And Who It's Actually For)</h2>
 
         <p>Anthropic launched Claude Managed Agents to solve a real problem. Just not YOUR problem.</p>
 
@@ -259,7 +276,7 @@
             <p style="margin:0;">Not sure which platform fits your business? <a href="https://automatyn.co/#contact">Book a free 15-minute call</a> and I'll walk you through what your specific setup would look like on OpenClaw. No pitch, just the mechanics.</p>
         </div>
 
-        <h2>Why OpenClaw Wins for Small Businesses</h2>
+        <h2 id="why-openclaw-wins-for-small-businesses">Why OpenClaw Wins for Small Businesses</h2>
 
         <p>Five specific reasons, not marketing claims.</p>
 
@@ -273,7 +290,7 @@
 
         <p><strong>5. It's stable and open-source.</strong> Managed Agents launched this week as a beta. Betas have bugs, missing features, and breaking changes. OpenClaw is open-source software you can inspect, audit, and fix yourself. No waiting for a vendor to patch something. No surprise deprecation notices.</p>
 
-        <h2>Where Managed Agents Actually Wins</h2>
+        <h2 id="where-managed-agents-actually-wins">Where Managed Agents Actually Wins</h2>
 
         <p>Fairness matters. Here's what Managed Agents does better.</p>
 
@@ -285,7 +302,7 @@
 
         <p><strong>Enterprise-grade debugging.</strong> Session tracing in the Claude Console shows every tool call, every decision point, every failure. For a team running 50 agents across departments, that centralized visibility matters. For a single-agent small business setup, it's overkill.</p>
 
-        <h2>The Real Question: What Do You Actually Need?</h2>
+        <h2 id="the-real-question-what-do-you-actually-need">The Real Question: What Do You Actually Need?</h2>
 
         <picture><source srcset="images/automate-robot-human-hands.webp" type="image/webp"><img src="images/automate-robot-human-hands.jpg" alt="Choosing the right AI agent platform" class="rounded-2xl my-8 w-full"></picture>
 
@@ -316,7 +333,7 @@
             <p style="margin:0;">If you're in the second category, Automatyn sets up OpenClaw for small businesses in under 10 minutes. Free tier available, paid plans from $29/mo. <a href="https://automatyn.co/#contact">Book a free 15-minute call</a> to see what your setup would look like.</p>
         </div>
 
-        <h2>The Configuration Problem Neither Platform Solves for You</h2>
+        <h2 id="the-configuration-problem-neither-platform-solves-for-you">The Configuration Problem Neither Platform Solves for You</h2>
 
         <p>Here's the thing both sides of this comparison miss.</p>
 
@@ -332,7 +349,7 @@
 
         <p>If you want to learn more about why these files matter more than your model choice, we wrote about it here: <a href="can-you-really-make-money-with-ai-2026.html" style="color:#22d3ee;">Can You Really Make Money with AI in 2026? An Honest Breakdown</a>.</p>
 
-        <h2>The Bottom Line</h2>
+        <h2 id="the-bottom-line">The Bottom Line</h2>
 
         <p>Claude Managed Agents is a real product solving a real problem for enterprise engineering teams. If you're building AI features into software at scale, it's worth evaluating.</p>
 

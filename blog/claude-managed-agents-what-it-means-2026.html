@@ -93,6 +93,11 @@
         .cta-button:hover { background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%); transform: translateY(-2px) scale(1.02); box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px rgba(117,224,167,0.3); }
         .inline-cta { background: rgba(34, 211, 238, 0.05); border: 1px solid rgba(34, 211, 238, 0.3); padding: 1.5rem 2rem; border-radius: 1rem; margin: 2.5rem 0; }
         .inline-cta a { color: #22d3ee; font-weight: 700; }
+        .toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
+        .toc a:hover, .prose .toc a:hover { color: #22d3ee !important; }
+        .toc h3 { font-size: 0.875rem !important; letter-spacing: 0.05em !important; margin: 0 0 0.75rem !important; font-weight: 600 !important; }
+        .card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; }
+        .card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
     </style>
 </head>
 <body class="hero-gradient">
@@ -142,6 +147,17 @@
     </header>
 
     <article class="prose max-w-3xl mx-auto px-6 pb-16">
+        <div class="card-glow rounded-xl p-5 mb-10 toc">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+            <a href="#what-claude-managed-agents-actually-is">What Claude Managed Agents Actually Is</a>
+            <a href="#who-this-is-actually-for">Who This Is Actually For</a>
+            <a href="#what-it-actually-changes-and-what-it-doesnt">What It Actually Changes (And What It Doesn't)</a>
+            <a href="#the-part-the-headlines-miss">The Part the Headlines Miss</a>
+            <a href="#should-you-care-about-this-launch">Should You Care About This Launch?</a>
+            <a href="#the-bottom-line">The Bottom Line</a>
+            <a href="#faq">Frequently Asked Questions</a>
+        </div>
+
 
         <p>On April 8, 2026, Anthropic launched Claude Managed Agents in public beta. It's now live on the Claude platform, and the announcement has been the biggest AI infrastructure news of the week.</p>
 
@@ -149,7 +165,7 @@
 
         <p>Big announcement. Real product. But if you're a small business owner reading this, the question isn't "is this impressive." The question is "does this change anything for me." Let's walk through it honestly.</p>
 
-        <h2>What Claude Managed Agents Actually Is</h2>
+        <h2 id="what-claude-managed-agents-actually-is">What Claude Managed Agents Actually Is</h2>
 
         <p>Stripped of marketing language, here's what the product is.</p>
 
@@ -161,7 +177,7 @@
 
         <p>In plain English: Anthropic is removing a month of setup work that every team building AI agents used to do from scratch. If you were going to write your own agent infrastructure, you can now skip that step.</p>
 
-        <h2>Who This Is Actually For</h2>
+        <h2 id="who-this-is-actually-for">Who This Is Actually For</h2>
 
         <picture><source srcset="images/automate-dashboard-flows.webp" type="image/webp"><img src="images/automate-dashboard-flows.jpg" alt="Enterprise dashboard with autonomous agents running tasks" class="rounded-2xl my-8 w-full"></picture>
 
@@ -179,7 +195,7 @@
             <p style="margin:0;">If you want to see what a real AI agent for your specific business would look like (menu rules, tone, escalation logic, the actual useful part) <a href="https://automatyn.co/#contact">book a free 15-minute call</a>. No pitch, just the mechanics.</p>
         </div>
 
-        <h2>What It Actually Changes (And What It Doesn't)</h2>
+        <h2 id="what-it-actually-changes-and-what-it-doesnt">What It Actually Changes (And What It Doesn't)</h2>
 
         <p>Here's the honest breakdown.</p>
 
@@ -205,7 +221,7 @@
 
         <p>Every one of those is a human decision. Managed Agents doesn't touch any of them. The announcement today removes plumbing. It doesn't remove the thinking.</p>
 
-        <h2>The Part the Headlines Miss</h2>
+        <h2 id="the-part-the-headlines-miss">The Part the Headlines Miss</h2>
 
         <p>There's a pattern that plays out with every major AI infrastructure release. The headlines say "this changes everything." Then three months later, the people actually building things quietly notice that the hard parts are still hard and the easy parts were already easy.</p>
 
@@ -217,7 +233,7 @@
 
         <p>The infrastructure changes. The thinking doesn't.</p>
 
-        <h2>Should You Care About This Launch?</h2>
+        <h2 id="should-you-care-about-this-launch">Should You Care About This Launch?</h2>
 
         <p>Here's the honest framework.</p>
 
@@ -233,7 +249,7 @@
             <p style="margin:0;">The people already ahead of this aren't waiting for the perfect platform. They're running their agent today, learning what works, and will migrate the infrastructure later if needed. <a href="https://automatyn.co/#contact">Book a 15-minute call</a> and we'll walk through what your setup would look like.</p>
         </div>
 
-        <h2>The Bottom Line</h2>
+        <h2 id="the-bottom-line">The Bottom Line</h2>
 
         <p>Claude Managed Agents is a real product, a real launch, and a real step forward for people building AI agents at scale. For developers and enterprise teams, it matters a lot. For small business owners, the launch is interesting news, not urgent news.</p>
 
