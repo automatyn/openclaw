@@ -1847,15 +1847,18 @@
             };
             var priceId = prices[plan];
             if (!priceId) return;
-            Paddle.Checkout.open({
+            var opts = {
                 items: [{ priceId: priceId, quantity: 1 }],
                 customData: { agent_id: agentId },
-                customer: { email: agentData.email || '' },
                 settings: {
                     successUrl: 'https://automatyn.co/dashboard.html?upgraded=' + plan,
                     theme: 'dark',
                 },
-            });
+            };
+            if (agentData.email && /@/.test(agentData.email)) {
+                opts.customer = { email: agentData.email };
+            }
+            Paddle.Checkout.open(opts);
         }
 
         function toggleBizMenu(e) {
