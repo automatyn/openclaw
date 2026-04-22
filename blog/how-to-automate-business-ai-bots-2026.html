@@ -144,13 +144,19 @@
             font-family: 'Cabinet Grotesk', sans-serif;
         }
         .cta-button {
-            background: linear-gradient(135deg, #10b981, #059669);
-            transition: all 0.3s ease;
+            background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
+            color: #0a0a0a !important;
+            text-decoration: none !important;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.2s;
         }
         .cta-button:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(117,224,167,0.3);
         }
         .accent-line {
             background: linear-gradient(90deg, #22d3ee, #10b981);
@@ -190,7 +196,7 @@
                     <a href="https://automatyn.co" class="text-gray-400 hover:text-white transition text-sm" style="text-decoration: none;">Home</a>
                     <a href="https://automatyn.co/pricing.html" class="text-gray-400 hover:text-white transition text-sm" style="text-decoration: none;">Pricing</a>
                     <a href="https://automatyn.co/blog/" class="text-gray-400 hover:text-white transition text-sm" style="text-decoration: none;">Blog</a>
-                    <a href="/signup.html" class="text-white px-4 py-2 rounded-lg text-sm font-medium" style="background: linear-gradient(135deg, #059669, #10b981); text-decoration: none;">Start Free</a>
+                    <a href="/signup.html" class="cta-button px-5 py-2 text-sm font-medium">Start Free</a>
                 </div>
                 <!-- Mobile menu button -->
                 <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white">
