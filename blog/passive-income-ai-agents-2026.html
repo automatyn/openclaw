@@ -319,15 +319,14 @@
         }
 
         /* Table of contents */
-        .toc a {
-            color: var(--text-secondary);
+        .toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important;
             text-decoration: none;
             transition: color 0.2s;
             display: block;
             padding: 0.35rem 0;
             font-size: 0.9375rem;
         }
-        .toc a:hover {
+        .toc a:hover, .prose .toc a:hover {
             color: var(--neon-purple);
         }
     </style>
