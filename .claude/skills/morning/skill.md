@@ -118,6 +118,13 @@ Run the reply detector on the last 14 hours and report.
 cd /home/marketingpatpat/openclaw/saas-api && node outreach/reply-detector.js 14
 ```
 
+Pull open events from Brevo (last 48h) so open rate is up-to-date:
+
+```bash
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+  node /home/marketingpatpat/openclaw/saas-api/outreach/fetch-opens.js 48
+```
+
 Then print a one-line status from the lead store:
 
 ```bash

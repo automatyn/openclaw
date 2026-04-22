@@ -131,10 +131,17 @@ async function startQrPairing(agentId) {
           const statusCode = lastDisconnect?.error?.output?.statusCode;
           if (statusCode === DisconnectReason.loggedOut) {
             connReject(new Error('WhatsApp logged out.'));
+            activeSessions.delete(agentId);
+            try {
+              const authDir = getAuthDir(agentId);
+              if (fs.existsSync(authDir)) fs.rmSync(authDir, { recursive: true, force: true });
+            } catch {}
           }
         }
       });
     });
+    // Attach a swallow-handler so an unawaited rejection never crashes the process.
+    connectionPromise.catch(() => {});
 
     sock.ev.on('connection.update', async (update) => {
       const { qr } = update;

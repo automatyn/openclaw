@@ -116,6 +116,12 @@ cd /home/marketingpatpat/openclaw/saas-api
   node outreach/sender.js e1
   ```
 
+**Volume ramp schedule (deliverability):**
+- Apr 22-24 (now-Fri): cap 15/day — baseline reputation building
+- Apr 25-30: bump cap to 25/day — only if bounces <2% and unsubs <1/day stay clean
+- May 1+: step to 40/day if trailing 7-day metrics hold. Never jump more than ~70% in a single step.
+- Update `OUTREACH_DAILY_CAP` in systemd env and restart automatyn-api to change.
+
 **Send follow-ups (uncapped, only go to already-contacted leads):**
 ```bash
 node outreach/sender.js e2   # Day 3 follow-up

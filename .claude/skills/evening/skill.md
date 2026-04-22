@@ -59,6 +59,10 @@ cd /home/marketingpatpat/openclaw/saas-api
 # Sweep replies + bounces from the full day
 node outreach/reply-detector.js 24
 
+# Pull open events from Brevo so open rate is current in the daily stats email
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+  node outreach/fetch-opens.js 48
+
 # If today is Sunday (day 0), top up the lead pool for the week
 # (JS getDay: 0=Sun)
 node -e "if(new Date().getDay()===0){process.exit(0)}else{process.exit(1)}" && \
