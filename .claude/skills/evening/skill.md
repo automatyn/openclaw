@@ -19,7 +19,13 @@ curl -s "https://api.fxtwitter.com/patrickssons"
 ```
 Report if still suspended or reinstated.
 
-**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. /evening volume: 0-1 original posts + 2 reply drafts (skip originals if earlier slots covered daily quota of 2-3). Drafts go to Telegram, Pat taps ✅/❌, only approved drafts hit the X API. NEVER use Playwright.
+**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. NEVER use Playwright.
+
+**Check x.com/i/account_analytics first (mandatory).** Open via browser-use CDP 18800, extract 7-day impressions, engagement rate, follows-over-time, verified followers. Log in session log. Adjust draft volume:
+- Impressions down >50% OR flat follows → **quality mode**: 1-2 replies max, accounts >10k on-topic only.
+- Trend flat or up → **normal mode**: 0-1 originals + 2 replies, targets >1k.
+
+Verify every target's follower count via `curl -s https://api.fxtwitter.com/<handle>` before drafting. Skip <1k unless warm chain. Drafts go as `x.com/intent/tweet?in_reply_to=<tweet_id>&text=...` URLs.
 
 ## Step 1b: Trigger Reddit AI Image Pipeline (n8n)
 

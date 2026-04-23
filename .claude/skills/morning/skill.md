@@ -39,7 +39,20 @@ If it returns user data, the account is back. If 404, still suspended.
 
 **IF X IS SUSPENDED:** Skip all X-related steps (tweets, replies, viral shot). Focus on TikTok, LinkedIn, Medium, Dev.to, blog.
 
-**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. /morning volume: 1 original post + 3 reply drafts. Drafts go to Telegram, Pat taps ✅/❌, only approved drafts hit the X API. NEVER use Playwright to post on X.
+**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. NEVER use Playwright to post on X.
+
+**Step 3a: Check X account analytics — MANDATORY before drafting.**
+
+Open `https://x.com/i/account_analytics` via browser-use (CDP 18800, already logged in) and extract the 7-day panel: impressions, engagement rate, follows over time, verified followers. Compare to mission ([project_monetization_goal.md](../../memory/project_monetization_goal.md) — 500 Premium + 5M impressions).
+
+**Adjust draft volume + quality based on trend:**
+- Impressions 7d down >50% OR flat follower growth → **quality mode**: 1 original + 1-2 replies max, ONLY to accounts >10k followers AND on-topic. Skip everything else.
+- Impressions 7d up OR follower growth positive → **normal mode**: 1 original + 3 replies, targets >1k followers.
+- Verified-follower count stalled vs last check → bias harder toward Premium-visible accounts (blue-check targets, founder circles).
+
+Log the analytics numbers in the session log every routine so we can see trend across runs.
+
+**Drafts go to Telegram as x.com/intent/tweet URLs with `in_reply_to=<tweet_id>` baked in** (feedback_x_intent_urls.md). Verify every target's follower count via `curl -s https://api.fxtwitter.com/<handle>` BEFORE drafting. Skip anyone <1k followers unless they already engaged @patrickssons (warm chain).
 
 ## Step 3b: Trigger Reddit AI Image Pipeline (n8n)
 
