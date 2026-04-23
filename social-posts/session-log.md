@@ -195,3 +195,16 @@ Open items for next slot:
 - Triggers: only Blog Writer enabled (next 2026-04-24 10:06 UTC). Content Machine + Medium Writer still missing from RemoteTrigger list.
 - Blog work (Pat-driven, not evening routine): automation-blog hero + 2 inline images regenerated via Forge (phone-on-stand, dual-phone comparison, cafe scene). All 44 blog images normalised to 1344x768, JPG q82/WebP q78. Fixed on-page CSS: hero now uses canonical h-56/sm:h-72/md:h-80 + object-cover (was h-auto, rendering ~50% taller than plumbers hero). ROI-calculator page fix: TOC was above header, moved below. Commits 6db9ace, 8a2bf9e, 34ecb41, 81ded40, 17c0c47, 8401a56.
 - Open items carried: reply-detector Gmail OAuth, Content Machine + Medium Writer triggers missing, Reddit pipeline Gemini retry.
+
+## 2026-04-23 /morning
+
+- Bot health: openclaw-gateway + automatyn-api active.
+- X: active, 112 followers, 488 tweets (+2 since yesterday evening).
+- 4 drafts pushed to Telegram gate as intent/tweet URLs: 1 original (service-hour math, 193 chars) + 3 adaptable reply drafts (kill switch, plumber math, distribution). Char counts 193/184/182/186 — all under 200.
+- Reddit AI Image Pipeline: webhook fired OK. Upstream Gemini 503 issue still unresolved (open item).
+- Outreach: 0 new sends overnight. Lifetime E1=18, opens=5 (+0 new events matched), replies=0, bounces=0, unsubs=1. Reply detector self-skipped (Gmail OAuth env absent — open item). Pool 578/77/33 (+15 personalised since yesterday evening).
+- Signups last 14h: 0. Real total unchanged at 18 (+1 test agent ignored).
+- TikTok: 22 videos / 6126 views (+3 overnight) / 75 likes. Top hooks unchanged: dad-at-dinner 979, mum-calling 806, boss-caught 652.
+- Triggers: only Blog Writer enabled (next fire 2026-04-24 10:06 UTC). Content Machine + Medium Writer still absent from list — carry as open item.
+- LinkedIn / Dev.to / Medium: deferred this slot.
+- Open items carried: reply-detector Gmail OAuth, Content Machine + Medium Writer triggers missing, Reddit pipeline Gemini retry.
