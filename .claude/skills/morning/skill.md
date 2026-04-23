@@ -160,6 +160,20 @@ Then print a one-line status from the lead store:
 cd /home/marketingpatpat/openclaw/saas-api && node -e "console.log(require('./outreach/leads-store').stats())"
 ```
 
+**Variant diagnostic (Larry-brain framework):**
+
+```bash
+cd /home/marketingpatpat/openclaw/saas-api && node outreach/daily-report.js --days 14
+```
+
+Reads open/reply rate per (subject × CTA) variant and prints the diagnosis:
+- **SCALE** — pour volume on this pair
+- **FIX CTA** — subject works, close fails (swap CTA, keep subject)
+- **FIX SUBJECT** — CTA converts, too few opens (swap subject, keep CTA)
+- **FULL RESET** — variant is dead, try something radically different
+
+Act on the diagnosis: if a pair has `FIX CTA` and 10+ sends, note in morning report which CTA to drop/swap. Do not retire winning subjects chasing CTA changes.
+
 If any replies came in overnight, flag them in the morning report — Pat needs to personally reply to those (do not auto-reply).
 
 If env vars `GMAIL_OAUTH_REFRESH_TOKEN` or `GMAIL_APP_PASSWORD` are missing, the reply detector prints a "skip" message. Note it in the report and move on — it's a setup gap, not a bug.

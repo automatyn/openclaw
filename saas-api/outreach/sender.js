@@ -22,7 +22,7 @@
 const https = require('https');
 const crypto = require('crypto');
 const store = require('./leads-store');
-const { buildEmail } = require('./templates');
+const { buildEmail, SUBJECTS_E1, CTAS_E1, pickVariantRoundRobin } = require('./templates');
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 const SENDER_EMAIL = process.env.OUTREACH_SENDER_EMAIL || 'patrick@automatyn.co';
@@ -91,12 +91,25 @@ function sentTodayCount(step) {
   return store.listAll().filter(l => l[key] && l[key].slice(0, 10) === today).length;
 }
 
+// Deterministic variant assignment: hash lead id into subject + CTA bucket,
+// independent axes so we get coverage on both. Recorded on the lead for
+// per-variant attribution in daily-report.js.
+function assignE1Variants(leadId) {
+  const h = crypto.createHash('sha1').update(leadId).digest();
+  const subjectId = pickVariantRoundRobin(SUBJECTS_E1, h[0]);
+  const ctaId = pickVariantRoundRobin(CTAS_E1, h[1]);
+  return { subjectId, ctaId };
+}
+
 async function sendOne(transport, lead, step, dryRun) {
   const token = unsubToken(lead.email);
-  const { subject, body } = buildEmail(step, lead, token);
+  const opts = step === 1 ? assignE1Variants(lead.id) : {};
+  const built = buildEmail(step, lead, token, opts);
+  const { subject, body } = built;
   if (dryRun) {
     console.log('---');
     console.log(`TO: ${lead.email}`);
+    if (step === 1) console.log(`VARIANTS: subject=${built.subjectId} cta=${built.ctaId}`);
     console.log(`SUBJECT: ${subject}`);
     console.log(body);
     return { ok: true, dry: true };
@@ -114,6 +127,10 @@ async function sendOne(transport, lead, step, dryRun) {
   const msgIdKey = step === 1 ? 'email1_message_id' : step === 2 ? 'email2_message_id' : 'email3_message_id';
   const patch = step === 1 ? { email1_sent: now } : step === 2 ? { email2_sent: now } : { email3_sent: now };
   patch[msgIdKey] = info.messageId || null;
+  if (step === 1) {
+    patch.e1_subject_id = built.subjectId;
+    patch.e1_cta_id = built.ctaId;
+  }
   store.update(lead.id, patch);
   return { ok: true, messageId: info.messageId };
 }
