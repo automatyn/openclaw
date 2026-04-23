@@ -110,13 +110,27 @@ Check if any Medium drafts need publishing. Use Playwright to check https://medi
 
 Always include a hero image from blog/images/ when publishing to Medium.
 
-## Step 8b: Cold Email Outreach — overnight reply check
+## Step 8b: Cold Email Outreach — overnight reply check + morning send
 
 Run the reply detector on the last 14 hours and report.
 
 ```bash
 cd /home/marketingpatpat/openclaw/saas-api && node outreach/reply-detector.js 14
 ```
+
+**Then send today's batch — every routine must send, not just /afternoon.** Load Brevo env from systemd and run E1/E2/E3:
+
+```bash
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+UNSUBSCRIBE_SECRET=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-) \
+OUTREACH_DAILY_CAP=15 \
+node outreach/sender.js e1 15
+
+BREVO_API_KEY=... UNSUBSCRIBE_SECRET=... node outreach/sender.js e2 10
+BREVO_API_KEY=... UNSUBSCRIBE_SECRET=... node outreach/sender.js e3 10
+```
+
+Daily cap is shared across slots via `email1_sent_today`. If morning hits cap=15, afternoon/evening E1 will naturally send 0. E2/E3 are day-based, not cap-based.
 
 Pull open events from Brevo (last 48h) so open rate is up-to-date:
 

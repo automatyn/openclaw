@@ -63,6 +63,20 @@ node outreach/reply-detector.js 24
 BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
   node outreach/fetch-opens.js 48
 
+# Send the evening outreach batch — every routine sends, not just /afternoon
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+UNSUBSCRIBE_SECRET=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-) \
+OUTREACH_DAILY_CAP=15 \
+  node outreach/sender.js e1 15
+
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+UNSUBSCRIBE_SECRET=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-) \
+  node outreach/sender.js e2 10
+
+BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
+UNSUBSCRIBE_SECRET=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-) \
+  node outreach/sender.js e3 10
+
 # If today is Sunday (day 0), top up the lead pool for the week
 # (JS getDay: 0=Sun)
 node -e "if(new Date().getDay()===0){process.exit(0)}else{process.exit(1)}" && \
