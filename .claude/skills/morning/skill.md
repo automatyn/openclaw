@@ -54,6 +54,8 @@ Log the analytics numbers in the session log every routine so we can see trend a
 
 **Drafts go to Telegram as x.com/intent/tweet URLs with `in_reply_to=<tweet_id>` baked in** (feedback_x_intent_urls.md). Verify every target's follower count via `curl -s https://api.fxtwitter.com/<handle>` BEFORE drafting. Skip anyone <1k followers unless they already engaged @patrickssons (warm chain).
 
+**Recency check — MANDATORY (feedback_x_reply_recency.md):** Every reply target post must be <6h old. Verify via `curl -s https://api.fxtwitter.com/status/<tweet_id>` → check `created_at`, reject if older. For discovery use `https://x.com/search?q=<term>&f=live` (Latest tab). If author's latest post is >6h old, skip the author entirely — do not fall back to older posts. Warm-chain replies (someone engaged @patrickssons) exempt up to 24h. Log rejected-by-age count in session log.
+
 ## Step 3b: Trigger Reddit AI Image Pipeline (n8n)
 
 Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.

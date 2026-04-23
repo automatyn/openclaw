@@ -27,6 +27,8 @@ Report if still suspended or reinstated.
 
 Verify every target's follower count via `curl -s https://api.fxtwitter.com/<handle>` before drafting. Skip <1k unless warm chain. Drafts go as `x.com/intent/tweet?in_reply_to=<tweet_id>&text=...` URLs.
 
+**Recency check — MANDATORY (feedback_x_reply_recency.md):** Reply target post must be <6h old. Verify via `curl -s https://api.fxtwitter.com/status/<tweet_id>` → check `created_at`, reject older. Use `x.com/search?...&f=live` (Latest) for discovery. Skip author entirely if latest post >6h old. Warm-chain exempt up to 24h. Log rejected-by-age count.
+
 ## Step 1b: Trigger Reddit AI Image Pipeline (n8n)
 
 Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.
