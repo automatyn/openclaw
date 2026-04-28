@@ -1973,23 +1973,24 @@
             return null;
         }
         var guess = langGuess();
-        if (guess && guess !== 'EU') apply(guess);
+        var trustedGuess = guess && guess !== 'EU';
+        if (trustedGuess) apply(guess);
         function tryIpapi() {
             return fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) })
                 .then(function(r) { if (!r.ok) throw new Error('ipapi'); return r.json(); })
-                .then(function(d) { if (!d.country_code) throw new Error('no cc'); apply(d.country_code); });
+                .then(function(d) { if (!d.country_code) throw new Error('no cc'); if (!trustedGuess) apply(d.country_code); });
         }
         function tryIpwho() {
             return fetch('https://ipwho.is/', { signal: AbortSignal.timeout(5000) })
                 .then(function(r) { if (!r.ok) throw new Error('ipwho'); return r.json(); })
-                .then(function(d) { if (!d.country_code) throw new Error('no cc'); apply(d.country_code); });
+                .then(function(d) { if (!d.country_code) throw new Error('no cc'); if (!trustedGuess) apply(d.country_code); });
         }
         function tryCloudflare() {
             return fetch('https://www.cloudflare.com/cdn-cgi/trace', { signal: AbortSignal.timeout(5000) })
                 .then(function(r) { if (!r.ok) throw new Error('cf'); return r.text(); })
-                .then(function(t) { var m = t.match(/loc=([A-Z]{2})/); if (!m) throw new Error('no loc'); apply(m[1]); });
+                .then(function(t) { var m = t.match(/loc=([A-Z]{2})/); if (!m) throw new Error('no loc'); if (!trustedGuess) apply(m[1]); });
         }
-        tryIpapi().catch(tryIpwho).catch(tryCloudflare).catch(function() {});
+        if (!trustedGuess) tryIpapi().catch(tryIpwho).catch(tryCloudflare).catch(function() {});
     })();
     </script>
 
