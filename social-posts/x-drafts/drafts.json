@@ -1,0 +1,118 @@
+{
+  "slot": "morning",
+  "date": "2026-04-29",
+  "drafts": [
+    {
+      "id": "d01",
+      "type": "original",
+      "draft": "Most small businesses don't have a marketing problem. They have a follow-up problem. The leads are already coming in. Nobody's chasing them on Tuesday at 6pm.",
+      "char_count": 158,
+      "reason": "SMB pain frame, time-specific"
+    },
+    {
+      "id": "d02",
+      "type": "original",
+      "draft": "If your customer asks a question at 9pm and you answer at 9am, the sale is gone. Speed has quietly become the only differentiator left.",
+      "char_count": 134,
+      "reason": "Speed as moat, no jargon"
+    },
+    {
+      "id": "d03",
+      "type": "original",
+      "draft": "Founders spend years building the perfect onboarding flow then lose 40% of signups because nobody replies to the first 'is this legit?' email for 6 hours.",
+      "char_count": 154,
+      "reason": "Specific funnel pain, no banned words"
+    },
+    {
+      "id": "d04",
+      "type": "reply",
+      "target_handle": "downtimeinc",
+      "target_followers": 51,
+      "target_age": "5h",
+      "target_url": "https://x.com/downtimeinc/status/2049324044118581504",
+      "tweet_id": "2049324044118581504",
+      "target_text": "Honest take on AI for small business in 2026: Most of the hype is still hype. But automated follow-up, review management...",
+      "draft": "Agreed. The boring middle layer (follow-up, scheduling, review chasing) is where AI actually pays back. Demos and chat-bots are theater.",
+      "char_count": 138,
+      "reason": "On-topic SMB, agree-and-extend (sub-1k but on-message and fresh)"
+    },
+    {
+      "id": "d05",
+      "type": "reply",
+      "target_handle": "MahlumAI",
+      "target_followers": null,
+      "target_age": "warm chain",
+      "target_url": "https://x.com/MahlumAI/status/2047014935423795332",
+      "tweet_id": "2047014935423795332",
+      "target_text": "Compounding loss is underrated. 15-yr field tech at a manufacturer walks out = ~8k undocumented decisions gone.",
+      "draft": "The frame I keep coming back to: tribal knowledge isn't lost when someone leaves, it's lost the day they stopped writing it down.",
+      "char_count": 130,
+      "reason": "Warm chain, pushes the metaphor forward"
+    },
+    {
+      "id": "d06",
+      "type": "reply",
+      "target_handle": "rxhit05",
+      "target_followers": null,
+      "target_age": "warm chain",
+      "target_url": "https://x.com/rxhit05/status/2048838344478781649",
+      "tweet_id": "2048838344478781649",
+      "target_text": "capital ain't infinite",
+      "draft": "And it always runs out a week before the thing that would've worked starts working.",
+      "char_count": 84,
+      "reason": "Warm chain, builder relatability"
+    },
+    {
+      "id": "d07",
+      "type": "reply",
+      "target_handle": "AishwaryaDevv",
+      "target_followers": null,
+      "target_age": "warm chain",
+      "target_url": "https://x.com/AishwaryaDevv/status/2048715899683950618",
+      "tweet_id": "2048715899683950618",
+      "target_text": "support becomes the actual product",
+      "draft": "The companies that figured this out early stopped calling it support and started calling it the onboarding team.",
+      "char_count": 113,
+      "reason": "Warm chain, agree-and-extend"
+    },
+    {
+      "id": "d08",
+      "type": "reply",
+      "target_handle": "TTrimoreau",
+      "target_followers": null,
+      "target_age": "warm chain",
+      "target_url": "https://x.com/TTrimoreau/status/2048343082555351473",
+      "tweet_id": "2048343082555351473",
+      "target_text": "Looks simple like that",
+      "draft": "Until the third rewrite. Then it's actually simple.",
+      "char_count": 51,
+      "reason": "Warm chain, builder humour"
+    },
+    {
+      "id": "d09",
+      "type": "reply",
+      "target_handle": "aminnnn_09",
+      "target_followers": 313,
+      "target_age": "warm chain",
+      "target_url": "https://x.com/aminnnn_09/status/2048247599958999418",
+      "tweet_id": "2048247599958999418",
+      "target_text": "warm chain",
+      "draft": "Building public is easy. Writing about what didn't work is the harder, more useful version.",
+      "char_count": 92,
+      "reason": "Warm chain, on-topic for builder audience"
+    },
+    {
+      "id": "d10",
+      "type": "reply",
+      "target_handle": "eke_ng_",
+      "target_followers": 2319,
+      "target_age": "1h",
+      "target_url": "https://x.com/eke_ng_/status/2049388108496748927",
+      "tweet_id": "2049388108496748927",
+      "target_text": "building in public",
+      "draft": "Building in public is undefeated for one reason: nobody else is willing to show the receipts.",
+      "char_count": 94,
+      "reason": "2.3k follower builder, fresh, BIP frame"
+    }
+  ]
+}
