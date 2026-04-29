@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "leads": [
+    {
+      "agentId": "biz-30adff",
+      "email": "adam@abplumbing-heating.co.uk",
+      "businessName": "AB Plumbing & Heating",
+      "addedAt": "2026-04-29T19:35:00Z",
+      "addedBy": "afternoon /2026-04-29",
+      "watch_for": [
+        "whatsappConnected_true",
+        "conversationCount_gt_0"
+      ],
+      "last_state": {
+        "whatsappConnected": false,
+        "conversationCount": 0,
+        "lastHit": 1777497633230,
+        "hits24h": 384,
+        "hitsLastHr": 84,
+        "qrPolls24h": 147
+      },
+      "notes": "First post-volume-push signup. Free starter tier. Welcome email sent 2026-04-29 21:17 UTC.",
+      "last_changed_at": "2026-04-29T21:21:03.401Z"
+    }
+  ]
+}

@@ -176,7 +176,7 @@ function saveConfig(config) {
 
 function reloadGateway() {
   try {
-    execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway reload', { timeout: 10000, stdio: 'pipe' });
+    execSync('node /usr/lib/node_modules/openclaw/openclaw.mjs gateway restart', { timeout: 30000, stdio: 'pipe' });
     return true;
   } catch (err) {
     console.error('Gateway reload failed:', err.message);

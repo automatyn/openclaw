@@ -10,6 +10,32 @@ const { loadConfig, saveConfig, reloadGateway, withConfigLock } = require('./pro
 // Track active sessions per agent
 const activeSessions = new Map();
 
+// Cache the live WA Web version so we don't hit web.whatsapp.com on every pair attempt.
+let _waVersionCache = { version: null, fetchedAt: 0 };
+async function getCurrentWAWebVersion() {
+  const now = Date.now();
+  if (_waVersionCache.version && now - _waVersionCache.fetchedAt < 6 * 60 * 60 * 1000) {
+    return _waVersionCache.version;
+  }
+  const https = require('https');
+  const body = await new Promise((resolve, reject) => {
+    const req = https.get('https://web.whatsapp.com/sw.js', (res) => {
+      let data = '';
+      res.on('data', (c) => (data += c));
+      res.on('end', () => resolve(data));
+    });
+    req.on('error', reject);
+    req.setTimeout(8000, () => req.destroy(new Error('timeout')));
+  });
+  const m = body.match(/client_revision\\?":\s*(\d+)/);
+  if (!m) throw new Error('client_revision not found in sw.js');
+  // Baileys version format: [major, minor, patch]. WA Web uses 2.3000.<rev>.
+  const version = [2, 3000, parseInt(m[1], 10)];
+  _waVersionCache = { version, fetchedAt: now };
+  console.log(`[whatsapp] using WA Web version ${version.join('.')}`);
+  return version;
+}
+
 function getAuthDir(agentId) {
   return path.join(AGENTS_DIR, agentId, 'whatsapp-auth');
 }
@@ -30,11 +56,23 @@ async function startPairingCode(agentId, phoneNumber) {
   await disconnectSession(agentId);
 
   const authDir = getAuthDir(agentId);
+  // Wipe any stale partial auth — leftover creds from a failed prior pair
+  // cause Baileys to attempt a "resume" that WhatsApp rejects as "couldn't link device".
+  if (fs.existsSync(authDir)) {
+    try { fs.rmSync(authDir, { recursive: true, force: true }); } catch {}
+  }
   fs.mkdirSync(authDir, { recursive: true, mode: 0o700 });
 
-  const logger = pino({ level: 'silent' });
+  const logger = pino({ level: 'debug' }, pino.destination({ dest: '/home/marketingpatpat/openclaw/saas-api/baileys.log', sync: true }));
   const { state, saveCreds } = await useMultiFileAuthState(authDir);
-  const { version } = await fetchLatestBaileysVersion();
+  // fetchLatestBaileysVersion() lags behind real WA Web. Use the actual current
+  // client_revision from web.whatsapp.com/sw.js, with the cached helper as fallback.
+  let version;
+  try {
+    version = await getCurrentWAWebVersion();
+  } catch {
+    version = (await fetchLatestBaileysVersion()).version;
+  }
 
   const sock = makeWASocket({
     auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
@@ -49,30 +87,68 @@ async function startPairingCode(agentId, phoneNumber) {
   // Save creds on update
   sock.ev.on('creds.update', saveCreds);
 
-  // Create a promise that resolves when connected or fails
+  // Pair flow with mid-flight 515 reconnect.
+  // Resolve only when the *fully registered* socket reaches 'open' (creds.registered === true).
   const connectionPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       reject(new Error('Connection timed out. Please try again.'));
-    }, 60000);
+    }, 180000);
 
-    sock.ev.on('connection.update', (update) => {
+    let currentState = state;
+    const onUpdate = (update) => {
       const { connection, lastDisconnect } = update;
       if (connection === 'open') {
-        clearTimeout(timeout);
-        resolve({ connected: true });
+        if (currentState.creds.registered) {
+          clearTimeout(timeout);
+          resolve({ connected: true });
+        }
+        // else: this is the pre-pair 'open' — wait for 515 reconnect cycle
+        return;
       }
       if (connection === 'close') {
         const statusCode = lastDisconnect?.error?.output?.statusCode;
-        if (statusCode === DisconnectReason.loggedOut) {
-          clearTimeout(timeout);
-          reject(new Error('WhatsApp logged out. Please try again.'));
+        const errMsg = lastDisconnect?.error?.message || 'connection closed';
+        console.log(`[whatsapp:${agentId}] connection close — code=${statusCode} msg=${errMsg} registered=${currentState.creds.registered}`);
+        if (statusCode === 515 || statusCode === DisconnectReason.restartRequired || (!statusCode && !currentState.creds.registered)) {
+          console.log(`[whatsapp:${agentId}] reconnecting after ${statusCode || 'silent-close'}`);
+          (async () => {
+            // Reload state fresh from disk — partial creds were saved during pair
+            const reloaded = await useMultiFileAuthState(authDir);
+            currentState = reloaded.state;
+            const newSock = makeWASocket({
+              auth: { creds: reloaded.state.creds, keys: makeCacheableSignalKeyStore(reloaded.state.keys, logger) },
+              version, logger,
+              printQRInTerminal: false,
+              browser: ['Automatyn', 'Chrome', '1.0'],
+              syncFullHistory: false,
+              markOnlineOnConnect: false,
+            });
+            newSock.ev.on('creds.update', reloaded.saveCreds);
+            newSock.ev.on('connection.update', onUpdate);
+            const stored = activeSessions.get(agentId);
+            if (stored) stored.sock = newSock;
+          })().catch((e) => { clearTimeout(timeout); reject(e); });
+          return;
         }
+        clearTimeout(timeout);
+        reject(new Error(`Pairing failed (${statusCode || 'no-code'}): ${errMsg}`));
       }
-    });
+    };
+    sock.ev.on('connection.update', onUpdate);
   });
+  // Swallow unhandled-rejection if the consumer never awaits
+  connectionPromise.catch(() => {});
 
-  // Request pairing code
-  const pairingCode = await sock.requestPairingCode(phone);
+  // Baileys requires the socket to reach 'connecting' state before requestPairingCode.
+  // Wait briefly so the request doesn't race the WS handshake.
+  await new Promise((r) => setTimeout(r, 1500));
+  let pairingCode;
+  try {
+    pairingCode = await sock.requestPairingCode(phone);
+  } catch (err) {
+    try { sock.end(); } catch {}
+    throw new Error(`Could not request pairing code: ${err.message}`);
+  }
 
   // Store session
   activeSessions.set(agentId, {
@@ -97,11 +173,22 @@ async function startQrPairing(agentId) {
   await disconnectSession(agentId);
 
   const authDir = getAuthDir(agentId);
+  // Wipe stale partial auth — see startPairingCode for rationale.
+  if (fs.existsSync(authDir)) {
+    try { fs.rmSync(authDir, { recursive: true, force: true }); } catch {}
+  }
   fs.mkdirSync(authDir, { recursive: true, mode: 0o700 });
 
-  const logger = pino({ level: 'silent' });
+  const logger = pino({ level: 'debug' }, pino.destination({ dest: '/home/marketingpatpat/openclaw/saas-api/baileys.log', sync: true }));
   const { state, saveCreds } = await useMultiFileAuthState(authDir);
-  const { version } = await fetchLatestBaileysVersion();
+  // fetchLatestBaileysVersion() lags behind real WA Web. Use the actual current
+  // client_revision from web.whatsapp.com/sw.js, with the cached helper as fallback.
+  let version;
+  try {
+    version = await getCurrentWAWebVersion();
+  } catch {
+    version = (await fetchLatestBaileysVersion()).version;
+  }
 
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
@@ -120,25 +207,54 @@ async function startQrPairing(agentId) {
 
     sock.ev.on('creds.update', saveCreds);
 
-    // Create connection promise for later checking
+    // QR pair: reload state from disk on 515 reconnect, only resolve when registered=true.
+    let qrCurrentState = state;
     const connectionPromise = new Promise((connResolve, connReject) => {
-      sock.ev.on('connection.update', (update) => {
+      const onUpdate = (update) => {
         const { connection, lastDisconnect } = update;
         if (connection === 'open') {
-          connResolve({ connected: true });
+          if (qrCurrentState.creds.registered) {
+            connResolve({ connected: true });
+          }
+          return;
         }
         if (connection === 'close') {
           const statusCode = lastDisconnect?.error?.output?.statusCode;
+          const errMsg = lastDisconnect?.error?.message || 'connection closed';
+          console.log(`[whatsapp:${agentId}] QR close — code=${statusCode} msg=${errMsg} registered=${qrCurrentState.creds.registered}`);
+          if (statusCode === 515 || statusCode === DisconnectReason.restartRequired || (!statusCode && !qrCurrentState.creds.registered)) {
+            console.log(`[whatsapp:${agentId}] QR reconnecting after ${statusCode || 'silent-close'}`);
+            (async () => {
+              const reloaded = await useMultiFileAuthState(authDir);
+              qrCurrentState = reloaded.state;
+              const newSock = makeWASocket({
+                auth: { creds: reloaded.state.creds, keys: makeCacheableSignalKeyStore(reloaded.state.keys, logger) },
+                version, logger,
+                printQRInTerminal: false,
+                browser: ['Automatyn', 'Chrome', '1.0'],
+                syncFullHistory: false,
+                markOnlineOnConnect: false,
+              });
+              newSock.ev.on('creds.update', reloaded.saveCreds);
+              newSock.ev.on('connection.update', onUpdate);
+              const stored = activeSessions.get(agentId);
+              if (stored) stored.sock = newSock;
+            })().catch((e) => connReject(e));
+            return;
+          }
           if (statusCode === DisconnectReason.loggedOut) {
             connReject(new Error('WhatsApp logged out.'));
             activeSessions.delete(agentId);
             try {
-              const authDir = getAuthDir(agentId);
-              if (fs.existsSync(authDir)) fs.rmSync(authDir, { recursive: true, force: true });
+              const authDir2 = getAuthDir(agentId);
+              if (fs.existsSync(authDir2)) fs.rmSync(authDir2, { recursive: true, force: true });
             } catch {}
+          } else {
+            connReject(new Error(`Pairing failed (${statusCode || 'no-code'}): ${errMsg}`));
           }
         }
-      });
+      };
+      sock.ev.on('connection.update', onUpdate);
     });
     // Attach a swallow-handler so an unawaited rejection never crashes the process.
     connectionPromise.catch(() => {});
@@ -169,14 +285,13 @@ async function startQrPairing(agentId) {
 async function checkPairingStatus(agentId) {
   const session = activeSessions.get(agentId);
   if (!session) {
-    // Check if already connected (auth files exist)
+    // Check if fully connected — require registered=true AND me.id (half-paired = registered:false)
     const authDir = getAuthDir(agentId);
-    const credsFile = path.join(authDir, 'creds.json');
-    if (fs.existsSync(credsFile)) {
-      const creds = JSON.parse(fs.readFileSync(credsFile, 'utf-8'));
-      if (creds.me?.id) {
+    if (isWhatsAppConnected(agentId)) {
+      try {
+        const creds = JSON.parse(fs.readFileSync(path.join(authDir, 'creds.json'), 'utf-8'));
         return { connected: true, phone: creds.me.id.split(':')[0] };
-      }
+      } catch {}
     }
     return { connected: false, message: 'No active pairing session. Start a new one.' };
   }
@@ -224,15 +339,17 @@ async function disconnectSession(agentId) {
 function isWhatsAppConnected(agentId) {
   const authDir = getAuthDir(agentId);
   const credsFile = path.join(authDir, 'creds.json');
-  if (fs.existsSync(credsFile)) {
-    try {
-      const creds = JSON.parse(fs.readFileSync(credsFile, 'utf-8'));
-      return !!creds.me?.id;
-    } catch (e) {
-      return false;
-    }
+  if (!fs.existsSync(credsFile)) return false;
+  try {
+    const creds = JSON.parse(fs.readFileSync(credsFile, 'utf-8'));
+    if (!creds.me?.id) return false;
+    // Pair is real once Baileys has saved at least one pre-key file.
+    // 'registered' flips later but full handshake is done by then.
+    const files = fs.readdirSync(authDir);
+    return files.some((f) => f.startsWith('pre-key-'));
+  } catch {
+    return false;
   }
-  return false;
 }
 
 /**
@@ -254,10 +371,24 @@ function registerWhatsAppWithGateway(agentId) {
     }
 
     config.channels.whatsapp.accounts[agentId] = {
+      enabled: true,
+      name: agentId,
       authDir: authDir,
-      dmPolicy: 'pairing',
-      agent: agentId,
+      dmPolicy: 'open',
+      allowFrom: ['*'],
+      groupPolicy: 'open',
+      debounceMs: 0,
     };
+
+    if (!Array.isArray(config.bindings)) config.bindings = [];
+    config.bindings = config.bindings.filter(
+      (b) => !(b?.match?.channel === 'whatsapp' && b?.match?.accountId === agentId)
+    );
+    config.bindings.push({
+      type: 'route',
+      agentId,
+      match: { channel: 'whatsapp', accountId: agentId },
+    });
 
     config.meta.lastTouchedAt = new Date().toISOString();
     saveConfig(config);
