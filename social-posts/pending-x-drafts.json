@@ -1,29 +1,11 @@
 [
   {
-    "id": "a1-1776757494",
-    "type": "reply",
-    "target": "https://x.com/SwigSwootie/status/2046542492602896558",
-    "targetAuthor": "@SwigSwootie",
-    "text": "The $2k/mo number only works on owners who already know their hourly cost of a missed call. Most do not. The real sale is tracking the first ten missed calls, then pricing against that.",
-    "created": "2026-04-21",
-    "slot": "afternoon"
-  },
-  {
-    "id": "a2-1776757495",
-    "type": "reply",
-    "target": "https://x.com/aetherisinno1/status/2045488513529851955",
-    "targetAuthor": "@aetherisinno1",
-    "text": "For most SMB owners it is not the tech. It is the fear of an agent saying something off-brand to a regular customer. Give them a kill switch on the dashboard and the objection drops.",
-    "created": "2026-04-21",
-    "slot": "afternoon"
-  },
-  {
-    "id": "a3-1776757496",
-    "type": "reply",
-    "target": "https://x.com/cryptokelly53/status/2046595309762232656",
-    "targetAuthor": "@cryptokelly53",
-    "text": "The MENA parallel holds. Distribution beats product once the underlying tech is commoditised. Whoever wins the local trust layer for small business agents wins the category.",
-    "created": "2026-04-21",
-    "slot": "afternoon"
+    "id": "emom1nmuj-b166",
+    "type": "original",
+    "text": "Test draft from new gate-send pipeline. Tap ✅ to post via X API, ❌ to skip. Will not post until approved.",
+    "target": null,
+    "targetAuthor": null,
+    "created": "2026-04-30T22:17:04.363Z",
+    "slot": "evening"
   }
 ]
