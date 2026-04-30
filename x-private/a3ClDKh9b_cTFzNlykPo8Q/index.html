@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X drafts — evening 2026-04-30</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; margin: 0; padding: 16px; max-width: 720px; margin: 0 auto; }
+header { position: sticky; top: 0; background: #0a0a0a; padding: 12px 0; border-bottom: 1px solid #222; z-index: 10; }
+h1 { font-size: 20px; margin: 0 0 8px; }
+.progress { font-size: 14px; color: #a855f7; }
+.card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 14px; margin: 12px 0; transition: opacity 0.3s; }
+.card.done { opacity: 0.35; border-color: #16a34a; }
+.card.skipped { opacity: 0.25; border-color: #444; }
+.card-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 8px; }
+.num { color: #666; font-weight: 600; }
+.badge { padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 11px; }
+.badge.reply { background: #1e3a8a; color: #93c5fd; }
+.badge.original { background: #581c87; color: #c4b5fd; }
+.meta { color: #888; }
+.char-count { margin-left: auto; color: #888; font-variant-numeric: tabular-nums; }
+.target { background: #1a1a1a; border-left: 3px solid #3b82f6; padding: 8px 10px; margin: 8px 0; border-radius: 4px; font-size: 13px; }
+.target a { color: #60a5fa; font-size: 11px; text-decoration: none; }
+.target-text { color: #aaa; margin-top: 4px; }
+.draft-text { background: #0f0f0f; border: 1px solid #2a2a2a; padding: 12px; border-radius: 8px; font-size: 15px; line-height: 1.45; white-space: pre-wrap; margin: 10px 0; }
+.reason { font-size: 11px; color: #666; font-style: italic; margin: 6px 0 10px; }
+.actions { display: flex; gap: 8px; margin-top: 10px; }
+.post-btn { flex: 1; background: #1d9bf0; color: white; padding: 12px; border-radius: 999px; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px; }
+.post-btn:active { background: #1a8cd8; }
+.skip-btn { background: transparent; color: #888; border: 1px solid #333; padding: 12px 18px; border-radius: 999px; font-size: 14px; cursor: pointer; }
+.reset { background: transparent; border: none; color: #666; font-size: 12px; cursor: pointer; text-decoration: underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>X drafts — evening 2026-04-30</h1>
+  <div class="progress"><span id="done-count">0</span>/5 posted · <span id="skipped-count">0</span> skipped · <button class="reset" onclick="resetState()">reset</button></div>
+</header>
+<div id="cards">
+
+<div class="card" data-id="o1" id="card-o1">
+  <div class="card-head">
+    <span class="num">#1</span>
+    <span class="badge original">ORIGINAL</span>
+    
+    
+    
+    <span class="char-count">144c</span>
+  </div>
+  
+  <div class="draft-text">The smallest businesses get the worst tools. Enterprise gets a Salesforce admin team. A solo electrician gets a notebook and a missed-call list.</div>
+  <div class="reason">evening original</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?text=The%20smallest%20businesses%20get%20the%20worst%20tools.%20Enterprise%20gets%20a%20Salesforce%20admin%20team.%20A%20solo%20electrician%20gets%20a%20notebook%20and%20a%20missed-call%20list." target="_blank" onclick="markDone('o1')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('o1')">Skip</button>
+  </div>
+</div>
+
+<div class="card" data-id="o2" id="card-o2">
+  <div class="card-head">
+    <span class="num">#2</span>
+    <span class="badge original">ORIGINAL</span>
+    
+    
+    
+    <span class="char-count">119c</span>
+  </div>
+  
+  <div class="draft-text">What SMBs want isn't an 'AI agent'. They want a thing that picks up the phone, books the job, and stops bothering them.</div>
+  <div class="reason">evening original</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?text=What%20SMBs%20want%20isn't%20an%20'AI%20agent'.%20They%20want%20a%20thing%20that%20picks%20up%20the%20phone%2C%20books%20the%20job%2C%20and%20stops%20bothering%20them." target="_blank" onclick="markDone('o2')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('o2')">Skip</button>
+  </div>
+</div>
+
+<div class="card" data-id="o3" id="card-o3">
+  <div class="card-head">
+    <span class="num">#3</span>
+    <span class="badge original">ORIGINAL</span>
+    
+    
+    
+    <span class="char-count">128c</span>
+  </div>
+  
+  <div class="draft-text">Speed of reply beats quality of reply. A two-line answer in two minutes converts better than a perfect answer at lunch tomorrow.</div>
+  <div class="reason">evening original</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?text=Speed%20of%20reply%20beats%20quality%20of%20reply.%20A%20two-line%20answer%20in%20two%20minutes%20converts%20better%20than%20a%20perfect%20answer%20at%20lunch%20tomorrow." target="_blank" onclick="markDone('o3')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('o3')">Skip</button>
+  </div>
+</div>
+
+<div class="card" data-id="r01" id="card-r01">
+  <div class="card-head">
+    <span class="num">#4</span>
+    <span class="badge reply">REPLY</span>
+    <span class="meta">@OpenAIDevs</span>
+    
+    <span class="meta">4h</span>
+    <span class="char-count">131c</span>
+  </div>
+  <div class="target"><a href="https://x.com/OpenAIDevs/status/2049888218464870670" target="_blank">view post →</a><div class="target-text">Students are learning to build with Codex, and building to learn.
+
+Here’s what 
+@UCBerkeley
+ students built at the Codex Creator Challenge with 
+@joinHandshake
+.</div></div>
+  <div class="draft-text">The interesting unlock isn't writing code faster. It's that the cost of throwing away the first attempt has dropped to almost zero.</div>
+  <div class="reason">AI-coding angle</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2049888218464870670&text=The%20interesting%20unlock%20isn't%20writing%20code%20faster.%20It's%20that%20the%20cost%20of%20throwing%20away%20the%20first%20attempt%20has%20dropped%20to%20almost%20zero." target="_blank" onclick="markDone('r01')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r01')">Skip</button>
+  </div>
+</div>
+
+<div class="card" data-id="r02" id="card-r02">
+  <div class="card-head">
+    <span class="num">#5</span>
+    <span class="badge reply">REPLY</span>
+    <span class="meta">@shawnchauhan1</span>
+    
+    <span class="meta">8h</span>
+    <span class="char-count">145c</span>
+  </div>
+  <div class="target"><a href="https://x.com/shawnchauhan1/status/2049828761068269890" target="_blank">view post →</a><div class="target-text">A 7 billion parameter model just beat models many times its size.
+
+Not by being smarter. By learning to manage them.
+
+Sakana AI trained a small model specifically to coordinate other LLMs - deciding w</div></div>
+  <div class="draft-text">The part of these announcements that ages best: not the headline number, but who's now locked into a multi-year roadmap they can't easily change.</div>
+  <div class="reason">tech-news angle</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2049828761068269890&text=The%20part%20of%20these%20announcements%20that%20ages%20best%3A%20not%20the%20headline%20number%2C%20but%20who's%20now%20locked%20into%20a%20multi-year%20roadmap%20they%20can't%20easily%20change." target="_blank" onclick="markDone('r02')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r02')">Skip</button>
+  </div>
+</div>
+</div>
+<script>
+const KEY = 'x-drafts-evening-2026-04-30';
+const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+function refresh() {
+  let done = 0, skipped = 0;
+  document.querySelectorAll('.card').forEach(c => {
+    const id = c.dataset.id;
+    c.classList.remove('done', 'skipped');
+    if (state[id] === 'done') { c.classList.add('done'); done++; }
+    if (state[id] === 'skipped') { c.classList.add('skipped'); skipped++; }
+  });
+  document.getElementById('done-count').textContent = done;
+  document.getElementById('skipped-count').textContent = skipped;
+}
+function markDone(id) { state[id] = 'done'; localStorage.setItem(KEY, JSON.stringify(state)); refresh(); }
+function markSkipped(id) { state[id] = 'skipped'; localStorage.setItem(KEY, JSON.stringify(state)); refresh(); }
+function resetState() { if (confirm('Reset all progress?')) { localStorage.removeItem(KEY); location.reload(); } }
+refresh();
+</script>
+</body>
+</html>
