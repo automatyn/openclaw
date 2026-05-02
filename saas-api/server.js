@@ -1,3 +1,10 @@
+process.on('uncaughtException', (err) => {
+  console.error('[uncaughtException]', err && err.stack ? err.stack : err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[unhandledRejection]', reason && reason.stack ? reason.stack : reason);
+});
+
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');

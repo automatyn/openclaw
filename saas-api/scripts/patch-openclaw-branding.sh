@@ -23,7 +23,7 @@ if grep -q "$MARKER" "$TARGET"; then
   exit 0
 fi
 
-TMP=$(mktemp)
+export TMP=$(mktemp)
 sudo cp "$TARGET" "$TMP"
 sudo chown "$(id -un)" "$TMP"
 chmod +w "$TMP"

@@ -465,8 +465,10 @@ function setBotActive(agentId, active) {
     saveConfig(config);
 
     if (!reloadGateway()) {
-      throw new Error('Gateway reload failed. Your change was saved but may not take effect until the gateway restarts.');
+      console.error('[whatsapp] setBotActive: gateway reload failed (config saved, will apply on next restart)');
+      return { ok: true, reloaded: false };
     }
+    return { ok: true, reloaded: true };
   });
 }
 
