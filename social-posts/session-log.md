@@ -576,3 +576,28 @@ Open items for next slot:
 - Signups last 14h: **0 new** (23 total).
 - Open items carried: yt-dlp install, Forge unreachable on Pat's laptop (blocks SEO Daily Task C + Reddit images), drip persistence bug, reply-detector autoresponder false-positive bug, double-send concurrency lock for sender.js, Adam stuck pre-WhatsApp connection.
 
+
+### /evening — 2026-05-04 19:00 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **125 followers / 657 tweets** (+1t since /afternoon).
+- X dual-channel: API source 5 candidates (/bin/bash.28/.50, all dupes of earlier today's drafts). Browser scrape **49 candidates** (best yet). After dedupe + fxtwitter checks: **8 unified drafts** (1 original + 7 replies). Targets: rauchg 470k, AravSrinivas 489k, lennysan 345k, arvidkahl 197k, patio11 194k, TTrimoreau 7.7k, rxhit05 2.8k. All <6h.
+- Drafts page: https://automatyn.co/x-private/yps3ietjwYlB-fQ/. Telegram msg 159 sent.
+- **Today's X total: 23 drafts (3 originals + 20 replies). BELOW 30-replies/day target.** Reason: API source dry of new top-tier handles (same 10-12 accounts cycle through every slot, dedup eats most). Browser source is the volume driver.
+- Reddit pipeline: webhook fired OK ({"message":"Workflow was started"}, HTTP 200).
+- Reply detector 24h: 29 inbox msgs scanned, **0 new replies, 0 bounces.**
+- **Outreach this slot:** E1 0 (no personalised-but-unsent leads), E2 0 (none at day-3 cadence), **E3 9 sent** (1 fail — null email on a placeholder I purged earlier; sender needs null-email guard, noted as bug).
+- **Outreach today total:** E1 **20** / E2 **15** / E3 **29** = **64 emails sent today**.
+- **Outreach lifetime:** 208 E1 / 176 E2 / 144 E3 (total 528) / 39 E1 opens / 41 E2 opens / 20 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 694/206/208.
+- Brevo opens: 46 events, 29 matched (48h window).
+- **NEW outreach copy live since 17:30 today.** 0 sends with new copy yet (today's E1 went out before deploy). E2 cadence will start hitting new copy ~5 days from now; E1 with new copy starts on next /afternoon ingest+enrich+personalise cycle.
+- **Outreach machine optimisations shipped today (commit da9d255):** rewrote E1/E2/E3 templates (money-loss subjects, Adam social proof, low-friction CTAs), added named-mailbox preference in sender, extended junk-domain filter (mysite.com, etc).
+- **Autonomous monitor shipped today (commit ff5b7dc):** outreach/monitor.js runs every 4h via cron once registered, checks brevo health, kills underperforming variants, telegrams pat on signups/replies/halts only, logs state for next routine to read.
+- **WhatsApp pairing fix (Adam):** restarted automatyn-api at 18:24 UTC — stale Baileys WA Web version 1038674955 (cached since 05-02 12:36) was being rejected by WhatsApp ("QR refs attempts ended"). Current is 1038719215 (44k revs ahead). Next QR scan should pair.
+- **Gateway crashloop fix:** disabled whatsapp:default account in ~/.openclaw/openclaw.json (auth dir empty, never connectable). Was crashlooping every 10-15 min for 3 days (86 events today, 118 yesterday, 126 day before). Zero restart events since fix at 18:26.
+- TikTok: yt-dlp not installed (open from previous sessions). Stats unchanged. Carousels SKIPPED (Postiz paused).
+- LinkedIn / Dev.to / Medium: deferred to SEO Daily Task D (fired 10:05 today; Task C blogs blocked by Forge unreachable on Pat's laptop, no new blogs since 2026-05-01).
+- Triggers: 3 enabled (SEO Daily next 2026-05-05 10:03, SEO Audit weekly next 2026-05-11 09:02, SEO Day-14 one-shot 2026-05-07 09:06). 2 disabled (used).
+- Signups today: **0 new** (23 total: 18 free / 4 starter / 1 pro). No caps hit today.
+- **Adam status:** Still whatsappConnected=false, conversationCount=0. Email last 14h ago ("How businesses like yours use Automatyn"), opened twice. After today's fixes, awaiting Pat to send personal nudge to retry the QR scan.
+- Open items: yt-dlp install, Forge restart on Pat's laptop, drip persistence bug, reply-detector autoresponder false-positive, double-send concurrency lock, sender null-email guard (new today), cron registration for monitor.js (new today).
+
