@@ -651,3 +651,45 @@ Open items for next slot:
   - Cron registration for outreach/monitor.js (last entry 05-04)
   - drip persistence bug (RAM-only setTimeouts)
   - reply-detector autoresponder false-positive
+
+### /evening — 2026-05-06 21:40 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **127 followers / 705 tweets** (+1f, +18t since /afternoon — Pat actively posting).
+- X dual-channel: API source 5 candidates ($0.40/$4.50). Browser 50 candidates (50/35-handle window). After dedupe vs afternoon drafts: **15 unified drafts** (3 originals + 12 replies hand-written, NO angle-matcher used). Note: 2 API candidates were dupes of afternoon's drafts (alexalbert "More chips" + "Code with Claude" talk) — wasted $0.01 in API reads. Bug: `scrape-via-api.js` doesn't dedupe across slot history.
+- Drafts targets: gregisenberg 638k (x2 — nerf-AI + Design.md), patio11 194k (x2), simonw 173k (x2 — robobun), jasonlk 239k (x2 — AI VP + RevenueCat 10B), TTrimoreau 7.7k (x2), lennysan 345k, GergelyOrosz 332k.
+- Drafts page: https://automatyn.co/x-private/f6ylAvSfAbxtu-Y/. Telegram msg 169 sent.
+- **Today's X total: 33 unique drafts (9 originals + 24 hand-drafted replies) across morning/afternoon/evening.** Approaching the 30-50/day target via hand-drafting. Browser scrape volume is healthy (52/53/50); API source needs cross-slot dedupe before we burn more budget.
+- Reddit pipeline: webhook 200.
+- Reply detector 24h: **37 inbox msgs scanned, 0 new replies, 0 bounces.**
+- **Outreach this slot:** SKIPPED. Pool dry: E1 ready 0, E2 ready 0, E3 ready 1 (the same null-email lead that fails sender). Not running ingest again — today's two ingests produced 22 + 6 leads but enrich found 0 emails on any of them. Enrichment script likely broken or pointing at a dead source.
+- **Outreach today total:** E1 **0** / E2 **6** / E3 **17** = **23 emails sent today**.
+- **Outreach lifetime:** 208 E1 / 182 E2 / 175 E3 = 565 / 43 E1 opens / 41 E2 opens / 27 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 775/206/208.
+- Brevo opens 48h: 40 events, 25 matched.
+- Variant diagnostic (14d): Overall **FIX CTA**. Best subject: S3×C1_binary 45.5% open. Worst: S3×C4_link 10% (FULL RESET).
+- **ADAM (AB Plumbing & Heating): WhatsApp pairing still BROKEN.** Today's saga:
+  - Adam reported "WhatsApp accepted the link but dashboard not updating" at 20:15. Investigated.
+  - **Bug 1 found: duplicate-socket race in whatsapp.js** — pre-pair silent close was triggering the same reconnect path as 515-restart, spawning a second socket per attempt. WhatsApp rejected both with code 408. Fixed in commit `7be89c5` (added saw515 flag, only reconnect on confirmed 515 or post-515 silent close).
+  - **Bug 2 found: phone normalization missing.** Adam's number `07496283791` was being sent to WhatsApp as-is, JID `07496283791@s.whatsapp.net` rejected. Added UK national-format detection: `^07\d{9}$` → strip leading 0, prefix `44`. Logged in `creds.json` from a failed attempt — `me.id` showed the broken JID directly.
+  - Both fixes deployed. Restarted automatyn-api. Tested fix on dummy agent ID via direct `wa.startQrPairing()` call — only 1 socket spawned, no duplicate-race anymore.
+  - **BUT: Adam's next QR attempt at 21:22 still failed with code=408.** Likely WhatsApp rate-limiting his agent's IP+device fingerprint after ~10 failed pair attempts today. Recommended pausing further attempts until tomorrow morning to let throttle clear.
+  - Phone-code path also generated a code (`KHDYDPGG` then `CWGAM1VM`) but expired before Adam could use them (3-minute WA-imposed lifetime).
+  - Next steps: tomorrow let throttle clear, tell Adam to use Phone Number tab on dashboard (he can self-generate fresh code, no email round-trip needed).
+- Memory saved: `feedback_email_drafts_format.md` (Pat copy-pastes drafts into Gmail, must be plain text not markdown).
+- TikTok: yt-dlp still missing (PEP 668 blocks pip). Carousels SKIPPED (Postiz paused).
+- LinkedIn / Dev.to / Medium: deferred (SEO Daily Task C blocked by Forge unreachable, no blogs to distribute).
+- **SEO Daily fired 10:08 UTC, produced 0 commits.** Same Forge-blocked failure mode as yesterday.
+- Triggers: 3 enabled. SEO Daily next 2026-05-07 10:08, SEO Audit weekly next 2026-05-11 09:02, SEO Day-14 ONE-SHOT FIRES TOMORROW 2026-05-07 09:06 (decision report on bump-or-hold).
+- Signups today: **0 new** (23 total: 18 free / 4 starter / 1 pro). 0 caps hit today.
+- Open items carried (active):
+  - Forge unreachable on Pat's laptop → blocks Task C blogs every day, Reddit images, distribution.
+  - Sender null-email guard (E3 fails on bad lead twice today).
+  - Sender double-send concurrency lock.
+  - Enrich-emails finding 0/28 emails on today's ingested leads.
+  - draft-from-candidates angle pool useless without LLM upgrade — current week shipping 100% hand-drafted replies.
+  - Browser scraper missing follower enrichment (have to verify via fxtwitter every time).
+  - X API budget tracker doesn't dedupe candidates across slots (wasted $0.01 today).
+  - yt-dlp install (apt or pipx, pip blocked by PEP 668).
+  - Cron registration for outreach/monitor.js (last entry 05-04, monitor not running).
+  - drip persistence bug (RAM-only setTimeouts).
+  - reply-detector autoresponder false-positive bug.
+  - **Adam pair throttle waiting cooldown 24h. Test tomorrow ~9-10am UK.**
