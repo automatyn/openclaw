@@ -693,3 +693,45 @@ Open items for next slot:
   - drip persistence bug (RAM-only setTimeouts).
   - reply-detector autoresponder false-positive bug.
   - **Adam pair throttle waiting cooldown 24h. Test tomorrow ~9-10am UK.**
+
+### /morning — 2026-05-07 07:30 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **128 followers / 719 tweets** (+1f, +14t since /evening — Pat posted overnight).
+- Triggers (5 total): 3 enabled. SEO Day-14 ONE-SHOT fires today 09:06 UTC. SEO Daily next 10:00 UTC. SEO Audit next 2026-05-11. **Skill's Content Machine / Medium Writer / Blog Writer trigger IDs are stale (404)** — replaced by SEO Daily Task C months ago.
+- Forge: **UP** (HTTP 200, 324ms, JuggernautXL loaded). First time in 3 days. Today's SEO Daily Task C should produce blogs.
+- X dual-channel:
+  - API source 5 reads / 4 candidates kept ($0.42 / $4.50 month). **BUG: scrape-via-api.js writes to candidates.json, then browser scrape OVERWRITES it 30s later.** Wasted $0.025 today. File-collision script bug.
+  - Browser scrape 52 candidates from 35 handles (good freshness signal: 30 ok, 6 noRecent, 3 broken, 26 skipped on age, 5 skipped on content).
+  - **Only 9 candidates passed strict <6h filter.** 43 of 52 were 6-19h old, all skipped per recency rule (feedback_x_reply_recency.md says skip author entirely if latest >6h).
+  - **8 unified drafts** (3 originals + 5 hand-drafted replies). Below 10-12 target due to recency floor.
+- Drafts targets: TTrimoreau 7958, dharmesh 376k, hnshah 288k, AishwaryaDevv 2336, shawnchauhan1 32k. All <2h fresh.
+- Drafts page: https://automatyn.co/x-private/morning-ydleAs8C/. Telegram msg 170 sent.
+- Reddit pipeline: webhook 200 (Forge UP today, expect images this run).
+- **Outreach this slot:** SKIPPED ALL BATCHES.
+  - E2 ready=0 (none at day-3, sender returned "0 lead(s) to send").
+  - E1 ready=0 (pool dry; ingest +6 leads but enrich-emails timed out at 180s, no emails enriched — same ongoing problem).
+  - E3 ready=1 (the same null-email lead, sender hit `Cannot read properties of null (reading 'toLowerCase')`).
+- **Outreach today total: E1 0 / E2 0 / E3 0 = 0 emails sent.**
+- **Outreach lifetime:** 208 E1 / 182 E2 / 175 E3 = 565 / 43 E1 opens / 41 E2 opens / 28 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 781/206/208.
+- Brevo opens 48h: 21 events, 15 matched.
+- Reply detector 14h: 24 inbox msgs scanned, 0 replies, 0 bounces.
+- Variant diagnostic (14d): Overall **FULL RESET**. Standout: **S3×C1_binary 45.5% open** (11 sends, FIX CTA — best subject by far). C4_link consistently FULL RESET (3 pairs, 12.5% / 12.5% / 10% open). S1×C2_reverse 0% open over 12 sends → drop entirely.
+- SEO 7d: **76 imp / 0 clk / pos 14.5** (vs yesterday 74 imp / pos 23.4 — fewer clicks but avg pos significantly improved). Top page passive-income blog 75 imp / pos 14.6. New blog claude-managed-agents at pos 9.0 (1 imp, getting indexed).
+- TikTok: yt-dlp still missing (PEP 668 blocks pip). Stats unchanged. Carousels SKIPPED (Postiz paused). yt-dlp install option: `sudo snap install yt-dlp` (snap available, pipx not).
+- LinkedIn: SKIPPED (Postiz paused).
+- Dev.to: last article 2026-04-20 (17 days ago, way past 3d threshold). SKIPPED — Task D handles distribution after Task C produces a blog.
+- Medium: SKIPPED (deferred to SEO Daily Task D).
+- Signups last 14h: **0 new** (23 total). 0 new caps.
+- Adam (AB Plumbing): WhatsApp pair was throttled overnight per /evening evening note. Test ~9-10am UK = ~8-9 UTC = right now-ish. **Pat: ping Adam to retry QR via Phone Number tab on dashboard.**
+- Open items carried (active):
+  - **scrape-via-api.js writes to candidates.json then gets overwritten by scrape-targets.js** — fix: rename API output to `candidates-api.json` (~5 min fix).
+  - Forge UP today, monitor it stays up through 10:00 SEO Daily run.
+  - Sender null-email guard (E3 fails on bad lead daily).
+  - Sender double-send concurrency lock.
+  - Enrich-emails timing out at 180s (today: 0/6 enriched). Likely fetcher hanging.
+  - draft-from-candidates angle pool useless without LLM upgrade — 100% hand-drafted week.
+  - Browser scraper missing follower enrichment (verify via fxtwitter every time).
+  - yt-dlp install (try `sudo snap install yt-dlp`).
+  - Cron registration for outreach/monitor.js (last entry 2026-05-04).
+  - drip persistence bug (RAM-only setTimeouts).
+  - reply-detector autoresponder false-positive bug.
