@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-07T21:32:23.200Z",
+  "scraped_at": "2026-05-08T08:02:32.009Z",
   "window_hours": 24,
   "source": "x-api-v2",
   "stats": {
@@ -8,75 +8,75 @@
     "skippedContent": 0
   },
   "budget": {
-    "used": 95,
+    "used": 100,
     "cap": 900,
-    "remaining": 805
+    "remaining": 800
   },
   "candidates": [
     {
-      "handle": "AnthropicAI",
-      "tweet_id": "2052494460966019137",
-      "url": "https://x.com/AnthropicAI/status/2052494460966019137",
-      "text": "We’re donating Petri, our open-source alignment tool, to @meridianlabs_ai, so its development can continue independently.\n\nWorking with Meridian Labs, we’ve also released a major update that improves the adaptability, realism, and depth of Petri’s tests.\n\nhttps://t.co/CyicsIScJi",
-      "created_at": "2026-05-07T21:03:07.000Z",
-      "age_hours": 0.5,
-      "likes": 300,
-      "replies": 20,
-      "reposts": 26,
-      "views": 19396,
-      "author_followers": 1236707
+      "handle": "GergelyOrosz",
+      "tweet_id": "2052617506334900667",
+      "url": "https://x.com/GergelyOrosz/status/2052617506334900667",
+      "text": "Unfortunate optics for Coinbase to have an hours-long outage when customers could not trade, a few days after their CEO said how non-technical teams are shipping code to production.\n\nThis outage is because Coinbase seems to have a hard dependency on AWS, and when AWS (or a part h",
+      "created_at": "2026-05-08T05:12:03.000Z",
+      "age_hours": 2.8,
+      "likes": 602,
+      "replies": 35,
+      "reposts": 36,
+      "views": 55601,
+      "author_followers": 332426
     },
     {
-      "handle": "levelsio",
-      "tweet_id": "2052493896970555902",
-      "url": "https://x.com/levelsio/status/2052493896970555902",
-      "text": "Maybe Claude is just tired? https://t.co/sbSrqqqanK",
-      "created_at": "2026-05-07T21:00:53.000Z",
-      "age_hours": 0.5,
-      "likes": 43,
-      "replies": 18,
-      "reposts": 0,
-      "views": 7378,
-      "author_followers": 863096
+      "handle": "GergelyOrosz",
+      "tweet_id": "2052612980433379654",
+      "url": "https://x.com/GergelyOrosz/status/2052612980433379654",
+      "text": "Remember these predictions?\n\n“Software engineering will be dead because of AI” —&gt; we’re seeing more demand for sw engineering (good part thanks to AI)\n\n“SaaS will be dead because of AI” —&gt; SaaS businesses growing massively (in part thanks to AI)\n\nBe careful what you believe",
+      "created_at": "2026-05-08T04:54:04.000Z",
+      "age_hours": 3.1,
+      "likes": 299,
+      "replies": 42,
+      "reposts": 28,
+      "views": 16602,
+      "author_followers": 332426
     },
     {
-      "handle": "levelsio",
-      "tweet_id": "2052498163693457522",
-      "url": "https://x.com/levelsio/status/2052498163693457522",
-      "text": "Man this makes sense, European evening now, American day, maybe that's why Claude is bad https://t.co/msn6prMScW",
-      "created_at": "2026-05-07T21:17:50.000Z",
-      "age_hours": 0.2,
-      "likes": 26,
-      "replies": 16,
-      "reposts": 0,
-      "views": 5818,
-      "author_followers": 863096
+      "handle": "GergelyOrosz",
+      "tweet_id": "2052614969888297357",
+      "url": "https://x.com/GergelyOrosz/status/2052614969888297357",
+      "text": "Remind me how every manager at Coinbase doing IC work, some with 15+reports will help generate more revenue, when revenue is fully dependent on trading volume, and trading volume is falling?\n\nunless these managers code up new businesses not dependent on this market ofc… https://t",
+      "created_at": "2026-05-08T05:01:59.000Z",
+      "age_hours": 3,
+      "likes": 384,
+      "replies": 9,
+      "reposts": 13,
+      "views": 37220,
+      "author_followers": 332426
     },
     {
-      "handle": "AravSrinivas",
-      "tweet_id": "2052497181702250503",
-      "url": "https://x.com/AravSrinivas/status/2052497181702250503",
-      "text": "Monitor the Situation \nhttps://t.co/TLkTfvJLLR",
-      "created_at": "2026-05-07T21:13:56.000Z",
-      "age_hours": 0.3,
-      "likes": 28,
+      "handle": "jasonlk",
+      "tweet_id": "2052622523804893198",
+      "url": "https://x.com/jasonlk/status/2052622523804893198",
+      "text": "2.5 days can change your roadmap. Your hiring plan. Your pricing strategy. Your fundraising narrative. \n\nSaaStr AI 2026 does that every year. \n\nThis year is the biggest one yet. \n\nMay 12-14. SF Bay. https://t.co/Zou0kioofV",
+      "created_at": "2026-05-08T05:32:00.000Z",
+      "age_hours": 2.5,
+      "likes": 12,
       "replies": 3,
-      "reposts": 4,
-      "views": 1928,
-      "author_followers": 493705
+      "reposts": 2,
+      "views": 1257,
+      "author_followers": 239527
     },
     {
-      "handle": "TKopelman",
-      "tweet_id": "2052500269515014517",
-      "url": "https://x.com/TKopelman/status/2052500269515014517",
-      "text": "Most wealth individuals work with some who does their taxes\n\nBut they don't have someone that does their \"tax planning\" \n\nTaxes are one of the most controllable parts of your financial life\n\nYou need filing and you need planning",
-      "created_at": "2026-05-07T21:26:12.000Z",
-      "age_hours": 0.1,
-      "likes": 1,
+      "handle": "shawnchauhan1",
+      "tweet_id": "2052637208860086582",
+      "url": "https://x.com/shawnchauhan1/status/2052637208860086582",
+      "text": "Anthropic just committed $200 billion to Google over five years.\n\nThe same Google that has invested billions into Anthropic.\nThe money goes out, comes back, goes out again.\n\nCloud giants fund AI labs.\nAI labs then become the largest customers of those same cloud giants.\n\nIt looks",
+      "created_at": "2026-05-08T06:30:21.000Z",
+      "age_hours": 1.5,
+      "likes": 8,
       "replies": 0,
-      "reposts": 0,
-      "views": 149,
-      "author_followers": 39889
+      "reposts": 3,
+      "views": 329,
+      "author_followers": 32114
     }
   ]
 }

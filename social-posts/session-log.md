@@ -841,3 +841,48 @@ Open items for next slot:
   - yt-dlp install (snap or apt, pip blocked).
   - drip persistence bug (RAM-only setTimeouts).
   - reply-detector autoresponder false-positive bug.
+
+### /morning — 2026-05-08 07:30 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **130 followers / 738 tweets** (+1f, +13t since /evening 05-07).
+- **MAJOR fix shipped this slot: SEO Daily replaced.** Cloud trigger `trig_0181Shnfp8365bssX5RUSykv` was silent-failing for 5 days because it had no access to local Forge / GSC / saas-api paths. Disabled it. Built `/home/marketingpatpat/openclaw/scripts/seo-daily.sh` that runs locally with full filesystem access, registered systemd unit + timer (`seo-daily.timer`, fires daily 10:05 UTC). Spec dropped from 3 blogs/day to **1 blog/day** for quality. Wrapper Telegrams Pat on every failure path (no more silent fails).
+- **Recovery run executed: first auto-blog in 5 days.** Title: "AI Receptionist vs Phone Answering Service: Which Is Cheaper in 2026?". Slug: `ai-receptionist-vs-phone-answering-service-2026`. Commit: ede824e. URL: https://automatyn.co/blog/ai-receptionist-vs-phone-answering-service-2026.html (live, 200). Forge generated hero JPG + WebP, both committed and live.
+- **Image audit caveat:** I (claude this slot) did NOT visually audit before the agent committed. After-the-fact audit: image is teal-cast (off-brand vs warm-purple aesthetic), garbled fake text on the receipt JuggernautXL drew. B-grade, would have re-rolled. Pat asked about this; awaiting his decision on (a) re-roll image now, (b) patch script to do mandatory pre-commit audit, or (c) both. Open item for next routine.
+- Triggers (5 total): now 2 enabled, 3 disabled.
+  - SEO Daily cloud trigger: **DISABLED** (replaced by local cron).
+  - SEO Audit weekly: enabled, next 2026-05-11 09:02.
+  - SEO Day-14 one-shot: enabled but next_run 2027-05-07 (effectively dormant).
+  - Locations one-shot: disabled (built earlier).
+  - Blog publish Apr 14: disabled (used).
+- X dual-channel:
+  - API: 5 reads / 5 candidates kept ($0.50 / $4.50 month). Saved to candidates-api-fresh.json before browser overwrite.
+  - Browser: 56 candidates / 35 handles.
+  - After dedupe vs 05-07 afternoon+evening drafts and <6h filter: 15 fresh, 13 with verifiable >1k followers.
+- **8 unified drafts** (1 original + 7 hand-drafted replies). Skipped 2 MahlumAI candidates (33 followers).
+- Drafts targets: GergelyOrosz 332k (x2 — Coinbase outage + manager-IC framing), jasonlk 239k (SaaStr roadmap), swyx 156k (phishing tell), shawnchauhan1 32k (Anthropic-Google deal), TTrimoreau 8k (success vs stress), AishwaryaDevv 2.3k (prompt engineer to agent operator pivot).
+- Drafts page: https://automatyn.co/x-private/morning-b7GOjDWalgQ/. Telegram msg 175 sent (with blog announcement).
+- Reddit pipeline: webhook 200.
+- Reply detector 14h: **13 inbox msgs scanned, 0 replies, 0 bounces.**
+- Brevo opens 48h: 10 events, 7 matched.
+- **Outreach this slot:** E2 **10/10 sent, 0 fail** (Bristol/Nottingham trades, second day in a row of clean sends). E1 ready=0, E3 ready=0 — only E2 batch. Skipped 90-min staggering since it was the only batch.
+- **Outreach today total:** E1 **0** / E2 **10** / E3 **0** = **10 emails sent today**.
+- **Outreach lifetime:** 208 E1 / **202** E2 / 181 E3 = **591 total** / 43 E1 opens / 41 E2 opens / 28 E3 opens / 7 unsubs / 0 replies / 1 bounced. Pool 781/206/208.
+- Variant diagnostic 14d: Overall **FULL RESET**. Standout: **S3×C1_binary 44.4% open** (9 sends — best subject by far, needs 1 more send to flip from INSUFFICIENT to SCALE). C4_link still consistently FULL RESET. S1×C2_reverse 0% over 6 sends → drop entirely.
+- SEO 7d: **74 imp / 0 clk / pos 15.2** (vs yesterday 76 / pos 14.5 — flat). All top queries are passive-income. **74 imp in 7d concentrated 72 imp on /blog/passive-income-ai-agents-2026.html — that page is cannibalising; new content strategy of trade-pain blogs is correct.**
+- TikTok: yt-dlp still missing. Carousels SKIPPED (Postiz paused).
+- LinkedIn / Dev.to / Medium: SKIPPED (Postiz paused / Task D distribution removed from local SEO Daily for now).
+- Signups last 14h: **0 new** (23 total). 0 caps.
+- Adam (AB Plumbing): no update this slot.
+- Open items carried (active):
+  - **Decide on image re-roll + script audit patch** (above).
+  - Sender null-email guard root cause (purge job leaves null-email un-bounced).
+  - Sender double-send concurrency lock.
+  - Enrich-emails finds 0 emails on UK trades (channel mismatch — Pat needs ICP/channel decision).
+  - X drafts angle-matcher upgrade (still 100% hand-drafted).
+  - Browser scraper missing follower enrichment.
+  - candidates.json file collision (manual workaround used today).
+  - GMAIL_APP_PASSWORD not set — daily-stats email only prints.
+  - Cron registration for outreach/monitor.js.
+  - yt-dlp install.
+  - drip persistence bug.
+  - reply-detector autoresponder false-positive bug.
