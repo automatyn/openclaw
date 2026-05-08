@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X drafts — afternoon 2026-05-08</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; margin: 0; padding: 16px; max-width: 720px; margin: 0 auto; }
+header { position: sticky; top: 0; background: #0a0a0a; padding: 12px 0; border-bottom: 1px solid #222; z-index: 10; }
+h1 { font-size: 20px; margin: 0 0 8px; }
+.progress { font-size: 14px; color: #a855f7; }
+.card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 14px; margin: 12px 0; transition: opacity 0.3s; }
+.card.done { opacity: 0.35; border-color: #16a34a; }
+.card.skipped { opacity: 0.25; border-color: #444; }
+.card-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 8px; }
+.num { color: #666; font-weight: 600; }
+.badge { padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 11px; }
+.badge.reply { background: #1e3a8a; color: #93c5fd; }
+.badge.original { background: #581c87; color: #c4b5fd; }
+.meta { color: #888; }
+.char-count { margin-left: auto; color: #888; font-variant-numeric: tabular-nums; }
+.target { background: #1a1a1a; border-left: 3px solid #3b82f6; padding: 8px 10px; margin: 8px 0; border-radius: 4px; font-size: 13px; }
+.target a { color: #60a5fa; font-size: 11px; text-decoration: none; }
+.target-text { color: #aaa; margin-top: 4px; }
+.draft-text { background: #0f0f0f; border: 1px solid #2a2a2a; padding: 12px; border-radius: 8px; font-size: 15px; line-height: 1.45; white-space: pre-wrap; margin: 10px 0; }
+.reason { font-size: 11px; color: #666; font-style: italic; margin: 6px 0 10px; }
+.actions { display: flex; gap: 8px; margin-top: 10px; }
+.post-btn { flex: 1; background: #1d9bf0; color: white; padding: 12px; border-radius: 999px; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px; }
+.post-btn:active { background: #1a8cd8; }
+.skip-btn { background: transparent; color: #888; border: 1px solid #333; padding: 12px 18px; border-radius: 999px; font-size: 14px; cursor: pointer; }
+.reset { background: transparent; border: none; color: #666; font-size: 12px; cursor: pointer; text-decoration: underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>X drafts — afternoon 2026-05-08</h1>
+  <div class="progress"><span id="done-count">0</span>/11 posted · <span id="skipped-count">0</span> skipped · <button class="reset" onclick="resetState()">reset</button></div>
+</header>
+<div id="cards">
+<div class="card" data-id="o1" id="card-o1">
+  <div class="card-head">
+    <span class="num">#1</span>
+    <span class="badge original">ORIGINAL</span>
+    <span class="char-count">178c</span>
+  </div>
+  
+  <div class="draft-text">A pattern from this week: every SMB owner I onboarded ran the agent silent for 24 hours before going live. Watching their own customers test it changed every prompt I wrote next.</div>
+  <div class="reason">Field-data observation, conversation-starter for builders.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?text=A%20pattern%20from%20this%20week%3A%20every%20SMB%20owner%20I%20onboarded%20ran%20the%20agent%20silent%20for%2024%20hours%20before%20going%20live.%20Watching%20their%20own%20customers%20test%20it%20changed%20every%20prompt%20I%20wrote%20next." target="_blank" onclick="markDone('o1')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('o1')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r1" id="card-r1">
+  <div class="card-head">
+    <span class="num">#2</span>
+    <span class="badge reply">REPLY</span><span class="meta">@TKopelman</span>
+    <span class="char-count">173c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/TKopelman/status/2052723752169885838" target="_blank">@TKopelman · 40k fol · view post →</a>
+    <div class="target-text">You don't need a complicated investment strategy to be successful. You need a simple one you actually use.</div>
+  </div>
+  <div class="draft-text">The simple-strategy gap shows up worst in trades. They run the same call-out fee for 3 years while costs climb. Whats the simplest test youd run on a portfolio held 5 years?</div>
+  <div class="reason">Brings Kopelman's frame into trades ICP. Asks for his test.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052723752169885838&text=The%20simple-strategy%20gap%20shows%20up%20worst%20in%20trades.%20They%20run%20the%20same%20call-out%20fee%20for%203%20years%20while%20costs%20climb.%20Whats%20the%20simplest%20test%20youd%20run%20on%20a%20portfolio%20held%205%20years%3F" target="_blank" onclick="markDone('r1')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r1')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r2" id="card-r2">
+  <div class="card-head">
+    <span class="num">#3</span>
+    <span class="badge reply">REPLY</span><span class="meta">@shawnchauhan1</span>
+    <span class="char-count">167c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/shawnchauhan1/status/2052720339478864241" target="_blank">@shawnchauhan1 · 32k fol · view post →</a>
+    <div class="target-text">Legal AI Legora hires Jude Law, $5.6B valuation, $600M raised.</div>
+  </div>
+  <div class="draft-text">Jude Law is a budget reveal. $600M raised means they need a brand search story to enterprise legal in 6 quarters. Whats the actual product moat under the spokesperson?</div>
+  <div class="reason">Forces specifics on the moat.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052720339478864241&text=Jude%20Law%20is%20a%20budget%20reveal.%20%24600M%20raised%20means%20they%20need%20a%20brand%20search%20story%20to%20enterprise%20legal%20in%206%20quarters.%20Whats%20the%20actual%20product%20moat%20under%20the%20spokesperson%3F" target="_blank" onclick="markDone('r2')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r2')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r3" id="card-r3">
+  <div class="card-head">
+    <span class="num">#4</span>
+    <span class="badge reply">REPLY</span><span class="meta">@TTrimoreau</span>
+    <span class="char-count">147c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/TTrimoreau/status/2052717898158731663" target="_blank">@TTrimoreau · 8k fol · view post →</a>
+    <div class="target-text">How many products have you shipped since the start of the year?</div>
+  </div>
+  <div class="draft-text">0 fully shipped, 4 half-shipped. Every founder I ask says some version of this. Whats your honest count and whats the one stuck in 80 percent done?</div>
+  <div class="reason">Shares vulnerable number, asks his back.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052717898158731663&text=0%20fully%20shipped%2C%204%20half-shipped.%20Every%20founder%20I%20ask%20says%20some%20version%20of%20this.%20Whats%20your%20honest%20count%20and%20whats%20the%20one%20stuck%20in%2080%20percent%20done%3F" target="_blank" onclick="markDone('r3')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r3')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r4" id="card-r4">
+  <div class="card-head">
+    <span class="num">#5</span>
+    <span class="badge reply">REPLY</span><span class="meta">@TKopelman</span>
+    <span class="char-count">133c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/TKopelman/status/2052704676202569924" target="_blank">@TKopelman · 40k fol · view post →</a>
+    <div class="target-text">People judge advisors by 'did you beat the S&amp;P 500'. Not how real money works.</div>
+  </div>
+  <div class="draft-text">The S&amp;P framing punishes anyone who actually managed risk in a drawdown year. Whats the question you wish more clients asked instead?</div>
+  <div class="reason">Validates his thesis, asks for the better question.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052704676202569924&text=The%20S%26P%20framing%20punishes%20anyone%20who%20actually%20managed%20risk%20in%20a%20drawdown%20year.%20Whats%20the%20question%20you%20wish%20more%20clients%20asked%20instead%3F" target="_blank" onclick="markDone('r4')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r4')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r5" id="card-r5">
+  <div class="card-head">
+    <span class="num">#6</span>
+    <span class="badge reply">REPLY</span><span class="meta">@GergelyOrosz</span>
+    <span class="char-count">190c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/GergelyOrosz/status/2052702817819795965" target="_blank">@GergelyOrosz · 332k fol · view post →</a>
+    <div class="target-text">Outside of Coinbase, did any other major service have a 8-hour outage?</div>
+  </div>
+  <div class="draft-text">I was on Coinbase Pro that day, also did not notice. The blast radius for Coinbase outages is mostly Coinbase users not crypto-at-large. Was there a single sympathetic move on BTC during it?</div>
+  <div class="reason">Adds data point, asks for cross-check.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052702817819795965&text=I%20was%20on%20Coinbase%20Pro%20that%20day%2C%20also%20did%20not%20notice.%20The%20blast%20radius%20for%20Coinbase%20outages%20is%20mostly%20Coinbase%20users%20not%20crypto-at-large.%20Was%20there%20a%20single%20sympathetic%20move%20on%20BTC%20during%20it%3F" target="_blank" onclick="markDone('r5')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r5')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r6" id="card-r6">
+  <div class="card-head">
+    <span class="num">#7</span>
+    <span class="badge reply">REPLY</span><span class="meta">@GergelyOrosz</span>
+    <span class="char-count">192c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/GergelyOrosz/status/2052684230392479931" target="_blank">@GergelyOrosz · 332k fol · view post →</a>
+    <div class="target-text">AI infra and AI adoption today reminds me of Cloud adoption in the 2010s.</div>
+  </div>
+  <div class="draft-text">Cloud took the better part of a decade to flip from optional to default. AI feels faster but the hard part is still the org chart change underneath. Whats the milestone you watch for the flip?</div>
+  <div class="reason">Engages his framing, asks for milestone.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052684230392479931&text=Cloud%20took%20the%20better%20part%20of%20a%20decade%20to%20flip%20from%20optional%20to%20default.%20AI%20feels%20faster%20but%20the%20hard%20part%20is%20still%20the%20org%20chart%20change%20underneath.%20Whats%20the%20milestone%20you%20watch%20for%20the%20flip%3F" target="_blank" onclick="markDone('r6')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r6')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r7" id="card-r7">
+  <div class="card-head">
+    <span class="num">#8</span>
+    <span class="badge reply">REPLY</span><span class="meta">@TTrimoreau</span>
+    <span class="char-count">167c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/TTrimoreau/status/2052677887963144503" target="_blank">@TTrimoreau · 8k fol · view post →</a>
+    <div class="target-text">Founders, what are you working on before weekend? Drop your product's link.</div>
+  </div>
+  <div class="draft-text">Building an AI receptionist for UK plumbers right now, link if useful: https://automatyn.co/pricing.html. The hardest part is still onboarding the owner not the model.</div>
+  <div class="reason">Direct invite to drop link. Friday so link allowed.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052677887963144503&text=Building%20an%20AI%20receptionist%20for%20UK%20plumbers%20right%20now%2C%20link%20if%20useful%3A%20https%3A%2F%2Fautomatyn.co%2Fpricing.html.%20The%20hardest%20part%20is%20still%20onboarding%20the%20owner%20not%20the%20model." target="_blank" onclick="markDone('r7')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r7')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r8" id="card-r8">
+  <div class="card-head">
+    <span class="num">#9</span>
+    <span class="badge reply">REPLY</span><span class="meta">@GergelyOrosz</span>
+    <span class="char-count">157c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/GergelyOrosz/status/2052689177855062121" target="_blank">@GergelyOrosz · 332k fol · view post →</a>
+    <div class="target-text">Linear has a unique hiring process trial week.</div>
+  </div>
+  <div class="draft-text">The Linear hiring trial week is the clearest signal of how a team actually thinks. Have you seen anyone copy it well, or does it die when leadership changes?</div>
+  <div class="reason">Asks for examples, his bread and butter.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052689177855062121&text=The%20Linear%20hiring%20trial%20week%20is%20the%20clearest%20signal%20of%20how%20a%20team%20actually%20thinks.%20Have%20you%20seen%20anyone%20copy%20it%20well%2C%20or%20does%20it%20die%20when%20leadership%20changes%3F" target="_blank" onclick="markDone('r8')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r8')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r9" id="card-r9">
+  <div class="card-head">
+    <span class="num">#10</span>
+    <span class="badge reply">REPLY</span><span class="meta">@shawnchauhan1</span>
+    <span class="char-count">149c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/shawnchauhan1/status/2052667389549097018" target="_blank">@shawnchauhan1 · 32k fol · view post →</a>
+    <div class="target-text">Anthropic's CEO said he hopes 80x growth doesnt continue.</div>
+  </div>
+  <div class="draft-text">The 80x reluctance is the most honest thing a frontier CEO has said this year. Whats your read, capacity bottleneck or commercial discipline talking?</div>
+  <div class="reason">Engages on a hot topic, forces a specific take.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052667389549097018&text=The%2080x%20reluctance%20is%20the%20most%20honest%20thing%20a%20frontier%20CEO%20has%20said%20this%20year.%20Whats%20your%20read%2C%20capacity%20bottleneck%20or%20commercial%20discipline%20talking%3F" target="_blank" onclick="markDone('r9')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r9')">Skip</button>
+  </div>
+</div>
+<div class="card" data-id="r10" id="card-r10">
+  <div class="card-head">
+    <span class="num">#11</span>
+    <span class="badge reply">REPLY</span><span class="meta">@shawnchauhan1</span>
+    <span class="char-count">140c</span>
+  </div>
+  
+  <div class="target">
+    <a href="https://x.com/shawnchauhan1/status/2052697587330036144" target="_blank">@shawnchauhan1 · 32k fol · view post →</a>
+    <div class="target-text">CB Insights AI 100 added Physical AI category for first time, 11 companies.</div>
+  </div>
+  <div class="draft-text">Physical AI being a fresh category means the moat is a year of data nobody else has. Who do you think wins the home robot lane in 24 months?</div>
+  <div class="reason">Forces a prediction, hot category.</div>
+  <div class="actions">
+    <a class="post-btn" href="https://x.com/intent/tweet?in_reply_to=2052697587330036144&text=Physical%20AI%20being%20a%20fresh%20category%20means%20the%20moat%20is%20a%20year%20of%20data%20nobody%20else%20has.%20Who%20do%20you%20think%20wins%20the%20home%20robot%20lane%20in%2024%20months%3F" target="_blank" onclick="markDone('r10')">📤 Post</a>
+    <button class="skip-btn" onclick="markSkipped('r10')">Skip</button>
+  </div>
+</div>
+</div>
+<script>
+const KEY = 'x-drafts-afternoon-2026-05-08';
+function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
+function update() {
+  const s = load();
+  let d=0, sk=0;
+  for (const id in s) { if (s[id] === 'done') d++; else if (s[id] === 'skipped') sk++; }
+  document.getElementById('done-count').textContent = d;
+  document.getElementById('skipped-count').textContent = sk;
+  for (const id in s) {
+    const el = document.getElementById('card-'+id);
+    if (el) el.classList.add(s[id]);
+  }
+}
+function markDone(id) { const s = load(); s[id] = 'done'; save(s); update(); }
+function markSkipped(id) { const s = load(); s[id] = 'skipped'; save(s); update(); }
+function resetState() { localStorage.removeItem(KEY); document.querySelectorAll('.card').forEach(c => c.classList.remove('done','skipped')); update(); }
+update();
+</script>
+</body>
+</html>
