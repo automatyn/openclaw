@@ -129,14 +129,15 @@ function bu(args) {
     return sb - sa;
   });
 
-  fs.writeFileSync(path.join(dir, 'candidates.json'), JSON.stringify({
+  fs.writeFileSync(path.join(dir, 'candidates-browser.json'), JSON.stringify({
     scraped_at: new Date().toISOString(),
     window_hours: hoursWindow,
+    source: 'browser-handles',
     stats: { scanned, kept, skippedAge, skippedContent, skippedReply, noRecent, broken },
     perHandle,
     candidates
   }, null, 2));
   console.log(`scanned=${scanned} kept=${kept} skipAge=${skippedAge} skipReply=${skippedReply} skipContent=${skippedContent} noRecent=${noRecent} broken=${broken}`);
   console.log(`legend: . ok | - noRecent (handle hasn't posted in window) | ! broken (page wouldn't load)`);
-  console.log(`wrote candidates.json (${candidates.length} candidates)`);
+  console.log(`wrote candidates-browser.json (${candidates.length} candidates)`);
 })();

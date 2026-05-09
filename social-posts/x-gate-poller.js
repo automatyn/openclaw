@@ -170,12 +170,28 @@ async function main() {
               continue;
             }
             if (action === 'post') {
-              if (!approvedQueue.find(d => d.id === id)) {
-                approvedQueue.push(draft);
-                log(`Queued ${id} (${approvedQueue.length} total)`);
+              // Existing API-write flow. Refuses if the draft is firehose-mode (manual)
+              // so a stray tap never burns API credits on a 150/day firehose draft.
+              if (draft.mode === 'manual') {
+                await tgAnswerCallback(cq.id, 'Manual-mode draft — use ✅ Tapped, not ✅ Post').catch(() => {});
+                log(`Refused post on manual-mode ${id}`);
+              } else {
+                if (!approvedQueue.find(d => d.id === id)) {
+                  approvedQueue.push(draft);
+                  log(`Queued ${id} (${approvedQueue.length} total)`);
+                }
+                await tgAnswerCallback(cq.id, `Queued (${approvedQueue.length} pending)`).catch(() => {});
               }
-              await tgAnswerCallback(cq.id, `Queued (${approvedQueue.length} pending)`).catch(() => {});
+            } else if (action === 'tap') {
+              // Firehose flow: user posted manually on phone, just mark as tapped.
+              // No API call, no queue. Pure bookkeeping for stats + dedupe.
+              draft.tapped_at = new Date().toISOString();
+              fs.writeFileSync(DRAFTS, JSON.stringify(drafts, null, 2));
+              await tgAnswerCallback(cq.id, '✓ Tapped').catch(() => {});
+              log(`Tapped ${id}`);
             } else if (action === 'skip') {
+              draft.skipped_at = new Date().toISOString();
+              fs.writeFileSync(DRAFTS, JSON.stringify(drafts, null, 2));
               await tgAnswerCallback(cq.id, 'Skipped').catch(() => {});
               log(`Skipped ${id}`);
             }

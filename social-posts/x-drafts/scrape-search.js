@@ -146,7 +146,7 @@ function bu(args) {
     return sb - sa;
   });
 
-  fs.writeFileSync(path.join(dir, 'candidates.json'), JSON.stringify({
+  fs.writeFileSync(path.join(dir, 'candidates-search.json'), JSON.stringify({
     scraped_at: new Date().toISOString(),
     window_hours: hoursWindow,
     source: 'live-search',
@@ -155,5 +155,5 @@ function bu(args) {
     candidates
   }, null, 2));
   console.log(`queries=${queries.length} raw=${totalRaw} kept=${kept} skipAge=${skipAge} skipReply=${skipReply} skipContent=${skipContent} skipDupe=${skipDupe} err=${errors}`);
-  console.log(`wrote candidates.json (${candidates.length} candidates)`);
+  console.log(`wrote candidates-search.json (${candidates.length} candidates)`);
 })();

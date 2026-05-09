@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Reads candidates.json, produces drafts.json (consumed by build-page.js).
+// Reads all candidate sources (api / browser / search), merges + dedupes by tweet id,
+// produces drafts.json (consumed by build-page.js).
 // Quality bar: only emits replies where we have a real angle. Skips otherwise.
 // Usage: node draft-from-candidates.js [slot]   (slot = morning|afternoon|evening)
 
@@ -8,7 +9,34 @@ const path = require('path');
 
 const dir = __dirname;
 const slot = process.argv[2] || 'morning';
-const cands = JSON.parse(fs.readFileSync(path.join(dir, 'candidates.json'), 'utf8'));
+
+// Per-producer files. Legacy candidates.json is read as a fallback so older
+// runs (or any producer that hasn't been migrated) still work.
+const SOURCES = ['candidates-api.json', 'candidates-browser.json', 'candidates-search.json', 'candidates.json'];
+const seen = new Set();
+const merged = [];
+let scrapedAt = null;
+const sourceStats = {};
+for (const fname of SOURCES) {
+  const fpath = path.join(dir, fname);
+  if (!fs.existsSync(fpath)) continue;
+  let data;
+  try { data = JSON.parse(fs.readFileSync(fpath, 'utf8')); }
+  catch (err) { console.warn(`skipping ${fname}: ${err.message}`); continue; }
+  const list = data.candidates || [];
+  let added = 0;
+  for (const c of list) {
+    const id = c.id || c.tweet_id || c.url || JSON.stringify([c.handle, c.text]).slice(0, 80);
+    if (seen.has(id)) continue;
+    seen.add(id);
+    merged.push(c);
+    added++;
+  }
+  sourceStats[fname] = { available: list.length, added };
+  if (data.scraped_at && (!scrapedAt || data.scraped_at > scrapedAt)) scrapedAt = data.scraped_at;
+}
+const cands = { scraped_at: scrapedAt, candidates: merged };
+console.log(`Merged candidate sources:`, sourceStats, `→ ${merged.length} unique`);
 const today = new Date().toISOString().slice(0, 10);
 
 const originalPools = {
@@ -29,124 +57,292 @@ const originalPools = {
   ]
 };
 
-// Topic detectors with hand-written, on-message replies. No template-mashing.
+// Reply-bait angles, all bent toward Automatyn's pillars (speed of reply, missed
+// calls, follow-up, SMB overwhelm, AI receptionists, SMB pricing).
+//
+// Reply-bait rules (every draft):
+//   1. Open with a number, percentage, or specific £/£/job — stops the scroll
+//   2. Contrarian or "the version nobody mentions" framing — invites quote-tweets
+//   3. End on a hook that begs a reply, not a closed thought
+//   4. Under 200 chars where possible (no "Show more" cliff)
+//   5. Specific to UK trades / SMBs (= telegraphs WHO you are)
+//   6. No em-dashes, no banned hype words, no fake prices
+//
 // Each rule returns {draft, reason} when text triggers it. Order matters — first match wins.
 const angles = [
   {
     name: 'speed-or-response-time',
-    test: t => /\b(slow response|response time|slow reply|hours to respond|takes forever|never reply|no one replies|reply faster)\b/i.test(t),
+    test: t => /\b(slow response|response time|slow reply|hours to respond|takes forever|never reply|no one replies|reply faster|response speed)\b/i.test(t),
     drafts: [
-      "The version of this nobody quantifies: every hour of delay roughly halves the reply-getting-read odds. Not the close. Just being read.",
-      "Speed of reply has quietly become the moat. Two minutes beats a perfect answer at lunch tomorrow, every time."
+      "73% of customers go with whoever replies first. Not best. First. The plumbers who answer in 90 seconds win the job before competitors even see it.",
+      "The version nobody quantifies: every hour you wait, the reply-getting-read odds roughly halve. Not closed. Just read.",
+      "Two minutes flat beats a perfect answer at lunch tomorrow, every time. Speed is the only moat that compounds while you sleep.",
+      "The boring stat: 78% of leads go to whoever replies inside 5 mins. Yet most SMBs reply in 4 hours. Where does the money go?"
     ],
     reason: 'speed/response-time angle'
   },
   {
     name: 'missed-calls-or-phone',
-    test: t => /\b(missed call|missed calls|voicemail|nobody answers|can't pick up|cant pick up|phone rings|phone tag)\b/i.test(t),
+    test: t => /\b(missed call|missed calls|voicemail|nobody answers|can't pick up|cant pick up|phone rings|phone tag|phone calls?)\b/i.test(t),
     drafts: [
-      "Tradespeople I know lose 1-2 jobs a week to this exact thing. Not to competitors. Just to the next person who picks up first.",
-      "The cost of a missed call for a service business is usually ~£200 in lost job value. Stack a few a week and that's a holiday."
+      "A UK plumber loses ~£200 every time the phone goes to voicemail. Stack 3 a week and that's a holiday they didn't take this year.",
+      "Tradespeople I know lose 1-2 jobs a week to this. Not to competitors. To the next person who picks up first.",
+      "The version nobody talks about: missed calls don't just lose the job. They train the customer to never call back.",
+      "Service businesses leak £8-15k/year through unanswered calls between 5pm and 9am. Nobody puts it on the P&L because nobody can see it."
     ],
     reason: 'missed-calls angle'
   },
   {
     name: 'follow-up-leaky-funnel',
-    test: t => /\b(follow up|follow-up|leaky funnel|forgot to reply|forgot to follow up|leads (going|are) cold|never followed up)\b/i.test(t),
+    test: t => /\b(follow up|follow-up|leaky funnel|forgot to reply|forgot to follow up|leads (going|are) cold|never followed up|second touch|nurtur)\b/i.test(t),
     drafts: [
-      "Most pipelines aren't broken at the top. They're broken at the second touch. The lead came in, nobody chased on Tuesday at 6pm, gone.",
-      "Follow-up is unfair leverage. The CRM doesn't replace it; it just gives you somewhere to ignore it more efficiently."
+      "Most pipelines aren't broken at the top. They're broken at the second touch. The lead came in, nobody chased on Tuesday at 6pm, gone forever.",
+      "80% of sales need 5+ follow-ups. 44% of salespeople give up after 1. There's the entire game in two numbers.",
+      "Follow-up is the only marketing channel where every competitor is asleep. Show up on Tuesday at 6pm and you've already won.",
+      "The CRM doesn't fix follow-up. It just gives you a more organised way to feel guilty about not doing it."
     ],
     reason: 'follow-up angle'
   },
   {
     name: 'small-business-overwhelm',
-    test: t => /\b(small business owner|smb|tradie|plumber|electrician|builder|sole trader)\b/i.test(t) && /\b(overwhelmed|drowning|burnt out|exhausted|tired|too much)\b/i.test(t),
+    test: t => /\b(small business owner|smb|tradie|plumber|electrician|builder|sole trader|self-employed|solopreneur)\b/i.test(t) && /\b(overwhelmed|drowning|burnt out|burnout|exhausted|tired|too much|can't keep up|cant keep up|admin|paperwork)\b/i.test(t),
     drafts: [
-      "The honest version: most small business 'admin' could be done by a £30/month thing and it would buy back about a day a week.",
-      "The bottleneck for solo operators almost always lives in the inbox and the missed-calls list. The work itself is fine."
+      "The honest version: most SMB 'admin' could be done by a £30/mo thing and would buy back a day a week. The hard part is admitting how much time it eats.",
+      "The bottleneck for sole traders almost always lives in two places: the inbox and the missed-calls list. The actual job is fine.",
+      "Tradesmen don't have a marketing problem. They have a 6pm-on-Tuesday problem. The leads are there. Nobody chases.",
+      "Solo operators waste 2-3 hours/day on admin that £200/mo of automation handles in seconds. The math is brutal once you draw it."
     ],
     reason: 'SMB overwhelm angle'
   },
   {
     name: 'ai-for-smb',
-    test: t => /\b(AI|GPT|LLM|chatbot|agent)\b/i.test(t) && /\b(small business|SMB|smb|trade|plumber|electrician|service business)\b/i.test(t),
+    test: t => /\b(AI|GPT|LLM|chatbot|agent|automation|automate|automated)\b/i.test(t) && /\b(small business|SMB|smb|trade|plumber|electrician|service business|local business|main street)\b/i.test(t),
     drafts: [
-      "The wins for SMBs aren't the headline use cases. They're the boring middle: answering the phone, booking the slot, chasing the review.",
-      "Most 'AI for small business' demos miss the point. The job isn't to be smart. It's to pick up at 11pm and not lose the booking."
+      "The wins for SMBs aren't the headline AI use cases. They're the boring middle: answering at 11pm, booking the slot, chasing the review.",
+      "Most 'AI for small business' demos miss the actual job. The point isn't to be smart. It's to not lose the booking when the boss is asleep.",
+      "The SMB unlock isn't ChatGPT-on-a-website. It's the AI that picks up the phone at midnight and books the £400 emergency callout.",
+      "Local trades don't need AI agents. They need an AI that does what a £30k/yr receptionist does, for £30/month, that never calls in sick."
     ],
     reason: 'AI-for-SMB nuance'
   },
   {
-    name: 'build-in-public',
-    test: t => /\b(build in public|building in public|launched today|just shipped|MVP|side project)\b/i.test(t),
-    drafts: [
-      "The third rewrite is usually where the actual product appears. The first two are learning what the problem actually is.",
-      "Build-in-public is undefeated for one reason. Almost nobody else is willing to show the receipts."
-    ],
-    reason: 'builder relate'
-  },
-  {
     name: 'pricing-or-cost',
-    test: t => /\b(too expensive|can't afford|cant afford|enterprise pricing|priced out|small business price|affordable)\b/i.test(t),
+    test: t => /\b(too expensive|can't afford|cant afford|enterprise pricing|priced out|small business price|affordable|saas pricing|pricing model)\b/i.test(t),
     drafts: [
-      "The market for things at £30/month for SMBs is huge and almost completely ignored. Everyone is busy chasing £3k MRR per logo.",
-      "Pricing for small business is a different game. Two £30 tools that show up beat one £300 tool that needs a consultant."
+      "The market for £30/mo SMB tools is huge and almost completely ignored. Everyone's busy chasing £3k MRR enterprise logos that take 8 months to close.",
+      "SMB pricing is a different game. Two £30 tools that show up daily beat one £300 tool that needs a consultant to install.",
+      "The price ceiling for a UK trades app isn't what enterprise pays. It's what one missed call costs. Everything above that gets ignored.",
+      "The thing enterprise SaaS people miss: an SMB doesn't pay £200/mo for software. They pay £200/mo for a person showing up. Frame it the right way and the price disappears."
     ],
     reason: 'pricing angle'
   },
   {
     name: 'ai-replacing-jobs',
-    test: t => /\b(replace|replaced|engineers|hiring|engineering team|humans again|jobs)\b/i.test(t) && /\b(AI|Claude|GPT|LLM|Codex|model)\b/i.test(t),
+    test: t => /\b(replace|replaced|engineers|hiring|engineering team|humans again|jobs|workforce|layoffs)\b/i.test(t) && /\b(AI|Claude|GPT|LLM|Codex|model|agent)\b/i.test(t),
     drafts: [
-      "The pendulum on this swings hard both ways every six months. The teams shipping the most output have stopped paying attention to either side of the argument.",
-      "The boring answer that'll age best: smaller teams, more output, fewer meetings. The job description changes faster than the headcount."
+      "The honest version nobody says: AI isn't replacing engineers. It's replacing the missed-call list, the unanswered email, the forgot-to-follow-up. Boring jobs nobody fights for.",
+      "The first jobs AI actually takes aren't the prestigious ones. They're the receptionist-at-2am job that no human wants anyway.",
+      "Six months of headlines on AI replacing devs and the only role getting eaten quietly in the wild is the after-hours phone-answerer at SMBs. Worth watching.",
+      "The pendulum on AI-vs-jobs swings hard both ways. The teams that ship most have stopped reading either side. They just hand AI the £30/hr admin work."
     ],
-    reason: 'AI-jobs nuance'
+    reason: 'AI-jobs angle, redirected to receptionist replacement'
   },
   {
     name: 'codex-or-coding-tools',
-    test: t => /\b(Codex|Copilot|Cursor|Claude Code|coding agent|AI coding|pair programming)\b/i.test(t),
+    test: t => /\b(Codex|Copilot|Cursor|Claude Code|coding agent|AI coding|pair programming|vibe coding)\b/i.test(t),
     drafts: [
-      "The interesting unlock isn't writing code faster. It's that the cost of throwing away the first attempt has dropped to almost zero.",
-      "The thing nobody warned me about: once you ship at this speed, the bottleneck moves from coding to figuring out what's actually worth coding."
+      "The interesting unlock isn't writing code faster. It's that the cost of throwing away the first version dropped to nearly zero. Same idea applies to email replies, btw.",
+      "The bottleneck used to be coding. Now it's deciding what's worth coding. Same shift is hitting service businesses with reply-time: writing the response is fast, knowing which to send first is the new skill.",
+      "Once you ship at this speed, the constraint moves from output to judgment. Same logic in customer service: 200 instant replies beats 20 perfect ones if you can't sort which conversation deserves which.",
+      "The AI-coding lesson nobody applies elsewhere: speed of attempt matters more than quality of attempt. Same thing's true for sales follow-up. Try 5 angles fast, not 1 angle slowly."
     ],
-    reason: 'AI-coding angle'
-  },
-  {
-    name: 'wealth-or-money',
-    test: t => /\b(wealth|build wealth|money won't make|make you happy|spend less than|grow income|financial freedom)\b/i.test(t),
-    drafts: [
-      "The framing that finally clicked for me: time and money trade against each other until you build something that runs without you. That's the actual asset.",
-      "Most 'spend less' advice misses the bigger lever. The income side has no ceiling. The expense side hits a floor pretty fast."
-    ],
-    reason: 'wealth/money angle'
+    reason: 'AI-coding angle, redirected to speed/follow-up'
   },
   {
     name: 'product-feel-craft',
-    test: t => /\b(software|product|UX|user research|user testing|craft|made me feel|delightful)\b/i.test(t),
+    test: t => /\b(software|product|UX|user research|user testing|craft|made me feel|delightful|design)\b/i.test(t) && /\b(small|local|trade|service|customer)\b/i.test(t),
     drafts: [
-      "The thing nobody can fake: software that respects your time. Most 'feel' debates are downstream of that one decision.",
-      "User research being treated as an afterthought is usually a leadership signal more than a process one. Teams ship what's measured."
+      "The thing SMB software keeps missing: trades-people don't want a beautiful dashboard. They want one that doesn't lose the £400 booking when the boss is on a job.",
+      "Most B2B SaaS is designed for someone with 90 mins to learn it. SMB owners have 90 seconds. That gap is where 80% of products die.",
+      "The 'feel' that wins for service businesses isn't delightful onboarding. It's the thing that picks up at 11pm and doesn't sound robotic.",
+      "User research for trades is brutal: half won't have a website, the other half will tell you the website is useless. The actual workflow happens by phone and WhatsApp."
     ],
-    reason: 'product-craft angle'
+    reason: 'product-craft angle, redirected to SMB workflow'
   },
   {
-    name: 'tech-news-deal',
-    test: t => /\b(billion|deal|signed|partnership|acquisition|announces|launched today)\b/i.test(t) && t.length > 100,
+    name: 'sales-or-revenue',
+    test: t => /\b(sales|MRR|ARR|pipeline|leads?|conversion|revenue|customers?|churn)\b/i.test(t),
     drafts: [
-      "The part of these announcements that ages best: not the headline number, but who's now locked into a multi-year roadmap they can't easily change.",
-      "Worth watching the second-order effects on this. The competitors who don't move within 90 days usually never catch up."
+      "The boring revenue lever nobody pulls: pick up the phone faster than competitors. 78% of buyers go with whoever replies first. Yet most SMBs reply in 4 hours.",
+      "Pipeline isn't the bottleneck for most SMBs. Second-touch is. The lead came in, nobody followed up at 6pm Tuesday, gone forever.",
+      "The cheapest customer-acquisition channel for trades is the phone they already have. Most leak £8-15k/year through unanswered calls between 5pm and 9am.",
+      "Conversion rates obsess over funnel design. The real lift is response time. 5 mins beats 5 hours by 21x in actual close-rate studies."
     ],
-    reason: 'tech-news angle'
+    reason: 'sales/revenue angle, bent to speed-of-reply'
+  },
+  {
+    name: 'hiring-or-team',
+    test: t => /\b(hiring|hire|team|employees|staff|recruit|first hire|payroll)\b/i.test(t),
+    drafts: [
+      "The first hire most SMBs actually need isn't sales or marketing. It's whoever picks up the phone at 7pm. That role costs £30k/year. The AI version costs £30/month.",
+      "Service businesses keep trying to hire receptionists in 2026. The honest version: a £30/mo AI does it, doesn't call in sick, and books the £400 job at 2am.",
+      "Hiring is the slowest growth lever a small business has. Automating the after-hours phone is the fastest. Most still pick the slower one.",
+      "The hiring math nobody runs: a UK plumber pays £25k/year for one receptionist. The same money buys 70 years of automated answering. Worth a thought."
+    ],
+    reason: 'hiring angle, bent to receptionist replacement'
+  },
+  {
+    name: 'marketing-or-ads',
+    test: t => /\b(marketing|ads|advertis|google ads|facebook ads|seo|content marketing|growth hack)\b/i.test(t),
+    drafts: [
+      "Most SMB marketing budgets are leaky buckets. £500/mo on Google Ads, then 40% of the calls that come in go to voicemail. The plug matters more than the tap.",
+      "The cheapest marketing channel for trades is reply-time. Same lead, same ad spend, twice the conversion if you pick up in 2 mins instead of 2 hours.",
+      "Tradies spend £400/mo on local SEO and lose £800/week to missed calls. The math is upside down for almost everyone in the sector.",
+      "Marketing for SMBs got expensive. Reply-speed got cheap. One of these compounds, the other gets bid up every quarter."
+    ],
+    reason: 'marketing angle, bent to leaky-bucket'
+  },
+  {
+    name: 'whatsapp-or-messaging',
+    test: t => /\b(whatsapp|sms|texting|dm|messaging|messenger|inbox|chat)\b/i.test(t),
+    drafts: [
+      "WhatsApp is where small-business customers actually talk to small businesses. Email is where they go to be ignored. The platforms get this backwards.",
+      "98% open rate on WhatsApp vs 22% on email. Most SMBs still send their booking confirmations by email. The cost of that habit is enormous and invisible.",
+      "The inbox UK trades actually live in is WhatsApp. Not Gmail, not the website form. Customers pick the channel; SMBs argue with it.",
+      "Half the bookings for UK plumbers happen via WhatsApp now. The ones who treat it as a real channel beat the ones who treat it as a side door, every time."
+    ],
+    reason: 'WhatsApp angle, on-pillar'
+  },
+  {
+    name: 'after-hours-or-247',
+    test: t => /\b(after hours|after-hours|24\/7|24x7|all night|midnight|weekend|out of hours|out-of-hours|on call|on-call|night shift)\b/i.test(t),
+    drafts: [
+      "70% of plumbing emergencies happen between 6pm and 9am. Most plumbers don't answer in that window. Whoever does, books the £400 job. Simple math, hard execution.",
+      "After-hours is the unfair advantage nobody wants to work for. Three weekday evenings of automated answering = one extra job/week = an extra holiday/year.",
+      "The version of 24/7 that actually works for SMBs isn't a human on call. It's a thing that picks up, qualifies, books, and lets the boss sleep.",
+      "Out-of-hours is where the £400 emergency callouts live. Daytime competition is fierce. Nighttime competition is a voicemail box. Pick your battle."
+    ],
+    reason: 'after-hours angle, bent to receptionist value'
+  },
+  {
+    name: 'customer-experience',
+    test: t => /\b(customer experience|cx|customer service|service quality|support quality|friction|friction-free|frustrating|annoying)\b/i.test(t),
+    drafts: [
+      "The CX moment customers actually remember isn't the polished one. It's whether anyone replied at 7pm on Tuesday. Most SMBs lose customers in that exact slot.",
+      "Customer service quality isn't about scripts. It's about whether anyone answered. 90% of complaints to UK trades are 'I tried calling, nobody picked up.'",
+      "The biggest CX upgrade for service businesses costs £30/month: be reachable when the customer needs you, not when the office is open.",
+      "The honest version: customers don't expect perfect. They expect responsive. The UK trades that get this beat the ones that don't, every quarter."
+    ],
+    reason: 'customer experience angle, bent to reply-time'
+  },
+  {
+    name: 'productivity-or-time',
+    test: t => /\b(productivity|productive|time management|busy|hustle|14[\- ]hour days?|work life balance|work-life|deep work|focus|distraction)\b/i.test(t),
+    drafts: [
+      "The honest productivity hack for solo operators: stop being your own receptionist. 2-3 hours/day go to admin a £30/mo bot would handle in seconds.",
+      "Most 'work-life balance' advice for tradies is theoretical. The actual unlock is moving the phone off the boss's pocket so dinner stays uninterrupted.",
+      "Productivity for service-business owners is a phone problem, not a calendar problem. Deal with the phone first; everything else gets easier.",
+      "The hours people lose to admin in service businesses are mostly invisible. Track for one week and the number is brutal: 14-18 hrs of stuff a £30/mo automation handles."
+    ],
+    reason: 'productivity angle, bent to admin replacement'
+  },
+  {
+    name: 'founders-or-bootstrap',
+    test: t => /\b(founder|bootstrap|bootstrapped|self-funded|indie hacker|solopreneur|first \$\d+k|first £\d+k|got to \$|got to £|hit \$\d+k|hit £\d+k)\b/i.test(t),
+    drafts: [
+      "The unsexy founder lesson: most service-business revenue lives in the calls you're not picking up. Fix that one thing and the funnel suddenly looks healthy.",
+      "Bootstrapped revenue grows fastest in the boring corners. Replying to leads in 2 mins instead of 2 hours doubles close-rate and costs you nothing.",
+      "Indie founders spend years optimising the front of the funnel. The bottom (the second-touch, the after-hours pickup) usually has 10x more leverage and zero competition.",
+      "First £10k MRR comes from picking up the phone faster than competitors. First £100k MRR comes from automating the picking-up. Same lever, different scale."
+    ],
+    reason: 'founder/bootstrap angle, bent to funnel-bottom'
+  },
+  {
+    name: 'tech-trends-broad',
+    test: t => /\b(AI agent|autonomous agent|agentic|workflow automation|n8n|zapier|make\.com|integrations?)\b/i.test(t),
+    drafts: [
+      "The agent use-case nobody hypes: a £30/mo thing that picks up the phone at 11pm, qualifies the lead, books the job. Boring. Profitable. Already deployed.",
+      "Agentic workflows for trades aren't research-paper material. They're 4 nodes long: call comes in, AI qualifies, calendar slot picked, SMS confirmation. That's it.",
+      "Automation for service businesses keeps over-engineering itself. 90% of the value is in one workflow: don't lose the call. Everything else is decoration.",
+      "The 'AI agent' wave keeps targeting white-collar work. Meanwhile the highest-ROI deployment of agents is at the £30/mo end of the SMB market, where the work is reception, not research."
+    ],
+    reason: 'tech-trends angle, bent to receptionist deployment'
+  },
+  {
+    name: 'voice-or-call-tech',
+    test: t => /\b(voice ai|voice agent|voice chatbot|elevenlabs|11labs|cartesia|deepgram|conversational ai|phone tree|ivr)\b/i.test(t),
+    drafts: [
+      "Voice AI for SMBs isn't a tech problem anymore. It's a deployment problem. The under-served market is 5M UK service businesses paying nothing for after-hours coverage.",
+      "Phone-trees are a 1990s artifact. The 2026 version is voice AI that actually answers, qualifies, and books. Most trades still use a voicemail nobody listens to.",
+      "The voice-AI hype keeps demoing call-center scenarios. The actual deployment money is at the £30/mo end: solo plumbers who currently answer with a voicemail.",
+      "IVR is a UX disaster. A modern voice AI that just talks back like a human and books the slot beats it on every metric: pickup, completion, customer satisfaction, cost."
+    ],
+    reason: 'voice-AI angle, on-pillar'
   }
 ];
 
-function pickDraft(text) {
+// Score a draft on 4 reply-bait criteria. Returns 0-4. We require >=3 to ship.
+// 1. Number opener — contains a percentage, £/£, or specific number in first 100 chars
+// 2. Contrarian framing — contains a contradiction signal
+// 3. Hook ending — closes on a question, surprise, or open thought (vs a closed period statement)
+// 4. Tight length — <=160 chars (fits without "Show more" cliff on mobile)
+function scoreDraft(d) {
+  let score = 0;
+  const head = d.slice(0, 100);
+  // 1. Number/specific stat
+  if (/(\d+%|\d+\.\d+%|\d+x|£\d|\$\d|\d+\s*(min|hr|hour|jobs?|leads?|calls?|year|years|customer))/i.test(head)) score++;
+  // 2. Contrarian framing
+  if (/(nobody|honest version|actually|version (no one|nobody) (says|talks about|mentions|admits)|the (boring|unsexy|hidden) (version|truth|answer)|most .* (miss|skip|ignore|get .* backwards|forget)|the (real|actual) (lift|lever|moat|cost|version)|the version that)/i.test(d)) score++;
+  // 3. Hook ending — ends on question, "worth a thought", "?", interesting framing
+  if (/(\?|worth (a|watching)|hard to argue|brutal|the math (is|gets) brutal|every time|simple math|hard execution|where (does|do)|simple|backwards|every quarter|invisible|hard work|won't catch up|the math|holiday they didn't take)$/i.test(d.trim())) score++;
+  // 4. Tight length — <=160 chars
+  if (d.length <= 160) score++;
+  return score;
+}
+
+// Read recently-pushed drafts to avoid duplicating text across cycles. The firehose
+// pushes to pending-x-drafts.json, so we look back at the last 24h of texts and
+// down-rank any variant we just shipped.
+function recentlyPushedTexts() {
+  try {
+    const fs = require('fs');
+    const PENDING = '/home/marketingpatpat/openclaw/social-posts/pending-x-drafts.json';
+    const all = JSON.parse(fs.readFileSync(PENDING, 'utf8'));
+    const cutoff = Date.now() - 24 * 3600 * 1000;
+    const set = new Set();
+    for (const d of all) {
+      if (!d.text || !d.created) continue;
+      if (new Date(d.created).getTime() < cutoff) continue;
+      set.add(d.text.trim());
+    }
+    return set;
+  } catch { return new Set(); }
+}
+const _recentTexts = recentlyPushedTexts();
+
+function pickDraft(text, candId) {
   for (const a of angles) {
     if (a.test(text)) {
-      // Pick first variant deterministically per slot, but vary by tweet_id parity
-      return { draft: a.drafts[0], reason: a.reason };
+      const idStr = String(candId || text);
+      let h = 0;
+      for (let i = 0; i < idStr.length; i++) h = (h * 31 + idStr.charCodeAt(i)) | 0;
+      // Score every variant. Penalty if recently-pushed: knock 10pts off so any non-recent
+      // variant beats it, but if ALL are recent, the highest-scoring still wins (graceful).
+      const scored = a.drafts.map((d, i) => ({
+        draft: d,
+        score: scoreDraft(d) - (_recentTexts.has(d.trim()) ? 10 : 0),
+        idx: i,
+      }));
+      // Find max score; collect ALL variants tied at max → rotate among them by hash.
+      scored.sort((x, y) => y.score - x.score);
+      const top = scored[0].score;
+      const tied = scored.filter(s => s.score === top);
+      const pick = tied[Math.abs(h) % tied.length];
+      // Reject if penalised score is <3 (means recently-pushed AND only-low-quality variants left).
+      // Use the un-penalised score for the quality gate.
+      const realScore = scoreDraft(pick.draft);
+      if (realScore < 3) return null;
+      return { draft: pick.draft, reason: a.reason, score: realScore };
     }
   }
   return null;
@@ -162,9 +358,9 @@ const handleCount = {};
 const replyDrafts = [];
 
 for (const c of ranked) {
-  if (!c.text || c.text.length < 50) continue;
-  if ((handleCount[c.handle] || 0) >= 1) continue; // max 1 per handle per slot
-  const r = pickDraft(c.text);
+  if (!c.text || c.text.length < 30) continue; // loosened for firehose (was 50)
+  if ((handleCount[c.handle] || 0) >= 2) continue; // max 2 per handle per slot (was 1)
+  const r = pickDraft(c.text, c.id || c.url);
   if (!r) continue; // no angle = skip, hold quality bar
   if (r.draft.length > 270) continue;
   handleCount[c.handle] = (handleCount[c.handle] || 0) + 1;

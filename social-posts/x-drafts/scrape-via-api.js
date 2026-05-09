@@ -164,7 +164,7 @@ function shouldSkip(text) {
     return sb - sa;
   });
 
-  fs.writeFileSync(path.join(dir, 'candidates.json'), JSON.stringify({
+  fs.writeFileSync(path.join(dir, 'candidates-api.json'), JSON.stringify({
     scraped_at: new Date().toISOString(),
     window_hours: HOURS,
     source: 'x-api-v2',
@@ -175,5 +175,5 @@ function shouldSkip(text) {
 
   console.log(`reads=${tweets.length} kept=${kept} skipContent=${skippedContent}`);
   console.log(`budget: ${budget.reads}/${MONTHLY_CAP_READS} used ($${(budget.reads * 0.005).toFixed(2)} of $4.50)`);
-  console.log(`wrote candidates.json (${candidates.length} candidates)`);
+  console.log(`wrote candidates-api.json (${candidates.length} candidates)`);
 })();
