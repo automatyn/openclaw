@@ -97,7 +97,7 @@ After writing the post:
 1. Update /home/marketingpatpat/openclaw/blog/index.html: add a new card at position 1 mirroring the existing card structure for that file. Do NOT remove old cards.
 2. Update /home/marketingpatpat/openclaw/index.html (homepage): if it has a "latest blogs" block, replace the oldest of the visible 3 with the new one. If you cannot find that block, skip and note in the report.
 3. Update /home/marketingpatpat/openclaw/sitemap.xml: append <url><loc>https://automatyn.co/blog/<slug>.html</loc><lastmod>YYYY-MM-DD</lastmod></url> with today's date.
-4. IndexNow ping: read /home/marketingpatpat/openclaw/indexnow-*.txt or ai-plugin.json to find the IndexNow key. POST { host, key, urlList: [the new URL] } to https://api.indexnow.org/indexnow.
+4. IndexNow ping (MANDATORY): run `node /home/marketingpatpat/openclaw/saas-api/seo/indexnow-ping.js https://automatyn.co/blog/<slug>.html` — this submits the URL to Bing/Yandex/DuckDuckGo for instant crawl. Verify the script exits 0 (HTTP 202 from IndexNow). Key file is at /home/marketingpatpat/openclaw/saas-api/secrets/indexnow-key.txt.
 5. git add the changed files (blog/<slug>.html, blog/<slug>.jpg, optional secondary image, blog/index.html, index.html, sitemap.xml). Commit with message "feat(blog): <H1 title>". Push origin main.
 
 Report: at the very end, output a single line in this exact format so the wrapper script can parse it:
@@ -199,6 +199,14 @@ fi
 # Step 9: Push (agent should have pushed, but double check)
 if ! git -C "$REPO" push origin main 2>&1 | tee -a "$RUN_LOG" | grep -qE 'up-to-date|main -> main'; then
   log "Push failed or no-op. Continuing - agent may have pushed already."
+fi
+
+# Step 10: IndexNow safety net — fire even if agent forgot
+log "IndexNow ping for $URL ..."
+if /usr/bin/node /home/marketingpatpat/openclaw/saas-api/seo/indexnow-ping.js "$URL" >> "$RUN_LOG" 2>&1; then
+  log "IndexNow OK"
+else
+  log "IndexNow ping failed (non-fatal — agent's own ping may have succeeded)"
 fi
 
 tg "SEO Daily OK $RUN_TS: $TITLE -> $URL"
