@@ -2,6 +2,44 @@
 
 Each command writes its results here after completing. The next command reads the most recent entry as a recap.
 
+### /afternoon — 2026-05-09 20:30 UTC
+
+**Bot health:** automatyn-api ✅ active · openclaw-gateway ✅ active · x-gate-poller ✅ active · x-firehose.timer ✅ active · x-thread.timer ✅ active · x-question.timer ✅ active.
+
+**X status:** @patrickssons live, **136 followers (+4 since /morning)**, 803 tweets (+37). Verified Premium ✓.
+
+**X 7d analytics (verified via screenshot):** 51.8K impressions ↑11% vs morning, engagement 1%, profile visits 120, replies 42, likes 162, **22/136 verified followers**. Trend up → normal mode.
+
+**X firehose (NEW system shipped today):** 26 drafts pushed today via systemd timer (every 30 min, 06-22 UTC). 8 tapped ✅, 18 pending. Plus 4 thread tweets (after-hours-arbitrage), plus 2 question-machine fires. Total drafts in TG today: ~32.
+
+**SEO Daily:** ✅ fired 10:05 UTC, blog shipped: `do-i-need-whatsapp-business-for-ai-receptionist-2026.html`. Next fire 2026-05-10 10:05 UTC.
+
+**Reddit n8n:** ✅ webhook fired, `{"message":"Workflow was started"}`.
+
+**Outreach: 🚨 HALTED at 12:00 UTC** — bounce rate 5.3% (4/75). Pool 263/1948, E1 sent 257 (49 today), bounced_total 5 (was 1).
+- 4 bounces from new aggressive enricher (Yell/rendered tier picking up `you@`, `server@` placeholder text from scraped sites).
+- Bounces forensics from Brevo events API: info@gas-247.co.uk, info@ecoheat.co.uk, you@redlandplumbing.co.uk, server@clearflowdrains.co.uk.
+- All 4 marked `bounced: true` in lead store.
+- Junk filter (`enrich-emails.js` JUNK_LOCAL_PARTS) extended with: you, youremail, name, firstname, fullname, me, someone, demo, server, webmaster, root, daemon, system, noc, nobody, mail, webhook.
+- HALT will naturally clear at ~08:00 UTC tomorrow as 24h rolling window rolls off.
+
+**TikTok:** 22 videos / 6,171 views / 75 likes. Top: "Dad asked at dinner what I do" (983v / 20L). Carousels SKIPPED (Postiz paused).
+
+**Skipped (with reason):**
+- TikTok carousels (Step 3): Postiz subscription paused.
+- LinkedIn (Step 5): Postiz paused.
+- TikTok DMs (Step 6): manual reminder for Pat.
+- Step 2aa scrape-via-api / scrape-targets: superseded by `x-firehose.timer` running every 30 min.
+
+**Open issues / Today's wins:**
+- ✅ X firehose system fully shipped: ~100 drafts/day, quality gate, big-account filter, QT machine, thread machine, question machine — all timer-driven.
+- ✅ env permission fix earlier (root cause of 4-day pool starvation).
+- ✅ Aggressive enricher with Playwright tier pulled pool 781 → 1948.
+- ❌ Outreach paused via HALT (will self-resolve tomorrow morning).
+- ❌ Image audit: blog hero quality issue still open per /evening 05-08 (Pat said look fine, deprioritised).
+
+---
+
 ### /morning — 2026-05-09 06:11 UTC
 
 **Gap context:** First /morning since 2026-05-03 (6-day gap). Hand-drafted morning/afternoon/evening commits from 2026-05-04 through 2026-05-07 are visible in git log. Today is the first auto run after the gap.
