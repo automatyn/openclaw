@@ -356,109 +356,56 @@ const angles = [
     reason: 'voice-AI angle, on-pillar'
   },
   {
-    name: 'agents-broad',
-    test: t => /\b(agents?|agentic|autonomous|build(ing)? agents?|agent skills?|shift to agents|future is agents)\b/i.test(t),
+    name: 'ai-agent-business-models-question',
+    // Only fires when OP is asking for AI-agent business model ideas (gregisenberg-style threads).
+    // Requires: a question or open prompt + agent/business-model language.
+    // Rejects pure announcements ("read the full post").
+    test: t => /\b(agents?|agentic)\b/i.test(t) && /\b(business model|use case|use[- ]cases?|idea|ideas|what(.s| is)|which (one|niche|use)|examples?|categor(y|ies)|niche)\b/i.test(t) && /\?|:\s*$|\n\s*-/.test(t),
     drafts: [
-      "5M UK SMBs would pay £30/mo for an agent that just picks up the phone. Nobody is building it. Where does the money go?",
-      "The agent use-case nobody hypes: 1 workflow, 4 nodes, books a £400 callout at 11pm. Brutal arithmetic.",
-      "90% of agent demos target tech teams. The 10% serving plumbers will print quietly. Worth a thought.",
-      "Most agentic AI demos solve fake problems. The real one: 5M SMBs missing calls every night. Simple.",
-      "Honest version of the agent shift: enterprise gets the headlines, SMBs get the £30/mo deployable bot. Different game.",
-      "The killer agent app isn't research. It's a £30/mo receptionist that doesn't sleep. Boring. Profitable.",
-      "Actually the £30/mo agent for trades is the most underserved gap in 2026. Where does the money go?",
-      "Most builders skip SMB agents because £30/mo isn't sexy. 1000 customers × £30 = £30k MRR. Simple."
+      "Voice-AI receptionist for UK trades. 5M solo plumbers and electricians who currently send after-hours calls to voicemail. £30/mo replaces a £25k receptionist. Boring, but the unit economics are wild.",
+      "AI receptionist for solo service businesses. Phone rings at 11pm, AI qualifies the job, books a slot, sends SMS confirm. Plumbers pay £30/mo. Nobody else is targeting that tier seriously.",
+      "Niche I keep seeing untouched: AI receptionist for UK trades. Solo plumber/electrician/locksmith. Currently uses voicemail. Customer rings at 8pm, books with whoever picks up. £30/mo product, 5M buyers.",
+      "Service-business reception. The under-served end of the agent market: a £30/mo voice/WhatsApp bot for the solo plumber who currently lets the phone ring out. Way bigger TAM than enterprise.",
+      "WhatsApp AI for trades. UK plumbers now get half their bookings via WhatsApp and most still answer manually. An AI that triages the inbox, books the slot, and pings them only if it gets stuck is a real wedge.",
+      "After-hours AI for emergency-callout trades (locksmiths, drainage, boiler). 70% of their inbound is between 6pm and 9am. Whoever picks up books the £400 job. Cheap to deploy, hard to displace once installed.",
+      "AI booking for hairdressers and salons with no front-of-house. Independent salon owner is mid-cut, phone rings, lead drops. A £30/mo AI that handles the calendar lift is one of the most ignored use-cases I've seen.",
+      "Mobile-mechanic dispatch. Solo operator drives between jobs all day, can't take calls. AI takes the inbound, qualifies vehicle/postcode, books the next free slot. Tiny niche, deep willingness to pay."
     ],
-    reason: 'agents broad, bent to receptionist deployment'
+    reason: 'AI agent business-model question, direct answer with our use-case'
   },
   {
-    name: 'founder-advice-broad',
-    test: t => /\b(founders?|building|shipping|startup|indie|solopreneur)\b/i.test(t) && /\b(speed|taste|execution|consistency|building too slowly|wrong thing|perfection|differentiates)\b/i.test(t),
+    name: 'mediocre-ai-outreach-or-sdr',
+    // OP complaining about bad AI SDRs / spammy AI outreach (jasonlk-style).
+    // We agree, then differentiate our category.
+    test: t => /\b(AI|GPT|LLM|automated)\b/i.test(t) && /\b(SDR|sdrs?|cold email|cold outreach|spam|spammy|mediocre|hallucinat|fake|outreach|reachout|reach[- ]?out)\b/i.test(t),
     drafts: [
-      "78% of buyers go with whoever replies first. The founder lever nobody pulls. Brutal but true.",
-      "5-min reply beats 5-hour reply by 21x. Same lead, same ad spend. Where does the money go?",
-      "Most founders chase differentiation when the actual differentiator is 'we picked up.' Simple.",
-      "Actually 'execution' for service businesses means showing up Tuesday at 6pm. Most don't. Brutal.",
-      "The unsexy founder lever: 2-min reply rate. Free, ignored, every quarter.",
-      "Speed of reply is the only metric where laziness costs measurable cash. Most miss this.",
-      "Honest version: 'consistency' for SMBs means somebody answers every time. £30/mo bot does it. Simple.",
-      "Most founders optimise positioning. The 78% close-on-first-reply stat eats positioning for breakfast."
+      "Yeah, and the worst part is it tars the legitimate use-cases too. An AI that picks up a missed call and books a slot is a different category from an AI that mass-emails strangers, but the market lumps them.",
+      "Agree. The deployment that survives is constrained: AI that does ONE narrow job (book the appointment, qualify the lead) on inbound. The mass-outbound stuff is what's getting blocked.",
+      "The SDR-spam problem is real and it's killing the brand for genuinely useful narrow agents. Inbound voice/WhatsApp reception is a totally different surface area; nobody confuses it with cold mass-email when they actually use it.",
+      "Right, and the frustrating bit is the surviving agent use-cases (inbound reception, booking, qualifying) get judged by the cold-outbound failures. Same word, totally different deployment.",
+      "The mediocre-AI-outbound wave is going to make customers way more skeptical, which weirdly favours the boring inbound deployments. Picking up a missed call is hard to spam, easy to verify.",
+      "Inbound vs outbound is the real split. AI doing cold reach-outs is the spam category. AI handling a customer who already rang you is just a faster receptionist. Customers can tell.",
+      "The 2026 split that matters: AI initiating contact (filterable, increasingly blocked) vs AI responding to inbound (welcomed if it actually helps). The second one is wide open and underbuilt.",
+      "Yeah. The lesson most people miss is that mass-outbound automation has always been borderline; AI just made it cheaper. The genuinely new surface is inbound triage, and it's nothing like SDR spam."
     ],
-    reason: 'founder-advice broad, bent to speed-of-reply'
+    reason: 'AI SDR/spam complaint, agree-then-differentiate'
   },
   {
-    name: 'ai-hallucination-or-quality',
-    test: t => /\b(hallucinat|fake|made up|wrong info|inaccurate|prompt inject|AI safety|alignment|reliable|reliable AI|trust)\b/i.test(t),
+    name: 'untapped-niche-or-underserved-market-question',
+    // OP asking what markets/niches are underserved or what to build (rxhit05/dvassallo-style direct asks).
+    // Requires a question form.
+    test: t => /\b(what (should|to build|business|niche|market|opportun|underserved|untapped)|which (niche|market)|name an under|biggest gap|most underserved|where('s| is) the (gap|opportunity|money))\b/i.test(t),
     drafts: [
-      "Hallucination is a writing problem. Nobody hallucinates a calendar slot. Different game.",
-      "Most 'AI is unreliable' takes assume open-ended use. SMB reception is 6 calendar slots. Simple.",
-      "Actually the unreliability narrative dies once you constrain the use-case. £30/mo bot, 4 questions. Brutal.",
-      "Honest reliability bar for SMB AI: better than the voicemail customers get now. Most clear it day 1.",
-      "Trust in AI for trades isn't benchmarks. It's 'the bot booked £400 while I slept.' One demo, done.",
-      "The version nobody mentions: AI safety panic ignores the constrained 4-node deployments. Where does the money go?",
-      "Most 'don't trust AI' arguments work for legal. For booking a plumber Tuesday 4pm? Brutal but irrelevant.",
-      "AI quality bar for SMBs is laughably low: just answer when nobody else does. 5M UK businesses fit. Simple."
+      "Solo UK service trades. 5M plumbers/electricians/locksmiths still sending after-hours calls to voicemail in 2026. £30/mo AI receptionist replaces a £25k human. Zero serious competition at that tier.",
+      "AI receptionist for solo trades. Currently they pay £0 (voicemail) or £25k (human). The gap between is empty and 5M UK businesses sit in it.",
+      "Single-operator service businesses. They lose £200-£400 per missed call and pay nothing to fix it. The £30/mo tier is empty because everyone's chasing enterprise.",
+      "Service-business reception is the most ignored £multibillion segment I've found. Plumber misses a call at 7pm, customer calls the next plumber. Nobody is building specifically for that.",
+      "Emergency-callout trades after 6pm. Locksmiths, drainage, boilers. 70% of demand is out-of-hours, most operators answer 30% of it. AI receptionist closes that gap directly.",
+      "Independent hair salons and beauty businesses with no receptionist. Owner is mid-appointment, phone rings, booking dropped. A £30/mo AI handling just the calendar is wildly underbuilt.",
+      "WhatsApp triage for trades. UK customers default to WhatsApp now and most small trades have no system for it. The owner reads messages between jobs. AI that triages and books inside WhatsApp is open territory.",
+      "Mobile-service operators (mechanics, tutors, dog groomers). They drive or work hands-on all day, can't pick up the phone. AI takes inbound, qualifies, books. Tiny per-customer ARR but enormous count and zero churn risk."
     ],
-    reason: 'AI-quality angle, bent to constrained deployment'
-  },
-  {
-    name: 'dev-tool-pricing-or-saas-cost',
-    test: t => /\b(\$\d+\/mo|£\d+\/mo|pricing|free tier|paid tier|subscription|SaaS|saas)\b/i.test(t) && !/\b(small business|smb|trades?|plumber|electrician|service business)\b/i.test(t),
-    drafts: [
-      "1000 SMBs × £30/mo = £30k MRR with zero competition. The £30 tier is empty. Brutal but true.",
-      "Most SaaS pricing assumes procurement. SMBs check 'one job pays for it.' Different buyer entirely.",
-      "Actually the £30/mo SMB tier is the unit economics VCs hate and bootstrappers love. Where does the money go?",
-      "Honest pricing test: would a UK plumber pay this with last week's callout? If no, wrong price. Simple.",
-      "5M UK SMBs ignored by enterprise SaaS. £30/mo, predictable, cancel any time. Brutal asymmetry.",
-      "Most pricing pages assume the buyer reads them. SMBs check ROI in 30 seconds. Different game.",
-      "The version nobody admits: SaaS for SMBs is a different product, not a cheaper one. Most miss this.",
-      "Actually £30/mo × 1000 customers beats £3k MRR × 10 customers on every metric except investor decks. Simple."
-    ],
-    reason: 'dev-tool pricing angle, bent to SMB pricing psychology'
-  },
-  {
-    name: 'social-or-engagement',
-    test: t => /\b(twitter|x account|posts|impressions|engagement|followers|content|audience|reach|virality|going viral)\b/i.test(t),
-    drafts: [
-      "1 viral thread = 6 months of SMB inbound. Most owners never even start posting. Where does the money go?",
-      "80% of SMB social conversion happens in DMs. 2-min reply closes, 4-hour reply doesn't. Brutal.",
-      "5,000 followers + 2-min reply rate beats 50,000 followers + 4-hour rate, every time. Simple.",
-      "Most engagement strategies optimise impressions. The actual lever: reply speed when DM lands. Free, ignored.",
-      "Actually social leverage for SMBs is reply-speed, not reach. 30% close-rate on instant DM reply. Brutal.",
-      "Going viral pays nothing if the DM sits 4 hours unread. Most owners learn this the expensive way.",
-      "The version nobody admits: 1000 niche followers + instant DM reply > 100k followers + slow reply. Simple.",
-      "Honest test: would a plumber gain bookings from your engagement advice? If no, you're optimising the algo. Brutal."
-    ],
-    reason: 'social-as-funnel angle, bent to reply-time leverage'
-  },
-  {
-    name: 'business-models-or-opportunities',
-    test: t => /\b(business model|business idea|side project|side hustle|opportunity|niche|untapped|underserved|market)\b/i.test(t),
-    drafts: [
-      "5M UK service businesses, zero competition at £30/mo. Most underserved market in 2026. Where does the money go?",
-      "SMB after-hours coverage = £multibillion gap nobody fills. £400/missed call, paid nothing to fix. Brutal.",
-      "Actually the boring SMB markets are ignored because no procurement team exists. Compounding asymmetry. Simple.",
-      "Most opportunity threads chase VC categories. £30/mo SMB tools have 5M buyers and zero rivals. Where does the money go?",
-      "The under-tapped niche: solo trades on voicemail. £30/mo bot replaces it. 5M UK businesses. Simple math.",
-      "Honest niche test: can a UK plumber set it up between jobs in his van? If yes, real market. Brutal filter.",
-      "Most 'find an underserved market' threads miss the simplest one: things humans hate doing at 11pm. Worth a thought.",
-      "The opportunity nobody mentions: shrink an existing £30k/yr job to £30/mo, sell to 5M SMBs. Boring. Brutal."
-    ],
-    reason: 'business-models angle, bent to SMB underserved'
-  },
-  {
-    name: 'cloud-infra-or-tech-cost',
-    test: t => /\b(cloud|infrastructure|infra|server|hosting|aws|gcp|cloudflare|nginx|sqlite|postgres|database|stack)\b/i.test(t),
-    drafts: [
-      "Most infra optimisations save £100/mo. SMBs leak £8-15k/yr to missed calls. Where does the money go?",
-      "Honest infra take: the cheapest server in the world doesn't matter if nobody picks up. Brutal but true.",
-      "Actually the highest-leverage piece of infra for service businesses isn't the DB. It's the thing answering at 11pm. Simple.",
-      "Most 'simple stack' threads optimise dev velocity. SMBs need a stack that books while they're on a job. Different KPI.",
-      "5M UK SMBs care about infra in one way: did the £400 booking land? £30/mo bot, zero servers. Brutal.",
-      "The infra a plumber actually needs: 1 workflow, 4 nodes, AI books slot. Which DB? Doesn't matter. Simple.",
-      "Most server-cost arguments ignore the £400 callout lost overnight. Free fix: AI receptionist. Where does the money go?",
-      "Honest version: 'simplify the stack' for SMBs means 'remove the human from after-hours phone.' Brutal arithmetic."
-    ],
-    reason: 'cloud/infra angle, bent to top-of-stack revenue'
+    reason: 'underserved-market question, direct answer with our segment'
   }
 ];
 
@@ -508,14 +455,22 @@ const _recentTexts = recentlyPushedTexts();
 //   (b) same text repeated within a single run (this set handles this)
 const _batchUsedTexts = new Set();
 
+// Conversational angles bypass the punchy-stat quality gate because they're
+// designed to engage the OP's specific question, not to viral-bait. Quality
+// is gated by the trigger (must be a real question/claim) instead of by the
+// draft form.
+const CONVERSATIONAL_ANGLES = new Set([
+  'ai-agent-business-models-question',
+  'mediocre-ai-outreach-or-sdr',
+  'untapped-niche-or-underserved-market-question',
+]);
+
 function pickDraft(text, candId) {
   for (const a of angles) {
     if (a.test(text)) {
       const idStr = String(candId || text);
       let h = 0;
       for (let i = 0; i < idStr.length; i++) h = (h * 31 + idStr.charCodeAt(i)) | 0;
-      // Score every variant. Penalty if recently-pushed (24h history) OR already
-      // used in THIS batch. Both penalties are -10 so any unused variant wins.
       const scored = a.drafts.map((d, i) => {
         const trimmed = d.trim();
         const recencyPenalty = _recentTexts.has(trimmed) ? 10 : 0;
@@ -530,10 +485,9 @@ function pickDraft(text, candId) {
       const top = scored[0].score;
       const tied = scored.filter(s => s.score === top);
       const pick = tied[Math.abs(h) % tied.length];
-      // Use the un-penalised score for the quality gate.
       const realScore = scoreDraft(pick.draft);
-      if (realScore < 3) return null;
-      // Mark this text as used in the batch so subsequent picks avoid it.
+      const isConversational = CONVERSATIONAL_ANGLES.has(a.name);
+      if (!isConversational && realScore < 3) return null;
       _batchUsedTexts.add(pick.draft.trim());
       return { draft: pick.draft, reason: a.reason, score: realScore };
     }
@@ -550,11 +504,32 @@ const ranked = (cands.candidates || []).slice().sort((a, b) => {
 const handleCount = {};
 const replyDrafts = [];
 
+function isUnrepliable(t) {
+  if (!t) return true;
+  const trimmed = t.trim();
+  if (trimmed.length < 60) return true;
+  // Pure announcements / link-only posts
+  if (/^(read (the )?full post|read more|new (research|paper|blog|post)|here(.s| is) (the|our)|just (shipped|launched|published))/i.test(trimmed)) return true;
+  // Personal life / family / holidays - never reply with B2B pitch
+  if (/\b(mother.s day|mothers day|father.s day|happy birthday|my (mum|mom|dad|son|daughter|wife|husband|kid|family)|RIP|condolences|prayers)\b/i.test(trimmed)) return true;
+  // Politics / charities / non-business commentary
+  if (/\b(election|democrat|republican|trump|biden|charity|charities|non[- ]?partisan|geopolit|ukraine|gaza)\b/i.test(trimmed)) return true;
+  // Personal anecdotes - dialogue with no business hook
+  if (/^(Liam:|Me:|Dad:|Mom:|Mum:|Son:|Daughter:|Wife:|Husband:)/m.test(trimmed)) return true;
+  // Pure self-promotion of someone's own product/launch (no question, no claim we can engage)
+  if (/^(I('m| am) (excited|thrilled|happy)|excited to (share|announce)|huge news|big news|announcing)/i.test(trimmed)) return true;
+  // Tweets that are essentially just a link with no substance
+  const wordsBeforeLink = trimmed.split(/https?:\/\//)[0].trim().split(/\s+/).length;
+  if (wordsBeforeLink < 8 && /https?:\/\//.test(trimmed)) return true;
+  return false;
+}
+
 for (const c of ranked) {
-  if (!c.text || c.text.length < 30) continue; // loosened for firehose (was 50)
-  if ((handleCount[c.handle] || 0) >= 2) continue; // max 2 per handle per slot (was 1)
+  if (!c.text || c.text.length < 30) continue;
+  if (isUnrepliable(c.text)) continue;
+  if ((handleCount[c.handle] || 0) >= 2) continue;
   const r = pickDraft(c.text, c.id || c.url);
-  if (!r) continue; // no angle = skip, hold quality bar
+  if (!r) continue;
   if (r.draft.length > 270) continue;
   handleCount[c.handle] = (handleCount[c.handle] || 0) + 1;
   replyDrafts.push({
