@@ -43,20 +43,19 @@ function rootDomain(url) {
   } catch { return null; }
 }
 
+const JUNK_LOCAL_SET = new Set(JUNK_LOCAL_PARTS);
+
 function isJunkEmail(email) {
   const lower = email.toLowerCase();
   const [local, domain] = lower.split('@');
   if (!local || !domain) return true;
   if (JUNK_DOMAINS.has(domain)) return true;
-  for (const bad of JUNK_LOCAL_PARTS) {
-    if (local.startsWith(bad)) return true;
-  }
+  if (JUNK_LOCAL_SET.has(local)) return true;
   if (/\.(png|jpg|jpeg|gif|svg|webp|ico)$/i.test(email)) return true;
   if (/^(test|admin|user|your|my)email?$/.test(local)) return true;
-  // Tracking-pixel hashes (32-char hex local-parts)
   if (/^[a-f0-9]{20,}$/i.test(local)) return true;
-  // Sentry DSN public keys
   if (/^[a-f0-9]{8,}@(o\d+\.ingest\.|sentry)/i.test(lower)) return true;
+  if (/sentry/i.test(domain)) return true;
   return false;
 }
 

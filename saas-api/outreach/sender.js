@@ -80,9 +80,6 @@ function sendViaBrevo({ from, to, subject, text, headers }) {
   });
 }
 
-// Generic mailboxes get worse reply rates — they often forward to a non-decision-maker
-// or sit in a shared inbox nobody reads. We don't drop these (some plumbers really do
-// only have info@), but we send to named local-parts first.
 const GENERIC_LOCAL_PARTS = new Set([
   'info', 'sales', 'contact', 'enquiries', 'enquiry', 'hello', 'admin',
   'office', 'reception', 'support', 'mail', 'general',
@@ -94,9 +91,33 @@ function isGenericMailbox(email) {
   return GENERIC_LOCAL_PARTS.has(local);
 }
 
-// Sort named-mailbox leads first within each queue.
+const PLACEHOLDER_LOCAL_PARTS = new Set([
+  'you', 'your', 'example', 'user', 'name', 'email', 'test',
+  'webmaster', 'server', 'hostmaster', 'postmaster',
+  'noreply', 'no-reply', 'mailer-daemon', 'donotreply', 'abuse',
+]);
+
+function isUnsendable(email) {
+  if (!email) return true;
+  if (typeof email !== 'string') return true;
+  const trimmed = email.trim();
+  if (!trimmed || trimmed === 'null' || trimmed === 'undefined') return true;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) return true;
+  const local = trimmed.split('@')[0].toLowerCase();
+  if (PLACEHOLDER_LOCAL_PARTS.has(local)) return true;
+  return false;
+}
+
 function preferNamed(queue) {
-  return queue.slice().sort((a, b) => {
+  const sendable = queue.filter(l => {
+    if (isUnsendable(l.email)) {
+      try { store.update(l.id, { do_not_send: true, do_not_send_reason: 'placeholder_or_invalid_email' }); } catch {}
+      return false;
+    }
+    if (l.do_not_send) return false;
+    return true;
+  });
+  return sendable.slice().sort((a, b) => {
     const ag = isGenericMailbox(a.email) ? 1 : 0;
     const bg = isGenericMailbox(b.email) ? 1 : 0;
     return ag - bg;
@@ -147,6 +168,10 @@ function assignE1Variants(leadId) {
 }
 
 async function sendOne(transport, lead, step, dryRun) {
+  if (isUnsendable(lead.email)) {
+    try { store.update(lead.id, { do_not_send: true, do_not_send_reason: 'placeholder_or_invalid_email' }); } catch {}
+    throw new Error(`unsendable email: ${JSON.stringify(lead.email)}`);
+  }
   const token = unsubToken(lead.email);
   const opts = step === 1 ? assignE1Variants(lead.id) : {};
   const built = buildEmail(step, lead, token, opts);
