@@ -354,6 +354,111 @@ const angles = [
       "The version nobody mentions: voice AI's killer feature for SMBs isn't intelligence. It's just 'somebody picked up.' That alone wins the £400 callout 60% of the time."
     ],
     reason: 'voice-AI angle, on-pillar'
+  },
+  {
+    name: 'agents-broad',
+    test: t => /\b(agents?|agentic|autonomous|build(ing)? agents?|agent skills?|shift to agents|future is agents)\b/i.test(t),
+    drafts: [
+      "5M UK SMBs would pay £30/mo for an agent that just picks up the phone. Nobody is building it. Where does the money go?",
+      "The agent use-case nobody hypes: 1 workflow, 4 nodes, books a £400 callout at 11pm. Brutal arithmetic.",
+      "90% of agent demos target tech teams. The 10% serving plumbers will print quietly. Worth a thought.",
+      "Most agentic AI demos solve fake problems. The real one: 5M SMBs missing calls every night. Simple.",
+      "Honest version of the agent shift: enterprise gets the headlines, SMBs get the £30/mo deployable bot. Different game.",
+      "The killer agent app isn't research. It's a £30/mo receptionist that doesn't sleep. Boring. Profitable.",
+      "Actually the £30/mo agent for trades is the most underserved gap in 2026. Where does the money go?",
+      "Most builders skip SMB agents because £30/mo isn't sexy. 1000 customers × £30 = £30k MRR. Simple."
+    ],
+    reason: 'agents broad, bent to receptionist deployment'
+  },
+  {
+    name: 'founder-advice-broad',
+    test: t => /\b(founders?|building|shipping|startup|indie|solopreneur)\b/i.test(t) && /\b(speed|taste|execution|consistency|building too slowly|wrong thing|perfection|differentiates)\b/i.test(t),
+    drafts: [
+      "78% of buyers go with whoever replies first. The founder lever nobody pulls. Brutal but true.",
+      "5-min reply beats 5-hour reply by 21x. Same lead, same ad spend. Where does the money go?",
+      "Most founders chase differentiation when the actual differentiator is 'we picked up.' Simple.",
+      "Actually 'execution' for service businesses means showing up Tuesday at 6pm. Most don't. Brutal.",
+      "The unsexy founder lever: 2-min reply rate. Free, ignored, every quarter.",
+      "Speed of reply is the only metric where laziness costs measurable cash. Most miss this.",
+      "Honest version: 'consistency' for SMBs means somebody answers every time. £30/mo bot does it. Simple.",
+      "Most founders optimise positioning. The 78% close-on-first-reply stat eats positioning for breakfast."
+    ],
+    reason: 'founder-advice broad, bent to speed-of-reply'
+  },
+  {
+    name: 'ai-hallucination-or-quality',
+    test: t => /\b(hallucinat|fake|made up|wrong info|inaccurate|prompt inject|AI safety|alignment|reliable|reliable AI|trust)\b/i.test(t),
+    drafts: [
+      "Hallucination is a writing problem. Nobody hallucinates a calendar slot. Different game.",
+      "Most 'AI is unreliable' takes assume open-ended use. SMB reception is 6 calendar slots. Simple.",
+      "Actually the unreliability narrative dies once you constrain the use-case. £30/mo bot, 4 questions. Brutal.",
+      "Honest reliability bar for SMB AI: better than the voicemail customers get now. Most clear it day 1.",
+      "Trust in AI for trades isn't benchmarks. It's 'the bot booked £400 while I slept.' One demo, done.",
+      "The version nobody mentions: AI safety panic ignores the constrained 4-node deployments. Where does the money go?",
+      "Most 'don't trust AI' arguments work for legal. For booking a plumber Tuesday 4pm? Brutal but irrelevant.",
+      "AI quality bar for SMBs is laughably low: just answer when nobody else does. 5M UK businesses fit. Simple."
+    ],
+    reason: 'AI-quality angle, bent to constrained deployment'
+  },
+  {
+    name: 'dev-tool-pricing-or-saas-cost',
+    test: t => /\b(\$\d+\/mo|£\d+\/mo|pricing|free tier|paid tier|subscription|SaaS|saas)\b/i.test(t) && !/\b(small business|smb|trades?|plumber|electrician|service business)\b/i.test(t),
+    drafts: [
+      "1000 SMBs × £30/mo = £30k MRR with zero competition. The £30 tier is empty. Brutal but true.",
+      "Most SaaS pricing assumes procurement. SMBs check 'one job pays for it.' Different buyer entirely.",
+      "Actually the £30/mo SMB tier is the unit economics VCs hate and bootstrappers love. Where does the money go?",
+      "Honest pricing test: would a UK plumber pay this with last week's callout? If no, wrong price. Simple.",
+      "5M UK SMBs ignored by enterprise SaaS. £30/mo, predictable, cancel any time. Brutal asymmetry.",
+      "Most pricing pages assume the buyer reads them. SMBs check ROI in 30 seconds. Different game.",
+      "The version nobody admits: SaaS for SMBs is a different product, not a cheaper one. Most miss this.",
+      "Actually £30/mo × 1000 customers beats £3k MRR × 10 customers on every metric except investor decks. Simple."
+    ],
+    reason: 'dev-tool pricing angle, bent to SMB pricing psychology'
+  },
+  {
+    name: 'social-or-engagement',
+    test: t => /\b(twitter|x account|posts|impressions|engagement|followers|content|audience|reach|virality|going viral)\b/i.test(t),
+    drafts: [
+      "1 viral thread = 6 months of SMB inbound. Most owners never even start posting. Where does the money go?",
+      "80% of SMB social conversion happens in DMs. 2-min reply closes, 4-hour reply doesn't. Brutal.",
+      "5,000 followers + 2-min reply rate beats 50,000 followers + 4-hour rate, every time. Simple.",
+      "Most engagement strategies optimise impressions. The actual lever: reply speed when DM lands. Free, ignored.",
+      "Actually social leverage for SMBs is reply-speed, not reach. 30% close-rate on instant DM reply. Brutal.",
+      "Going viral pays nothing if the DM sits 4 hours unread. Most owners learn this the expensive way.",
+      "The version nobody admits: 1000 niche followers + instant DM reply > 100k followers + slow reply. Simple.",
+      "Honest test: would a plumber gain bookings from your engagement advice? If no, you're optimising the algo. Brutal."
+    ],
+    reason: 'social-as-funnel angle, bent to reply-time leverage'
+  },
+  {
+    name: 'business-models-or-opportunities',
+    test: t => /\b(business model|business idea|side project|side hustle|opportunity|niche|untapped|underserved|market)\b/i.test(t),
+    drafts: [
+      "5M UK service businesses, zero competition at £30/mo. Most underserved market in 2026. Where does the money go?",
+      "SMB after-hours coverage = £multibillion gap nobody fills. £400/missed call, paid nothing to fix. Brutal.",
+      "Actually the boring SMB markets are ignored because no procurement team exists. Compounding asymmetry. Simple.",
+      "Most opportunity threads chase VC categories. £30/mo SMB tools have 5M buyers and zero rivals. Where does the money go?",
+      "The under-tapped niche: solo trades on voicemail. £30/mo bot replaces it. 5M UK businesses. Simple math.",
+      "Honest niche test: can a UK plumber set it up between jobs in his van? If yes, real market. Brutal filter.",
+      "Most 'find an underserved market' threads miss the simplest one: things humans hate doing at 11pm. Worth a thought.",
+      "The opportunity nobody mentions: shrink an existing £30k/yr job to £30/mo, sell to 5M SMBs. Boring. Brutal."
+    ],
+    reason: 'business-models angle, bent to SMB underserved'
+  },
+  {
+    name: 'cloud-infra-or-tech-cost',
+    test: t => /\b(cloud|infrastructure|infra|server|hosting|aws|gcp|cloudflare|nginx|sqlite|postgres|database|stack)\b/i.test(t),
+    drafts: [
+      "Most infra optimisations save £100/mo. SMBs leak £8-15k/yr to missed calls. Where does the money go?",
+      "Honest infra take: the cheapest server in the world doesn't matter if nobody picks up. Brutal but true.",
+      "Actually the highest-leverage piece of infra for service businesses isn't the DB. It's the thing answering at 11pm. Simple.",
+      "Most 'simple stack' threads optimise dev velocity. SMBs need a stack that books while they're on a job. Different KPI.",
+      "5M UK SMBs care about infra in one way: did the £400 booking land? £30/mo bot, zero servers. Brutal.",
+      "The infra a plumber actually needs: 1 workflow, 4 nodes, AI books slot. Which DB? Doesn't matter. Simple.",
+      "Most server-cost arguments ignore the £400 callout lost overnight. Free fix: AI receptionist. Where does the money go?",
+      "Honest version: 'simplify the stack' for SMBs means 'remove the human from after-hours phone.' Brutal arithmetic."
+    ],
+    reason: 'cloud/infra angle, bent to top-of-stack revenue'
   }
 ];
 
