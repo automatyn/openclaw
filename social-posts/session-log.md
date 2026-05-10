@@ -1101,3 +1101,15 @@ Open items for next slot:
   - drip persistence bug.
   - reply-detector autoresponder false-positive.
   - Dev.to backfill (last post 20d ago).
+
+### /afternoon - 2026-05-10 13:30 UTC
+- X: 139 followers / 814 tweets (no change since /morning).
+- **OUTREACH HALT STILL ACTIVE** — sender skipped. Today total: E1 0 / E2 0 / E3 0 = 0 sent.
+- X dual-channel: API 5 fresh ($0.60/$4.50 month), browser 34 candidates. **After merge: 84 unique, 0 matched any angle, 0 replies pushed.** Angle-matcher remains the bottleneck (open item from 2026-05-07).
+- 3 originals from drafter, none pass 30k follower floor.
+- Today's X drafts pushed to Pat (across firehose + morning + afternoon): **0 replies**.
+- Reddit pipeline (afternoon): webhook 200.
+- TikTok / LinkedIn / Medium: skipped (Postiz paused, yt-dlp missing).
+- Bot health: openclaw-gateway + automatyn-api active. /api/health 200.
+- Open items same as /morning. Adding:
+  - **X firehose pushed 0 reply drafts today.** Scrape-targets-pw exits null, search/fxt write 0-candidate files. 84 candidates from API + browser merge but angle-matcher rejects all. The X reply pipeline is effectively dead until matcher is loosened or firehose scrapers fixed.
