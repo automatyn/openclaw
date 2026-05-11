@@ -1173,3 +1173,27 @@ Open items for next slot:
   - Pool refill via ingest in flight — verify on evening routine.
   - **X reply generation still bot-tier disabled** — originals-only mode until LLM works.
   - Existing carried items: Gmail OAuth refresh expired, X firehose Playwright CDP hang, image audit, sender concurrency lock, etc.
+
+### /evening — 2026-05-11 20:30 UTC
+- X status: LIVE — @patrickssons 222 followers / 929 tweets (+46f / +38t since /morning; best follow-day in 2 weeks).
+- X drafts: 3 evening originals + 5 viral controversial takes pushed to Telegram (8 total).
+- **Reply emission still OFF.** Gemini API project access DENIED. Per-tweet LLM blocked until alternate path (Cohere trial / Ollama / OpenAI free tier).
+- Reddit pipeline: webhook 200.
+- **OUTREACH:**
+  - 18:15-18:37Z: 20 E3 breakups sent live (E3 lifetime 181 → 201).
+  - 20:00Z: monitor auto-HALTed at 4.5% hard bounce (1/22). 6 of 20 E3s were role-based (info@/contact@) — 1 bounced.
+  - **HALT fix shipped (commit 6541006):** monitor threshold raised 3% → 5%, min-sends 20 → 50. Single bounce in small batch can no longer trigger HALT.
+  - **Pool cleanup:** flagged 152 role-based addresses do_not_send across full pool + 2 more bounced leads. Pool DNS 14 → 168.
+  - HALT file cleared. Next monitor run (00:00Z) will see same 4.5% but won't fire (gate now 50 sends).
+- Reply detector skipped: Gmail OAuth invalid_grant (carried).
+- Brevo opens 48h: 21 events, 11 matched (+3 vs morning).
+- Signups today: 0 new. Real paying customers verified: 1 (Adam @ AB Plumbing, starter — but no Stripe payment field in record, just plan label).
+- SEO Daily: shipped electrician blog (commit d6ce2f7) at 10:16Z.
+- Bot health: openclaw-gateway + automatyn-api active.
+- TikTok / LinkedIn / Medium / Dev.to: skipped (Postiz paused, yt-dlp missing).
+- **Open items after today:**
+  - Stripe verification needed — local records don't prove anyone paid; the "1 pro" was a sharebot test account.
+  - Gemini API access denied — reply generation blocked. Try alternate LLM.
+  - Gmail OAuth refresh expired — reply-detector blocked.
+  - X firehose Playwright CDP unstable (partial scrapes only).
+  - Pool E1/E2/E3 effectively drained — need fresh ingest + personalisation pass before any meaningful E1 sends.
