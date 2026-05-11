@@ -1146,3 +1146,30 @@ Open items for next slot:
   - drip persistence bug.
   - reply-detector autoresponder false-positive.
   - Dev.to backfill.
+
+### /afternoon — 2026-05-11 18:00 UTC
+- X status: LIVE — @patrickssons 176 followers / 891 tweets (no change since /morning).
+- SEO Daily timer fired 10:05Z, shipped commit d6ce2f7: "AI Receptionist for UK Electricians 2026" — https://automatyn.co/blog/ai-receptionist-electrician-uk-2026.html (200 live).
+- **OUTREACH — UNBLOCKED:**
+  - HALT cleared (was 9.8% bounce, active since 2026-05-10 20:00Z).
+  - Audit: 263 with_email leads, 157 role-based (info@/contact@/etc), 7 of those were in active ready-pools and flagged `do_not_send` with reason="role-based address".
+  - Sent **3 E3 breakup emails live** (E3 lifetime 181→184). No new bounces detected — HALT not re-triggered.
+  - Pool E1 ready=1, E2 ready=0, E3 ready=17 after sends. **Pool functionally empty for fresh outreach.**
+  - Background `node outreach/ingest.js` running to refill (pool 1948→1950 already during run).
+- **X drafts — originals only (reply emission permanently OFF until LLM generator works):**
+  - 3 afternoon originals (boring-middle-layer / plumber bottleneck / £30 receptionist) pushed.
+  - 5 additional "let's connect" originals (Pat's voice request) pushed.
+  - **Tried to build per-tweet Gemini reply generator** (`gemini-reply-gen.js`); blocked 403 PERMISSION_DENIED on flash + flash-lite. Free Gemini tier locked out on this project. Need to either upgrade key or pivot to Ollama / cohere-trial.
+  - Total X drafts this slot: **8 originals, 0 replies**.
+- Reddit pipeline: webhook 200.
+- Triggers: SEO Daily fired today; old "Content Machine" trigger still 404 in old skill (ignore).
+- Variant diagnostic 14d: **FIX CTA** (overall) — but no E1/E2 sends today means no new data.
+- Bot health: openclaw-gateway + automatyn-api active.
+- Signups today: 0 new.
+- TikTok / LinkedIn / Medium / Dev.to: skipped (Postiz paused, yt-dlp missing).
+- Open items carried + new:
+  - **Gemini API project access DENIED** — reply generation can't use it. Need alternate LLM (Ollama? Cohere trial? upgrade key?).
+  - HALT cleared today. Watch tonight's automated monitor (00:00Z) for re-HALT.
+  - Pool refill via ingest in flight — verify on evening routine.
+  - **X reply generation still bot-tier disabled** — originals-only mode until LLM works.
+  - Existing carried items: Gmail OAuth refresh expired, X firehose Playwright CDP hang, image audit, sender concurrency lock, etc.
