@@ -1197,3 +1197,25 @@ Open items for next slot:
   - Gmail OAuth refresh expired — reply-detector blocked.
   - X firehose Playwright CDP unstable (partial scrapes only).
   - Pool E1/E2/E3 effectively drained — need fresh ingest + personalisation pass before any meaningful E1 sends.
+
+### /morning — 2026-05-12 07:45 UTC
+- X status: LIVE — @patrickssons 230 followers / 945 tweets (+8f / +16t overnight).
+- **HALT cleared overnight and stayed clear.** Monitor 00:00Z + 04:00Z: `21 sent · 0 hard · 0 spam · OK`. Threshold fix from yesterday (3%→5%, min-sends 20→50) plus the 168 DNS-flagged role-based addresses is holding.
+- X drafts pushed: 3 morning originals + 5 broader "let's connect" originals = **8 drafts to Telegram**.
+- Reddit pipeline: webhook 200.
+- **OUTREACH:**
+  - Pool dry: E1 ready=1, E2=0, E3=0. The 1 E1 didn't pass sender filters (likely placeholder/sentry) — 0 sends, no HALT.
+  - Brevo 48h opens: 9 events, 7 matched (+1 vs yesterday).
+  - Pool 1953 total / 263 with_email / 168 DNS / 5 bounced.
+  - Fresh ingest running in background (Google Places).
+- Reply detector: skipped (Gmail OAuth invalid_grant, carried).
+- GSC 7d: **133 imp / 0 clk / pos 17.4** (-2 imp / pos flat vs yesterday). Top page passive-income-ai-agents (91 imp pos 14.8) unchanged.
+- Bot health: all 5 services active (openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer).
+- Signups overnight: 0. Total 23.
+- TikTok / LinkedIn / Medium / Dev.to: skipped (Postiz paused, yt-dlp missing).
+- Open items unchanged:
+  - Gemini API access denied (reply gen blocked).
+  - Gmail OAuth refresh expired.
+  - X firehose Playwright CDP unstable.
+  - Stripe verification needed (local records don't prove anyone paid).
+  - E1/E2/E3 pool refill needs ingest + personalisation cycle.

@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-04T11:10:35.151Z",
+  "scraped_at": "2026-05-12T07:43:08.193Z",
   "window_hours": 24,
   "source": "x-api-v2",
   "stats": {
@@ -8,75 +8,75 @@
     "skippedContent": 0
   },
   "budget": {
-    "used": 40,
+    "used": 155,
     "cap": 900,
-    "remaining": 860
+    "remaining": 745
   },
   "candidates": [
     {
       "handle": "amasad",
-      "tweet_id": "2051167532523074015",
-      "url": "https://x.com/amasad/status/2051167532523074015",
-      "text": "10 active, 198 draft, 700+ done.\n\nI don’t think there’s more agentic parallelism happening anywhere else on the internet than what happens on @Replit. https://t.co/eoEkNlNsu9",
-      "created_at": "2026-05-04T05:10:23.000Z",
-      "age_hours": 6,
-      "likes": 166,
-      "replies": 22,
-      "reposts": 7,
-      "views": 12160,
-      "author_followers": 457262
-    },
-    {
-      "handle": "levelsio",
-      "tweet_id": "2051242426275188980",
-      "url": "https://x.com/levelsio/status/2051242426275188980",
-      "text": "🌡️ Update on the CO2 bedroom saga\n\nI tried this tip by @jesper_bee \n\nWe have a bathroom in the bedroom with a vent (for removing humidity after showering), so I kept the door open and vent on\n\nAnyway it worked CO2 at night peaked at 850ppm, still a bit high but almost half of ht",
-      "created_at": "2026-05-04T10:07:59.000Z",
-      "age_hours": 1,
-      "likes": 147,
-      "replies": 13,
+      "tweet_id": "2053999885872218120",
+      "url": "https://x.com/amasad/status/2053999885872218120",
+      "text": "Another day another massive JavaScript supply chain attack. Replit users are safe and protected. https://t.co/AZZgQEh7uJ",
+      "created_at": "2026-05-12T00:45:08.000Z",
+      "age_hours": 7,
+      "likes": 189,
+      "replies": 25,
       "reposts": 3,
-      "views": 29373,
-      "author_followers": 862431
+      "views": 19298,
+      "author_followers": 458915
     },
     {
-      "handle": "shawnchauhan1",
-      "tweet_id": "2051177120915997030",
-      "url": "https://x.com/shawnchauhan1/status/2051177120915997030",
-      "text": "Starbucks is pulling automation out of its busiest cafés and hiring more baristas.\n\nNot because automation failed. Because customers left when it succeeded.\n\nThis is the first mass-market signal of what economists have been modeling for years.\n\nWhen AI makes everything cheap, htt",
-      "created_at": "2026-05-04T05:48:29.000Z",
-      "age_hours": 5.4,
-      "likes": 25,
-      "replies": 3,
+      "handle": "simonw",
+      "tweet_id": "2053992869405618580",
+      "url": "https://x.com/simonw/status/2053992869405618580",
+      "text": "Wrote about today's GitLab restructuring / \"workforce reduction\" announcement, and ended up digging around in version control for both the GitLab and the 37signals public employee handbooks to help illustrate my thoughts https://t.co/xkqehsa5hT",
+      "created_at": "2026-05-12T00:17:16.000Z",
+      "age_hours": 7.4,
+      "likes": 146,
+      "replies": 9,
       "reposts": 7,
-      "views": 1151,
-      "author_followers": 32119
+      "views": 22236,
+      "author_followers": 174381
+    },
+    {
+      "handle": "GergelyOrosz",
+      "tweet_id": "2054088342254371311",
+      "url": "https://x.com/GergelyOrosz/status/2054088342254371311",
+      "text": "Supply chain attacks are happening left and right with npm, PyPI and so many other places. It seems to be getting worse, everyone agrees.\n\nBut what can you do about it?\n\nSome thoughts on possible approaches (all have tradeoffs). \n\nWhat did I miss? And what vendors actually work? ",
+      "created_at": "2026-05-12T06:36:38.000Z",
+      "age_hours": 1.1,
+      "likes": 76,
+      "replies": 27,
+      "reposts": 4,
+      "views": 6041,
+      "author_followers": 333021
+    },
+    {
+      "handle": "jasonlk",
+      "tweet_id": "2053994308882342277",
+      "url": "https://x.com/jasonlk/status/2053994308882342277",
+      "text": "Getting Ready!! https://t.co/W8Zjo0GVWs https://t.co/y5duWFDDXq",
+      "created_at": "2026-05-12T00:22:59.000Z",
+      "age_hours": 7.3,
+      "likes": 23,
+      "replies": 3,
+      "reposts": 1,
+      "views": 7483,
+      "author_followers": 239914
     },
     {
       "handle": "shawnchauhan1",
-      "tweet_id": "2051202714210828430",
-      "url": "https://x.com/shawnchauhan1/status/2051202714210828430",
-      "text": "KKR just handed $10B to the former CEO of AWS to build AI infrastructure.\n\nNot a model company. Not an application layer. Pure picks-and-shovels infrastructure.\n\nThe smartest allocators in the world are not betting on which AI wins.\n\nThey are betting that whoever wins will need h",
-      "created_at": "2026-05-04T07:30:11.000Z",
-      "age_hours": 3.7,
-      "likes": 1,
-      "replies": 1,
-      "reposts": 0,
-      "views": 150,
-      "author_followers": 32119
-    },
-    {
-      "handle": "TKopelman",
-      "tweet_id": "2051255061066448972",
-      "url": "https://x.com/TKopelman/status/2051255061066448972",
-      "text": "Equity compensation is a great way for people to build wealth\n\n→ Can buy stock at a discounted price\n→ Can have extra stock given as a bonus\n\nBut a lot of mistakes can be made along the way\n\nHere's the most common ones I've seen (and how to avoid them):",
-      "created_at": "2026-05-04T10:58:11.000Z",
-      "age_hours": 0.2,
+      "tweet_id": "2054100941910253641",
+      "url": "https://x.com/shawnchauhan1/status/2054100941910253641",
+      "text": "OpenAI just admitted the model is no longer the hard part.\n\nThe OpenAI Deployment Company launches with $4B and a mandate to embed engineers directly inside client organizations.\nBacked by Goldman, SoftBank, McKinsey, Bain, Capgemini.\n\nThat partner list tells you exactly what htt",
+      "created_at": "2026-05-12T07:26:42.000Z",
+      "age_hours": 0.3,
       "likes": 0,
-      "replies": 1,
+      "replies": 0,
       "reposts": 0,
-      "views": 178,
-      "author_followers": 39843
+      "views": 44,
+      "author_followers": 32100
     }
   ]
 }
