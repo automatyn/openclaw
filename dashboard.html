@@ -2156,9 +2156,24 @@
                 loadLeads();
                 loadAvailabilityData();
                 loadBookingsData();
+                maybeAutoOpenCheckout();
             } catch (err) {
                 showAuthError();
             }
+        }
+
+        function maybeAutoOpenCheckout() {
+            if (!agentData) return;
+            if (agentData.plan && agentData.plan !== 'starter') return;
+            var wanted = agentData.requestedPlan;
+            if (wanted !== 'pro' && wanted !== 'max') return;
+            // One-shot: clear server-side so reload does not re-pop
+            agentData.requestedPlan = null;
+            fetch(API_URL + '/api/agent/' + agentId + '/clear-requested-plan', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + token },
+            }).catch(function() {});
+            setTimeout(function() { openCheckout(wanted); }, 1200);
         }
 
         function renderDashboard() {

@@ -153,7 +153,8 @@ app.post('/api/auth/register', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const email = (req.body.email || '').trim().toLowerCase();
   const password = req.body.password || '';
-  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
+  // Plan param = what the user wanted. Always provision Starter; Paddle webhook flips on payment.
+  const requestedPlan = ['pro', 'max'].includes(req.body.plan) ? req.body.plan : null;
 
   // Rate limit
   if (!authLib.rateLimit(`register:ip:${ip}`, 5, 3600000)) {
@@ -220,7 +221,7 @@ app.post('/api/auth/register', async (req, res) => {
     // Create agent shell (empty business details — will be filled during onboarding)
     const metadata = provisionAgent({
       email, businessName: '', industry: '', services: '', prices: '',
-      hours: '', location: '', policies: '', plan,
+      hours: '', location: '', policies: '', plan: 'starter', requestedPlan,
     });
 
     const user = {
@@ -228,7 +229,8 @@ app.post('/api/auth/register', async (req, res) => {
       passwordHash,
       verified: false,
       agentId: metadata.agentId,
-      plan,
+      plan: 'starter',
+      requestedPlan,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -257,7 +259,8 @@ app.post('/api/auth/register', async (req, res) => {
       token: jwtToken,
       email,
       verified: false,
-      plan,
+      plan: 'starter',
+      requestedPlan,
     });
   } catch (err) {
     console.error('Register error:', err);
@@ -310,7 +313,7 @@ app.post('/api/auth/login', async (req, res) => {
 app.post('/api/auth/magic-link', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const email = (req.body.email || '').trim().toLowerCase();
-  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
+  const requestedPlan = ['pro', 'max'].includes(req.body.plan) ? req.body.plan : null;
 
   if (!authLib.rateLimit(`magiclink:ip:${ip}`, 10, 3600000)) {
     return res.status(429).json({ error: 'Too many requests from this IP. Try again later.' });
@@ -332,14 +335,15 @@ app.post('/api/auth/magic-link', async (req, res) => {
     try {
       const metadata = provisionAgent({
         email, businessName: '', industry: '', services: '', prices: '',
-        hours: '', location: '', policies: '', plan,
+        hours: '', location: '', policies: '', plan: 'starter', requestedPlan,
       });
       user = {
         email,
         passwordHash: null, // magic-link users have no password
         verified: false,
         agentId: metadata.agentId,
-        plan,
+        plan: 'starter',
+        requestedPlan,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
@@ -347,6 +351,15 @@ app.post('/api/auth/magic-link', async (req, res) => {
     } catch (err) {
       console.error('Magic-link account provision failed:', err);
       return res.status(500).json({ error: 'Failed to start sign-in. Please try again.' });
+    }
+  } else if (requestedPlan && user.plan === 'starter' && user.agentId) {
+    // Returning user came back via /pricing.html?plan=pro|max — propagate to agent so
+    // dashboard auto-opens checkout once they consume the magic link.
+    const agent = getAgent(user.agentId);
+    if (agent && agent.plan === 'starter') {
+      agent.requestedPlan = requestedPlan;
+      agent.updatedAt = new Date().toISOString();
+      fs.writeFileSync(path.join(DATA_DIR, `${user.agentId}.json`), JSON.stringify(agent, null, 2));
     }
   }
 
@@ -438,7 +451,7 @@ app.post('/api/auth/magic-link/consume', (req, res) => {
 app.post('/api/auth/google', async (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   const credential = (req.body.credential || '').trim();
-  const plan = ['starter', 'pro', 'max'].includes(req.body.plan) ? req.body.plan : 'starter';
+  const requestedPlan = ['pro', 'max'].includes(req.body.plan) ? req.body.plan : null;
 
   if (!credential) return res.status(400).json({ error: 'Missing Google credential.' });
   if (!authLib.rateLimit(`google:ip:${ip}`, 20, 3600000)) {
@@ -486,7 +499,7 @@ app.post('/api/auth/google', async (req, res) => {
     try {
       const metadata = provisionAgent({
         email, businessName: '', industry: '', services: '', prices: '',
-        hours: '', location: '', policies: '', plan,
+        hours: '', location: '', policies: '', plan: 'starter', requestedPlan,
       });
       user = {
         email,
@@ -495,7 +508,8 @@ app.post('/api/auth/google', async (req, res) => {
         googleSub: payload.sub,
         name: payload.name || '',
         agentId: metadata.agentId,
-        plan,
+        plan: 'starter',
+        requestedPlan,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
@@ -513,6 +527,16 @@ app.post('/api/auth/google', async (req, res) => {
     if (!user.verified) { user.verified = true; user.verifiedAt = new Date().toISOString(); }
     user.lastLoginAt = new Date().toISOString();
     user.updatedAt = new Date().toISOString();
+    // If returning user came back via /pricing.html?plan=pro|max, propagate it to their agent
+    // so the dashboard auto-opens the Paddle checkout. Only if they aren't already on that plan.
+    if (requestedPlan && user.plan !== requestedPlan && user.agentId) {
+      const agent = getAgent(user.agentId);
+      if (agent && agent.plan === 'starter') {
+        agent.requestedPlan = requestedPlan;
+        agent.updatedAt = new Date().toISOString();
+        fs.writeFileSync(path.join(DATA_DIR, `${user.agentId}.json`), JSON.stringify(agent, null, 2));
+      }
+    }
     authLib.setUser(email, user);
   }
 
@@ -524,6 +548,7 @@ app.post('/api/auth/google', async (req, res) => {
     email: user.email,
     verified: true,
     plan: user.plan || 'starter',
+    requestedPlan,
     isNewUser,
   });
 });
@@ -1509,6 +1534,23 @@ app.delete('/api/auth/account', auth, async (req, res) => {
     log('error', 'account_delete_error', { agentId, email, error: err.message });
     res.status(500).json({ error: 'Failed to delete account. Please email support@automatyn.co.' });
   }
+});
+
+// ============================================================
+// POST /api/agent/:id/clear-requested-plan — One-shot clear of the auto-checkout flag
+// ============================================================
+app.post('/api/agent/:id/clear-requested-plan', auth, (req, res) => {
+  if (req.params.id !== req.agentId) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+  const agent = getAgent(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Agent not found' });
+  if (agent.requestedPlan) {
+    agent.requestedPlan = null;
+    agent.updatedAt = new Date().toISOString();
+    fs.writeFileSync(path.join(DATA_DIR, `${req.params.id}.json`), JSON.stringify(agent, null, 2));
+  }
+  res.json({ ok: true });
 });
 
 // ============================================================
