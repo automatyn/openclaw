@@ -89,10 +89,21 @@ function outreachState() {
 async function xState() {
   const r = await get('https://api.fxtwitter.com/patrickssons');
   if (!r || !r.user) return { error: 'fxtwitter no data' };
+  // Read manual-update fields if Pat has dropped them in /home/marketingpatpat/x-manual.json
+  // Schema: { verified_followers: 121, impressions_7d: 18000, impressions_28d: 80000, updated_at: ISO }
+  let manual = {};
+  const manualFile = '/home/marketingpatpat/x-manual.json';
+  if (fs.existsSync(manualFile)) {
+    try { manual = JSON.parse(fs.readFileSync(manualFile, 'utf8')); } catch {}
+  }
   return {
     followers: r.user.followers,
     tweets: r.user.tweets,
     verified: r.user.verification?.verified || false,
+    verified_followers: manual.verified_followers ?? null,
+    impressions_7d: manual.impressions_7d ?? null,
+    impressions_28d: manual.impressions_28d ?? null,
+    manual_updated_at: manual.updated_at ?? null,
   };
 }
 
@@ -146,8 +157,29 @@ async function main() {
 
   // Deltas vs yesterday
   const dFollowers = state.last_followers ? x.followers - state.last_followers : null;
+  const dVerifiedFollowers = state.last_verified_followers && x.verified_followers ? x.verified_followers - state.last_verified_followers : null;
+  const dImp7 = state.last_impressions_7d && x.impressions_7d ? x.impressions_7d - state.last_impressions_7d : null;
   const dE1 = state.last_e1_lifetime ? outreach.e1_lifetime - state.last_e1_lifetime : null;
   const dReplied = state.last_replied ? outreach.replied - state.last_replied : null;
+
+  // X eligibility math: 500 verified followers + 5M impressions over 3 months
+  let xProgress = '';
+  if (x.verified_followers != null) {
+    const vfGap = Math.max(0, 500 - x.verified_followers);
+    xProgress += `  verified_followers=${x.verified_followers}${dVerifiedFollowers !== null ? ` (${dVerifiedFollowers >= 0 ? '+' : ''}${dVerifiedFollowers})` : ''}  to 500-gate: ${vfGap}\n`;
+  }
+  if (x.impressions_7d != null) {
+    // 5M over 90d = ~388k/week target. Compare.
+    const weeklyTarget = Math.round(5000000 / (90/7));
+    const pct = Math.round(x.impressions_7d / weeklyTarget * 100);
+    xProgress += `  impressions_7d=${x.impressions_7d.toLocaleString()}${dImp7 !== null ? ` (${dImp7 >= 0 ? '+' : ''}${dImp7.toLocaleString()})` : ''}  (${pct}% of ${weeklyTarget.toLocaleString()}/wk target for 5M/90d)\n`;
+  }
+  if (x.manual_updated_at) {
+    const ageH = Math.round((Date.now() - new Date(x.manual_updated_at).getTime()) / 3600000);
+    if (ageH > 30) xProgress += `  ! manual x-stats stale: ${ageH}h old. Update /home/marketingpatpat/x-manual.json\n`;
+  } else {
+    xProgress += `  ! no manual x-stats. Create /home/marketingpatpat/x-manual.json with verified_followers + impressions_7d\n`;
+  }
 
   const lines = [
     `PULSE ${today} 09:00 UTC`,
@@ -164,6 +196,7 @@ async function main() {
     ``,
     `X (@patrickssons):`,
     `  followers=${x.followers}${dFollowers !== null ? ` (${dFollowers >= 0 ? '+' : ''}${dFollowers})` : ''}  tweets=${x.tweets}  premium=${x.verified ? 'yes' : 'NO'}`,
+    xProgress.trimEnd(),
     `  firehose last run: ${firehose.last_run_min}min ago, ${firehose.candidates} candidates`,
     ``,
     `HEALTH:`,
@@ -189,6 +222,9 @@ async function main() {
     last_paddle_subs: paddle.active_subs,
     last_followers: x.followers,
     last_tweets: x.tweets,
+    last_verified_followers: x.verified_followers,
+    last_impressions_7d: x.impressions_7d,
+    last_impressions_28d: x.impressions_28d,
     last_e1_lifetime: outreach.e1_lifetime,
     last_replied: outreach.replied,
     last_bounced: outreach.bounced,
