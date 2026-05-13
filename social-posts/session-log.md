@@ -1344,3 +1344,31 @@ Open items for next slot:
   - Gmail OAuth refresh expired (reply-detector blocked)
   - X API CreditsDepleted on search endpoint
   - Pool E1/E2/E3 dry — need fresh enrichment (non-OpenAI tools only) or new vertical
+
+### /evening — 2026-05-13 ~18:00 UTC
+- X status: LIVE — total followers 356, tweets 1151 (+22f / +58t since afternoon's 334/1093). Verified followers: 120 (scraped via CDP at 13:14Z, Pat updates manually).
+- X impressions (7d, live-scraped): **78,000** (20% of 388K/wk pace for 5M/90d gate). WoW trend: +198%.
+- Monitor 16:00Z: `Brevo 24h: 42 sent · 4 hard · 0 spam · OK`. HALT clear all day.
+- **OUTREACH:**
+  - Reply-detector: skipped (Gmail OAuth invalid_grant, carried).
+  - Brevo opens 48h: `Scanned 16 open events, matched 11 to leads` (+1 since afternoon's 10).
+  - **Evening send: 7 E1 fresh sends** (lifetime 270→277; today 13→20). The 11 newly personalised leads were eligible — 7 cleared sender filters, 4 didn't (likely Brevo soft-bounce or sender heuristic).
+  - **Hand-personalisation in-session: 11 new intro lines written + saved** (Globe Plumbing, 360 PHS, Baker & Soars, Advance, ARV Group, Prime Fusion, Transform Heating, PlumbSharp, J A Clarke, SA Plumbing, UK Gas Services). 8 bad leads DNS-flagged in same pass (domain mismatches + chain merchants + Google-Fonts scrape garbage).
+  - Pool: total 2848 / with_email 338 / personalised 276 / E1 ready now 0.
+  - E2/E3 ready: 0/0.
+- **PADDLE:** still `completed: 0, subscriptions: 0`. Verified live API works (test transaction created OK), prices `active`. Discovered side issue: `https://automatyn.co/checkout?_ptxn=...` returns HTTP 404 (overlay-mode bypasses this so non-blocking, but stale fallback URL).
+- **X DRAFTS THIS SESSION (cumulative):** ~91 pre-filled drafts in Telegram across batches 1-6 + sama×2 + gregisenberg + 5 viral originals + 5 X-native trend piggybacks + 3 evening virals.
+- Reddit pipeline: webhook 200 `{"message":"Workflow was started"}`.
+- TikTok: 22 videos / 6,178 views / 75 likes (unchanged — yt-dlp tracker cached).
+- Postiz (TikTok carousels + LinkedIn): skipped — POSTIZ_API_KEY absent.
+- Bot health: openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer, reply-watcher.timer, goal-pulse.timer = all `active`. top-ev-pusher.timer disabled today (it was pushing "write your own" garbage to Telegram).
+- Signups today: 0 real customers.
+- **MEMORY WRITTEN TODAY**: project_phase1_plan, project_paddle_checkout_flow, feedback_openai_paid_bot_only, feedback_read_repo_md_files, feedback_x_audience_not_plumbers, reference_x_manual_analytics, feedback_x_levelsio_replies_restricted, feedback_telegram_no_write_your_own, feedback_x_purely_creator_payouts.
+- **COMMITS TODAY**: 7db734d (Paddle auto-open), 908e561 (pulse + handwritten + firehose+12), eae81f1 (SEO blog 1/3), 5591838 (reply-watcher + top-ev-pusher), aceab53 (/afternoon log), 2cc5d64 (verified count fix), f6ff65b (pulse v2). 7 total.
+- **OPEN ITEMS CARRIED:**
+  - Forge image-gen unreachable (SEO 1/3 success rate)
+  - Gmail OAuth refresh expired (reply-detector blocked)
+  - X API search 402 CreditsDepleted
+  - Pool E1/E2/E3 ready dry; needs more personalisation tomorrow
+  - automatyn.co/checkout 404 (overlay-mode masks it; fix soon)
+  - Paddle verification status unconfirmed (Pat should check dashboard)
