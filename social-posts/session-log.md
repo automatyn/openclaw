@@ -1314,3 +1314,33 @@ Open items for next slot:
   - Pricing CTA copy "Start free trial" → less misleading framing (was deferred this cycle)
   - The 5 reply targets are highest-EV if posted within next 6h (algo recency)
 - **Memory written:** `project_paddle_checkout_flow.md` — Paddle (not Stripe), API at `api.automatyn.co`, `requestedPlan` invariant.
+
+### /afternoon — 2026-05-13 12:50 UTC
+- X status: LIVE — `"followers":319,"tweets":1053` (+12f / +32t since morning's 307/1021). Verified Premium. Verified-followers reached 109 today (Pat).
+- X drafts THIS SESSION: ~51 pushed to Telegram pre-filled (17 firehose batch 1 + 3 batch 2 + 1 aminnnn_09 reply-back + 20 pre-written batch 3 + 5 viral originals + 5 X-native trend piggybacks). All one-tap intent URLs with reply pre-loaded.
+- **SEO Daily:** trigger fired `last_fired_at: 2026-05-13T10:02:12Z`, enabled, next 2026-05-14T10:08Z. Produced only **1 of 3 blog posts** (commit `eae81f1 feat(blog): AI Receptionist for UK Locksmiths`). 2 of 3 silently failed — likely Forge image-gen unreachable (carried open item).
+- Reddit pipeline: webhook 200, `{"message":"Workflow was started"}`.
+- **OUTREACH:**
+  - Monitor 12:00Z: `Brevo 24h: 42 sent · 4 hard · 0 spam · OK`. 4 hard bounces today were late-delivery on E1s from 2026-04-29 to 2026-05-09 (Brevo bounce signal lagged 4-14 days). 0 of v4_handwritten bounced.
+  - Pool: 2848 total / 315 with_email / 109 sendable (post-DNS). E1/E2(3d)/E3(5d) ready = 0/0/0.
+  - **Cleanup**: 2 placeholder emails DNS-flagged (`example@mysite.com` Birmingham Plumbing Rescue, `example@server.co.uk` Pimlico Plumbers — both from prior smart-crawl runs).
+  - No sends this slot (pool dry of ready leads).
+  - HALT clear.
+- TikTok: unchanged from morning — 22 videos / 6,178 views / 75 likes. yt-dlp tracker may be cached.
+- Postiz (TikTok carousels + LinkedIn): skipped — POSTIZ_API_KEY absent.
+- Bot health: openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer + 3 new timers (goal-pulse, reply-watcher, top-ev-pusher) = all `active`.
+- **NEW INFRA SHIPPED THIS SESSION:**
+  - `goal-pulse.timer` daily 09:00 UTC → Telegram digest (Paddle/outreach/X/health)
+  - `reply-watcher.timer` every 10 min → detects new replies on @patrickssons tweets, pings for fast reply-back
+  - `top-ev-pusher.timer` every 30 min → 3 URGENT high-EV X targets per cycle
+  - `firehose-fxt.js` expanded handle list 40→52 (verified +12 via fxtwitter)
+  - `send-handwritten.js` for bypass-templates outreach batches
+  - Paddle checkout auto-open fix (commit 7db734d) — pricing→signup→dashboard now auto-pops Paddle if `?plan=pro|max`
+  - 13 hand-written outreach emails sent (variant v4_handwritten, lifetime E1 257→270)
+  - Pool ingest +825 leads across Coventry/Bradford/Stoke/Wolverhampton/Sunderland/Plymouth/Portsmouth/Southampton × plumbers/electricians/boiler-installers
+- **Memory written**: project_phase1_plan, project_paddle_checkout_flow, feedback_openai_paid_bot_only, feedback_read_repo_md_files, feedback_x_audience_not_plumbers.
+- **Open items same:**
+  - Forge image-gen unreachable (SEO Daily 1/3 success rate)
+  - Gmail OAuth refresh expired (reply-detector blocked)
+  - X API CreditsDepleted on search endpoint
+  - Pool E1/E2/E3 dry — need fresh enrichment (non-OpenAI tools only) or new vertical
