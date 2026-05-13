@@ -1316,7 +1316,7 @@ Open items for next slot:
 - **Memory written:** `project_paddle_checkout_flow.md` — Paddle (not Stripe), API at `api.automatyn.co`, `requestedPlan` invariant.
 
 ### /afternoon — 2026-05-13 12:50 UTC
-- X status: LIVE — `"followers":319,"tweets":1053` (+12f / +32t since morning's 307/1021). Verified Premium. Verified-followers reached 109 today (Pat).
+- X status: LIVE — total followers 334, tweets 1093 (+27f / +72t since morning's 307/1021). Verified Premium. **Verified followers: 121** (was 87 yesterday eve, 109 this morning, 121 now). Pace ~34/day. 500-gate ETA ~2026-05-24.
 - X drafts THIS SESSION: ~51 pushed to Telegram pre-filled (17 firehose batch 1 + 3 batch 2 + 1 aminnnn_09 reply-back + 20 pre-written batch 3 + 5 viral originals + 5 X-native trend piggybacks). All one-tap intent URLs with reply pre-loaded.
 - **SEO Daily:** trigger fired `last_fired_at: 2026-05-13T10:02:12Z`, enabled, next 2026-05-14T10:08Z. Produced only **1 of 3 blog posts** (commit `eae81f1 feat(blog): AI Receptionist for UK Locksmiths`). 2 of 3 silently failed — likely Forge image-gen unreachable (carried open item).
 - Reddit pipeline: webhook 200, `{"message":"Workflow was started"}`.
