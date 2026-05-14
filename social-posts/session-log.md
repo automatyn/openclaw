@@ -1372,3 +1372,34 @@ Open items for next slot:
   - Pool E1/E2/E3 ready dry; needs more personalisation tomorrow
   - automatyn.co/checkout 404 (overlay-mode masks it; fix soon)
   - Paddle verification status unconfirmed (Pat should check dashboard)
+
+### /morning — 2026-05-14 08:13 UTC
+- X status: LIVE — @patrickssons `"followers":356,"tweets":1163` (+0f / +12t overnight vs evening 356/1151). Premium verified. Account analytics scrape skipped (CDP-flaky; firehose autonomous).
+- X firehose: timer active, 4 clean runs since 06:00Z (06:00, 06:30, 07:00, 07:30, 08:00 currently running). 30-min cadence holding.
+- X scrape Source 1 (API): `HTTP 402 CreditsDepleted` (carried). `budget: 170/900 used ($0.85)` — need ~$2-3 top-up to unblock.
+- X scrape Source 2 (browser): scrape-targets.js running in background. Supplementary to firehose.
+- Triggers: all 3 legacy IDs return 404 (Content Machine, Medium Writer, Blog Writer). Real scheduler is `seo-daily.timer` (active).
+- Reddit pipeline: webhook 200 `{"message":"Workflow was started"}`.
+- **OUTREACH:**
+  - HALT clear all night. Monitor 08:00Z: `Brevo 24h: 46 sent · 4 hard · 0 spam · OK`.
+  - Reply detector: skipped — Gmail OAuth `invalid_grant` (carried open item).
+  - Pool: total 4558 / with_email 666 / personalised 290 / E1-ready 4 / E2-ready 0 / E3-ready 0.
+  - **E1 sent: 4** (PlumbSharp, J A Clarke, S A Plumbing, UK Gas Services). Lifetime E1: 291 → 295. Today: 4/50.
+  - Pool dry on E2/E3 — no batch staggering needed today.
+  - Brevo opens 48h: `Scanned 16 open events, matched 11`. E1 opens 51→56 (+5), E2 51, E3 31.
+  - Variant diagnostic 14d: every pair INSUFFICIENT DATA. Summer-pivot (gardeners/tree-surgeons) 1 send each. Need volume to learn.
+- GSC 7d: **118 imp / 0 clicks / pos 17.2** (vs yesterday 121 / 0 / 17.7). Flat, no regression. Top page passive-income-ai-agents 65 imp pos 15.0. Top query "claude managed agents vs openclaw" 4 imp pos 19.3. No new page-2 quick-wins.
+- TikTok: yt-dlp returning only 5 videos (paginated cache). Top: "My boss said I was 'too quiet'..." 374v.
+- TikTok carousels: skipped — POSTIZ_API_KEY absent (Postiz paused, carried).
+- LinkedIn: skipped — Postiz paused.
+- Dev.to: skipped — last article 2026-05-13 (yesterday, within 3-day gate).
+- Medium: skipped (Playwright/CDP flaky, carried).
+- Bot health: openclaw-gateway, automatyn-api, x-firehose.timer, x-thread.timer, x-question.timer = all `active`.
+- Cap-hit scan: only `Test Agent biz-test-race` (pre-existing artefact). No real-tenant cap hits.
+- Signups last 14h: 0.
+- **Open items carried unchanged:**
+  - X API CreditsDepleted (~$2-3 top-up needed)
+  - Gmail OAuth refresh expired (reply-detector blocked)
+  - Forge image-gen unreachable (SEO Daily success rate)
+  - automatyn.co/checkout 404 (overlay-mode masks it)
+  - Medium Playwright/CDP unstable
