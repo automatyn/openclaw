@@ -1434,3 +1434,39 @@ Open items for next slot:
   - Gmail OAuth invalid_grant (reply-detector blocked, carried)
   - X API CreditsDepleted (carried)
   - Pool E2/E3 ready=0 (carried)
+
+### /morning — 2026-05-15 09:38 UTC
+- **X status:** LIVE — @patrickssons `"followers":372,"tweets":1208` (+13f / +40t since /afternoon 2026-05-14 19:04Z 359/1168). X manual analytics (2026-05-13 snapshot): 120 verified, 78k imp 7d, +198% imp WoW → **normal mode**.
+- **X drafts pushed:** 8 in-context bend-back replies to Telegram from firehose-candidates.json (15 candidates, 0-3h old, 2k-2.7M follower range). All 50-93 chars. Voice check passed (no em-dashes, no banned words). Targets: @paulg (2.7M), @amasad (460k), @peer_rich (37k), @TTrimoreau ×3 (8k), @zhenthebuilder (7k), @AishwaryaDevv (2k).
+- **X firehose timer:** 8 successful runs since 06:00Z (06:00, 06:30, 07:00, 07:30, 08:00, 08:30, 09:00, 09:30). Latest run kept 15/52 (43 skipNoTweet, 915 skipAge across window). 0 replies pushed by firehose itself (code-disabled per [[x-reply-pipeline-is-claude]]) — Claude doing the drafting in routine instead.
+- **Triggers:** legacy IDs still 404 (Content Machine, Medium Writer, Blog Writer). Real scheduler `seo-daily.timer` active. No new SEO blog overnight (git log empty since 2026-05-14 19:30).
+- **Reddit pipeline:** webhook 200 `{"message":"Workflow was started"}` fired 09:39Z.
+- **OUTREACH — HALT still in place** from 2026-05-14T20:00:01Z (`HARD BOUNCE 8.0% (4/50)`, false-positive from old bounces aging into rolling window).
+  - Brevo 24h (per monitor 08:00Z): `5 sent · 0 hard · 0 spam · OK` — real bounce rate today = 0%.
+  - Pool: total 4558 / with_email 666 / personalised 290 / **E1 ready 0 / E2 ready 0 / E3 ready 23**. E1/E2 dry.
+  - E1 sent today: 0. Lifetime: 295 / 227 / 201 (E1/E2/E3).
+  - Reply detector: blocked (Gmail OAuth `invalid_grant`, carried).
+  - Brevo opens 48h: 13 events scanned, 9 matched. Opens E1/E2/E3 = 58/51/31 (unchanged).
+  - Variant diagnostic 14d: every pair INSUFFICIENT DATA. Verdict FULL RESET on cumulative. 0/295 lifetime replies on E1. Template cooked.
+  - **Action needed:** Pat-call on (a) clear HALT manually, (b) ingest fresh leads before next slot.
+- **SEO 7d:** `101 imp / 0 clicks / pos 17.5` (vs 2026-05-14 morning 118/0/17.2 → impressions -14%, position flat). Top page passive-income-ai-agents 56 imp pos 15.1. Top query "claude managed agents vs openclaw" 2 imp pos 19.0. No new page-2 quick-wins.
+- **GSC index ops — daily 10 (NEW routine):**
+  - Last night's 10 (4 ai-receptionist-uk, 4 whatsapp-bot, 2 comparison) fired IndexNow ✓ — Pat manual GSC tap pending.
+  - Today's 10 picked from remaining 84 unknowns (small-business/buyer-regret/ROI/vs-phone/cost cluster). IndexNow accepted (200). Telegram push sent for manual tap.
+  - Blog audit state (from 2026-05-14 evening): 115 total / 20 indexed / 94 unknown / 0 discovered-not-indexed / 0 errors.
+- **TikTok:** 22 videos / **6,181 views / 75 likes** (+3v vs yesterday). Top: "My dad asked me at dinner..." 989v.
+- **LinkedIn / Postiz:** skipped (POSTIZ_API_KEY absent, paused).
+- **Dev.to:** skipped — last article 2026-05-13 (2 days ago, within 3-day gate).
+- **Medium:** skipped (Playwright/CDP flaky, carried).
+- **Bot health:** openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer, reply-watcher.timer, goal-pulse.timer = all `active`. ✅
+- **Cap-hit scan:** only `Test Agent biz-test-race` (pre-existing artefact).
+- **Signups last 14h:** 0.
+- **Open items (carried):**
+  - HALT false-positive blocking outreach
+  - Pool E1/E2 ready = 0 (need ingest)
+  - 0/295 lifetime E1 replies — template cooked, needs Pat-call on full rewrite
+  - Gmail OAuth invalid_grant (reply-detector blocked)
+  - X API CreditsDepleted (~$2-3 top-up)
+  - Forge image-gen success rate (SEO Daily 1/3 yesterday)
+  - automatyn.co/checkout 404 (overlay-mode masks it)
+  - Daily 10 GSC manual taps (today's list in Telegram)
