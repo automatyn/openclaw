@@ -134,14 +134,14 @@ function listNeedingEnrichment(limit = Infinity) {
 // Leads needing personalisation: has email, no intro_line, not bounced/unsub.
 function listNeedingPersonalisation(limit = Infinity) {
   return listAll()
-    .filter(l => l.email && !l.intro_line && !l.bounced && !l.unsubscribed && !l.replied)
+    .filter(l => l.email && !l.intro_line && !l.email1_sent && !l.bounced && !l.dns_flagged && !l.unsubscribed && !l.replied)
     .slice(0, limit);
 }
 
 // Leads ready for Email 1: email + intro_line + never emailed + clean.
 function listReadyForEmail1(limit = Infinity) {
   return listAll()
-    .filter(l => l.email && l.intro_line && !l.email1_sent && !l.bounced && !l.unsubscribed && !l.replied && !l.do_not_send)
+    .filter(l => l.email && l.intro_line && !l.email1_sent && !l.bounced && !l.dns_flagged && !l.unsubscribed && !l.replied && !l.do_not_send)
     .slice(0, limit);
 }
 
@@ -153,14 +153,14 @@ function daysSince(iso) {
 // Leads ready for Email 2: email1 sent 3+ days ago, email2 not sent, clean.
 function listReadyForEmail2(limit = Infinity, minDays = 3) {
   return listAll()
-    .filter(l => l.email1_sent && !l.email2_sent && !l.bounced && !l.unsubscribed && !l.replied && !l.do_not_send && daysSince(l.email1_sent) >= minDays)
+    .filter(l => l.email1_sent && !l.email2_sent && !l.bounced && !l.dns_flagged && !l.unsubscribed && !l.replied && !l.do_not_send && daysSince(l.email1_sent) >= minDays)
     .slice(0, limit);
 }
 
 // Leads ready for Email 3: email1 sent 5+ days ago, email3 not sent, clean.
 function listReadyForEmail3(limit = Infinity, minDays = 5) {
   return listAll()
-    .filter(l => l.email1_sent && !l.email3_sent && !l.bounced && !l.unsubscribed && !l.replied && !l.do_not_send && daysSince(l.email1_sent) >= minDays)
+    .filter(l => l.email1_sent && !l.email3_sent && !l.bounced && !l.dns_flagged && !l.unsubscribed && !l.replied && !l.do_not_send && daysSince(l.email1_sent) >= minDays)
     .slice(0, limit);
 }
 

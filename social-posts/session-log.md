@@ -1546,3 +1546,44 @@ Open items for next slot:
   - automatyn.co/checkout 404 (overlay-mode masks it)
   - Daily 10 GSC routine needs noindex-filter
   - CLAUDE.md pricing line still stale per [[automatyn-pricing-monthly-saas]]
+
+### /afternoon — 2026-05-16 17:04 UTC
+- **X status:** LIVE — @patrickssons `"followers":408,"tweets":1303,"likes":928` (+7f / +26t since /morning 09:07Z 401/1277). Crossed 400 mark this morning, growing steadily.
+- **X analytics:** stale (2026-05-13 13:14Z). Chrome CDP wedged (carried, day 5).
+- **X drafts pushed this slot: 15 to Telegram** (8 round-1 replies + 1 levelsio QT correction + 7 round-2 replies after Pat asked for more).
+  - Round 1 from firehose 15:41Z (21 raw → 8 kept): @levelsio 867k 138c (⚠️ replies blocked, sent QT replacement), @ThePrimeagen 362k ×2 (93c, 105c), @jasonlk 240k 96c, @shadcn 223k 83c, @TKopelman 40k 100c, @peer_rich 37k ×2 (88c, 113c).
+  - Round 2 from firehose 16:11Z (9 fresh → 7 kept): @ThePrimeagen 362k 82c, @TKopelman 40k 130c, @peer_rich 37k ×2 (113c, 138c), @TTrimoreau 8k 15c ("merge-conflicts"), @evanlapointe 8k 107c, @rxhit05 2.8k 122c.
+  - Voice-checked, all 15-138c, no em-dashes, no banned words. Quote-tweet used for @levelsio per [[x-levelsio-replies-restricted]].
+- **X firehose timer:** scraping reliably every 30 min, 21 candidates in 15:41Z file. Reply emission code-disabled per [[x-reply-pipeline-is-claude]].
+- **SEO Daily trigger:** `enabled:true, last_fired_at:2026-05-16T10:04:24Z, next_run:2026-05-17T10:04:15Z`. **ZERO new blog commits today** beyond mine. Task C silently failed again (third day in a row likely Forge image-gen). Pattern needs Pat-fix on the trigger.
+- **Manual blog published:** [[ai-receptionist-tree-surgeon-uk-2026]] — Template-A trade vertical for the summer-niche outreach audience. Storm callout triage, photo-based quoting, TPO/conservation flags, NPTC certs, public liability. Commit `8d41a69`. IndexNow accepted (200). Fills competitor gap (Bizwings is farming this lane).
+- **Reddit pipeline:** webhook 200 fired.
+- **OUTREACH — big session:**
+  - HALT clear. Monitor 12:00Z `Brevo 24h: 32 sent · 1 hard · 0 spam · OK`.
+  - Pool at slot start: E1 ready 0, E2 ready 0, E3 ready 3 (left from morning's 20-send).
+  - **Personalised 10 new plumber leads** (2 Leicester + 6 Glasgow + 2 already-sent that got re-tagged for E2). DNS-flagged 6 leads in same pass (4 prior-bounced domains + 2 suppliers/wholesalers wrong-audience: Leicester Plumbing and Heating Supplies, Kendor Leicester merchants, Nova Heating wholesalers, City Plumbing chain, Wolseley Plumb & Parts merchant, City Plumbing Supplies chain).
+  - **E1 sent: 5/0 failed** (5 Glasgow plumbers from today's personalise: DGP 145 reviews, Glasgow Plumbers Ltd, Glasgow City Plumbers, 1Point, GPH). Lifetime E1 305→310, today 3→8.
+  - **E2 sent: 13/0 failed** but ⚠️ **4 went to previously-bounced domains** (combirepairs.com, local-manchester-plumbers.co.uk, leedsplumber.uk, gildersomegas.co.uk). These will hard-bounce again, pushing toward HALT threshold. Lifetime E2 227→240.
+  - **Bug fix shipped:** [[leads-store.js]] filters all 4 missing `dns_flagged` gate (listNeedingPersonalisation + listReadyForEmail1 + listReadyForEmail2 + listReadyForEmail3). Also `listNeedingPersonalisation` was returning leads that had `email1_sent` already (root cause of why I re-personalised 4 already-contacted plumbers earlier in session, then they re-qualified for E2 with new intro lines). Fixed: now requires `!email1_sent` too.
+  - Pool now: total 4564 / with_email 666 / personalised 316 / E1 sent 310 / E2 sent 240 / E3 sent 221.
+  - unsubs: 11 → 12 (+1 overnight, lifetime 1.8% of with_email pool).
+  - Today's send totals: E1 8 / E2 13 / E3 20 = **41 emails this routine-day** (vs typical 3-5/day prior).
+  - Reply detector: blocked (Gmail OAuth invalid_grant, carried).
+- **TikTok:** 22 videos / **6,182 views / 75 likes** (unchanged since /morning). yt-dlp paginated cache pattern.
+- **Postiz / LinkedIn:** skipped (paused).
+- **Bot health:** openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer, reply-watcher.timer, goal-pulse.timer = all `active`. ✅
+- **Cap-hit scan:** clean.
+- **Signups since /morning:** 0 real.
+- **Commits this slot:** `8d41a69 feat(blog): AI Receptionist for UK Tree Surgeons`. Bug-fix commits pending.
+- **SEO sweep earlier today** (separate from /morning): triple audit ran (seo-audit + technical-seo + marketing competitor). Critical fixes shipped in `09b4bb2` (sitemap-noindex collision, /x-private/ Disallow, internal .md Jekyll-excluded, /checkout 404 redirect, orphan hero-bg.jpg deleted, 2 pages reflipped to index). IndexNow pinged. Site now serving CLAUDE.md as 404 ✓. All audits flagged tree-surgeon page as quick-win — shipped same day.
+- **Open items (carried + new):**
+  - 4 dns-flagged-but-already-sent domains will likely hard-bounce in next 24-72h (Brevo lag). If 3+ land, HALT will trip and outreach pauses.
+  - SEO Daily Task C silently failing for 3+ days running (Forge image-gen issue on Pat's laptop). seo-daily.timer is enabled and firing but producing 0 blogs.
+  - 0/310 lifetime E1 replies — new template smoke test n=12, only 1 open total (Edinburgh Heating). Signal still inconclusive.
+  - X manual analytics stale (3+ days). Browser CDP wedged, blocks both scrape + analytics.
+  - X API search CreditsDepleted (~$2-3 top-up to unblock).
+  - Gmail OAuth invalid_grant (reply-detector blocked).
+  - automatyn.co/checkout 404 → now redirects to /pricing.html (fixed today).
+  - Daily-10 GSC routine needs noindex-filter.
+  - CLAUDE.md pricing line still stale ($400 setup is the self-host SKU, not the SaaS — kept as-is after verification).
+  - Pool ingest needs another run to keep E1 fed (just personalised 8 fresh, now 0 ready again).
