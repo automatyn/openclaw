@@ -1504,3 +1504,45 @@ Open items for next slot:
   - Forge image-gen Daily success rate (1/3 again today)
   - automatyn.co/checkout 404 (overlay-mode masks it)
   - CLAUDE.md pricing line still stale (memory file written, file itself not yet rewritten)
+
+### /morning — 2026-05-16 09:07 UTC
+- **X status:** LIVE — @patrickssons `"followers":401,"tweets":1277,"likes":916` (+17f / +29t since /afternoon 2026-05-15 12:35Z 384/1248). Crossed 400-follower threshold overnight.
+- **X manual analytics:** stale (2026-05-13 13:14Z, 78k imp 7d, 120 verified). Browser CDP scrape blocked again (carried). Mode-call: bias toward normal mode based on growth rate, but underlying impression trend unverified.
+- **X drafts pushed this slot: 10 to Telegram** (7 bend-back replies + 3 morning originals).
+  - Replies (from firehose-candidates.json 08:35Z, 12 raw → 7 kept after follower/dedupe filter): @tdinh_me 186k 36c, @damengchen 92k 76c, @peer_rich 37k 71c, @shawnchauhan1 32k ×2 (77c, 87c), @TTrimoreau 8k ×2 (97c, 73c). All 36-97c, no em-dashes, no banned words. Pre-filled intent URLs with inline button.
+  - Originals: 137c (vibe-coding ratio jab), 161c (anthropic moat = tool-use latency), 141c (the if-statement nobody writes).
+- **X firehose timer:** active, latest run 08:35Z scraped 12 candidates (rich window 0.1-2.9h). Reply emission still code-disabled per [[x-reply-pipeline-is-claude]] (correct).
+- **X API search:** still CreditsDepleted — candidates-search.json 08:34Z shows `kept:0 errors:16 / 16 queries`. Carried open item.
+- **Browser scrape:** scrape-targets.js spawned Playwright child, hit `timeout 700` SIGTERM 143. candidates-browser.json still 34h stale. Chrome CDP wedged (5th day now). Carried.
+- **Triggers:** legacy IDs all return `not_found_error`. Real scheduler `seo-daily.timer` active. No new SEO blog overnight (last `3f92623 feat(blog): AI Receptionist for UK Accountants` from yesterday).
+- **Reddit pipeline:** webhook 200 `{"message":"Workflow was started"}` (after http→https redirect).
+- **OUTREACH:**
+  - HALT clear. Monitor 08:00Z `Brevo 24h: 12 sent · 1 hard · 0 spam · OK`.
+  - Reply detector: blocked (Gmail OAuth `invalid_grant`, carried).
+  - Pool at slot start: total 4564 / with_email 666 / personalised 300 / **E1 ready 0 / E2 ready 0 / E3 ready 23**. E1/E2 dry.
+  - **E3 batch sent: 20 / 0 failed.** Lifetime E3 201 → 221. Today E3 0 → 20. (RSV, Meridian, Phoenix Gas, Ninja Boiler, Becks, Eco Technicians, Staywarm, LA Heating, etc.)
+  - E1 sent today: 3 (autonomous sender between /afternoon and /morning, lifetime 302 → 305).
+  - E2 sent today: 0 (pool dry).
+  - Brevo opens 48h: `Scanned 9 open events, matched 7 to leads`. E1 opens 59 → 60 (+1 overnight). E2/E3 unchanged (51/31).
+  - Variant diagnostic 14d: every pair INSUFFICIENT DATA, overall FULL RESET on cumulative (expected with n<10 per pair post-template-rewrite). Report saved `outreach/reports/2026-05-16.md`.
+  - 0/305 lifetime E1 replies still standing; only 1 open on the new-template smoke-test cohort.
+- **GSC 7d:** `84 imp / 0 clicks / 0.00% CTR / pos 16.2` (vs /morning 2026-05-15 `101 imp / 0 / 17.5` → impressions **-17%**, pos +1.3 worse). Top page passive-income-ai-agents 52 imp pos 15.2. Top query "ai agents for passive income 2026" 2 imp pos 19.0. Impression slide worth watching.
+- **TikTok:** 22 videos / **6,182 views / 75 likes** (+1 view since /morning 2026-05-15). yt-dlp cache pattern persists. Top: "My dad asked me at dinner..." 989v / 20l.
+- **Dev.to:** **PUBLISHED** — id 3682183, slug `ai-receptionist-for-uk-accountants-real-costs-and-what-to-expect-in-2026-2mml`, canonical → automatyn.co/blog/ai-receptionist-accountant-uk-2026.html. Last article 2026-05-13 (3 days, at gate).
+- **LinkedIn / Postiz:** skipped (POSTIZ_API_KEY absent, paused).
+- **Medium:** skipped (Playwright/CDP flaky, carried).
+- **Bot health:** openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer, reply-watcher.timer, goal-pulse.timer = all `active`. ✅
+- **Cap-hit scan:** clean.
+- **Signups last 14h:** 0 real.
+- **Open items (carried):**
+  - GSC 7d impressions sliding (-17% day-over-day)
+  - 0/305 lifetime E1 replies; new template n=7, 1 open
+  - Pool E1/E2 ready = 0 (need ingest + personalise before next slot)
+  - X manual analytics 3 days stale (Chrome CDP wedged)
+  - Browser scrape blocked (same CDP issue)
+  - X API search CreditsDepleted
+  - Gmail OAuth invalid_grant (reply-detector blocked)
+  - Forge image-gen Daily success rate (yesterday 1/3 again)
+  - automatyn.co/checkout 404 (overlay-mode masks it)
+  - Daily 10 GSC routine needs noindex-filter
+  - CLAUDE.md pricing line still stale per [[automatyn-pricing-monthly-saas]]
