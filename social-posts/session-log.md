@@ -1587,3 +1587,43 @@ Open items for next slot:
   - Daily-10 GSC routine needs noindex-filter.
   - CLAUDE.md pricing line still stale ($400 setup is the self-host SKU, not the SaaS — kept as-is after verification).
   - Pool ingest needs another run to keep E1 fed (just personalised 8 fresh, now 0 ready again).
+
+### /morning + /afternoon — 2026-05-17 (combined entry, 10:30Z + 17:50Z)
+- **X status:** LIVE. /morning 427f/1363t/958l → /afternoon 433f/1386t/962l (+6f / +23t across the day, +6 likes received).
+- **X analytics:** still stale (2026-05-13 13:14Z, 4 days now). Chrome CDP wedged (day 6).
+- **X drafts pushed today: 14 to Telegram across 2 slots.**
+  - /morning: 2 "Pick the worse" originals (174c trades + 137c funnel-stack) + 4 reply-bait (@dhh 141c, @shawnchauhan1 113c, @TTrimoreau 138c & 122c) = 6.
+  - /afternoon: 6 replies from firehose 17:41Z (19 raw → 6 kept after dedupe + 1k follower filter): @dharmesh 386k 126c, @ThePrimeagen 362k 119c, @jasonlk 240k 159c (TG retry with HTML escape after `<1 hour` choked), @arvidkahl 197k 140c, @simonw 179k 144c, @swyx 158k 170c. All voice-checked, no em-dashes.
+- **X firehose timer:** scraping every 30 min. 19 candidates at 17:41Z (vs 4 at /morning's 10:11Z scrape — Sunday peak hours).
+- **SEO Daily trigger:** `last_fired 2026-05-17T10:04Z`, `next_run 2026-05-18T10:04Z`. **Task C silently failed 5th day running.** ZERO new blog commits today beyond mine. Forge image-gen still unreachable from automatyn-prod (timer is enabled and firing the agent, agent can't generate images, post never gets written).
+- **Reddit pipeline:** webhook 200 fired (both slots).
+- **OUTREACH — clean day, no HALT:**
+  - Monitor 16:00Z: `Brevo 24h: 58 sent · 0 hard · 0 spam · OK`. The 4 dns-flagged-but-already-sent domains from yesterday's batch NEVER hard-bounced. Either Brevo retried successfully or those inboxes accept-then-discard. Not a HALT risk.
+  - Reply detector: blocked (Gmail OAuth invalid_grant, carried).
+  - **Total sent today: 27** (E1 0, E2 24, E3 3).
+    - /morning: E2 batch 15/0 sent (Globe Plumbing, Advance, Prime Fusion, Tony Landscaping, Lancaster's Gardencare, Lloyd's Gardens, Bella Landscape, MyLandscapes, Flowers Landscape, J and Son Trees, Aspire, Ideal Landscapes, Matt's Lawns, KMR Gardens, Manchester Landscape). Lifetime E2 240→255.
+    - /afternoon: E2 batch 9/0 + E3 batch 3/0 sent. Mix Capital Landscapes + Greenscape Gardeners + plumbers. Lifetime E2 255→264, E3 221→224.
+  - E1 sent today: 0. The autonomous sender between /afternoon yesterday and /morning today sent 0 because the new dns_flagged filter is now blocking all the bad-domain leads it used to attempt. Real signal: pool is genuinely E1-dry, not bug-dry.
+  - Pool now: total 4564 / with_email 666 / personalised 316 / **E1 ready 0 / E2 ready 0 / E3 ready 0**. Fully drained.
+  - **Brevo opens 48h:** 14 events scanned, 9 matched. E1 opens 60→62 (+2 since /morning), E2 51→55 (+4), E3 31→32 (+1). **First open-rate movement on E2 in days — the rewrite is finally getting eyeballs.**
+  - 0/310 lifetime E1 replies still standing. The opens are happening, the reply trigger isn't.
+- **GSC 7d:** **blocked today — `ERROR: invalid_grant`.** Google Search Console OAuth token has expired (just like Gmail). Now 2 expired Google OAuth tokens. Needs Pat to refresh.
+- **TikTok:** 22 / **6,183v / 75l** (+1v since yesterday morning, basically static). yt-dlp pagination cache issue persists.
+- **Dev.to:** skipped both slots — last article 2026-05-16 (yesterday), within 3-day gate.
+- **LinkedIn / Postiz:** skipped (paused).
+- **Medium:** skipped (Playwright/CDP flaky, carried).
+- **Bot health:** all 7 services `active` ✅. openclaw-gateway, automatyn-api, x-firehose.timer, x-gate-poller, seo-daily.timer, reply-watcher.timer, goal-pulse.timer.
+- **Cap-hit scan:** clean.
+- **Signups last 14h:** 0 real.
+- **Commits today:** `4f41b8f docs: rewrite CLAUDE.md to match live pricing + add missing rules` (single biggest doc cleanup of the project — fixed stale pricing across 5 files, broadened em-dash scope, promoted no-Playwright-on-social to top-level, added Telegram-gate, OPENAI-paid-bot-only, two-audience-split, plain-text-emails, Rule 7 pause-before-prod-mutation, canonical reference files).
+- **CLAUDE.md drift audit:** ran cross-check against 50+ memory files + 8 repo .md files + 3 skill files. 5 HIGH-severity contradictions resolved in `4f41b8f`. Stale $400/$800/$1500 line eliminated from CLAUDE.md, blog_style.md, morning/afternoon/evening skill.md. All now reference live Free/$29/$79 SaaS pricing + 5-country geo-pricing on /pricing.html.
+- **Open items (carried + new):**
+  - GSC OAuth expired today (NEW). Pat needs to refresh `saas-api/secrets/gsc-token.json` via OAuth flow.
+  - SEO Daily Task C silent for 5+ days running (Forge image-gen on Pat's laptop unreachable from prod). Whole agentic blog pipeline disabled. Needs Pat-fix or rewrite to use a hosted image source.
+  - X manual analytics 4 days stale. Browser CDP wedged (day 6).
+  - X API search CreditsDepleted (~$2-3 top-up).
+  - Gmail OAuth invalid_grant (reply-detector blocked).
+  - 0/310 lifetime E1 replies still — but new template smoke test now at 12 sends with 1 open + 0 replies. Still inconclusive on the rewrite.
+  - Pool fully drained on E1/E2/E3 — needs ingest + personalisation pass before evening can send anything.
+  - Daily-10 GSC routine needs noindex-filter (separate from OAuth issue).
+  - Skill files (.claude/skills/*) reference Gemini API for TikTok images — contradicts `feedback_image_generation.md` (Forge only). Separate cleanup needed, not in this commit.
