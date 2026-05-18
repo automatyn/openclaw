@@ -1668,3 +1668,44 @@ Open items for next slot:
   - Pool E1/E2/E3 ready chronically 0 — personalisation is the only bottleneck.
   - Daily-10 GSC routine needs noindex-filter.
   - Skill files still reference Gemini for TikTok images (contradicts Forge-only memory rule).
+
+### /afternoon — 2026-05-18 12:42 UTC
+- **X status:** LIVE — @patrickssons `"followers":436,"tweets":1437,"likes":974` (+5f / +4t since /morning 431/1433). Followers ticked up post-morning drafts.
+- **X manual analytics:** still stale (2026-05-13). CDP wedged day 7+. Carried.
+- **X drafts pushed this slot: 6 to Telegram** from firehose 12:11Z (12 raw → 6 kept >1k, none drafted earlier today):
+  - @paulg 2.7M ×2 (156c lead-on observation + 114c "crusty German watchmaker") **— first 2.7M-follower targets this session.**
+  - @shawnchauhan1 32k ×2 (146c on $80B AI ARR concentration + 169c on MCP auth problem)
+  - @irfansenercom 11k 148c (warm: searchad.ai launch on PH)
+  - @TTrimoreau 8k 111c (distribution-as-trust answer)
+- **X firehose timer:** active. 12 candidates 12:11Z.
+- **SEO Daily trigger:** **PRODUCED A BLOG TODAY** — commit `f982545 feat(blog): AI Receptionist for UK Roofers: Real Costs and What to Expect in 2026`. First Task C success in 6 days. The pattern broke. Forge image-gen must have been reachable at 10:04Z this morning. ✅
+- **Reddit pipeline:** webhook 200 fired.
+- **OUTREACH — major day: v6 template smoke test live:**
+  - HALT clear. Monitor 12:00Z: `Brevo 24h: 41 sent · 0 hard · 0 spam · OK`.
+  - **templates-v6.js shipped earlier today** (commit `6c32b6f`) after 0/322 replies on v5 hit the FULL RESET stop condition in [[phase1-plan]]. v6 changes: single-question CTA, no link in E1, Saturday-quote scenario (not burst-pipe), 3-paragraph body, aligned with marketing/outreach-scripts.md canonical. Wired behind `EMAIL_TEMPLATE_VERSION=v6` env flag.
+  - **v6 smoke test sent: 5/0 sent** at 12:35-12:40Z via `EMAIL_TEMPLATE_VERSION=v6 sender.js e1 5`. Cohort: The Local Glasgow Plumbers (7r), Evolve Plumbing (14r), Blocked Drain Glasgow (94r), Celsius 672r Edinburgh, Scott Findlay 380r Edinburgh.
+  - **v5 morning batch:** 6/0 sent at ~09:30Z (Ncd, KRplumbingGlasgow, Gas Engineer Glasgow, FastFix, Quality Safe, J.H.Horn).
+  - **E2/E3 follow-ups (v5 cohort, in flight at log time):** E2 batch 7, E3 batch 9. Will land in monitor.log by 13:00Z.
+  - **TODAY E1 sent: 11** (6 v5 morning + 5 v6 afternoon). Lifetime E1: 322 → 327.
+  - Pool: total 4572 / with_email 666 / personalised 333 / E1 sent 327 / E2 sent 264 / E3 sent 224. E1 ready 0, E2 ready 7, E3 ready 9 (now sending).
+  - **unsubs ticked: 12 → 13** during this routine. One v5 morning send got unsubbed. Real signal — v5 doesn't just fail to convert, it actively annoys.
+  - **Opens 48h:** E1 62→64 (+2), E2 57 unchanged, E3 32 unchanged.
+  - **v6 verdict in 24-72h.** If 1+/5 replies → flip systemd default to v6. If 0/5 → diagnosis wrong, copy isn't the issue.
+- **3 wrong-audience leads DNS-flagged** earlier this slot: City Plumbing (chain), Rpl Plumbers Merchants (merchant), Glasgow Plumbing Services (no data).
+- **TikTok:** 22 / **6,184v / 75l** (unchanged since /morning). yt-dlp paginated cache.
+- **Postiz / LinkedIn / Medium:** skipped (paused/flaky).
+- **Bot health:** all 7 services `active` ✅.
+- **Cap-hit scan:** clean.
+- **Signups last 14h:** 0.
+- **Commits this slot:** `6c32b6f outreach: ship templates-v6` (CTA rewrite). `f982545 feat(blog): AI Receptionist for UK Roofers` was automated SEO Daily output earlier this morning, not my commit.
+- **Open items (carried + new):**
+  - **NEW: v6 smoke test in flight (5 sends).** Watch 24-72h. If 0/5 → outreach copy isn't the problem.
+  - 0/327 lifetime E1 replies still. Unsub rate 13/666 = 2% (rising).
+  - GSC OAuth `invalid_grant` (carried 3 days now).
+  - SEO Daily Task C broke its 6-day silence today — but tomorrow's run is unverified.
+  - Per-email dns_flag bug carried from /morning. dev7561@gmail.com received E2 from autonomous sender between routines (not verified but expected).
+  - X manual analytics 5+ days stale. CDP wedged day 7+.
+  - X API search CreditsDepleted.
+  - Gmail OAuth dead — reply-detector blocked. Pat confirmed manually checked inbox, 0 replies.
+  - Pool E1/E2/E3 ready chronic-low pattern.
+  - Skill files reference Gemini for TikTok images (contradicts Forge-only memory).
