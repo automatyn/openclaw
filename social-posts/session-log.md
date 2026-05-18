@@ -1685,8 +1685,9 @@ Open items for next slot:
   - **templates-v6.js shipped earlier today** (commit `6c32b6f`) after 0/322 replies on v5 hit the FULL RESET stop condition in [[phase1-plan]]. v6 changes: single-question CTA, no link in E1, Saturday-quote scenario (not burst-pipe), 3-paragraph body, aligned with marketing/outreach-scripts.md canonical. Wired behind `EMAIL_TEMPLATE_VERSION=v6` env flag.
   - **v6 smoke test sent: 5/0 sent** at 12:35-12:40Z via `EMAIL_TEMPLATE_VERSION=v6 sender.js e1 5`. Cohort: The Local Glasgow Plumbers (7r), Evolve Plumbing (14r), Blocked Drain Glasgow (94r), Celsius 672r Edinburgh, Scott Findlay 380r Edinburgh.
   - **v5 morning batch:** 6/0 sent at ~09:30Z (Ncd, KRplumbingGlasgow, Gas Engineer Glasgow, FastFix, Quality Safe, J.H.Horn).
-  - **E2/E3 follow-ups (v5 cohort, in flight at log time):** E2 batch 7, E3 batch 9. Will land in monitor.log by 13:00Z.
-  - **TODAY E1 sent: 11** (6 v5 morning + 5 v6 afternoon). Lifetime E1: 322 → 327.
+  - **E2/E3 follow-ups (v5 cohort) completed at 13:00Z:** E2 batch 7/0 sent (Edinburgh Heating, SMC, Llandaff, Rosoman, Marcus Jones, Gas Guard, JHP). E3 batch 9/0 sent (L J B, Mossley Hill, South Liverpool, Aigburth, Jonathan Roberts, Apd, D C Sheffield, Sheffield Boiler People, Warmglow). Lifetime E2: 264→271, E3: 224→233.
+  - **TODAY total: 27 emails sent** (E1 11, E2 7, E3 9). Lifetime E1: 322 → 327.
+  - **⚠️ per-email dns bug confirmed propagating today:** `dev7561@gmail.com` received E3 under "Jonathan Roberts" lead. Same email previously bounced under a different lead. dns_flagged is per-ID, needs per-email propagation helper.
   - Pool: total 4572 / with_email 666 / personalised 333 / E1 sent 327 / E2 sent 264 / E3 sent 224. E1 ready 0, E2 ready 7, E3 ready 9 (now sending).
   - **unsubs ticked: 12 → 13** during this routine. One v5 morning send got unsubbed. Real signal — v5 doesn't just fail to convert, it actively annoys.
   - **Opens 48h:** E1 62→64 (+2), E2 57 unchanged, E3 32 unchanged.
