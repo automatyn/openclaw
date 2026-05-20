@@ -1794,3 +1794,36 @@ Open items for next slot:
   - Pool E1-ready chronically 0 (personalisation bottleneck).
   - 9 dependabot vulns on automatyn.github.io.
   - Phase 1 push: Trillet + Down To Earth compare pages shipped, sub-£30 trades blog page + sitemap + IndexNow + listicle outreach still pending (task #81-#84).
+
+### /afternoon — 2026-05-20 17:25 UTC
+- **Recap:** /morning 09:35Z. E3 14/14 sent, lifetime E3 257. 9 reply drafts + 5 originals + 3 warm-chain pushed. New issue: sender hang post-send (process held lock 13min idle, killed via SIGTERM).
+- **HALT:** clear. Monitor 16:00Z (last entry): `Brevo 24h: 18 sent`.
+- **Bot health:** all 7 services active ✅.
+- **X status:** @patrickssons 442f / 1518t / 996l (unchanged since /morning).
+- **OUTREACH — E3 afternoon batch 6/6 sent:** Lifetime E3 258 → 264. Today E3 total **21** (15 morning + 6 afternoon).
+  - Sent: SMC Plumbing, Llandaff Heating, Rosoman Plumbing, Marcus Jones, Gas Guard, JHP Services.
+  - **First send 60s-timeout-wrapped run aborted after 1 lead (15→16, +1).** Removed wrapper for second batch — sender exited cleanly without hang this time. **Hang pattern intermittent.**
+  - E1 ready: 0 (personalisation backlog continues to bite).
+  - E2 ready: 0.
+- **X drafts pushed afternoon: 5 reply drafts** from firehose 17:11Z scrape (28 fresh candidates 3h window):
+  - @nikitabier 1.06M 79c (Tokyo Kraft single)
+  - @ThePrimeagen 363k 138c (AI going sideways)
+  - @lennysan 353k 157c (jobs are time capsules)
+  - @patio11 194k 133c (alpha never moved, queue did)
+  - @hnshah 293k 114c (same chaos, better lighting)
+- **X originals pushed afternoon: 3 view-max drafts:**
+  - A 180c: Cursor pivot to bang-for-buck (reactive)
+  - B 214c: contrarian on "writing is dead" (alpha never moved, queue did)
+  - C 148c: "build in public is marketing for private" quote-bait
+- **Reddit pipeline:** webhook 200.
+- **Browser scrape:** 35 handles, 44 candidates kept (24h window).
+- **TikTok:** 22 / **6,186v / 75l** (+1v since /morning). yt-dlp paginated cache.
+- **Opens:** 1 new event matched to lead (8h fetch).
+- **SEO Daily:** fired 10:01Z. Task C produced **1 blog (gardeners)** out of expected 3. Partial silent fail same as past weeks.
+- **Open items (carried + new):**
+  - **NEW: SEO Daily Task C only producing 1/3 blogs.** Need to investigate Forge image-gen state on Pat's laptop or look at the trigger session log.
+  - Sender hang carried (now intermittent, not constant).
+  - v6 smoke test verdict pending (5 sends 2026-05-18, 0/5 replies at 48h, in 24-72h window).
+  - GSC OAuth dead 5d. Gmail OAuth dead 6+d. GMAIL_APP_PASSWORD missing.
+  - X API CreditsDepleted (~$2-3 needed).
+  - Phase 1 push items #82-84 still pending.
